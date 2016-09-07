@@ -45,6 +45,9 @@ endmacro(FailIfNotSet)
 
 include (CheckIncludeFiles)
 IF (UNIX)
+        CHECK_INCLUDE_FILES(sys/types.h HAVE_SYS_TYPES_H)
+        FailIfNotSet(HAVE_SYS_TYPES_H sys/types.h)
+
 	CHECK_INCLUDE_FILES(stdlib.h HAVE_STDLIB_H)
 	FailIfNotSet(HAVE_STDLIB_H stdlib.h)
 
@@ -59,6 +62,10 @@ IF (UNIX)
 
 	CHECK_INCLUDE_FILES(stdbool.h HAVE_STDBOOL_H)
 	FailIfNotSet(HAVE_STDBOOL_H stdbool.h)
+
+        CHECK_INCLUDE_FILES(sys/time.h HAVE_SYS_TIME_H)
+        FailIfNotSet(HAVE_SYS_TIME_H sys/time.h)
 ENDIF (UNIX)
 
+include_directories(src)
 add_subdirectory(src/ objs)
