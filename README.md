@@ -17,11 +17,6 @@ Runtime/Compilation:
 * cmake
 * gcc or clang
 
-
-Recommended:
-* iperf (as a good practice, for testing network performance prior to test execution)
-
-
 License
 ----
 
