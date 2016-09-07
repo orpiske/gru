@@ -4,7 +4,7 @@
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
 Version:            0.0.1
-Release:            3%{?dist}
+Release:            1%{?dist}
 License:            Apache-2.0
 Group:              Development/Tools
 Source:             gru-%{version}.tar.gz
