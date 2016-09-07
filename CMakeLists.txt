@@ -1,0 +1,64 @@
+project(gru)
+cmake_minimum_required(VERSION 2.8)
+
+if( CMAKE_SIZEOF_VOID_P EQUAL 8)
+    message(STATUS "64 bits compiler detected")
+    set(APP_BUILD_PLATFORM 64)
+    set(APP_BUILD_PLATFORM_NAME "x86_64")
+    set(CPP_LIBRARY_DIR "lib64")
+else(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    message(STATUS "32 bits compiler detected")
+    set(APP_BUILD_PLATFORM 32)
+    set(APP_BUILD_PLATFORM_NAME "i686")
+    set(CPP_LIBRARY_DIR "lib")
+endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
+
+
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
+
+set(RUNTIME_DIR "bin")
+set(CPP_INCLUDE_DIR "include")
+set(SHARED_DIR "share")
+set(GRU_SHARED_DIR ${SHARED_DIR}/gru)
+
+#### GNU Compiler flags
+
+if (CMAKE_COMPILER_IS_GNUCXX)
+	set(CMAKE_C_FLAGS "-Wall -Wshadow -std=c99" CACHE STRING
+		"Flags used by the compiler during all build types." FORCE
+	)
+        set(CMAKE_C_FLAGS_DEBUG "-fdiagnostics-color=auto -g" CACHE STRING
+		"Flags used by the compiler during debug build." FORCE
+	)
+        set(CMAKE_C_FLAGS_RELEASE "-O2 -fomit-frame-pointer" CACHE STRING
+		"Flags used by the compiler during release build." FORCE
+	)
+endif (CMAKE_COMPILER_IS_GNUCXX)
+
+macro (FailIfNotSet VARIABLE name)
+	IF (NOT ${VARIABLE}) 
+		SET(MSG "** A required file, " ${name} ", was not found on your system **")
+		MESSAGE(FATAL_ERROR ${MSG})
+	ENDIF (NOT ${VARIABLE}) 
+endmacro(FailIfNotSet)
+
+include (CheckIncludeFiles)
+IF (UNIX)
+	CHECK_INCLUDE_FILES(stdlib.h HAVE_STDLIB_H)
+	FailIfNotSet(HAVE_STDLIB_H stdlib.h)
+
+        CHECK_INCLUDE_FILES(stdio.h HAVE_STDIO_H)
+	FailIfNotSet(HAVE_STDIO_H stdio.h)
+
+        CHECK_INCLUDE_FILES(string.h HAVE_STRING_H)
+	FailIfNotSet(HAVE_STRING_H string.h)
+
+        CHECK_INCLUDE_FILES(strings.h HAVE_STRINGS_H)
+	FailIfNotSet(HAVE_STRINGS_H strings.h)
+
+	CHECK_INCLUDE_FILES(stdbool.h HAVE_STDBOOL_H)
+	FailIfNotSet(HAVE_STDBOOL_H stdbool.h)
+ENDIF (UNIX)
+
+add_subdirectory(src/ objs)
