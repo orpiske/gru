@@ -22,6 +22,10 @@ extern "C" {
 #include <stdint.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
+#include <errno.h>
+    
+#define GRU_MAX_ERROR_MESSAGE 1024
 
 /*
  * Valid status codes
@@ -49,6 +53,15 @@ typedef struct gru_status_t_ {
  */
 void gru_status_set(gru_status_t *status, gru_status_code_t code, 
                       const char *message, ...);
+
+/**
+ * Sets the status from the errno
+ * @param status an instance of the status object to set
+ * @param code the code to set the object to
+ * @param errnum the error number (as in errno)
+ */
+void gru_status_strerror(gru_status_t *status, gru_status_code_t code, 
+                         int errnum);
 
 /**
  * Resets the status

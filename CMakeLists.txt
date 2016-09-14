@@ -54,6 +54,12 @@ IF (UNIX)
         CHECK_INCLUDE_FILES(stdio.h HAVE_STDIO_H)
 	FailIfNotSet(HAVE_STDIO_H stdio.h)
 
+        CHECK_INCLUDE_FILES(stdarg.h HAVE_STDARG_H)
+	FailIfNotSet(HAVE_STDARG_H stdarg.h)
+
+        CHECK_INCLUDE_FILES(errno.h HAVE_ERRNO_H)
+	FailIfNotSet(HAVE_ERRNO_H errno.h)
+
         CHECK_INCLUDE_FILES(string.h HAVE_STRING_H)
 	FailIfNotSet(HAVE_STRING_H string.h)
 
