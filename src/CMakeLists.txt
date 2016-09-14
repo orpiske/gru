@@ -23,7 +23,7 @@ install(DIRECTORY log
 )
 
 
-install(DIRECTORY options
+install(DIRECTORY io
         DESTINATION include/${PROJECT_NAME}
         FILES_MATCHING PATTERN "*.h"
 )
