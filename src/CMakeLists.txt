@@ -9,7 +9,7 @@ add_library(
         common/gru_status.c
         io/gru_path.c
         io/gru_ioutils.c
-        log/logger.c
+        log/gru_logger.c
 #        log/log.c
 )
 
