@@ -6,8 +6,9 @@ endif (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
 
 add_library(
 	gru SHARED
-        log/logger.c
-        options/options.c
+        common/gru_status.c
+#        log/logger.c
+#        log/log.c
 )
 
 
