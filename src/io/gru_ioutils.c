@@ -25,7 +25,7 @@ bool gru_io_remap(const char *dir, const char *name, FILE *fd,
         return false;
     }
 
-    if (!gru_path_rename_if_exists(fullpath, status)) {
+    if (!gru_path_rename(fullpath, status)) {
         free(fullpath);
         return false;
     }
@@ -48,7 +48,7 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status)
 
     char *fullpath = gru_path_format(dir, name, status);
 
-    if (!gru_path_rename_if_exists(fullpath, status)) {
+    if (!gru_path_rename(fullpath, status)) {
         free(fullpath);
         return NULL;
     }

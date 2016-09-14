@@ -57,7 +57,7 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status);
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_path_rename_if_exists(const char *filename, gru_status_t *status);
+bool gru_path_rename(const char *filename, gru_status_t *status);
 
 
 /**
