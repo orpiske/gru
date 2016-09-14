@@ -24,10 +24,6 @@
 #include <ctype.h>
 #include <assert.h>
 
-#define likely(x)  __builtin_expect((x),1)
-#define unlikely(x)  __builtin_expect((x),0)
-
-
 /**
  * Removes spaces from the right side of a string
  * @param input Input string
