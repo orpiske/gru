@@ -74,10 +74,12 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status)
     return true;
 }
 
-
-bool gru_path_rename(const char *filename, gru_status_t *status)
+bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond, 
+                          gru_status_t *status)
 {
-    if (!gru_path_exists(filename, status)) {
+    
+    // Return if the condition is already fulfilled
+    if (!cond(filename, status)) {
         return true;
     }
 
@@ -99,7 +101,7 @@ bool gru_path_rename(const char *filename, gru_status_t *status)
         bzero(new_file, size);
         snprintf(new_file, size, "%s.%03i", filename, i);
 
-        if (!gru_path_exists(new_file, status)) {
+        if (!cond(new_file, status)) {
             int ret = 0;
 
             ret = rename(filename, new_file);
@@ -118,6 +120,12 @@ bool gru_path_rename(const char *filename, gru_status_t *status)
 
     free(new_file);
     return true;
+}
+
+
+bool gru_path_rename(const char *filename, gru_status_t *status)
+{
+    return gru_path_rename_cond(filename, gru_path_exists, status);
 }
 
 char *gru_path_format(const char *dir, const char *name, gru_status_t *status)

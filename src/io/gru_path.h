@@ -30,6 +30,8 @@ extern "C" {
 #endif
 
 #define APPEND_SIZE_REMAP 64
+    
+typedef bool(*gru_path_cond_t)(const char *, gru_status_t *status);
 
 /**
  * Checks whether a given file exists
@@ -48,6 +50,18 @@ bool gru_path_exists(const char *filename, gru_status_t *status);
  * @return
  */
 bool gru_path_can_read_write(const char *filename, gru_status_t *status);
+
+
+/**
+ * Renames a file based on a condition
+ * @param filename the filename
+ * @param cond condition that must be fulfilled for the rename to occur
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return true if successful or false otherwise
+ */
+bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond, 
+                          gru_status_t *status);
 
 
 /**
