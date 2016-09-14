@@ -158,3 +158,45 @@ bool gru_create_dir(const char *path, gru_status_t *status)
 
     return true;
 }
+
+
+bool gru_create_dirs(const char *path, gru_status_t *status)
+{
+    const char *ptr = path;
+    int count = 0;
+    int tmp_size = strlen(path) + 1;
+    char *tmp = (char *) malloc(tmp_size);
+
+    if (!tmp) {
+        gru_status_set(status, GRU_FAILURE,
+                       "Not enough memory to allocate %i bytes", tmp_size);
+
+        return false;
+    }
+
+    bzero(tmp, tmp_size);
+    do {
+        const char *last = ptr;
+
+        ptr++;
+        ptr = strstr(ptr, FILE_SEPARATOR);
+        count += ptr - last;
+
+        snprintf(tmp, tmp_size, "%.*s", count, path);
+
+        if (gru_path_exists(tmp, status)) {
+            continue;
+        }
+
+        if (!gru_create_dir(tmp, status)) {
+            free(tmp);
+
+            return false;
+        }
+    }
+    while (ptr != NULL);
+
+    free(tmp);
+    return true;
+}
+

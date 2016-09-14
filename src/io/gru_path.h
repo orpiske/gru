@@ -30,6 +30,10 @@ extern "C" {
 #endif
 
 #define APPEND_SIZE_REMAP 64
+
+#ifndef FILE_SEPARATOR
+#define FILE_SEPARATOR "/"
+#endif
     
 typedef bool(*gru_path_cond_t)(const char *, gru_status_t *status);
 
@@ -92,6 +96,16 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
  * @return true if successful or false otherwise
  */
 bool gru_create_dir(const char *path, gru_status_t *status);
+
+
+/**
+ * Given a path, this function will recursively create directories
+ * @param path The path
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return true if successfully create the directories or false otherwise
+ */
+bool gru_create_dirs(const char *path, gru_status_t *status);
 
 #ifdef __cplusplus
 }
