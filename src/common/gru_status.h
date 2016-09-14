@@ -24,6 +24,7 @@ extern "C" {
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>
+#include <assert.h>
     
 #define GRU_MAX_ERROR_MESSAGE 1024
 

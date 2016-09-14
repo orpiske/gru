@@ -18,6 +18,8 @@
 void gru_status_set(gru_status_t *status, gru_status_code_t code,
                     const char *message, ...)
 {
+    assert(status);
+
     va_list ap;
 
     if (status->message != NULL) {
@@ -86,7 +88,7 @@ void gru_status_strerror(gru_status_t *status, gru_status_code_t code, int errnu
 
     gru_status_set(status, code, message);
 
-e_exit:
+    e_exit:
     free(message);
 
     return;
