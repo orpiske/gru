@@ -22,6 +22,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdbool.h>
+#include <stdarg.h>
 
 typedef enum log_level_t_ {
 	TRACE = 0,
@@ -35,11 +36,52 @@ typedef enum log_level_t_ {
 
 typedef void(*logger_t)(log_level_t level, const char *message, ...);
 
-log_level_t get_log_level(const char *str);
-bool can_log(log_level_t l1, log_level_t l2);
+/**
+ * Gets the log level from an input string
+ * @param str the input string (ie.: info, warn, etc)
+ * @return the log level
+ */
+log_level_t gru_logger_get_level(const char *str);
 
-void set_logger(logger_t new_msg);
-logger_t get_logger(void);
+/**
+ * Whether can log (ie.: whether log level 1 is greater or equal to l2, thus 
+ * allowing to log)
+ * @param l1 log level being checked
+ * @return 
+ */
+bool gru_logger_can_log(log_level_t l1);
+
+/**
+ * Sets the logger
+ * @param logger the new logger
+ */
+void gru_logger_set(logger_t logger);
+
+/**
+ * Gets the logger
+ * @return the logger
+ */
+logger_t gru_logger_get(void);
+
+/**
+ * Sets the minimum log level
+ * @param minimum the minimum log level
+ */
+void gru_logger_set_mininum(log_level_t minimum);
+
+/**
+ * Gets the minimum log level
+ * @return the minimum log level
+ */
+log_level_t gru_logger_get_mininum();
+
+
+/**
+ * Default logger that logs to stdout
+ * @param level message level
+ * @param msg the message + additional parameters
+  */
+void gru_logger_default_printer(log_level_t level, const char *msg, ...);
 
 // GRU_LOGGER_H_
 #endif

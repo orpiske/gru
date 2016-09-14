@@ -1,5 +1,5 @@
 /**
- Copyright 2015 Otavio Rodolfo Piske
+ Copyright 2016 Otavio Rodolfo Piske
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -13,12 +13,33 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-
 #include "logger.h"
 
-static logger_t msg = NULL;
+static logger_t logger = NULL;
+static log_level_t minimum = INFO;
 
-bool can_log(log_level_t current, log_level_t minimum)
+void gru_logger_set(logger_t new_logger) {
+	logger = new_logger;
+}
+
+
+logger_t gru_logger_get(void) {
+	return logger;
+}
+
+
+void gru_logger_set_mininum(log_level_t new_minimum) {
+    minimum = new_minimum;
+}
+
+
+log_level_t gru_logger_get_mininum() {
+    return minimum;
+}
+
+
+
+bool gru_logger_can_log(log_level_t current)
 {
     if (current >= minimum) {
         return true;
@@ -29,7 +50,7 @@ bool can_log(log_level_t current, log_level_t minimum)
 
 
 
-log_level_t get_log_level(const char *str) {
+log_level_t gru_logger_get_level(const char *str) {
     if (strncasecmp("TRACE", str, strlen(str)) == 0) {
         return TRACE;
     }
@@ -63,11 +84,48 @@ log_level_t get_log_level(const char *str) {
     return INFO;
 }
 
-void set_logger(logger_t new_msg) {
-	msg = new_msg;
-}
+
+void gru_logger_default_printer(log_level_t level, const char *msg, ...)
+{
+    if (!gru_logger_can_log(level)) {
+        return;
+    }
+
+    va_list ap;
+    char *ret = NULL;
+
+    va_start(ap, msg);
+    vasprintf(&ret, msg, ap);
+    va_end(ap);
 
 
-logger_t get_logger(void) {
-	return msg;
+    switch (level) {
+    case TRACE:
+        fprintf(stderr, "[TRACE]: %s\n", ret);
+        break;
+    case DEBUG:
+        fprintf(stderr, "[DEBUG]: %s\n", ret);
+        break;
+    case INFO:
+        fprintf(stderr, "[INFO]: %s\n", ret);
+        break;
+    case STAT:
+        fprintf(stderr, "[STAT]: %s\n", ret);
+        break;
+    case WARNING:
+        fprintf(stderr, "[WARNING]: %s\n", ret);
+        break;
+    case ERROR:
+        fprintf(stderr, "[ERROR]: %s\n", ret);
+        break;
+    case FATAL:
+        fprintf(stderr, "[FATAL]: %s\n", ret);
+        break;
+    default:
+        fprintf(stderr, "[MSG]: %s\n", ret);
+        break;
+    }
+
+    free(ret);
 }
+
