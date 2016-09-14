@@ -10,7 +10,6 @@ add_library(
         io/gru_path.c
         io/gru_ioutils.c
         log/gru_logger.c
-#        log/log.c
 )
 
 
