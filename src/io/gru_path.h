@@ -17,6 +17,9 @@
 #include <string.h>
 #include <stdbool.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include "common/gru_status.h"
 
