@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <inttypes.h>
 #include <assert.h>
 
 #include "gru_node.h"
@@ -38,14 +39,14 @@ typedef void(*handle_function_t)(const void *, void *);
 gru_list_t *list_new(gru_status_t *status);
 
 const gru_node_t *list_append(gru_list_t *list, const void *data);
-gru_node_t *list_insert(gru_list_t *list, const void *data, unsigned int position);
+gru_node_t *list_insert(gru_list_t *list, const void *data, uint32_t position);
 
 
-gru_node_t *list_remove(gru_list_t *list, unsigned int position);
+gru_node_t *list_remove(gru_list_t *list, uint32_t position);
 bool list_remove_item(gru_list_t *list, compare_function_t comparable,
 		const void *other);
-const void *list_get(const gru_list_t *list, unsigned int position);
-unsigned int list_count(const gru_list_t *list);
+const void *list_get(const gru_list_t *list, uint32_t position);
+uint32_t list_count(const gru_list_t *list);
 
 
 void list_for_each_compare(gru_list_t *list, bool uniqueness,

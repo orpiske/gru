@@ -35,7 +35,7 @@ gru_list_t *list_new(gru_status_t *status) {
 }
 
 
-inline static bool can_continue(unsigned int count, unsigned int position) {
+inline static bool can_continue(uint32_t count, uint32_t position) {
 	if (likely(count < position)) {
 		return true;
 	}
@@ -44,7 +44,7 @@ inline static bool can_continue(unsigned int count, unsigned int position) {
 }
 
 
-static gru_node_t *go_to(gru_list_t *list, unsigned int position, unsigned int *count) {
+static gru_node_t *go_to(gru_list_t *list, uint32_t position, uint32_t *count) {
 	gru_node_t *node = list->root;
 
 	*count = 0;
@@ -74,8 +74,8 @@ static gru_node_t *go_to_end(gru_list_t *list) {
  * @return The number of items
  * @note The list must not be NULL
  */
-unsigned int list_count(const gru_list_t *list) {
-	unsigned int count = 0;
+uint32_t list_count(const gru_list_t *list) {
+	uint32_t count = 0;
 	gru_node_t *node = NULL;
 
 	assert(list != NULL);
@@ -122,10 +122,10 @@ const gru_node_t *list_append(gru_list_t *list, const void *data) {
  * @param position The position to insert the data
  * @return A pointer to the new node
  */
-gru_node_t *list_insert(gru_list_t *list, const void *data, unsigned int position) {
+gru_node_t *list_insert(gru_list_t *list, const void *data, uint32_t position) {
 	gru_node_t *current = NULL;
 	gru_node_t *node = NULL;
-	unsigned int count = 0;
+	uint32_t count = 0;
 
 	current = go_to(list, position, &count);
 	if (count != position) {
@@ -155,9 +155,9 @@ gru_node_t *list_insert(gru_list_t *list, const void *data, unsigned int positio
  * @param position The position of the item to be removed
  * @return A pointer to the removed node
  */
-gru_node_t *list_remove(gru_list_t *list, unsigned int position) {
+gru_node_t *list_remove(gru_list_t *list, uint32_t position) {
 	gru_node_t *node = NULL;
-	unsigned int count = 0;
+	uint32_t count = 0;
 
 	node = go_to(list, position, &count);
 	if (count != position) {
@@ -188,7 +188,7 @@ gru_node_t *list_remove(gru_list_t *list, unsigned int position) {
 bool list_remove_item(gru_list_t *list, compare_function_t comparable,
 		const void *other)
 {
-	unsigned int i = 0;
+	uint32_t i = 0;
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {
@@ -291,7 +291,8 @@ void list_for_each(gru_list_t *list, handle_function_t handle, void *data)
  * @param other
  * @param result
  */
-const void *list_get_item(gru_list_t *list, compare_function_t comparable, const void *other)
+const void *list_get_item(gru_list_t *list, compare_function_t comparable, 
+                          const void *other)
 {
 	gru_node_t *node = NULL;
 
