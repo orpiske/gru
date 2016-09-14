@@ -30,7 +30,7 @@
  * @param size Size of the string
  * @return A pointer to the new string (which is the same address as input)
  */
-char *gru_rtrim(char *input, int size);
+char *gru_rtrim(char *input, size_t size);
 
 /**
  * Removes spaces from the left side of a string
@@ -38,7 +38,7 @@ char *gru_rtrim(char *input, int size);
  * @param size Size of the string
  * @return A pointer to the new string (which is the same address as input)
  */
-char *gru_ltrim(char *input, int size);
+char *gru_ltrim(char *input, size_t size);
 
 /**
  * Removes spaces from all sides of a string
@@ -46,7 +46,7 @@ char *gru_ltrim(char *input, int size);
  * @param size Size of the string
  * @return A pointer to the new string (which is the same address as input)
  */
-char *gru_trim(char *input, int size);
+char *gru_trim(char *input, size_t size);
 
 
 /**
@@ -54,6 +54,6 @@ char *gru_trim(char *input, int size);
  * @param url The url
  * @return the file name
  */
-const char *gru_get_name_from_url(const char *url, int size);
+const char *gru_get_name_from_url(const char *url, size_t size);
 
 #endif // GRU_UTIL_H

@@ -16,8 +16,8 @@
 #include "gru_util.h"
 
 
-char *gru_rtrim(char *input, int size) {
-	int i = size;
+char *gru_rtrim(char *input, size_t size) {
+	size_t i = size;
 
 	assert(input != NULL);
 
@@ -30,8 +30,8 @@ char *gru_rtrim(char *input, int size) {
 }
 
 
-char *gru_ltrim(char *input, int size) {
-	int i = 0;
+char *gru_ltrim(char *input, size_t size) {
+	size_t i = 0;
 	assert(input != NULL);
 
 	while (isspace(input[i])) {
@@ -47,8 +47,8 @@ char *gru_ltrim(char *input, int size) {
 }
 
 
-char *gru_trim(char *input, int size) {
-	int tmp_size = 0;
+char *gru_trim(char *input, size_t size) {
+	size_t tmp_size = 0;
 	char *tmp_string = NULL;
 
 	tmp_string = gru_rtrim(input, size);
@@ -58,8 +58,8 @@ char *gru_trim(char *input, int size) {
 }
 
 
-const char *gru_get_name_from_url(const char *url, int size) {
-    int i = 0;
+const char *gru_get_name_from_url(const char *url, size_t size) {
+    size_t i = 0;
     
     for (i = size; i > 0; i--) {
         if (url[i] == '/') {
