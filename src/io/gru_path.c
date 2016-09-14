@@ -15,11 +15,7 @@
  */
 #include "gru_path.h"
 
-/**
- * Checks whether a given file exists
- * @param filename the filename
- * @return
- */
+
 bool gru_path_exists(const char *filename, gru_status_t *status)
 {
     int ret = 0;
@@ -44,11 +40,6 @@ bool gru_path_exists(const char *filename, gru_status_t *status)
 }
 
 
-/**
- * Checks whether can read/write a given file
- * @param filename the filename
- * @return
- */
 bool gru_path_can_read_write(const char *filename, gru_status_t *status)
 {
     int ret = 0;

@@ -31,9 +31,43 @@ extern "C" {
 
 #define APPEND_SIZE_REMAP 64
 
+/**
+ * Checks whether a given file exists
+ * @param filename the filename
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return
+ */
 bool gru_path_exists(const char *filename, gru_status_t *status);
+
+/**
+ * Checks whether can read/write a given file
+ * @param filename the filename
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return
+ */
 bool gru_path_can_read_write(const char *filename, gru_status_t *status);
+
+
+/**
+ * Renames a file
+ * @param filename the filename
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return true if successful or false otherwise
+ */
 bool gru_path_rename_if_exists(const char *filename, gru_status_t *status);
+
+
+/**
+ * Formats a path
+ * @param dir directory of the file
+ * @param name name of the file
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return the formatted path
+ */
 char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
 
 #ifdef __cplusplus

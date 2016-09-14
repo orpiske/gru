@@ -36,7 +36,27 @@
 extern "C" {
 #endif
 
+/**
+ * Remaps IO from one file descriptor to a file pointed by dir/name
+ * @param dir directory of the file
+ * @param name name of the file
+ * @param fd file descriptor to remap
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return true if remaped or false otherwise (in this case, check status)
+ */
 bool gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *status);
+
+
+/**
+ * Tryes to safely open a file (ie.: creating directories and stuff)
+ * @param dir directory of the file
+ * @param name name of the file
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
+ * check status)
+ */
 FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
 
 #ifdef __cplusplus
