@@ -15,7 +15,6 @@
  */
 #include "gru_path.h"
 
-
 bool gru_path_exists(const char *filename, gru_status_t *status)
 {
     int ret = 0;
@@ -38,7 +37,6 @@ bool gru_path_exists(const char *filename, gru_status_t *status)
 
     return false;
 }
-
 
 bool gru_path_can_read_write(const char *filename, gru_status_t *status)
 {
@@ -74,10 +72,10 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status)
     return true;
 }
 
-bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond, 
+bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
                           gru_status_t *status)
 {
-    
+
     // Return if the condition is already fulfilled
     if (!cond(filename, status)) {
         return true;
@@ -92,7 +90,7 @@ bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
 
     if (!new_file) {
         gru_status_set(status, GRU_FAILURE,
-               "Not enough memory to allocate for renaming the existing file");
+                       "Not enough memory to allocate for renaming the existing file");
         return false;
     }
 
@@ -122,7 +120,6 @@ bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
     return true;
 }
 
-
 bool gru_path_rename(const char *filename, gru_status_t *status)
 {
     return gru_path_rename_cond(filename, gru_path_exists, status);
@@ -132,11 +129,11 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status)
 {
     char *fullpath;
     size_t size = strlen(dir) + APPEND_SIZE_REMAP;
-    
+
     fullpath = (char *) malloc(size);
     if (fullpath == NULL) {
         gru_status_set(status, GRU_FAILURE, "Unable to format path");
-        
+
 
         free(fullpath);
         return NULL;
@@ -146,4 +143,18 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status)
     snprintf(fullpath, size - 1, "%s/%s", dir, name);
 
     return fullpath;
+}
+
+bool gru_create_dir(const char *path, gru_status_t *status)
+{
+    int ret = 0;
+
+    ret = mkdir(path, 0774);
+    if (ret != 0) {
+
+        gru_status_strerror(status, GRU_FAILURE, errno);
+        return false;
+    }
+
+    return true;
 }

@@ -84,6 +84,15 @@ bool gru_path_rename(const char *filename, gru_status_t *status);
  */
 char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
 
+/**
+ * Create a directory
+ * @param path directory path
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return true if successful or false otherwise
+ */
+bool gru_create_dir(const char *path, gru_status_t *status);
+
 #ifdef __cplusplus
 }
 #endif
