@@ -13,6 +13,7 @@ add_library(
         io/gru_ioutils.c
         log/gru_logger.c
         string/gru_util.c
+        config/gru_config.c
 )
 
 
@@ -38,6 +39,12 @@ install(DIRECTORY string
 )
 
 install(DIRECTORY collection
+        DESTINATION include/${PROJECT_NAME}
+        FILES_MATCHING PATTERN "*.h"
+)
+
+
+install(DIRECTORY config
         DESTINATION include/${PROJECT_NAME}
         FILES_MATCHING PATTERN "*.h"
 )
