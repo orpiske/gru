@@ -19,6 +19,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+    
+#define GRU_OPT_MAX_STR_SIZE 256
+#define GRU_OPT_MAX_STR_SIZE_MASK "%256s"
 
 #define likely(x)  __builtin_expect((x),1)
 #define unlikely(x)  __builtin_expect((x),0)
