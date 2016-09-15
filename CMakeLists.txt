@@ -16,11 +16,13 @@ endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
+set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin)
 
 set(RUNTIME_DIR "bin")
 set(CPP_INCLUDE_DIR "include")
 set(SHARED_DIR "share")
 set(GRU_SHARED_DIR ${SHARED_DIR}/gru)
+set(BUILD_WITH_UNIT_TESTS ON CACHE BOOL "Build unit tests")
 
 #### GNU Compiler flags
 
@@ -75,3 +77,11 @@ ENDIF (UNIX)
 
 include_directories(src)
 add_subdirectory(src/ objs)
+
+
+if (BUILD_WITH_UNIT_TESTS)
+    enable_testing()
+
+    include_directories(test)
+    add_subdirectory(test)
+endif (BUILD_WITH_UNIT_TESTS)
