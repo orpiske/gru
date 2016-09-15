@@ -29,8 +29,8 @@ typedef struct gru_node_t_ {
 
 typedef struct gru_node_t_ gru_node_t;
 
-gru_node_t *new_node(const void *ptr);
-void set_previous(gru_node_t *node, gru_node_t *previous);
-void set_next(gru_node_t *node, gru_node_t *next);
+gru_node_t *gru_node_new(const void *ptr);
+void gru_node_set_previous(gru_node_t *node, gru_node_t *previous);
+void gru_node_set_next(gru_node_t *node, gru_node_t *next);
 
 #endif

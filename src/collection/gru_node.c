@@ -16,7 +16,7 @@
 #include "gru_node.h"
 
 
-gru_node_t *new_node(const void *ptr) {
+gru_node_t *gru_node_new(const void *ptr) {
 	gru_node_t *ret = (gru_node_t *) malloc(sizeof(gru_node_t));
 
 	if (!ret) {
@@ -30,7 +30,7 @@ gru_node_t *new_node(const void *ptr) {
 }
 
 
-void set_previous(gru_node_t *node, gru_node_t *previous) {
+void gru_node_set_previous(gru_node_t *node, gru_node_t *previous) {
 	if (!node) {
 		return;
 	}
@@ -43,7 +43,7 @@ void set_previous(gru_node_t *node, gru_node_t *previous) {
 }
 
 
-void set_next(gru_node_t *node, gru_node_t *next) {
+void gru_node_set_next(gru_node_t *node, gru_node_t *next) {
 	if (!node) {
 		return;
 	}

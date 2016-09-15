@@ -100,15 +100,15 @@ const gru_node_t *list_append(gru_list_t *list, const void *data) {
 	gru_node_t *last = go_to_end(list);
 	gru_node_t *node = NULL;
 
-	node = new_node(data);
+	node = gru_node_new(data);
 
 	if (!last) {
 		list->root = node;
 		list->current = node;
 	}
 	else {
-		set_next(last, node);
-		set_previous(node, last);
+		gru_node_set_next(last, node);
+		gru_node_set_previous(node, last);
 	}
 
 	return node;
@@ -132,17 +132,17 @@ gru_node_t *list_insert(gru_list_t *list, const void *data, uint32_t position) {
 		return NULL;
 	}
 
-	node = new_node(data);
+	node = gru_node_new(data);
 	if (current == NULL) {
 		list->root = node;
 		list->current = node;
 	}
 	else {
-		set_next(current->previous, node);
-		set_previous(node, current->previous);
+		gru_node_set_next(current->previous, node);
+		gru_node_set_previous(node, current->previous);
 
-		set_previous(current, node);
-		set_next(node, current);
+		gru_node_set_previous(current, node);
+		gru_node_set_next(node, current);
 	}
 
 	return node;
@@ -168,8 +168,8 @@ gru_node_t *list_remove(gru_list_t *list, uint32_t position) {
 		return node;
 	}
 
-	set_next(node->previous, node->next);
-	set_previous(node->next, node->previous);
+	gru_node_set_next(node->previous, node->next);
+	gru_node_set_previous(node->next, node->previous);
 	list->current = node->previous;
 
 	node->previous = NULL;
@@ -203,8 +203,8 @@ bool list_remove_item(gru_list_t *list, compare_function_t comparable,
 
 		ret = comparable(node->data, other, NULL);
 		if (ret == true) {
-			set_next(node->previous, node->next);
-			set_previous(node->next, node->previous);
+			gru_node_set_next(node->previous, node->next);
+			gru_node_set_previous(node->next, node->previous);
 			list->current = node->previous;
 
 			node->previous = NULL;
