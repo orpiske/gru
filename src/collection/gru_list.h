@@ -36,24 +36,24 @@ typedef struct gru_list_t_ {
 typedef bool(*compare_function_t)(const void *, const void *data, void *result);
 typedef void(*handle_function_t)(const void *, void *);
 
-gru_list_t *list_new(gru_status_t *status);
+gru_list_t *gru_list_new(gru_status_t *status);
 
-const gru_node_t *list_append(gru_list_t *list, const void *data);
-gru_node_t *list_insert(gru_list_t *list, const void *data, uint32_t position);
+const gru_node_t *gru_list_append(gru_list_t *list, const void *data);
+gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t position);
 
 
-gru_node_t *list_remove(gru_list_t *list, uint32_t position);
-bool list_remove_item(gru_list_t *list, compare_function_t comparable,
+gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position);
+bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 		const void *other);
-const void *list_get(const gru_list_t *list, uint32_t position);
-uint32_t list_count(const gru_list_t *list);
+const void *gru_list_get(const gru_list_t *list, uint32_t position);
+uint32_t gru_list_count(const gru_list_t *list);
 
 
-void list_for_each_compare(gru_list_t *list, bool uniqueness,
+void gru_list_for_each_compare(gru_list_t *list, bool uniqueness,
 		compare_function_t comparable, const void *compare, void *result);
-void list_for_each(gru_list_t *list, handle_function_t handle, void *data);
+void gru_list_for_each(gru_list_t *list, handle_function_t handle, void *data);
 
-const void *list_get_item(gru_list_t *list, compare_function_t comparable, 
+const void *gru_list_get_item(gru_list_t *list, compare_function_t comparable, 
                           const void *other);
 
 

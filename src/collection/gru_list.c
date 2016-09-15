@@ -19,7 +19,7 @@
  * Creates a new list
  * @return A new gru_list_t object
  */
-gru_list_t *list_new(gru_status_t *status) {
+gru_list_t *gru_list_new(gru_status_t *status) {
 	gru_list_t *ret = (gru_list_t *) malloc(sizeof(gru_list_t));
 
 	if (!ret) {
@@ -74,7 +74,7 @@ static gru_node_t *go_to_end(gru_list_t *list) {
  * @return The number of items
  * @note The list must not be NULL
  */
-uint32_t list_count(const gru_list_t *list) {
+uint32_t gru_list_count(const gru_list_t *list) {
 	uint32_t count = 0;
 	gru_node_t *node = NULL;
 
@@ -96,7 +96,7 @@ uint32_t list_count(const gru_list_t *list) {
  * @param data The data for the new node
  * @return A pointer to the new node
  */
-const gru_node_t *list_append(gru_list_t *list, const void *data) {
+const gru_node_t *gru_list_append(gru_list_t *list, const void *data) {
 	gru_node_t *last = go_to_end(list);
 	gru_node_t *node = NULL;
 
@@ -122,7 +122,7 @@ const gru_node_t *list_append(gru_list_t *list, const void *data) {
  * @param position The position to insert the data
  * @return A pointer to the new node
  */
-gru_node_t *list_insert(gru_list_t *list, const void *data, uint32_t position) {
+gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t position) {
 	gru_node_t *current = NULL;
 	gru_node_t *node = NULL;
 	uint32_t count = 0;
@@ -155,7 +155,7 @@ gru_node_t *list_insert(gru_list_t *list, const void *data, uint32_t position) {
  * @param position The position of the item to be removed
  * @return A pointer to the removed node
  */
-gru_node_t *list_remove(gru_list_t *list, uint32_t position) {
+gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position) {
 	gru_node_t *node = NULL;
 	uint32_t count = 0;
 
@@ -185,7 +185,7 @@ gru_node_t *list_remove(gru_list_t *list, uint32_t position) {
  * @param other The data to compare the node with
  * @return true if the node was removed or false if it was not found
  */
-bool list_remove_item(gru_list_t *list, compare_function_t comparable,
+bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 		const void *other)
 {
 	uint32_t i = 0;
@@ -230,7 +230,7 @@ bool list_remove_item(gru_list_t *list, compare_function_t comparable,
  * @param other
  * @param result
  */
-void list_for_each_compare(gru_list_t *list, bool uniqueness,
+void gru_list_for_each_compare(gru_list_t *list, bool uniqueness,
 		compare_function_t comparable, const void *other, void *result)
 {
 	gru_node_t *node = NULL;
@@ -264,7 +264,7 @@ void list_for_each_compare(gru_list_t *list, bool uniqueness,
  * NULL then it will be ignored
  * @param data Payload data for the true_handle and false_handle functions
  */
-void list_for_each(gru_list_t *list, handle_function_t handle, void *data)
+void gru_list_for_each(gru_list_t *list, handle_function_t handle, void *data)
 {
 	gru_node_t *node = NULL;
 
@@ -291,7 +291,7 @@ void list_for_each(gru_list_t *list, handle_function_t handle, void *data)
  * @param other
  * @param result
  */
-const void *list_get_item(gru_list_t *list, compare_function_t comparable, 
+const void *gru_list_get_item(gru_list_t *list, compare_function_t comparable, 
                           const void *other)
 {
 	gru_node_t *node = NULL;
