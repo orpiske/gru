@@ -30,6 +30,14 @@ gru_node_t *gru_node_new(const void *ptr) {
 }
 
 
+void gru_node_destroy(gru_node_t **node) {
+	gru_node_unlink(*(node));
+        
+        free(*(node));
+        *node = NULL;
+}
+
+
 void gru_node_set_previous(gru_node_t *node, gru_node_t *previous) {
 	if (!node) {
 		return;
@@ -52,4 +60,23 @@ void gru_node_set_next(gru_node_t *node, gru_node_t *next) {
 	if (next) {
 		next->previous = node;
 	}
+}
+
+
+void gru_node_reset(gru_node_t *node) {
+    node->previous = NULL;
+    node->next = NULL;
+}
+
+
+void gru_node_unlink(gru_node_t *node) {
+    
+    if (!node) {
+        return;
+    }
+    
+    gru_node_set_next(node->previous, node->next);
+    gru_node_set_previous(node->next, node->previous);
+    
+    gru_node_reset(node);
 }
