@@ -21,76 +21,94 @@
 
 #include "collection/gru_node.h"
 
-
 static bool test_set_next() {
-    uint32_t value1 = 10;
-    uint32_t value2 = 20;
-    
-    gru_node_t *node1 = gru_node_new(&value1);
-    gru_node_t *node2 = gru_node_new(&value2);
-    
-    gru_node_set_next(node1, node2);
-    
-    // A *very* simple test to check the circular relationship between the nodes
-    
-    uint32_t *d1 = (uint32_t *) node1->next->data;
-    uint32_t *d2 = (uint32_t *) node2->previous->data;
-    
-    if (*d1 == 20) {
-        if (*d2 == 10) {
-            gru_node_destroy(&node1);
-            gru_node_destroy(&node2);
-            
-            return true;
-        }
-    }
-    gru_node_destroy(&node1);
-    gru_node_destroy(&node2);
-    
-    return false;   
+	uint32_t value1 = 10;
+	uint32_t value2 = 20;
+
+	gru_node_t *node1 = gru_node_new(&value1);
+	gru_node_t *node2 = gru_node_new(&value2);
+
+	gru_node_set_next(node1, node2);
+
+	// A *very* simple test to check the circular relationship between the nodes
+
+	uint32_t *d1 = (uint32_t *) node1->next->data;
+	uint32_t *d2 = (uint32_t *) node2->previous->data;
+
+	if (*d1 == 20) {
+		if (*d2 == 10) {
+			gru_node_destroy(&node1);
+			gru_node_destroy(&node2);
+
+			if (node1 != NULL || node2 != NULL) {
+				printf("Node incorrectly destroyed\n");
+
+				return false;
+
+			}
+
+			return true;
+		}
+	}
+	gru_node_destroy(&node1);
+	gru_node_destroy(&node2);
+
+	if (node1 != NULL || node2 != NULL) {
+		printf("Node incorrectly destroyed\n");
+	}
+
+	return false;
 }
 
-
 static bool test_set_previous() {
-    uint32_t value1 = 10;
-    uint32_t value2 = 20;
-    
-    gru_node_t *node1 = gru_node_new(&value1);
-    gru_node_t *node2 = gru_node_new(&value2);
-    
-    gru_node_set_previous(node2, node1);
-    
-    // A *very* simple test to check the circular relationship between the nodes
-    
-    uint32_t *d1 = (uint32_t *) node1->next->data;
-    uint32_t *d2 = (uint32_t *) node2->previous->data;
-    
-    if (*d1 == 20) {
-        if (*d2 == 10) {
-            gru_node_destroy(&node1);
-            gru_node_destroy(&node2);
-            
-            return true;
-        }
-    }
-    gru_node_destroy(&node1);
-    gru_node_destroy(&node2);
-    
-    return false;   
+	uint32_t value1 = 10;
+	uint32_t value2 = 20;
+
+	gru_node_t *node1 = gru_node_new(&value1);
+	gru_node_t *node2 = gru_node_new(&value2);
+
+	gru_node_set_previous(node2, node1);
+
+	// A *very* simple test to check the circular relationship between the nodes
+
+	uint32_t *d1 = (uint32_t *) node1->next->data;
+	uint32_t *d2 = (uint32_t *) node2->previous->data;
+
+	if (*d1 == 20) {
+		if (*d2 == 10) {
+			gru_node_destroy(&node1);
+			gru_node_destroy(&node2);
+
+			if (node1 != NULL || node2 != NULL) {
+				printf("Node incorrectly destroyed\n");
+
+				return false;
+
+			}
+
+			return true;
+		}
+	}
+	gru_node_destroy(&node1);
+	gru_node_destroy(&node2);
+
+	if (node1 != NULL || node2 != NULL) {
+		printf("Node incorrectly destroyed\n");
+	}
+
+	return false;
 }
 
 /*
  * 
  */
-int
-main(int argc, char** argv)
-{
-    if (test_set_next()) {
-        if (test_set_previous()) {
-            return EXIT_SUCCESS;
-        }
-    }
-    
-    return EXIT_FAILURE;
+int main(int argc, char** argv) {
+	if (test_set_next()) {
+		if (test_set_previous()) {
+			return EXIT_SUCCESS;
+		}
+	}
+
+	return EXIT_FAILURE;
 }
 
