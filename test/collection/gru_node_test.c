@@ -32,11 +32,11 @@ static bool test_set_next() {
 
 	// A *very* simple test to check the circular relationship between the nodes
 
-	uint32_t *d1 = (uint32_t *) node1->next->data;
-	uint32_t *d2 = (uint32_t *) node2->previous->data;
+	uint32_t d1 = gru_node_get_data(uint32_t, node1->next);
+	uint32_t d2 = gru_node_get_data(uint32_t, node2->previous);
 
-	if (*d1 == 20) {
-		if (*d2 == 10) {
+	if (d1 == 20) {
+		if (d2 == 10) {
 			gru_node_destroy(&node1);
 			gru_node_destroy(&node2);
 
@@ -71,11 +71,11 @@ static bool test_set_previous() {
 
 	// A *very* simple test to check the circular relationship between the nodes
 
-	uint32_t *d1 = (uint32_t *) node1->next->data;
-	uint32_t *d2 = (uint32_t *) node2->previous->data;
+	uint32_t d1 = gru_node_get_data(uint32_t, node1->next);
+	uint32_t d2 = gru_node_get_data(uint32_t, node2->previous);
 
-	if (*d1 == 20) {
-		if (*d2 == 10) {
+	if (d1 == 20) {
+		if (d2 == 10) {
 			gru_node_destroy(&node1);
 			gru_node_destroy(&node2);
 

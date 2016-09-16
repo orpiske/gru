@@ -37,4 +37,8 @@ void gru_node_set_next(gru_node_t *node, gru_node_t *next);
 void gru_node_reset(gru_node_t *node);
 void gru_node_unlink(gru_node_t *node);
 
+
+#define gru_node_get_data_ptr(type, node) (type *) node->data
+#define gru_node_get_data(type, node) (*(gru_node_get_data_ptr(type, node)))
+
 #endif
