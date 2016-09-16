@@ -17,6 +17,15 @@ BuildRequires:      gcc
 %description
 This library implements reusable C/C++ utilities, algorithms and features.
 
+
+%package devel
+Summary:            Generic Reusable Utilities (GRU) development kit
+Requires:           gcc
+Group:              Development/Libraries
+
+%description devel
+Development packages for the GRU library
+
 %prep
 %autosetup -n gru-%{version}
 
@@ -32,6 +41,9 @@ make install
 %files
 %doc AUTHORS README.md LICENSE COPYING
 %{_libdir}/*
+
+
+%files devel
 %{_includedir}/*
 
 
