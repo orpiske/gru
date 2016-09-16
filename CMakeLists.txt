@@ -1,5 +1,5 @@
 project(gru)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.6)
 
 if( CMAKE_SIZEOF_VOID_P EQUAL 8)
     message(STATUS "64 bits compiler detected")
