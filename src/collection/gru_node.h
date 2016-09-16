@@ -27,8 +27,6 @@ typedef struct gru_node_t_ {
 	const void *data;
 } gru_node_t;
 
-typedef struct gru_node_t_ gru_node_t;
-
 gru_node_t *gru_node_new(const void *ptr);
 void gru_node_destroy(gru_node_t **node);
 
