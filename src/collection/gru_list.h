@@ -34,7 +34,7 @@ typedef struct gru_list_t_ {
 } gru_list_t;
 
 typedef bool(*compare_function_t)(const void *, const void *data, void *result);
-typedef void(*handle_function_t)(const void *, void *);
+typedef void(*handle_function_t)(const gru_node_t *, void *);
 
 
 /**
@@ -98,6 +98,13 @@ gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position);
  */
 bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 		const void *other);
+
+/**
+ * Gets a node from the list at the given position
+ * @param list the list
+ * @param position the position
+ * @return the node or NULL if not existent
+ */
 const void *gru_list_get(const gru_list_t *list, uint32_t position);
 
 

@@ -59,7 +59,7 @@ inline static bool can_continue(uint32_t count, uint32_t position) {
 }
 
 
-static gru_node_t *go_to(gru_list_t *list, uint32_t position, uint32_t *count) {
+static gru_node_t *go_to(const gru_list_t *list, uint32_t position, uint32_t *count) {
 	gru_node_t *node = list->root;
 
 	*count = 0;
@@ -199,6 +199,18 @@ bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 	return false;
 }
 
+const void *gru_list_get(const gru_list_t *list, uint32_t position) {
+	gru_node_t *node = NULL;
+	uint32_t count = 0;
+
+	node = go_to(list, position, &count);
+	if (count != position) {
+		return NULL;
+	}
+
+	return node;
+}
+
 
 
 void gru_list_for_each_compare(gru_list_t *list, bool uniqueness,
@@ -237,7 +249,7 @@ void gru_list_for_each(gru_list_t *list, handle_function_t handle, void *data)
 	node = list->root;
 
 	while (node) {
-		handle(node->data, data);
+		handle(node, data);
 
 		node = node->next;
 	}
