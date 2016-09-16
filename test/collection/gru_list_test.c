@@ -23,6 +23,14 @@
 #include "collection/gru_list.h"
 
 
+void check_val(const gru_node_t *node, void *data) {
+	bool *exist = (bool *) data;
+	uint32_t value = gru_node_get_data(uint32_t, node);
+
+	if (value == 32) {
+		*exist = true;
+	}
+}
 
 
 int main(int argc, char **argv) {
@@ -37,26 +45,85 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
+	uint32_t tmp[list_size];
 	for (uint32_t i = 0; i < list_size; i++) {
-		uint32_t tmp = i;
-		gru_list_append(list, &tmp);
+		tmp[i] = i;
+		gru_list_append(list, &tmp[i]);
 	}
 
 	uint32_t count = gru_list_count(list);
 	if (count != 256) {
 		printf("Unexpected list size: %i != %i\n", count, list_size);
 
-		return EXIT_FAILURE;
+		goto e_exit;
 	}
 
-	// gru_node_t *node64 = gru_list_get(list, 64);
+	const gru_node_t *node64 = gru_list_get(list, 64);
+	if (node64 == NULL) {
+		printf("The node does not exist\n");
+
+		goto e_exit;
+	}
+
+	uint32_t value = gru_node_get_data(uint32_t, node64);
+
+	if (value != 64) {
+		printf("The value of the node does not match the expected: %i != %i\n",
+				value, 64);
+
+		goto e_exit;
+	}
+
+	uint32_t new_value = 444;
+	gru_node_t *node = gru_list_insert(list, &new_value, 200);
+	count = gru_list_count(list);
+	if (count != 257) {
+		printf("Unexpected list size: %i != %i\n", count, list_size + 1);
+
+		goto e_exit;
+	}
+
+	node = gru_list_remove(list, 200);
+	gru_node_destroy(&node);
+
+	node = gru_list_remove(list, 200);
+	gru_node_destroy(&node);
+
+	node = gru_list_remove(list, 200);
+	gru_node_destroy(&node);
+
+	count = gru_list_count(list);
+	if (count != 254) {
+		printf("Unexpected list size: %i != %i\n", count, 254);
+
+		goto e_exit;
+	}
+
+	bool exist = false;
+	gru_list_for_each(list, check_val, &exist);
+	if (!exist) {
+		printf("Value 32 should be present on the list");
+
+		goto e_exit;
+	}
+
 
 	gru_list_destroy(&list);
 	if (list != NULL) {
 		printf("List incorrectly destroyed\n");
 
+		goto e_exit;
 	}
 
 
 	return EXIT_SUCCESS;
+
+	e_exit:
+	gru_list_destroy(&list);
+	if (list != NULL) {
+		printf("List incorrectly destroyed\n");
+	}
+
+	return EXIT_FAILURE;
+
 }
