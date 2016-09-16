@@ -37,6 +37,9 @@ typedef bool(*compare_function_t)(const void *, const void *data, void *result);
 typedef void(*handle_function_t)(const void *, void *);
 
 gru_list_t *gru_list_new(gru_status_t *status);
+void gru_list_destroy(gru_list_t **list);
+
+uint32_t gru_list_count(const gru_list_t *list);
 
 const gru_node_t *gru_list_append(gru_list_t *list, const void *data);
 gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t position);
@@ -46,7 +49,7 @@ gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position);
 bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 		const void *other);
 const void *gru_list_get(const gru_list_t *list, uint32_t position);
-uint32_t gru_list_count(const gru_list_t *list);
+
 
 
 void gru_list_for_each_compare(gru_list_t *list, bool uniqueness,

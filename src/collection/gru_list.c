@@ -35,6 +35,24 @@ gru_list_t *gru_list_new(gru_status_t *status) {
 }
 
 
+void gru_list_destroy(gru_list_t **list) {
+	if ((*list) == NULL) {
+		return;
+	}
+
+	gru_node_t *node = (*list)->root;
+
+	while (node) {
+		gru_node_t *next = node->next;
+		gru_node_destroy(&node);
+
+		node = next;
+	}
+
+	free(*list);
+	*list = NULL;
+}
+
 inline static bool can_continue(uint32_t count, uint32_t position) {
 	if (likely(count < position)) {
 		return true;
