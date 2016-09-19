@@ -46,6 +46,18 @@ typedef bool(*gru_path_cond_t)(const char *, gru_status_t *status);
  */
 bool gru_path_exists(const char *filename, gru_status_t *status);
 
+
+/**
+ * Checks whether a given file exists based on it's file descriptor
+ * @param fd the file descriptor
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return
+ */
+bool gru_path_fexists(int fd, gru_status_t *status);
+
+
+
 /**
  * Checks whether can read/write a given file
  * @param filename the filename

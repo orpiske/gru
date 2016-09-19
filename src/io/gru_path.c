@@ -38,6 +38,28 @@ bool gru_path_exists(const char *filename, gru_status_t *status)
     return false;
 }
 
+bool gru_path_fexists(int fd, gru_status_t *status) {
+int ret = 0;
+    struct stat info;
+
+    ret = fstat(fd, &info);
+    if (ret == 0) {
+
+        if (status) {
+            gru_status_reset(status);
+        }
+
+        return true;
+    }
+    else {
+        if (status) {
+            gru_status_strerror(status, GRU_FAILURE, errno);
+        }
+    }
+
+    return false;
+}
+
 bool gru_path_can_read_write(const char *filename, gru_status_t *status)
 {
     int ret = 0;
