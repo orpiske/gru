@@ -21,6 +21,11 @@ install(TARGETS gru
 	LIBRARY DESTINATION ${CPP_LIBRARY_DIR}
 )
 
+install(DIRECTORY common
+        DESTINATION include/${PROJECT_NAME}
+        FILES_MATCHING PATTERN "*.h"
+)
+
 install(DIRECTORY log
         DESTINATION include/${PROJECT_NAME}
         FILES_MATCHING PATTERN "*.h"
