@@ -48,10 +48,35 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status)
 
     char *fullpath = gru_path_format(dir, name, status);
 
+    if (!gru_path_exists(fullpath, status) == status->code == GRU_SUCCESS) {
+        if (!gru_create_dirs(dir, status)) {
+            return NULL;
+        }
+    }
+    
+    FILE *f = fopen(fullpath, "w+");
+    if (f == NULL) {
+        gru_status_strerror(status, GRU_FAILURE, errno);
+
+        free(fullpath);
+        return NULL;
+    }
+
+    free(fullpath);
+    return f;
+}
+
+
+FILE *gru_io_open_unique_file(const char *dir, const char *name, gru_status_t *status)
+{
+
+    char *fullpath = gru_path_format(dir, name, status);
+
     if (!gru_path_rename(fullpath, status)) {
         free(fullpath);
         return NULL;
     }
+    
 
 
     FILE *f = fopen(fullpath, "w+");

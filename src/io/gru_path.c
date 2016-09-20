@@ -22,16 +22,16 @@ bool gru_path_exists(const char *filename, gru_status_t *status)
 
     ret = stat(filename, &info);
     if (ret == 0) {
-
-        if (status) {
-            gru_status_reset(status);
-        }
-
         return true;
     }
     else {
-        if (status) {
-            gru_status_strerror(status, GRU_FAILURE, errno);
+        if (errno == ENOENT) {
+            return false;
+        }
+        else {
+            if (status) {
+                gru_status_strerror(status, GRU_FAILURE, errno);
+            }
         }
     }
 
@@ -44,16 +44,16 @@ int ret = 0;
 
     ret = fstat(fd, &info);
     if (ret == 0) {
-
-        if (status) {
-            gru_status_reset(status);
-        }
-
         return true;
     }
     else {
-        if (status) {
-            gru_status_strerror(status, GRU_FAILURE, errno);
+        if (errno == ENOENT) {
+            return false;
+        }
+        else {
+            if (status) {
+                gru_status_strerror(status, GRU_FAILURE, errno);
+            }
         }
     }
 
