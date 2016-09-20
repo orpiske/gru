@@ -17,7 +17,7 @@
 
 
 gru_config_t *gru_config_init(const char *dir, const char *filename, 
-                              void *payload, gru_status_t *status) {
+                              gru_payload_t *payload, gru_status_t *status) {
     assert(status && dir && filename);
 
     gru_config_t *ret = (gru_config_t *) calloc(1, sizeof(gru_config_t));
@@ -31,14 +31,23 @@ gru_config_t *gru_config_init(const char *dir, const char *filename,
     
     asprintf(&ret->dir, "%s", dir);
     asprintf(&ret->filename, "%s", filename);
-    ret->payload = payload;
     
     // open file
+    /*
     ret->file = gru_io_open_file(ret->dir, ret->filename, status);
     if (!ret->file) {
         free(ret->dir);
         free(ret->filename);
         free(ret);
+        
+        return NULL;
+    }
+     */
+    
+    gru_payload_init_data(payload, ret->dir, ret->filename, &ret->file, status);
+    
+    if (status->code != GRU_SUCCESS) {
+        gru_config_destroy(&ret);
         
         return NULL;
     }
@@ -97,31 +106,12 @@ end:
     pthread_mutex_unlock(&mutex);
 }
 
-void gru_config_init_payload(gru_config_t *config, gru_payload_t *payload, 
-                             gru_status_t *status)
-{
-    if (!gru_path_exists(config->filename, status) && status->code == GRU_SUCCESS) {
-        // set defaults
-        payload->init(payload->data);
 
-        // write configs
-        payload->save(config->file, payload->data);
-        
-        fflush(NULL);
-    }
-    else {
-        if (status->code != GRU_SUCCESS) {
-            return;
-        }
-        
-        payload->data = payload->read(config->file);
-    }   
-}
 
 void gru_config_read_char(char *dest, FILE *source, const char *name)
 {
-    gru_config_read(dest, source, "%[^=]=" GRU_OPT_MAX_STR_SIZE_MASK, name);
-
+    gru_config_read(dest, source, "%[^=]=" GRU_OPT_MAX_CHAR_SIZE_MASK, name);
+    
 }
 
 void gru_config_read_int(int32_t *dest, FILE *source, const char *name)

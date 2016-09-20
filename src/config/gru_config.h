@@ -31,21 +31,13 @@
 #include "io/gru_path.h"
 #include "io/gru_ioutils.h"
 
+#include "gru_payload.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
     
-typedef void(*gru_payload_data_init_t)(void *);
-typedef void(*gru_payload_data_save_t)(FILE *, void *);
-typedef void *(*gru_payload_data_read_t)(FILE *);
 
-typedef struct gru_payload_t_ {
-    gru_payload_data_init_t init;
-    gru_payload_data_save_t save;
-    gru_payload_data_read_t read;
-    
-    void *data;
-} gru_payload_t;
     
 typedef struct gru_config_t_ {
     char *dir;
@@ -57,12 +49,11 @@ typedef struct gru_config_t_ {
 
 
 gru_config_t *gru_config_init(const char *dir, const char *filename, 
-                              void *payload, gru_status_t *status);
+                              gru_payload_t *payload, gru_status_t *status);
 
 void gru_config_destroy(gru_config_t **config);
 
-void gru_config_init_payload(gru_config_t *config, gru_payload_t *payload, 
-                             gru_status_t *status);
+
 
 void gru_config_set(char *dest, uint32_t size, const char *fmt, ...);
 void gru_config_read(void *dest, FILE *source, const char *mask, const char *name);

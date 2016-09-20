@@ -24,3 +24,19 @@ target_link_libraries(gru_list_test
 add_test(NAME gru-list
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
     COMMAND gru_list_test)
+
+
+add_executable(gru_config_test
+	config/gru_config_test.c
+)
+
+target_link_libraries(gru_config_test
+           gru)
+
+add_test(NAME gru-config-write
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+    COMMAND gru_config_test "write")
+
+add_test(NAME gru-config-read
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+    COMMAND gru_config_test "read")
