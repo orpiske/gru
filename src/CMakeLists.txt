@@ -7,6 +7,7 @@ endif (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
 add_library(
 	gru SHARED
         common/gru_status.c
+        common/gru_alloc.c
         collection/gru_node.c
         collection/gru_list.c
         io/gru_path.c
