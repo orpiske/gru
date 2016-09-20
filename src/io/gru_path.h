@@ -24,6 +24,7 @@
 #include <sys/stat.h>
 
 #include "common/gru_status.h"
+#include "common/gru_alloc.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,7 +36,38 @@ extern "C" {
 #define FILE_SEPARATOR "/"
 #endif
     
+typedef struct gru_path_slice_t_ {
+    char *directory;
+    char *filename;
+} gru_path_slice_t;
+    
+typedef struct gru_path_full_t_ {
+    char *fullpath;
+} gru_path_full_t;
+
+typedef union gru_path_spec_t_ {
+    gru_path_slice_t slice;
+    gru_path_full_t full;
+} gru_path_spec_t;
+
+typedef enum gru_path_spec_type_t_ {
+    SLICE,
+    FULL,  
+} gru_path_spec_type_t;
+    
+typedef struct gru_path_t_ {
+    gru_path_spec_type_t type;
+    gru_path_spec_t location;     
+} gru_path_t;
+    
 typedef bool(*gru_path_cond_t)(const char *, gru_status_t *status);
+
+
+gru_path_t *gru_path_init_from_slice(const char *directory, const char *name, 
+                                     gru_status_t *status);
+gru_path_t *gru_path_init_from_path(const char *fullpath, gru_status_t *status);
+
+void gru_path_destroy(gru_path_t **path);
 
 /**
  * Checks whether a given file exists
@@ -44,7 +76,7 @@ typedef bool(*gru_path_cond_t)(const char *, gru_status_t *status);
  * failure
  * @return
  */
-bool gru_path_exists(const char *filename, gru_status_t *status);
+bool gru_path_exists(const gru_path_t *path, gru_status_t *status);
 
 
 /**
@@ -65,7 +97,7 @@ bool gru_path_fexists(int fd, gru_status_t *status);
  * failure
  * @return
  */
-bool gru_path_can_read_write(const char *filename, gru_status_t *status);
+bool gru_path_can_read_write(const gru_path_t *path, gru_status_t *status);
 
 
 /**
@@ -76,7 +108,7 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status);
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond, 
+bool gru_path_rename_cond(const gru_path_t *path, gru_path_cond_t cond, 
                           gru_status_t *status);
 
 
@@ -87,7 +119,7 @@ bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_path_rename(const char *filename, gru_status_t *status);
+bool gru_path_rename(const gru_path_t *path, gru_status_t *status);
 
 
 /**
@@ -107,7 +139,7 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_create_dir(const char *path, gru_status_t *status);
+bool gru_create_dir(const gru_path_t *path, gru_status_t *status);
 
 
 /**
@@ -117,7 +149,7 @@ bool gru_create_dir(const char *path, gru_status_t *status);
  * failure
  * @return true if successfully create the directories or false otherwise
  */
-bool gru_create_dirs(const char *path, gru_status_t *status);
+bool gru_create_dirs(const gru_path_t *path, gru_status_t *status);
 
 #ifdef __cplusplus
 }

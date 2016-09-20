@@ -15,7 +15,44 @@
  */
 #include "gru_path.h"
 
-bool gru_path_exists(const char *filename, gru_status_t *status)
+
+gru_path_t *gru_path_init_from_slice(const char *directory, const char *filename, 
+                                     gru_status_t *status) {
+    gru_path_t *ret = gru_alloc(sizeof(gru_path_t), status);
+    
+    gru_alloc_check(ret, NULL);
+    
+    asprintf(&ret->location.slice.directory, "%s", directory);
+    asprintf(&ret->location.slice.filename, "%s", filename);
+    ret->type = SLICE;
+    
+    return ret;
+}
+
+gru_path_t *gru_path_init_from_path(const char *fullpath, gru_status_t *status) {
+    gru_path_t *ret = gru_alloc(sizeof(gru_path_t), status);
+    
+    gru_alloc_check(ret, NULL);
+    
+    asprintf(&ret->location.full.fullpath, "%s", fullpath);
+    ret->type = FULL;
+    
+    return ret;
+}
+
+void gru_path_destroy(gru_path_t **path) {
+    if ((*path)->type == SLICE) {
+        gru_dealloc_string(&(*path)->location.slice.directory);
+        gru_dealloc_string(&(*path)->location.slice.filename);
+    }
+    else {
+        gru_dealloc_string(&(*path)->location.full.fullpath);
+    }
+    
+    gru_dealloc((void **) path);
+}
+
+static bool gru_path_exists_internal(const char *filename, gru_status_t *status)
 {
     int ret = 0;
     struct stat info;
@@ -38,8 +75,22 @@ bool gru_path_exists(const char *filename, gru_status_t *status)
     return false;
 }
 
+bool gru_path_exists(const gru_path_t *path, gru_status_t *status) {
+    if (path->type == SLICE) {
+        char *fullpath = gru_path_format(path->location.slice.directory, 
+                                         path->location.slice.filename, status);
+        
+        bool ret = gru_path_exists_internal(fullpath, status);
+        gru_dealloc_string(&fullpath);
+        
+        return ret;
+    }
+    
+    return gru_path_exists_internal(path->location.full.fullpath, status);
+}
+
 bool gru_path_fexists(int fd, gru_status_t *status) {
-int ret = 0;
+    int ret = 0;
     struct stat info;
 
     ret = fstat(fd, &info);
@@ -60,7 +111,7 @@ int ret = 0;
     return false;
 }
 
-bool gru_path_can_read_write(const char *filename, gru_status_t *status)
+static bool gru_path_can_read_write_internal(const char *filename, gru_status_t *status)
 {
     int ret = 0;
 
@@ -94,7 +145,21 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status)
     return true;
 }
 
-bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
+bool gru_path_can_read_write(const gru_path_t *path, gru_status_t *status) {
+    if (path->type == SLICE) {
+        char *fullpath = gru_path_format(path->location.slice.directory, 
+                                         path->location.slice.filename, status);
+        
+        bool ret = gru_path_can_read_write_internal(fullpath, status);
+        gru_dealloc_string(&fullpath);
+        
+        return ret;
+    }
+    
+    return gru_path_can_read_write_internal(path->location.full.fullpath, status);
+}
+
+static bool gru_path_rename_cond_internal(const char *filename, gru_path_cond_t cond,
                           gru_status_t *status)
 {
 
@@ -103,7 +168,7 @@ bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
         return true;
     }
 
-    if (!gru_path_can_read_write(filename, status)) {
+    if (!gru_path_can_read_write_internal(filename, status)) {
         return false;
     }
 
@@ -142,9 +207,26 @@ bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
     return true;
 }
 
-bool gru_path_rename(const char *filename, gru_status_t *status)
+bool gru_path_rename_cond(const gru_path_t *path, gru_path_cond_t cond,
+                          gru_status_t *status)
 {
-    return gru_path_rename_cond(filename, gru_path_exists, status);
+    if (path->type == SLICE) {
+        char *fullpath = gru_path_format(path->location.slice.directory, 
+                                         path->location.slice.filename, status);
+        
+        bool ret = gru_path_rename_cond_internal(fullpath, cond, status);
+        gru_dealloc_string(&fullpath);
+        
+        return ret;
+    }
+    
+    return gru_path_rename_cond_internal(path->location.full.fullpath, cond,
+                                            status);
+}
+
+bool gru_path_rename(const gru_path_t *path, gru_status_t *status)
+{
+    return gru_path_rename_cond(path, gru_path_exists_internal, status);
 }
 
 char *gru_path_format(const char *dir, const char *name, gru_status_t *status)
@@ -167,7 +249,7 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status)
     return fullpath;
 }
 
-bool gru_create_dir(const char *path, gru_status_t *status)
+static bool gru_create_dir_internal(const char *path, gru_status_t *status)
 {
     int ret = 0;
 
@@ -181,8 +263,22 @@ bool gru_create_dir(const char *path, gru_status_t *status)
     return true;
 }
 
+bool gru_create_dir(const gru_path_t *path, gru_status_t *status) {
+    if (path->type == SLICE) {
+        char *fullpath = gru_path_format(path->location.slice.directory, 
+                                         path->location.slice.filename, status);
+        
+        bool ret = gru_create_dir_internal(fullpath, status);
+        gru_dealloc_string(&fullpath);
+        
+        return ret;
+    }
+    
+    return gru_create_dir_internal(path->location.full.fullpath, status);
+}
 
-bool gru_create_dirs(const char *path, gru_status_t *status)
+
+static bool gru_create_dirs_internal(const char *path, gru_status_t *status)
 {
     const char *ptr = path;
     int count = 0;
@@ -206,11 +302,11 @@ bool gru_create_dirs(const char *path, gru_status_t *status)
 
         snprintf(tmp, tmp_size, "%.*s", count, path);
 
-        if (gru_path_exists(tmp, status)) {
+        if (gru_path_exists_internal(tmp, status)) {
             continue;
         }
 
-        if (!gru_create_dir(tmp, status)) {
+        if (!gru_create_dir_internal(tmp, status)) {
             free(tmp);
 
             return false;
@@ -220,5 +316,20 @@ bool gru_create_dirs(const char *path, gru_status_t *status)
 
     free(tmp);
     return true;
+}
+
+
+bool gru_create_dirs(const gru_path_t *path, gru_status_t *status) {
+    if (path->type == SLICE) {
+        char *fullpath = gru_path_format(path->location.slice.directory, 
+                                         path->location.slice.filename, status);
+        
+        bool ret = gru_create_dirs_internal(fullpath, status);
+        gru_dealloc_string(&fullpath);
+        
+        return ret;
+    }
+    
+    return gru_create_dirs_internal(path->location.full.fullpath, status);
 }
 
