@@ -14,6 +14,12 @@ else(CMAKE_SIZEOF_VOID_P EQUAL 8)
 endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
 
 
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    add_definitions(-DLINUX_BUILD)
+    add_definitions(-D_GNU_SOURCE)
+endif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
 set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin)

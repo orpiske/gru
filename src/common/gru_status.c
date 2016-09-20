@@ -57,38 +57,9 @@ void gru_status_strerror(gru_status_t *status, gru_status_code_t code, int errnu
         return;
     }
 
-    if (strerror_r(errnum, message, GRU_MAX_ERROR_MESSAGE) != 0) {
-        switch (errno) {
-        case EINVAL:
-        {
-            gru_status_set(status, GRU_FAILURE, "Invalid error number: %i",
-                           errnum);
+    char *tmpmsg = strerror_r(errnum, message, GRU_MAX_ERROR_MESSAGE);
+    gru_status_set(status, code, tmpmsg);
 
-
-            goto e_exit;
-        }
-        case ERANGE:
-        {
-            gru_status_set(status, GRU_FAILURE,
-                           "Insufficient buffer size for error message: %i",
-                           errnum);
-
-            goto e_exit;
-        }
-        default:
-        {
-            gru_status_set(status, GRU_FAILURE,
-                           "Unknown error: %i",
-                           errnum);
-
-            goto e_exit;
-        }
-        }
-    }
-
-    gru_status_set(status, code, message);
-
-    e_exit:
     free(message);
 
     return;
