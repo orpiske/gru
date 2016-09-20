@@ -49,7 +49,8 @@ bool gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *sta
 
 
 /**
- * Tries to safely open a file (ie.: creating directories and stuff)
+ * Tries to safely open a file (ie.: creating directories and stuff). Truncates 
+ * the file
  * @param dir directory of the file
  * @param name name of the file
  * @param status status structure containing error code/description in case of 
@@ -58,6 +59,18 @@ bool gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *sta
  * check status)
  */
 FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
+
+
+/**
+ * Tries to safely open a file (ie.: creating directories and stuff)
+ * @param dir directory of the file
+ * @param name name of the file
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
+ * check status)
+ */
+FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *status);
 
 /**
  * Tries to safely open a file (ie.: creating directories and stuff)
