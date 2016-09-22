@@ -16,6 +16,8 @@ add_library(
         string/gru_util.c
         config/gru_payload.c
         config/gru_config.c
+        time/gru_time_utils.c
+        time/gru_duration.c
 )
 
 
@@ -52,6 +54,12 @@ install(DIRECTORY collection
 
 
 install(DIRECTORY config
+        DESTINATION include/${PROJECT_NAME}
+        FILES_MATCHING PATTERN "*.h"
+)
+
+
+install(DIRECTORY time
         DESTINATION include/${PROJECT_NAME}
         FILES_MATCHING PATTERN "*.h"
 )
