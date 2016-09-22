@@ -57,12 +57,21 @@ void gru_config_destroy(gru_config_t **config);
 
 void gru_config_set(char *dest, uint32_t size, const char *fmt, ...);
 void gru_config_read(void *dest, FILE *source, const char *mask, const char *name);
-void gru_config_read_char(char *dest, FILE *source, const char *name);
-void gru_config_read_int(int32_t *dest, FILE *source, const char *name);
+void gru_config_read_string(char *dest, FILE *source, const char *name);
 void gru_config_read_short(int16_t *dest, FILE *source, const char *name);
+void gru_config_read_ushort(uint16_t *dest, FILE *source, const char *name);
+void gru_config_read_int(int32_t *dest, FILE *source, const char *name);
+void gru_config_read_uint(uint32_t *dest, FILE *source, const char *name);
+void gru_config_read_long(int64_t *dest, FILE *source, const char *name);
+void gru_config_read_ulong(uint64_t *dest, FILE *source, const char *name);
 
-void gru_config_write_int(FILE *dest, const char *name, int32_t value);
 void gru_config_write_short(FILE *dest, const char *name, int16_t value);
+void gru_config_write_ushort(FILE *dest, const char *name, uint16_t value);
+void gru_config_write_int(FILE *dest, const char *name, int32_t value);
+void gru_config_write_uint(FILE *dest, const char *name, uint32_t value);
+void gru_config_write_long(FILE *dest, const char *name, int64_t value);
+void gru_config_write_ulong(FILE *dest, const char *name, uint64_t value);
+
 void gru_config_write_string(FILE *dest, const char *name, const char *value);
 
 #ifdef __cplusplus

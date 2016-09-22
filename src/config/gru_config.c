@@ -15,23 +15,23 @@
  */
 #include "gru_config.h"
 
-
-gru_config_t *gru_config_init(const char *dir, const char *filename, 
-                              gru_payload_t *payload, gru_status_t *status) {
+gru_config_t *gru_config_init(const char *dir, const char *filename,
+                              gru_payload_t *payload, gru_status_t *status)
+{
     assert(status && dir && filename);
 
-    gru_config_t *ret = (gru_config_t *) calloc(1, sizeof(gru_config_t));
-    
+    gru_config_t *ret = (gru_config_t *) calloc(1, sizeof (gru_config_t));
+
     if (ret == NULL) {
-        gru_status_set(status, GRU_FAILURE, 
+        gru_status_set(status, GRU_FAILURE,
                        "Unable to allocate memory for gru config");
-        
+
         return NULL;
     }
-    
+
     asprintf(&ret->dir, "%s", dir);
     asprintf(&ret->filename, "%s", filename);
-    
+
     // open file
     /*
     ret->file = gru_io_open_file(ret->dir, ret->filename, status);
@@ -43,21 +43,22 @@ gru_config_t *gru_config_init(const char *dir, const char *filename,
         return NULL;
     }
      */
-    
+
     gru_payload_init_data(payload, ret->dir, ret->filename, &ret->file, status);
-    
+
     if (status->code != GRU_SUCCESS) {
         gru_config_destroy(&ret);
-        
+
         return NULL;
     }
 
     return ret;
 }
 
-void gru_config_destroy(gru_config_t **config) {
+void gru_config_destroy(gru_config_t **config)
+{
     fclose((*config)->file);
-    
+
     free((*config)->dir);
     free((*config)->filename);
     free(*config);
@@ -106,12 +107,20 @@ end:
     pthread_mutex_unlock(&mutex);
 }
 
-
-
-void gru_config_read_char(char *dest, FILE *source, const char *name)
+void gru_config_read_string(char *dest, FILE *source, const char *name)
 {
     gru_config_read(dest, source, "%[^=]=" GRU_OPT_MAX_CHAR_SIZE_MASK, name);
-    
+
+}
+
+void gru_config_read_short(int16_t *dest, FILE *source, const char *name)
+{
+    gru_config_read(dest, source, "%[^=]=%h"PRId16, name);
+}
+
+void gru_config_read_ushort(uint16_t *dest, FILE *source, const char *name)
+{
+    gru_config_read(dest, source, "%[^=]=%h"PRIu16, name);
 }
 
 void gru_config_read_int(int32_t *dest, FILE *source, const char *name)
@@ -119,19 +128,47 @@ void gru_config_read_int(int32_t *dest, FILE *source, const char *name)
     gru_config_read(dest, source, "%[^=]=%"PRId32"", name);
 }
 
-void gru_config_read_short(int16_t *dest, FILE *source, const char *name)
+void gru_config_read_uint(uint32_t *dest, FILE *source, const char *name)
 {
-    gru_config_read(dest, source, "%[^=]=%h"PRIi16, name);
+    gru_config_read(dest, source, "%[^=]=%"PRIu32"", name);
 }
 
-void gru_config_write_int(FILE *dest, const char *name, int32_t value)
+void gru_config_read_long(int64_t *dest, FILE *source, const char *name)
 {
-    fprintf(dest, "%s=%h"PRId32"\n", name, value);
+    gru_config_read(dest, source, "%[^=]=%"PRId64"", name);
+}
+
+void gru_config_read_ulong(uint64_t *dest, FILE *source, const char *name)
+{
+    gru_config_read(dest, source, "%[^=]=%"PRIu64"", name);
 }
 
 void gru_config_write_short(FILE *dest, const char *name, int16_t value)
 {
     fprintf(dest, "%s=%h"PRIi16"\n", name, value);
+}
+
+void gru_config_write_ushort(FILE *dest, const char *name, uint16_t value)
+{
+    fprintf(dest, "%s=%h"PRIu16"\n", name, value);
+}
+
+void gru_config_write_int(FILE *dest, const char *name, int32_t value)
+{
+    fprintf(dest, "%s=%"PRId32"\n", name, value);
+}
+
+void gru_config_write_uint(FILE *dest, const char *name, uint32_t value)
+{
+    fprintf(dest, "%s=%"PRIu32"\n", name, value);
+}
+
+void gru_config_write_long(FILE *dest, const char *name, int64_t value) {
+    fprintf(dest, "%s=%"PRId64"\n", name, value);
+}
+
+void gru_config_write_ulong(FILE *dest, const char *name, uint64_t value) {
+    fprintf(dest, "%s=%"PRIu64"\n", name, value);
 }
 
 void gru_config_write_string(FILE *dest, const char *name, const char *value)
