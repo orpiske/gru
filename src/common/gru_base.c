@@ -13,28 +13,17 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-#ifndef GRU_BASE_H
-#define GRU_BASE_H
+#include "gru_base.h"
 
-#include <stdlib.h>
-#include <stdio.h>
+const char *gru_base_app_home(const char *appname) {
+	char *home = getenv("HOME");
+	char *filename = NULL;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-    
-#define GRU_OPT_MAX_STR_SIZE 256
-#define GRU_OPT_MAX_STR_SIZE_MASK "%256s"
-#define GRU_OPT_MAX_CHAR_SIZE_MASK "%256c"
+	if (!home) {
+            home = ".";
+	}
 
-#define likely(x)  __builtin_expect((x),1)
-#define unlikely(x)  __builtin_expect((x),0)
-    
-const char *gru_base_app_home(const char *appname);
-    
-#ifdef __cplusplus
+        asprintf(&filename, "%s/%s", home, appname);
+        
+	return filename;
 }
-#endif
-
-#endif /* GRU_BASE_H */
-
