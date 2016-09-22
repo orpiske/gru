@@ -51,7 +51,7 @@ void read_options(FILE *file, void *data) {
     test_options_t *options = (test_options_t *) data;
 
     gru_config_read_int(&options->value1, file, "value1");
-    gru_config_read_char(options->value2, file, "value2");
+    gru_config_read_string(options->value2, file, "value2");
     gru_config_read_short(&options->value3, file, "value3");
 }
 
