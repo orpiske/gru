@@ -23,7 +23,7 @@ const char *gru_base_app_home(const char *appname) {
             home = ".";
 	}
 
-        asprintf(&filename, "%s/%s", home, appname);
+        asprintf(&filename, "%s/.%s", home, appname);
         
 	return filename;
 }
