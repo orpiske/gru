@@ -107,7 +107,7 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_create_dir(const char *path, gru_status_t *status);
+bool gru_path_mkdir(const char *path, gru_status_t *status);
 
 
 /**
@@ -117,7 +117,7 @@ bool gru_create_dir(const char *path, gru_status_t *status);
  * failure
  * @return true if successfully create the directories or false otherwise
  */
-bool gru_create_dirs(const char *path, gru_status_t *status);
+bool gru_path_mkdirs(const char *path, gru_status_t *status);
 
 #ifdef __cplusplus
 }

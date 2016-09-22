@@ -167,7 +167,7 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status)
     return fullpath;
 }
 
-bool gru_create_dir(const char *path, gru_status_t *status)
+bool gru_path_mkdir(const char *path, gru_status_t *status)
 {
     int ret = 0;
 
@@ -182,7 +182,7 @@ bool gru_create_dir(const char *path, gru_status_t *status)
 }
 
 
-bool gru_create_dirs(const char *path, gru_status_t *status)
+bool gru_path_mkdirs(const char *path, gru_status_t *status)
 {
     const char *ptr = path;
     int count = 0;
@@ -210,7 +210,7 @@ bool gru_create_dirs(const char *path, gru_status_t *status)
             continue;
         }
 
-        if (!gru_create_dir(tmp, status)) {
+        if (!gru_path_mkdir(tmp, status)) {
             free(tmp);
 
             return false;
