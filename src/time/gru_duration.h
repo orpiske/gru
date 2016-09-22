@@ -17,6 +17,9 @@
 #define GRU_DURATION_H
 
 #include <stdlib.h>
+#include <math.h>
+
+#include <sys/time.h>
 
 #include "gru_time_utils.h"
 
@@ -34,7 +37,8 @@ typedef struct gru_duration_t_ {
 gru_duration_t gru_duration_from_seconds(uint64_t seconds);
 gru_duration_t gru_duration_from_minutes(uint64_t seconds);
 
-uint64_t gru_duration_seconds();
+uint64_t gru_duration_seconds(gru_duration_t duration);
+uint64_t gru_duration_minutes(gru_duration_t duration, double *fractional);
 
 #ifdef __cplusplus
 }

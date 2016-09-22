@@ -44,3 +44,23 @@ gru_duration_t gru_duration_from_minutes(uint64_t seconds) {
 uint64_t gru_duration_seconds(gru_duration_t duration) {
     return duration.end.tv_sec - duration.start.tv_sec;
 }
+
+
+uint64_t gru_duration_minutes(gru_duration_t duration, double *fractional) {
+    // Gets the number of seconds
+    uint64_t seconds = gru_duration_seconds(duration);
+    
+    // Convert the amount of seconds to minutes
+    double mint =  ((double) seconds / 60);
+    double integral;
+    double discard;
+    
+    // From minutes, get the integral part. If fractional pointer is given, 
+    // set its value, otherwise discard it
+    discard = modf(mint, &integral);
+    if (fractional) {
+        *fractional = discard;
+    }
+    
+    return (uint64_t) integral;
+}
