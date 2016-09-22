@@ -14,6 +14,7 @@
  limitations under the License.
  */
 #include "gru_path.h"
+#include "common/gru_alloc.h"
 
 bool gru_path_exists(const char *filename, gru_status_t *status)
 {
@@ -108,13 +109,9 @@ bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
     }
 
     int size = strlen(filename) + 16;
-    char *new_file = (char *) malloc(size);
-
-    if (!new_file) {
-        gru_status_set(status, GRU_FAILURE,
-                       "Not enough memory to allocate for renaming the existing file");
-        return false;
-    }
+    
+    char *new_file = gru_alloc(size, status);
+    gru_alloc_check(new_file, false);
 
     int i = 0;
     do {
@@ -149,19 +146,11 @@ bool gru_path_rename(const char *filename, gru_status_t *status)
 
 char *gru_path_format(const char *dir, const char *name, gru_status_t *status)
 {
-    char *fullpath;
     size_t size = strlen(dir) + APPEND_SIZE_REMAP;
 
-    fullpath = (char *) malloc(size);
-    if (fullpath == NULL) {
-        gru_status_set(status, GRU_FAILURE, "Unable to format path");
+    char *fullpath = gru_alloc(size, status);
+    gru_alloc_check(fullpath, NULL);
 
-
-        free(fullpath);
-        return NULL;
-    }
-
-    bzero(fullpath, size);
     snprintf(fullpath, size - 1, "%s/%s", dir, name);
 
     return fullpath;
@@ -187,16 +176,9 @@ bool gru_path_mkdirs(const char *path, gru_status_t *status)
     const char *ptr = path;
     int count = 0;
     int tmp_size = strlen(path) + 1;
-    char *tmp = (char *) malloc(tmp_size);
+    char *tmp = gru_alloc(tmp_size, status);
+    gru_alloc_check(tmp, false);
 
-    if (!tmp) {
-        gru_status_set(status, GRU_FAILURE,
-                       "Not enough memory to allocate %i bytes", tmp_size);
-
-        return false;
-    }
-
-    bzero(tmp, tmp_size);
     do {
         const char *last = ptr;
 
