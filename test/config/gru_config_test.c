@@ -41,18 +41,19 @@ void initialize_options(void *data) {
 void save_options(FILE *file, void *data) {
     test_options_t *options = (test_options_t *) data;
     
-    fprintf(file, "value1=%hi\n", options->value1);
-    fprintf(file, "value2=%s\n", options->value2);
-    fprintf(file, "value3=%hi\n", options->value3);
+    gru_config_write_int("value1", file, options->value1);
+    gru_config_write_string("value2", file, options->value2);
+    gru_config_write_short("value3", file, options->value3);
+    
     fflush(file);
 }
 
 void read_options(FILE *file, void *data) {
     test_options_t *options = (test_options_t *) data;
 
-    gru_config_read_int(&options->value1, file, "value1");
-    gru_config_read_string(options->value2, file, "value2");
-    gru_config_read_short(&options->value3, file, "value3");
+    gru_config_read_int("value1", file, &options->value1);
+    gru_config_read_string("value2", file, options->value2);
+    gru_config_read_short("value3", file, &options->value3);
 }
 
 int test_write_init(int argc, char** argv)
