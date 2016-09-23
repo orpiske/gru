@@ -21,7 +21,7 @@ char *gru_rtrim(char *input, size_t size) {
 
 	assert(input != NULL);
 
-	while (isspace(input[i]) && i > 0) {
+	while ((isspace(input[i]) || input[i] == 0) && i > 0) {
 		input[i] = 0;
 		i--;
 	}
