@@ -21,10 +21,16 @@ char *gru_rtrim(char *input, size_t size) {
 
 	assert(input != NULL);
 
-	while (isspace(input[i])) {
+	while (isspace(input[i]) && i > 0) {
 		input[i] = 0;
 		i--;
 	}
+        
+        if (i == 0) {
+            if (isspace(input[0])) {
+                input[0] = 0;
+            }
+        }
 
 	return input;
 }
