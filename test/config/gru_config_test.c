@@ -27,6 +27,8 @@ typedef struct test_options_t_
     int32_t value1;
     char value2[32];
     int16_t value3;
+    uint64_t value4; 
+    int64_t value5;
 } test_options_t;
 
 void initialize_options(void *data) {
@@ -36,6 +38,8 @@ void initialize_options(void *data) {
     bzero(options->value2, sizeof(options->value2));
     snprintf(options->value2, sizeof(options->value2), "%s", "sample value");
     options->value3 = 16;
+    options->value4 = UINT64_MAX;
+    options->value5 = INT64_MAX;
 }
 
 void save_options(FILE *file, void *data) {
@@ -44,6 +48,8 @@ void save_options(FILE *file, void *data) {
     gru_config_write_int("value1", file, options->value1);
     gru_config_write_string("value2", file, options->value2);
     gru_config_write_short("value3", file, options->value3);
+    gru_config_write_ulong("value4", file, options->value4);
+    gru_config_write_long("value5", file, options->value5);
     
     fflush(file);
 }
@@ -54,14 +60,12 @@ void read_options(FILE *file, void *data) {
     gru_config_read_int("value1", file, &options->value1);
     gru_config_read_string("value2", file, options->value2);
     gru_config_read_short("value3", file, &options->value3);
+    gru_config_read_ulong("value4", file, &options->value4);
+    gru_config_read_long("value5", file, &options->value5);
 }
 
 int test_write_init(int argc, char** argv)
 {
-    /*
-     * gru_config_init(const char *dir, const char *filename, 
-                              void *payload, gru_status_t *status)
-     */
     test_options_t options = {0};
     gru_status_t status = {0};
     
@@ -108,10 +112,6 @@ int test_write_init(int argc, char** argv)
 
 int test_read_init(int argc, char** argv)
 {
-    /*
-     * gru_config_init(const char *dir, const char *filename, 
-                              void *payload, gru_status_t *status)
-     */
     test_options_t options = {0};
     gru_status_t status = {0};
     
@@ -185,4 +185,6 @@ int main(int argc, char** argv)
             return test_write_init(argc, argv);
         }
     }
+    
+    return EXIT_FAILURE;
 }
