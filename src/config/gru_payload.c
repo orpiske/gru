@@ -15,6 +15,7 @@
  */
 
 #include "gru_payload.h"
+#include "common/gru_alloc.h"
 
 gru_payload_t *gru_payload_init(gru_payload_data_init_t init, 
                                         gru_payload_data_save_t save,
@@ -22,13 +23,8 @@ gru_payload_t *gru_payload_init(gru_payload_data_init_t init,
                                         void *data,
                                         gru_status_t *status)
 {
-    gru_payload_t *ret = (gru_payload_t *) malloc(sizeof(gru_payload_t));
-    
-    if (!ret) {
-        gru_status_set(status, GRU_FAILURE, 
-                       "Unable to allocate memory for the payload");
-        return NULL;
-    }
+    gru_payload_t *ret = gru_alloc(sizeof(gru_payload_t), status);
+    gru_alloc_check(ret, NULL);
     
     ret->init = init;
     ret->save = save; 
@@ -44,36 +40,44 @@ void gru_payload_destroy(gru_payload_t **payload) {
     *payload = NULL;
 }
 
-void gru_payload_init_data(gru_payload_t *payload, const char *dir, 
-                           const char *name, FILE **file, 
+FILE *gru_payload_init_data(gru_payload_t *payload, const char *dir, 
+                           const char *name, 
                            gru_status_t *status)
 {
+    FILE *config_file;
+    
     char *fullpath = gru_path_format(dir, name, status);
+    if (fullpath == NULL || status->code != GRU_SUCCESS) {
+        return NULL;
+    }
     
     if (!gru_path_exists(fullpath, status) && status->code == GRU_SUCCESS) {
-        (*file) = gru_io_open_file(dir, name, status);
-        if (!(*file)) {
-            return;
+        config_file = gru_io_open_file(dir, name, status);
+        if (!config_file) {
+            goto e_exit;
         }
         
         // set defaults
         payload->init(payload->data);
 
         // write configs
-        payload->save((*file), payload->data);
+        payload->save(config_file, payload->data);
         
-        fflush(NULL);
+        fflush(config_file);
     }
     else {
-        if (status->code != GRU_SUCCESS) {
-            return;
+        config_file = gru_io_open_file_read(dir, name, status);
+        if (!config_file) {
+            goto e_exit;
         }
         
-        (*file) = gru_io_open_file_read(dir, name, status);
-        if (!(*file)) {
-            return;
-        }
-        
-        payload->read((*file), payload->data);
-    }   
+        payload->read(config_file, payload->data);
+    }  
+    
+    free(fullpath);
+    return config_file;
+    
+    e_exit:
+    free(fullpath);
+    return NULL;
 }

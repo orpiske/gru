@@ -20,25 +20,21 @@ gru_config_t *gru_config_init(const char *dir, const char *filename,
 {
     assert(status && dir && filename);
 
-    gru_config_t *ret = (gru_config_t *) calloc(1, sizeof (gru_config_t));
-
-    if (ret == NULL) {
-        gru_status_set(status, GRU_FAILURE,
-                       "Unable to allocate memory for gru config");
-
-        return NULL;
-    }
+    gru_config_t *ret = gru_alloc(sizeof(gru_config_t), status);
+    gru_alloc_check(ret, NULL);
 
     asprintf(&ret->dir, "%s", dir);
     asprintf(&ret->filename, "%s", filename);
-
-    gru_payload_init_data(payload, ret->dir, ret->filename, &ret->file, status);
-
-    if (status->code != GRU_SUCCESS) {
+    
+    ret->file = gru_payload_init_data(payload, ret->dir, ret->filename, status);
+    
+    if (ret->file == NULL && status->code != GRU_SUCCESS) {
         gru_config_destroy(&ret);
 
         return NULL;
     }
+    
+    ret->payload = payload;
 
     return ret;
 }
@@ -46,7 +42,7 @@ gru_config_t *gru_config_init(const char *dir, const char *filename,
 void gru_config_destroy(gru_config_t **config)
 {
     fclose((*config)->file);
-
+    
     free((*config)->dir);
     free((*config)->filename);
     free(*config);
@@ -69,30 +65,23 @@ void gru_config_set(char *dest, uint32_t size, const char *fmt, ...)
 
 void gru_config_read(const char *name, FILE *source, void *dest, const char *mask)
 {
-    pthread_mutex_t mutex;
-    pthread_mutex_lock(&mutex);
-
     rewind(source);
     while (!feof(source)) {
-        char line[GRU_OPT_MAX_STR_SIZE];
+        char line[GRU_OPT_MAX_STR_SIZE] = {0};
 
-        bzero(line, GRU_OPT_MAX_STR_SIZE);
         fgets(line, GRU_OPT_MAX_STR_SIZE - 1, source);
 
-        gru_trim(line, sizeof (line));
-
         if (strstr(line, name) != NULL) {
+            char *filtered = gru_trim(line, (sizeof (line) - 1));
+            
             char none[GRU_OPT_MAX_STR_SIZE];
 
             bzero(none, sizeof (none));
-            sscanf(line, mask, none, dest);
+            sscanf(filtered, mask, none, dest);
 
-            goto end;
+            break;
         }
     }
-
-end:
-    pthread_mutex_unlock(&mutex);
 }
 
 void gru_config_read_string(const char *name, FILE *source, char *dest)

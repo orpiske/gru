@@ -50,9 +50,8 @@ gru_payload_t *gru_payload_init(gru_payload_data_init_t init,
 
 void gru_payload_destroy(gru_payload_t **payload);
 
-void gru_payload_init_data(gru_payload_t *payload, const char *dir, 
+FILE *gru_payload_init_data(gru_payload_t *payload, const char *dir, 
                            const char *name,
-                           FILE **file, 
                            gru_status_t *status);
 
 #ifdef __cplusplus

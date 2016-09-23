@@ -27,6 +27,7 @@
 #include <assert.h>
 
 #include "common/gru_base.h"
+#include "common/gru_alloc.h"
 #include "string/gru_util.h"
 #include "io/gru_path.h"
 #include "io/gru_ioutils.h"
