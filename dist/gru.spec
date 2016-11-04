@@ -3,7 +3,7 @@
 
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
-Version:            0.0.1
+Version:            0.0.2
 Release:            1%{?dist}
 License:            Apache-2.0
 Group:              Development/Tools
@@ -48,5 +48,8 @@ make install
 
 
 %changelog
+* Tue Nov 04 2016 Otavio R. Piske <angusyoung@gmail.com> - 20161104
+- Changed non-write interfaces of the list to use a const pointer
+
 * Tue Sep 07 2016 Otavio R. Piske <angusyoung@gmail.com> - 20160907
 - Initial release
