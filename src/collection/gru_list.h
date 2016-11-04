@@ -116,7 +116,7 @@ const void *gru_list_get(const gru_list_t *list, uint32_t position);
  * @param other
  * @param result
  */
-void gru_list_for_each_compare(gru_list_t *list, bool uniqueness,
+void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
 		compare_function_t comparable, const void *compare, void *result);
 
 
@@ -130,7 +130,7 @@ void gru_list_for_each_compare(gru_list_t *list, bool uniqueness,
  * NULL then it will be ignored
  * @param data Payload data for the true_handle and false_handle functions
  */
-void gru_list_for_each(gru_list_t *list, handle_function_t handle, void *data);
+void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *data);
 
 
 /**
@@ -141,7 +141,7 @@ void gru_list_for_each(gru_list_t *list, handle_function_t handle, void *data);
  * @param other
  * @param result
  */
-const void *gru_list_get_item(gru_list_t *list, compare_function_t comparable, 
+const void *gru_list_get_item(const gru_list_t *list, compare_function_t comparable, 
                           const void *other);
 
 
