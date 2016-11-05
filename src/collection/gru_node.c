@@ -21,6 +21,8 @@ gru_node_t *gru_node_new(const void *ptr) {
 
 	if (!ret) {
 		fprintf(stderr, "Not enough memory to allocate for new node\n");
+                
+                return NULL;
 	}
 	ret->previous = NULL;
 	ret->next = NULL;
