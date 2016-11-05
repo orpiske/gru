@@ -51,14 +51,25 @@ bool compare_file_name(const void *current, const void *data, void *result) {
 }
 
 
+void print_path(const void *nodedata, void *data) {
+    printf("\t%s\n", (const char *) nodedata);
+
+}
+
 int main(int argc, char **argv) {
     gru_tree_node_t *root = build_paths();
     
     gru_tree_node_t *c = gru_tree_search(root, compare_file_name, "c");
+    
+    gru_tree_for_each(root, print_path, NULL);
+    
     gru_tree_remove_child(root, compare_file_name, "var");
     
-    printf("Removed?\n");
+    gru_tree_for_each(root, print_path, NULL);
+    
     gru_tree_search(root, compare_file_name, "c");
+    
+    gru_tree_for_each(root, print_path, NULL);
     
     gru_tree_destroy(&root);
     

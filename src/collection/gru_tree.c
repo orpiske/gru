@@ -36,8 +36,8 @@ gru_tree_node_t *gru_tree_new(const void *data) {
     return ret;
 }
 
-static void gru_tree_node_destroy_child(const gru_node_t *listnode, void *ptr) {
-    gru_tree_node_t *node = gru_node_get_data_ptr(gru_tree_node_t, listnode);
+static void gru_tree_node_destroy_child(const void *data, void *ptr) {
+    gru_tree_node_t *node = (gru_tree_node_t *) data;
 
     gru_tree_destroy(&node);
 }
@@ -67,7 +67,7 @@ gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node,
         return NULL;
     }
 
-    gru_node_t *ret = gru_list_append(node->children, child);
+    const gru_node_t *ret = gru_list_append(node->children, child);
     if (!ret) {
         gru_tree_destroy(&child);
 
@@ -97,7 +97,7 @@ const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
         gru_tree_node_t *tn = gru_node_get_data_ptr(gru_tree_node_t,
                 child_node);
 
-        gru_tree_node_t *ret = gru_tree_search(tn, comparable, other);
+        const gru_tree_node_t *ret = gru_tree_search(tn, comparable, other);
 
         if (ret) {
             return ret;
@@ -132,7 +132,6 @@ bool gru_tree_remove_child(gru_tree_node_t *node,
 
 
         if (comparable(tn->data, other, NULL)) {
-            printf("Removing item at pos %i\n", pos);
             gru_node_t *n = gru_list_remove(node->children, pos);
             gru_node_destroy(&n);
             gru_tree_destroy(&tn);
@@ -144,4 +143,36 @@ bool gru_tree_remove_child(gru_tree_node_t *node,
     }
 
     return false;
+}
+
+
+const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node, 
+                            tree_callback_fn callback, 
+                            void *payload)
+{
+    if (!node) {
+        return NULL;
+    }
+
+    if (!node->children) {
+        return NULL;
+    }
+
+    callback(node->data, payload);
+
+    gru_node_t *child_node = node->children->root;
+    while (child_node) {
+        gru_tree_node_t *tn = gru_node_get_data_ptr(gru_tree_node_t,
+                child_node);
+
+        gru_tree_node_t *ret = gru_tree_for_each(tn, callback, payload);
+
+        if (ret) {
+            return ret;
+        }
+
+        child_node = child_node->next;
+    }
+
+    return NULL;
 }

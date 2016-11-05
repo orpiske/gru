@@ -22,6 +22,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+    
+typedef void(*tree_callback_fn)(const void *, void *);
     
 /*
  * An extremely simple unbalanced tree implementation 
@@ -80,6 +83,18 @@ bool gru_tree_remove_child(gru_tree_node_t *node,
                                 compare_function_t comparable, 
                                 const void *other);
 
+
+
+/**
+ * Traverses the tree executing a set of operations
+ * @param node The starting node for the search
+ * @param callback A callback function to be executed for all the nodes
+ * @param payload Payload data to be passed to the passed to the callback
+ * @return A pointer to the node or NULL if not found
+ */
+const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node, 
+                            tree_callback_fn callback, 
+                            void *payload);
 
 #ifdef __cplusplus
 }
