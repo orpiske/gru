@@ -14,3 +14,134 @@
  limitations under the License.
  */
 #include "gru_tree.h"
+
+gru_tree_node_t *gru_tree_new(const void *data) {
+    gru_tree_node_t *ret = malloc(sizeof (gru_tree_node_t));
+
+    if (!ret) {
+        fprintf(stderr, "Not enough memory to allocate for new node\n");
+
+        return NULL;
+    }
+
+    ret->children = gru_list_new(NULL);
+    if (!ret->children) {
+        gru_tree_destroy(&ret);
+
+        return NULL;
+    }
+
+    ret->data = data;
+
+    return ret;
+}
+
+static void gru_tree_node_destroy_child(const gru_node_t *listnode, void *ptr) {
+    gru_tree_node_t *node = gru_node_get_data_ptr(gru_tree_node_t, listnode);
+
+    gru_tree_destroy(&node);
+}
+
+void gru_tree_destroy(gru_tree_node_t **ptr) {
+    gru_tree_node_t *node = *ptr;
+
+    if (!node) {
+        return;
+    }
+
+    if (node->children) {
+        gru_list_for_each(node->children, gru_tree_node_destroy_child, NULL);
+        gru_list_destroy(&node->children);
+    }
+
+
+    free(node);
+    node = NULL;
+}
+
+gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node,
+        const void *data) {
+    gru_tree_node_t *child = gru_tree_new(data);
+
+    if (!child) {
+        return NULL;
+    }
+
+    gru_node_t *ret = gru_list_append(node->children, child);
+    if (!ret) {
+        gru_tree_destroy(&child);
+
+        return NULL;
+    }
+
+    return child;
+}
+
+const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
+        compare_function_t comparable,
+        const void *other) {
+    if (!node) {
+        return NULL;
+    }
+
+    if (!node->children) {
+        return NULL;
+    }
+
+    if (comparable(node->data, other, NULL)) {
+        return node;
+    }
+
+    gru_node_t *child_node = node->children->root;
+    while (child_node) {
+        gru_tree_node_t *tn = gru_node_get_data_ptr(gru_tree_node_t,
+                child_node);
+
+        gru_tree_node_t *ret = gru_tree_search(tn, comparable, other);
+
+        if (ret) {
+            return ret;
+        }
+
+        child_node = child_node->next;
+    }
+
+    return NULL;
+}
+
+bool gru_tree_remove_child(gru_tree_node_t *node,
+        compare_function_t comparable,
+        const void *other) {
+    if (!node) {
+        return false;
+    }
+
+    if (!node->children) {
+        return false;
+    }
+
+    if (comparable(node->data, other, NULL)) {
+        return true;
+    }
+
+    gru_node_t *child_node = node->children->root;
+    uint32_t pos = 0;
+    while (child_node) {
+        gru_tree_node_t *tn = gru_node_get_data_ptr(gru_tree_node_t,
+                child_node);
+
+
+        if (comparable(tn->data, other, NULL)) {
+            printf("Removing item at pos %i\n", pos);
+            gru_node_t *n = gru_list_remove(node->children, pos);
+            gru_node_destroy(&n);
+            gru_tree_destroy(&tn);
+            return true;
+        }
+
+        child_node = child_node->next;
+        pos++;
+    }
+
+    return false;
+}

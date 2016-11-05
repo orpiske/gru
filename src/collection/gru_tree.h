@@ -23,17 +23,60 @@
 extern "C" {
 #endif
     
+/*
+ * An extremely simple unbalanced tree implementation 
+ */
+    
 typedef struct gru_tree_node_t_ {
-    gru_tree_node_t *parent;
     gru_list_t *children;
     const void *data ;
 } gru_tree_node_t;
 
-gru_tree_node_t gru_tree_node_new(const void *data);
-void gru_tree_node_destroy(gru_tree_node_t **ptr);
 
-gru_tree_node_t *gru_tree_node_add_child(gru_tree_node_t *node, const void *data);
-void gru_tree_node_remove_child(gru_tree_node_t *node, 
+/**
+ * Creates a new tree and returns a pointer to the root node
+ * @param data The data for the root node
+ * @return A pointer to the root node
+ */
+gru_tree_node_t *gru_tree_new(const void *data);
+
+/**
+ * Destroys a tree node and all it's descendants
+ * @param ptr A pointer-to-pointer for the node to destroy
+ */
+void gru_tree_destroy(gru_tree_node_t **ptr);
+
+
+/**
+ * Adds a child node to a given node.
+ * @param node The node to add the child to
+ * @param data The data to add to the child
+ * @return A pointer to the newly added node. This node does *NOT* need to be 
+ * free'd. It will be free'd along with its parent
+ */
+gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node, const void *data);
+
+
+/**
+ * Searches the tree using DFS
+ * @param node The starting node for the search
+ * @param comparable A comparator function
+ * @param other The data to compare to
+ * @return A pointer to the node or NULL if not found
+ */
+const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node, 
+                            compare_function_t comparable, 
+                            const void *other);
+
+
+/**
+ * Removes a direct descendant of a node
+ * @param node The parent node
+ * @param comparable A comparator function
+ * @param other The data to compare to
+ * @return true if removed or false otherwise
+ */
+bool gru_tree_remove_child(gru_tree_node_t *node, 
                                 compare_function_t comparable, 
                                 const void *other);
 

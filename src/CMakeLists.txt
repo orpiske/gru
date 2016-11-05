@@ -11,6 +11,7 @@ add_library(
         common/gru_alloc.c
         collection/gru_node.c
         collection/gru_list.c
+        collection/gru_tree.c
         io/gru_path.c
         io/gru_ioutils.c
         log/gru_logger.c
