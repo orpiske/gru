@@ -23,9 +23,9 @@
 #include "collection/gru_list.h"
 
 
-void check_val(const gru_node_t *node, void *data) {
+void check_val(const void *nodedata, void *data) {
 	bool *exist = (bool *) data;
-	uint32_t value = gru_node_get_data(uint32_t, node);
+	uint32_t value = (*(uint32_t *) nodedata);
 
 	if (value == 32) {
 		*exist = true;

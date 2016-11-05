@@ -34,7 +34,7 @@ typedef struct gru_list_t_ {
 } gru_list_t;
 
 typedef bool(*compare_function_t)(const void *, const void *data, void *result);
-typedef void(*handle_function_t)(const gru_node_t *, void *);
+typedef void(*handle_function_t)(const void *, void *);
 
 
 /**
@@ -122,13 +122,9 @@ void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
 
 
 /**
- * Traverses the list executing a set of operations depending on the result of a
- * comparison function
+ * Traverses the list executing a set of operations
  * @param list The list to be traversed
- * @param comparable A comparison function. If NULL, then defaults to true
- * @param true_handle A function handle for when comparable returns true
- * @param false_handle A function handle for when comparable returns false. If
- * NULL then it will be ignored
+ * @param handle A pointer to a function of type handle_function_t
  * @param data Payload data for the true_handle and false_handle functions
  */
 void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *data);

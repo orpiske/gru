@@ -255,7 +255,7 @@ void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *d
 	node = list->root;
 
 	while (node) {
-		handle(node, data);
+		handle(node->data, data);
 
 		node = node->next;
 	}
