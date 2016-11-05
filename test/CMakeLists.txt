@@ -26,6 +26,18 @@ add_test(NAME gru-list
     COMMAND gru_list_test)
 
 
+add_executable(gru_tree_test
+	collection/gru_tree_test.c
+)
+
+target_link_libraries(gru_tree_test
+           gru)
+
+add_test(NAME gru-tree
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+    COMMAND gru_tree_test)
+
+
 add_executable(gru_config_test
 	config/gru_config_test.c
 )
