@@ -199,7 +199,7 @@ bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 	return false;
 }
 
-const void *gru_list_get(const gru_list_t *list, uint32_t position) {
+const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position) {
 	gru_node_t *node = NULL;
 	uint32_t count = 0;
 

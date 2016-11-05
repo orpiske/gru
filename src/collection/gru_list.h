@@ -105,7 +105,7 @@ bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
  * @param position the position
  * @return the node or NULL if not existent
  */
-const void *gru_list_get(const gru_list_t *list, uint32_t position);
+const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position);
 
 
 /**
