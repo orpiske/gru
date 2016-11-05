@@ -107,6 +107,10 @@ const gru_node_t *gru_list_append(gru_list_t *list, const void *data) {
 	gru_node_t *node = NULL;
 
 	node = gru_node_new(data);
+        
+        if (!node) {
+            return NULL;
+        }
 
 	if (!last) {
 		list->root = node;

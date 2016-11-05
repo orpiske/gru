@@ -65,7 +65,8 @@ uint32_t gru_list_count(const gru_list_t *list);
  * @param data The data for the new node
  * @note It's up to the application to make sure that the data pointer remains
  * valid throughout the lifetime of the list
- * @return A pointer to the new node
+ * @return A pointer to the new node or NULL if there's not enough memory for the
+ * new node
  */
 const gru_node_t *gru_list_append(gru_list_t *list, const void *data);
 
