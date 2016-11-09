@@ -192,3 +192,29 @@ void gru_tree_for_each_child(gru_tree_node_t *node,
 
     gru_list_for_each(node->children, callback, payload);
 }
+
+
+uint32_t gru_tree_count_children(gru_tree_node_t *node) { 
+    if (!node) {
+        return 0;
+    }
+    
+    if (!node->children) {
+        return 0;
+    }
+    
+    return gru_list_count(node->children);
+}
+
+static void gru_tree_count_int(const void *nodeptr, void *payload) {
+    uint32_t *count = (uint32_t *) payload;
+    
+    (*count)++;
+}
+
+uint32_t gru_tree_count(gru_tree_node_t *node) {
+    uint32_t ret = 0;
+    gru_tree_for_each(node, gru_tree_count_int, &ret);
+    
+    return ret;
+}

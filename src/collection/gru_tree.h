@@ -104,6 +104,22 @@ void gru_tree_for_each_child(gru_tree_node_t *node,
                             tree_callback_fn callback, 
                             void *payload);
 
+/**
+ * Returns the number of children of a node
+ * @param node The node to count the number of children
+ * @return The number of items
+ * @note The node must not be NULL, otherwise it returns 0
+ */
+uint32_t gru_tree_count_children(gru_tree_node_t *node);
+
+/**
+ * Returns the number of children of a tree
+ * @param node The node to count the number of children
+ * @return The number of items
+ * @note The node must not be NULL, otherwise it returns 0
+ */
+uint32_t gru_tree_count(gru_tree_node_t *node);
+
 #ifdef __cplusplus
 }
 #endif
