@@ -53,17 +53,43 @@ bool compare_file_name(const void *current, const void *data, void *result) {
 
 void print_path(const void *nodedata, void *data) {
     printf("\t%s\n", (const char *) nodedata);
-
 }
+
+void print_path2(const void *nodedata, void *data) {
+    printf("\t%s\n", (char *) ((gru_tree_node_t *) nodedata)->data);
+}
+
 
 int main(int argc, char **argv) {
     gru_tree_node_t *root = build_paths();
+    
+    uint32_t count = gru_tree_count(root);
+    
+    if (count != 11) {
+        fprintf(stderr, "Expected 11 nodes but got %d\n", count);
+        return EXIT_FAILURE;
+    }
+    
+    uint32_t children = gru_tree_count_children(root);
+    if (children != 4) {
+        fprintf(stderr, "Expected 4 children nodes but got %d\n", children);
+        return EXIT_FAILURE;
+    }
     
     gru_tree_node_t *c = gru_tree_search(root, compare_file_name, "c");
     
     gru_tree_for_each(root, print_path, NULL);
     
+    printf("Printing childs of var\n");
+    gru_tree_for_each_child(root, print_path, NULL);
+    printf("Done");
+    
     gru_tree_remove_child(root, compare_file_name, "var");
+    count = gru_tree_count(root);
+    if (count != 6) {
+        fprintf(stderr, "Expected 7 nodes after removing var but got %d\n", count);
+        return EXIT_FAILURE;
+    }
     
     gru_tree_for_each(root, print_path, NULL);
     

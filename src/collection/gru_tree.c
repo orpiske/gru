@@ -177,6 +177,26 @@ const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node,
     return NULL;
 }
 
+typedef struct gru_tree_node_wrapper_t_ {
+    void *payload; 
+    tree_callback_fn callback;
+} gru_tree_wrapper_t; 
+
+
+/**
+ * Long story short: since the implementation uses a gru_list_t * to hold the 
+ * children, the call to gru_tree_for_each_child uses gru_list_for_each to 
+ * iterate over the children. Since it gru_tree_node_t pointers are stored in 
+ * the children list, it is necessary to unwrap it and provide the pointer to 
+ * the data structure for the callback functions.
+ */
+static void gru_tree_for_each_wrapper(const void *ptr, void *envelope) {
+    gru_tree_node_t *node = (gru_tree_node_t *) ptr; 
+    gru_tree_wrapper_t *wrapper = (gru_tree_wrapper_t *) envelope;
+    
+    wrapper->callback(node->data, wrapper->payload);
+}
+
 
 void gru_tree_for_each_child(gru_tree_node_t *node, 
                             tree_callback_fn callback, 
@@ -190,7 +210,16 @@ void gru_tree_for_each_child(gru_tree_node_t *node,
         return;
     }
 
-    gru_list_for_each(node->children, callback, payload);
+    /*
+     * See the comments in gru_tree_for_each_wrapper for details about why 
+     * the data and the callback are wrapped
+     */
+    gru_tree_wrapper_t wrapper = {
+        .payload = payload,
+        .callback = callback,
+    };
+    
+    gru_list_for_each(node->children, gru_tree_for_each_wrapper, &wrapper);
 }
 
 
