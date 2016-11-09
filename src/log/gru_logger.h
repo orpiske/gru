@@ -24,6 +24,10 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum log_level_t_ {
 	TRACE = 0,
 	DEBUG = 1,
@@ -82,6 +86,10 @@ log_level_t gru_logger_get_mininum();
  * @param msg the message + additional parameters
   */
 void gru_logger_default_printer(log_level_t level, const char *msg, ...);
+
+#ifdef __cplusplus
+}
+#endif
 
 // GRU_LOGGER_H_
 #endif

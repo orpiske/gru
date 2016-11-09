@@ -28,6 +28,9 @@
 #include "common/gru_status.h"
 #include "common/gru_base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct gru_list_t_ {
 	gru_node_t *root;
@@ -140,6 +143,8 @@ const void *gru_list_get_item(const gru_list_t *list, compare_function_t compara
                           const void *other);
 
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif

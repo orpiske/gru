@@ -24,6 +24,10 @@
 #include <ctype.h>
 #include <assert.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+    
 /**
  * Removes spaces from the right side of a string
  * @param input Input string
@@ -55,5 +59,9 @@ char *gru_trim(char *input, size_t size);
  * @return the file name
  */
 const char *gru_get_name_from_url(const char *url, size_t size);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // GRU_UTIL_H
