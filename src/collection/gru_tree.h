@@ -18,13 +18,11 @@
 
 #include "gru_node.h"
 #include "gru_list.h"
+#include "gru_collection_callbacks.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-    
-typedef void(*tree_callback_fn)(const void *, void *);
     
 /*
  * An extremely simple unbalanced tree implementation 
@@ -93,6 +91,16 @@ bool gru_tree_remove_child(gru_tree_node_t *node,
  * @return A pointer to the node or NULL if not found
  */
 const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node, 
+                            tree_callback_fn callback, 
+                            void *payload);
+
+/**
+ * Executes an operation on each child of the given node
+ * @param node The starting node for the search
+ * @param callback A callback function to be executed for all the nodes
+ * @param payload Payload data to be passed to the passed to the callback
+ */
+void gru_tree_for_each_child(gru_tree_node_t *node, 
                             tree_callback_fn callback, 
                             void *payload);
 

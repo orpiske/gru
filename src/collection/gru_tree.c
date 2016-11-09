@@ -165,7 +165,7 @@ const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node,
         gru_tree_node_t *tn = gru_node_get_data_ptr(gru_tree_node_t,
                 child_node);
 
-        gru_tree_node_t *ret = gru_tree_for_each(tn, callback, payload);
+        const gru_tree_node_t *ret = gru_tree_for_each(tn, callback, payload);
 
         if (ret) {
             return ret;
@@ -175,4 +175,20 @@ const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node,
     }
 
     return NULL;
+}
+
+
+void gru_tree_for_each_child(gru_tree_node_t *node, 
+                            tree_callback_fn callback, 
+                            void *payload)
+{
+    if (!node) {
+        return;
+    }
+
+    if (!node->children) {
+        return;
+    }
+
+    gru_list_for_each(node->children, callback, payload);
 }

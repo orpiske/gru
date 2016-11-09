@@ -24,6 +24,7 @@
 #include <assert.h>
 
 #include "gru_node.h"
+#include "gru_collection_callbacks.h"
 #include "common/gru_status.h"
 #include "common/gru_base.h"
 
@@ -32,9 +33,6 @@ typedef struct gru_list_t_ {
 	gru_node_t *root;
 	gru_node_t *current;
 } gru_list_t;
-
-typedef bool(*compare_function_t)(const void *, const void *data, void *result);
-typedef void(*handle_function_t)(const void *, void *);
 
 
 /**
