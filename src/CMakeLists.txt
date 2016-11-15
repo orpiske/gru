@@ -1,7 +1,5 @@
-add_definitions(-D_GNU_SOURCE -D_POSIX_C_SOURCE)
-
-if (${CMAKE_SYSTEM_NAME} EQUAL "Linux") 
- add_definitions(-DLINUX_BUILD) 
+if (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
+ add_definitions(-D_GNU_SOURCE -DLINUX_BUILD)
 endif (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
 
 add_library(
@@ -65,5 +63,3 @@ install(DIRECTORY time
         DESTINATION include/${PROJECT_NAME}
         FILES_MATCHING PATTERN "*.h"
 )
-
-

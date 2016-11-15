@@ -1,12 +1,12 @@
 /**
  Copyright 2016 Otavio Rodolfo Piske
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,10 +16,6 @@
 #ifndef GRU_STATUS_H
 #define GRU_STATUS_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -27,7 +23,11 @@ extern "C" {
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
-    
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define GRU_MAX_ERROR_MESSAGE 1024
 
 /*
@@ -51,10 +51,10 @@ typedef struct gru_status_t_ {
  * Sets the status
  * @param status an instance of the status object to set
  * @param code the code to set the object to
- * @param message the status message followed by any other parameter as accepted 
+ * @param message the status message followed by any other parameter as accepted
  * by vasprintf
  */
-void gru_status_set(gru_status_t *status, gru_status_code_t code, 
+void gru_status_set(gru_status_t *status, gru_status_code_t code,
                       const char *message, ...);
 
 /**
@@ -63,7 +63,7 @@ void gru_status_set(gru_status_t *status, gru_status_code_t code,
  * @param code the code to set the object to
  * @param errnum the error number (as in errno)
  */
-void gru_status_strerror(gru_status_t *status, gru_status_code_t code, 
+void gru_status_strerror(gru_status_t *status, gru_status_code_t code,
                          int errnum);
 
 /**
@@ -84,4 +84,3 @@ void gru_status_success(gru_status_t *status);
 #endif
 
 #endif /* GRU_STATUS_H */
-
