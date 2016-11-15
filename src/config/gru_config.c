@@ -1,12 +1,12 @@
 /**
  Copyright 2016 Otavio Rodolfo Piske
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,15 +25,15 @@ gru_config_t *gru_config_init(const char *dir, const char *filename,
 
     asprintf(&ret->dir, "%s", dir);
     asprintf(&ret->filename, "%s", filename);
-    
+
     ret->file = gru_payload_init_data(payload, ret->dir, ret->filename, status);
-    
+
     if (ret->file == NULL && status->code != GRU_SUCCESS) {
         gru_config_destroy(&ret);
 
         return NULL;
     }
-    
+
     ret->payload = payload;
 
     return ret;
@@ -42,7 +42,7 @@ gru_config_t *gru_config_init(const char *dir, const char *filename,
 void gru_config_destroy(gru_config_t **config)
 {
     fclose((*config)->file);
-    
+
     free((*config)->dir);
     free((*config)->filename);
     free(*config);
@@ -73,7 +73,7 @@ void gru_config_read(const char *name, FILE *source, void *dest, const char *mas
 
         if (strstr(line, name) != NULL) {
             char *filtered = gru_trim(line, (sizeof (line) - 1));
-            
+
             char none[GRU_OPT_MAX_STR_SIZE];
 
             bzero(none, sizeof (none));
@@ -122,12 +122,12 @@ void gru_config_read_ulong(const char *name, FILE *source, uint64_t *dest)
 
 void gru_config_write_short(const char *name, FILE *dest, int16_t value)
 {
-    fprintf(dest, "%s=%h"PRIi16"\n", name, value);
+    fprintf(dest, "%s=%"PRIi16"\n", name, value);
 }
 
 void gru_config_write_ushort(const char *name, FILE *dest, uint16_t value)
 {
-    fprintf(dest, "%s=%h"PRIu16"\n", name, value);
+    fprintf(dest, "%s=%"PRIu16"\n", name, value);
 }
 
 void gru_config_write_int(const char *name, FILE *dest, int32_t value)
@@ -152,6 +152,3 @@ void gru_config_write_string(const char *name, FILE *dest, const char *value)
 {
     fprintf(dest, "%s=%s\n", name, value);
 }
-
-
-
