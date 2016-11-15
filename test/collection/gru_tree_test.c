@@ -24,20 +24,20 @@
 
 static gru_tree_node_t *build_paths() {
     gru_tree_node_t *root = gru_tree_new("/");
-    
+
     gru_tree_node_t *usr = gru_tree_add_child(root, "usr");
     gru_tree_node_t *opt = gru_tree_add_child(root, "opt");
     gru_tree_node_t *var = gru_tree_add_child(root, "var");
     gru_tree_node_t *dev = gru_tree_add_child(root, "dev");
-    
+
     gru_tree_node_t *usr_bin = gru_tree_add_child(usr, "bin");
     gru_tree_node_t *opt_other = gru_tree_add_child(opt, "other");
-    
+
     gru_tree_node_t *var_log = gru_tree_add_child(var, "log");
     gru_tree_node_t *var_log_a = gru_tree_add_child(var_log, "a");
     gru_tree_node_t *var_log_a_b = gru_tree_add_child(var_log_a, "b");
     gru_tree_node_t *var_log_a_c = gru_tree_add_child(var_log_a_b, "c");
-    
+
     return root;
 }
 
@@ -62,43 +62,43 @@ void print_path2(const void *nodedata, void *data) {
 
 int main(int argc, char **argv) {
     gru_tree_node_t *root = build_paths();
-    
+
     uint32_t count = gru_tree_count(root);
-    
+
     if (count != 11) {
         fprintf(stderr, "Expected 11 nodes but got %d\n", count);
         return EXIT_FAILURE;
     }
-    
+
     uint32_t children = gru_tree_count_children(root);
     if (children != 4) {
         fprintf(stderr, "Expected 4 children nodes but got %d\n", children);
         return EXIT_FAILURE;
     }
-    
-    gru_tree_node_t *c = gru_tree_search(root, compare_file_name, "c");
-    
+
+    const gru_tree_node_t *c = gru_tree_search(root, compare_file_name, "c");
+
     gru_tree_for_each(root, print_path, NULL);
-    
+
     printf("Printing childs of var\n");
     gru_tree_for_each_child(root, print_path, NULL);
     printf("Done");
-    
+
     gru_tree_remove_child(root, compare_file_name, "var");
     count = gru_tree_count(root);
     if (count != 6) {
         fprintf(stderr, "Expected 7 nodes after removing var but got %d\n", count);
         return EXIT_FAILURE;
     }
-    
+
     gru_tree_for_each(root, print_path, NULL);
-    
+
     gru_tree_search(root, compare_file_name, "c");
-    
+
     gru_tree_for_each(root, print_path, NULL);
-    
+
     gru_tree_destroy(&root);
-    
-    
+
+
     return EXIT_SUCCESS;
 }
