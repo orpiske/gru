@@ -185,10 +185,9 @@ bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 	node = list->root;
 
 	while (node) {
-		bool ret = false;
 		i++;
 
-		ret = comparable(node->data, other, NULL);
+		bool ret = comparable(node->data, other, NULL);
 		if (ret == true) {
 			gru_node_unlink(node);
 
@@ -231,9 +230,7 @@ void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
 	node = list->root;
 
 	while (node) {
-		bool ret = false;
-
-		ret = comparable(node->data, other, result);
+		bool ret = comparable(node->data, other, result);
 		if (ret == true && uniqueness == true) {
 			return;
 		}
@@ -275,9 +272,7 @@ const void *gru_list_get_item(const gru_list_t *list, compare_function_t compara
 	node = list->root;
 
 	while (node) {
-		bool ret = false;
-
-		ret = comparable(node->data, other, NULL);
+		bool ret = comparable(node->data, other, NULL);
 		if (ret == true) {
 			return node->data;
 		}
