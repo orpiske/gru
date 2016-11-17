@@ -20,13 +20,15 @@ void gru_status_set(gru_status_t *status, gru_status_code_t code,
 {
     assert(status);
 
-    va_list ap;
+    
 
     if (status->message != NULL) {
         gru_status_reset(status);
     }
 
     if (message != NULL) {
+        va_list ap;
+        
         va_start(ap, message);
         vasprintf(&status->message, message, ap);
         va_end(ap);
