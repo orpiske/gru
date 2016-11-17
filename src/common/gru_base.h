@@ -19,6 +19,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <pwd.h>
+#include <unistd.h>
+#include <sys/types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

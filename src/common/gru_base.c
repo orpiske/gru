@@ -16,14 +16,10 @@
 #include "gru_base.h"
 
 const char *gru_base_app_home(const char *appname) {
-	char *home = getenv("HOME");
-	char *filename = NULL;
+	struct passwd *pw = getpwuid(getuid());
+        char *filename = NULL;
 
-	if (!home) {
-            home = ".";
-	}
-
-        asprintf(&filename, "%s/.%s", home, appname);
+	asprintf(&filename, "%s/.%s", pw->pw_dir, appname);
         
 	return filename;
 }

@@ -96,6 +96,9 @@ IF (UNIX)
 
 	CHECK_INCLUDE_FILES(ctype.h HAVE_CTYPE_H)
 	FailIfNotSet(HAVE_CTYPE_H ctype.h)
+
+        CHECK_INCLUDE_FILES(pwd.h HAVE_PWD_H)
+        FailIfNotSet(HAVE_PWD_H pwd.h)
 ENDIF (UNIX)
 
 include_directories(src)
