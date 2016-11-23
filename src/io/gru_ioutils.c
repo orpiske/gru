@@ -14,6 +14,7 @@
  limitations under the License.
  */
 #include "gru_ioutils.h"
+#include "common/gru_alloc.h"
 
 
 bool gru_io_remap(const char *dir, const char *name, FILE *fd, 
@@ -50,6 +51,8 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status)
 
     if (!gru_path_exists(fullpath, status) && (status->code == GRU_SUCCESS)) {
         if (!gru_path_mkdirs(dir, status)) {
+            
+            gru_dealloc_string(&fullpath);
             return NULL;
         }
     }
@@ -58,11 +61,11 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status)
     if (f == NULL) {
         gru_status_strerror(status, GRU_FAILURE, errno);
 
-        free(fullpath);
+        gru_dealloc_string(&fullpath);
         return NULL;
     }
 
-    free(fullpath);
+    gru_dealloc_string(&fullpath);
     return f;
 }
 
@@ -74,6 +77,8 @@ FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *sta
 
     if (!gru_path_exists(fullpath, status) && (status->code == GRU_SUCCESS)) {
         if (!gru_path_mkdirs(dir, status)) {
+            
+            gru_dealloc_string(&fullpath);
             return NULL;
         }
     }
@@ -82,11 +87,11 @@ FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *sta
     if (f == NULL) {
         gru_status_strerror(status, GRU_FAILURE, errno);
 
-        free(fullpath);
+        gru_dealloc_string(&fullpath);
         return NULL;
     }
 
-    free(fullpath);
+    gru_dealloc_string(&fullpath);
     return f;
 }
 

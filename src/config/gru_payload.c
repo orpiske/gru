@@ -47,7 +47,13 @@ FILE *gru_payload_init_data(gru_payload_t *payload, const char *dir,
     FILE *config_file;
     
     char *fullpath = gru_path_format(dir, name, status);
-    if (fullpath == NULL || status->code != GRU_SUCCESS) {
+    if (fullpath == NULL) {
+        return NULL;
+    }
+    
+    if (status->code != GRU_SUCCESS) {
+        gru_dealloc_string(&fullpath);
+        
         return NULL;
     }
     
