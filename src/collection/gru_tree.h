@@ -71,6 +71,18 @@ const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
 
 
 /**
+ * Searches only the immediate children of the node
+ * @param node The starting node for the search
+ * @param comparable A comparator function
+ * @param other The data to compare to
+ * @return A pointer to the node or NULL if not found
+ */
+const gru_tree_node_t *gru_tree_search_child(gru_tree_node_t *node, 
+                            compare_function_t comparable, 
+                            const void *other);
+
+
+/**
  * Removes a direct descendant of a node
  * @param node The parent node
  * @param comparable A comparator function

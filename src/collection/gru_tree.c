@@ -247,3 +247,90 @@ uint32_t gru_tree_count(gru_tree_node_t *node) {
     
     return ret;
 }
+
+/*
+ const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
+        compare_function_t comparable,
+        const void *other) {
+    if (!node) {
+        return NULL;
+    }
+
+    if (!node->children) {
+        return NULL;
+    }
+
+    if (comparable(node->data, other, NULL)) {
+        return node;
+    }
+
+    gru_node_t *child_node = node->children->root;
+    while (child_node) {
+        gru_tree_node_t *tn = gru_node_get_data_ptr(gru_tree_node_t,
+                child_node);
+
+        const gru_tree_node_t *ret = gru_tree_search(tn, comparable, other);
+
+        if (ret) {
+            return ret;
+        }
+
+        child_node = child_node->next;
+    }
+
+    return NULL;
+}
+ */
+
+typedef struct gru_tree_child_search_wrapper_t_ {
+    const void *other;
+    void *ret;
+    compare_function_t comparable;
+} gru_tree_child_search_wrapper_t; 
+
+
+/**
+ * Long story short: since the implementation uses a gru_list_t * to hold the 
+ * children, the call to gru_tree_for_each_child uses gru_list_for_each to 
+ * iterate over the children. Since it gru_tree_node_t pointers are stored in 
+ * the children list, it is necessary to unwrap it and provide the pointer to 
+ * the data structure for the callback functions.
+ */
+static inline bool gru_tree_child_search_wrapper(const void *ptr, 
+                                                 const void *envelope, 
+                                                 void *r) {
+    gru_tree_node_t *node = (gru_tree_node_t *) ptr; 
+    gru_tree_child_search_wrapper_t *wrapper = 
+            (gru_tree_child_search_wrapper_t *) envelope;
+    
+    return wrapper->comparable(node->data, wrapper->other, wrapper->ret);
+}
+
+
+const gru_tree_node_t *gru_tree_search_child(gru_tree_node_t *node, 
+                            compare_function_t comparable, 
+                            const void *other)
+{
+    if (!node) {
+        return NULL;
+    }
+
+    if (!node->children) {
+        return NULL;
+    }
+
+    gru_node_t *child_node = node->children->root;
+    while (child_node) {
+        gru_tree_node_t *tn = gru_node_get_data_ptr(gru_tree_node_t,
+                child_node);
+
+        bool ret = comparable(tn->data, other, NULL);
+        if (ret) {
+            return tn;
+        }
+
+        child_node = child_node->next;
+    }
+
+    return NULL;
+}
