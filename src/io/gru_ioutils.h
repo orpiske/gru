@@ -30,7 +30,10 @@
 #include "gru_path.h"
 #include "common/gru_status.h"
 
-
+/**
+ * @brief IO utilities. Lot's of nonsense here. Most will be fixed/rewritten in 
+ * the future.
+ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -62,6 +65,18 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
 
 
 /**
+ * Tries to safely open a file (ie.: creating directories and stuff). Truncates 
+ * the file
+ * @param path path to the file
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
+ * check status)
+ */
+FILE *gru_io_open_file_path(const char *path, gru_status_t *status);
+
+
+/**
  * Tries to safely open a file (ie.: creating directories and stuff)
  * @param dir directory of the file
  * @param name name of the file
@@ -71,6 +86,17 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
  * check status)
  */
 FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *status);
+
+
+/**
+ * Tries to safely open a file (ie.: creating directories and stuff)
+ * @param path path to the file
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
+ * check status)
+ */
+FILE *gru_io_open_file_read_path(const char *path, gru_status_t *status);
 
 /**
  * Tries to safely open a file (ie.: creating directories and stuff)
@@ -82,6 +108,19 @@ FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *sta
  * check status)
  */
 FILE *gru_io_open_unique_file(const char *dir, const char *name, gru_status_t *status);
+
+
+
+/**
+ * Reads the file pointed by file into the destination buffer. The memory for 
+ * the allocation buffer is allocated as needed and must be free'd after use
+ * @param dest the destination buffer
+ * @param file the file to read
+ * @param status status structure containing error code/description in case of 
+ * failure
+ * @return the amount of bytes read of 0 in case of error
+ */
+size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status);
 
 #ifdef __cplusplus
 }
