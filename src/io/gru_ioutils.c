@@ -135,7 +135,7 @@ size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status) {
     long size = ftell(file);
     rewind(file);
     
-    char *ret = gru_alloc(size, status);
+    char *ret = gru_alloc(size + 1, status);
     gru_alloc_check(ret, 0);
     
     long cur = 0;
