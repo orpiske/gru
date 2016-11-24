@@ -24,6 +24,8 @@ gru_list_t *gru_list_new(gru_status_t *status) {
 		gru_status_set(status, GRU_FAILURE, 
                          "Not enough memory to allocate for a new list");
             }
+            
+            return NULL;
 	}
 	else {
 		ret->root = NULL;
