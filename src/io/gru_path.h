@@ -19,7 +19,9 @@
 #include <string.h>
 #include <stdbool.h>
 #include <fcntl.h>
-#include <unistd.h>
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <unistd.h>
+#endif // !defined(_WIN32) && !defined(_WIN64)
 #include <sys/types.h>
 #include <sys/stat.h>
 

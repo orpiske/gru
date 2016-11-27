@@ -19,8 +19,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <pwd.h>
-#include <unistd.h>
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <pwd.h>
+ #include <unistd.h>
+#endif
 #include <sys/types.h>
 
 #ifdef __cplusplus
