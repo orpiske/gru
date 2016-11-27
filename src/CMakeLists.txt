@@ -2,11 +2,22 @@ if (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
  add_definitions(-D_GNU_SOURCE -DLINUX_BUILD)
 endif (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
 
+if (WIN32)
+	message(STATUS "Adding Windows specific files")
+	set(OS_SPECIFIC_FILES
+		common/windows/contrib/asprintf.c
+		common/windows/contrib/vasprintf.c
+	)
+
+
+endif(WIN32)
+
 add_library(
 	gru SHARED
         common/gru_base.c
         common/gru_status.c
         common/gru_alloc.c
+		${OS_SPECIFIC_FILES}
         collection/gru_node.c
         collection/gru_list.c
         collection/gru_tree.c
@@ -23,6 +34,7 @@ add_library(
 
 install(TARGETS gru
 	LIBRARY DESTINATION ${CPP_LIBRARY_DIR}
+	 ARCHIVE DESTINATION ${CPP_LIBRARY_DIR}
 )
 
 install(DIRECTORY common
