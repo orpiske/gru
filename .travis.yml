@@ -1,24 +1,27 @@
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "Zizye5YuocAjm1NaABSEpPRO46JWeezIY06ISBLa0NmZR3U1F7F7TBpq51Wr5hSxHeTxeVx/AjTfC1sb0/kqDDWu/PUKGtxzkKJsfp1s8ytKDplsJWUgL12KttGXSdcd/VIJHLkfvUGMnXP0dfK+W3dFGqLOKVd3CHUB2NBRxrxNauRkVs/NjrIGx+CAoVY4yM84i87VUYgpuW4wtdxrA/ya9f9lWmPniNXmI+ICJZ13wVvrGyHHbb6ZISdn3zV7PG12OoWs74Fh38k/7EYLK8+rBbbqTBHvqxHPFoOUDlJugX9CAIKJY2yA7HELshaDuJ/dhfRGRzNrB8ivcxwd9yA40wM9n5Do3lrwCBGNoI1tDJnTmWwa7VFIBRFZHc1kKS1lzucDuuYmSZhR7zFNKs/Swzcz7GD+aOUqGSeFzv6FCeEaP91gfgt7etyaSEqf8vsxLOLzWN5qE9U44UtPRyDAjulu1FPeE+HUX+2pA0ngFhEhgXdsYaELpakavXYbh9wjn3WNrnsFwiKaf/9AnZzhcfbT4Keddhp+lsMRPvqIvMVXE10bplN3KA36SsgbHLpNx109QcHe4/QfRVePTQ/eBuTg0TCkqgAQdnvunB2rRJT+8JCyZzuJ7Q4MEF/ZkJcuj2Zr9giT2nm4jWdSRvnG7PR4m7n0EJus8etZZrU="
+    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    #   via the "travis encrypt" command using the project repo's public key
+    - secure: "tTyvKckPrcvShByiskYbD0BaHZSJ1SRcCILc3qx+CyZx3o5uJHZGlxTVTUTevjLM6C3ZPpD9tRL5QxjnRNYPrm0nF6pEgMnf0AXi5F+/n6kNKqLjm+FyKi8E792x7RhkS1kyONmtzS9mgDWaVK1Tql9SgaLH3qQypyWG7zsdl6C68ReN3PiqtmwrKW0jcCjgWg7VW5pqKt5ljCEbe9EskJvbZJSfXr0+YUDnAjtJCGKHqJI8Hn07rxUD8LXJouQyqJ3xrhZysWVf4QdZprUMbgPQStJJAXBTNF3UcqhGrexUm/lwlHLSYByYb0fhoqhJ4NdzzWPtNpeX90QIf+cBbBVL25094bec2/BlurvqTGbBVn2Al0Nuxee+jJu6K8pYUUelUbU43Iy4ecX1xjOLTo0dknnpzXlzSDl5MS5eDig9F8cK4BLm75yZKT+s6hNR4Y8vdpbdCXCfyDyD8GYRG1xcerfZxIIwxqkFn8otEMiKcEEq/xZmBqmRpmOgFQ0W8wD9teU5+34taTZQEJBZGe96Ae/j0eYzNtqQY4LVyIaim3vstwV23MORM3SMVeTANws/oPRYKuhSsXRXl35V4kqRlZYM30UaZwvLKpb80NlyUmaZcaiAQGykGR7F2SDOcYLom3mZwhPPjATFMfY0uv4yaDBZj2I6iH1EHjW63zs="
+
 os:
-- linux
+  - linux
 sudo: true
 language:
-- c
+  - c
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y cmake doxygen
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 before_script:
-- mkdir build
-- cd build
-- cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=RELEASE ..
 script:
-- make all
+  - make all
 addons:
+  apt:
+    packages:
+      - cmake
+      - doxygen
   coverity_scan:
     project:
       name: "orpiske/gru"
