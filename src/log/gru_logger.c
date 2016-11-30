@@ -51,31 +51,31 @@ bool gru_logger_can_log(log_level_t current)
 
 
 log_level_t gru_logger_get_level(const char *str) {
-    if (strncasecmp("TRACE", str, strlen(str)) == 0) {
+    if (strncasecmp("TRACE", str, 5) == 0) {
         return TRACE;
     }
     
-    if (strncasecmp("DEBUG", str, strlen(str)) == 0) {
+    if (strncasecmp("DEBUG", str, 5) == 0) {
         return DEBUG;
     }
     
-    if (strncasecmp("INFO", str, strlen(str)) == 0) {
+    if (strncasecmp("INFO", str, 4) == 0) {
         return INFO;
     }
         
-    if (strncasecmp("WARNING", str, strlen(str)) == 0) {
+    if (strncasecmp("WARNING", str, 7) == 0) {
         return WARNING;
     }
     
-    if (strncasecmp("ERROR", str, strlen(str)) == 0) {
+    if (strncasecmp("ERROR", str, 5) == 0) {
         return ERROR;
     }
     
-    if (strncasecmp("FATAL", str, strlen(str)) == 0) {
+    if (strncasecmp("FATAL", str, 5) == 0) {
         return FATAL;
     }
     
-    if (strncasecmp("STAT", str, strlen(str)) == 0) {
+    if (strncasecmp("STAT", str, 4) == 0) {
         return STAT;
     }
     
