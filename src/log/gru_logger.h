@@ -87,6 +87,15 @@ log_level_t gru_logger_get_mininum();
   */
 void gru_logger_default_printer(log_level_t level, const char *msg, ...);
 
+
+/**
+ * Utility printing function that can be used by implementations of the logger printer
+ * @param level message level
+ * @param msg the message + additional parameters
+ * @param ap va_list object for variable argument list
+  */
+void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap);
+
 #ifdef __cplusplus
 }
 #endif

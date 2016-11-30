@@ -80,7 +80,7 @@ log_level_t gru_logger_get_level(const char *str) {
     }
     
     
-    fprintf(stderr, "Invalid log level %s\n. Using INFO as default", str);
+    fprintf(stderr, "Invalid log level %s.\n Using INFO as default\n", str);
     return INFO;
 }
 
@@ -92,40 +92,41 @@ void gru_logger_default_printer(log_level_t level, const char *msg, ...)
     }
 
     va_list ap;
-    char *ret = NULL;
-
+    
     va_start(ap, msg);
-    vasprintf(&ret, msg, ap);
+    gru_logger_default_do_print(level, msg, ap);
     va_end(ap);
+}
 
-
+void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap) {
     switch (level) {
     case TRACE:
-        fprintf(stderr, "[TRACE]: %s\n", ret);
+        fprintf(stderr, "[TRACE]: ");
         break;
     case DEBUG:
-        fprintf(stderr, "[DEBUG]: %s\n", ret);
+        fprintf(stderr, "[DEBUG]: ");
         break;
     case INFO:
-        fprintf(stderr, "[INFO]: %s\n", ret);
+        fprintf(stderr, "[INFO]: ");
         break;
     case STAT:
-        fprintf(stderr, "[STAT]: %s\n", ret);
+        fprintf(stderr, "[STAT]: ");
         break;
     case WARNING:
-        fprintf(stderr, "[WARNING]: %s\n", ret);
+        fprintf(stderr, "[WARNING]: ");
         break;
     case ERROR:
-        fprintf(stderr, "[ERROR]: %s\n", ret);
+        fprintf(stderr, "[ERROR]: ");
         break;
     case FATAL:
-        fprintf(stderr, "[FATAL]: %s\n", ret);
+        fprintf(stderr, "[FATAL]: ");
         break;
     default:
-        fprintf(stderr, "[MSG]: %s\n", ret);
+        fprintf(stderr, "[MSG]: ");
         break;
     }
-
-    free(ret);
+    
+    vfprintf(stderr, msg, ap);
+    fprintf(stderr, "\n");
 }
 
