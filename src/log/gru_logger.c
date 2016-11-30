@@ -126,6 +126,8 @@ void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap)
         break;
     }
     
+    // TODO: this is possibly unsafe and should be replaced with something safer in the 
+    // future
     vfprintf(stderr, msg, ap);
     fprintf(stderr, "\n");
 }
