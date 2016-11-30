@@ -6,6 +6,7 @@ env:
 
 os:
   - linux
+sudo: false
 language:
   - c
 before_install:
