@@ -20,6 +20,8 @@
 #include "gru_list.h"
 #include "gru_collection_callbacks.h"
 
+#include "common/gru_portable.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -39,13 +41,13 @@ typedef struct gru_tree_node_t_ {
  * @param data The data for the root node
  * @return A pointer to the root node
  */
-gru_tree_node_t *gru_tree_new(const void *data);
+gru_export gru_tree_node_t *gru_tree_new(const void *data);
 
 /**
  * Destroys a tree node and all it's descendants
  * @param ptr A pointer-to-pointer for the node to destroy
  */
-void gru_tree_destroy(gru_tree_node_t **ptr);
+gru_export void gru_tree_destroy(gru_tree_node_t **ptr);
 
 
 /**
@@ -55,7 +57,7 @@ void gru_tree_destroy(gru_tree_node_t **ptr);
  * @return A pointer to the newly added node. This node does *NOT* need to be 
  * free'd. It will be free'd along with its parent
  */
-gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node, const void *data);
+gru_export gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node, const void *data);
 
 
 /**
@@ -65,7 +67,7 @@ gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node, const void *data);
  * @param other The data to compare to
  * @return A pointer to the node or NULL if not found
  */
-const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node, 
+gru_export const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
                             compare_function_t comparable, 
                             const void *other);
 
@@ -77,7 +79,7 @@ const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
  * @param other The data to compare to
  * @return A pointer to the node or NULL if not found
  */
-const gru_tree_node_t *gru_tree_search_child(gru_tree_node_t *node, 
+gru_export const gru_tree_node_t *gru_tree_search_child(gru_tree_node_t *node,
                             compare_function_t comparable, 
                             const void *other);
 
@@ -89,7 +91,7 @@ const gru_tree_node_t *gru_tree_search_child(gru_tree_node_t *node,
  * @param other The data to compare to
  * @return true if removed or false otherwise
  */
-bool gru_tree_remove_child(gru_tree_node_t *node, 
+gru_export bool gru_tree_remove_child(gru_tree_node_t *node,
                                 compare_function_t comparable, 
                                 const void *other);
 
@@ -102,7 +104,7 @@ bool gru_tree_remove_child(gru_tree_node_t *node,
  * @param payload Payload data to be passed to the passed to the callback
  * @return A pointer to the node or NULL if not found
  */
-const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node, 
+gru_export const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node,
                             tree_callback_fn callback, 
                             void *payload);
 
@@ -112,7 +114,7 @@ const gru_tree_node_t *gru_tree_for_each(gru_tree_node_t *node,
  * @param callback A callback function to be executed for all the nodes
  * @param payload Payload data to be passed to the passed to the callback
  */
-void gru_tree_for_each_child(gru_tree_node_t *node, 
+gru_export void gru_tree_for_each_child(gru_tree_node_t *node,
                             tree_callback_fn callback, 
                             void *payload);
 
@@ -122,7 +124,7 @@ void gru_tree_for_each_child(gru_tree_node_t *node,
  * @return The number of items
  * @note The node must not be NULL, otherwise it returns 0
  */
-uint32_t gru_tree_count_children(gru_tree_node_t *node);
+gru_export uint32_t gru_tree_count_children(gru_tree_node_t *node);
 
 /**
  * Returns the number of children of a tree
@@ -130,7 +132,7 @@ uint32_t gru_tree_count_children(gru_tree_node_t *node);
  * @return The number of items
  * @note The node must not be NULL, otherwise it returns 0
  */
-uint32_t gru_tree_count(gru_tree_node_t *node);
+gru_export uint32_t gru_tree_count(gru_tree_node_t *node);
 
 #ifdef __cplusplus
 }

@@ -30,12 +30,11 @@
  #define mkdir(x, y) _mkdir(x)
 #endif // !defined(_WIN32) && !defined(_WIN64)
 
-
-
 #include <sys/types.h>
 #include <sys/stat.h>
 
 #include "common/gru_status.h"
+#include "common/gru_portable.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -56,7 +55,7 @@ typedef bool(*gru_path_cond_t)(const char *, gru_status_t *status);
  * failure
  * @return
  */
-bool gru_path_exists(const char *filename, gru_status_t *status);
+gru_export bool gru_path_exists(const char *filename, gru_status_t *status);
 
 
 /**
@@ -66,7 +65,7 @@ bool gru_path_exists(const char *filename, gru_status_t *status);
  * failure
  * @return
  */
-bool gru_path_fexists(int fd, gru_status_t *status);
+gru_export bool gru_path_fexists(int fd, gru_status_t *status);
 
 
 
@@ -77,7 +76,7 @@ bool gru_path_fexists(int fd, gru_status_t *status);
  * failure
  * @return
  */
-bool gru_path_can_read_write(const char *filename, gru_status_t *status);
+gru_export bool gru_path_can_read_write(const char *filename, gru_status_t *status);
 
 
 /**
@@ -88,7 +87,7 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status);
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond, 
+gru_export bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
                           gru_status_t *status);
 
 
@@ -99,7 +98,7 @@ bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_path_rename(const char *filename, gru_status_t *status);
+gru_export bool gru_path_rename(const char *filename, gru_status_t *status);
 
 
 /**
@@ -110,7 +109,7 @@ bool gru_path_rename(const char *filename, gru_status_t *status);
  * failure
  * @return the formatted path
  */
-char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
+gru_export char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
 
 /**
  * Create a directory
@@ -119,7 +118,7 @@ char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
  * failure
  * @return true if successful or false otherwise
  */
-bool gru_path_mkdir(const char *path, gru_status_t *status);
+gru_export bool gru_path_mkdir(const char *path, gru_status_t *status);
 
 
 /**
@@ -129,7 +128,7 @@ bool gru_path_mkdir(const char *path, gru_status_t *status);
  * failure
  * @return true if successfully create the directories or false otherwise
  */
-bool gru_path_mkdirs(const char *path, gru_status_t *status);
+gru_export bool gru_path_mkdirs(const char *path, gru_status_t *status);
 
 #ifdef __cplusplus
 }

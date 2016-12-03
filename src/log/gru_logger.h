@@ -24,8 +24,11 @@
 #if !defined(_WIN32) && !defined(_WIN64)
  #include <strings.h>
 #endif
+
 #include <stdbool.h>
 #include <stdarg.h>
+
+#include "common/gru_base.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,7 +51,7 @@ typedef void(*logger_t)(log_level_t level, const char *message, ...);
  * @param str the input string (ie.: info, warn, etc)
  * @return the log level
  */
-log_level_t gru_logger_get_level(const char *str);
+gru_export log_level_t gru_logger_get_level(const char *str);
 
 /**
  * Whether can log (ie.: whether log level 1 is greater or equal to l2, thus 
@@ -56,31 +59,31 @@ log_level_t gru_logger_get_level(const char *str);
  * @param l1 log level being checked
  * @return 
  */
-bool gru_logger_can_log(log_level_t l1);
+gru_export bool gru_logger_can_log(log_level_t l1);
 
 /**
  * Sets the logger
  * @param logger the new logger
  */
-void gru_logger_set(logger_t logger);
+gru_export void gru_logger_set(logger_t logger);
 
 /**
  * Gets the logger
  * @return the logger
  */
-logger_t gru_logger_get(void);
+gru_export logger_t gru_logger_get(void);
 
 /**
  * Sets the minimum log level
  * @param minimum the minimum log level
  */
-void gru_logger_set_mininum(log_level_t minimum);
+gru_export void gru_logger_set_mininum(log_level_t minimum);
 
 /**
  * Gets the minimum log level
  * @return the minimum log level
  */
-log_level_t gru_logger_get_mininum();
+gru_export log_level_t gru_logger_get_mininum();
 
 
 /**
@@ -88,7 +91,7 @@ log_level_t gru_logger_get_mininum();
  * @param level message level
  * @param msg the message + additional parameters
   */
-void gru_logger_default_printer(log_level_t level, const char *msg, ...);
+gru_export void gru_logger_default_printer(log_level_t level, const char *msg, ...);
 
 
 /**
@@ -97,7 +100,7 @@ void gru_logger_default_printer(log_level_t level, const char *msg, ...);
  * @param msg the message + additional parameters
  * @param ap va_list object for variable argument list
   */
-void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap);
+gru_export void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap);
 
 #ifdef __cplusplus
 }

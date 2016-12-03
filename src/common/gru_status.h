@@ -24,6 +24,8 @@
 #include <errno.h>
 #include <assert.h>
 
+#include "common/gru_portable.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -54,7 +56,7 @@ typedef struct gru_status_t_ {
  * @param message the status message followed by any other parameter as accepted
  * by vasprintf
  */
-void gru_status_set(gru_status_t *status, gru_status_code_t code,
+gru_export void gru_status_set(gru_status_t *status, gru_status_code_t code,
                       const char *message, ...);
 
 /**
@@ -63,20 +65,20 @@ void gru_status_set(gru_status_t *status, gru_status_code_t code,
  * @param code the code to set the object to
  * @param errnum the error number (as in errno)
  */
-void gru_status_strerror(gru_status_t *status, gru_status_code_t code,
+gru_export void gru_status_strerror(gru_status_t *status, gru_status_code_t code,
                          int errnum);
 
 /**
  * Resets the status
  * @param status an instance of the status object to set
  */
-void gru_status_reset(gru_status_t *status);
+gru_export void gru_status_reset(gru_status_t *status);
 
 /**
  * Sets the status to success
  * @param status an instance of the status object to set
  */
-void gru_status_success(gru_status_t *status);
+gru_export void gru_status_success(gru_status_t *status);
 
 
 #ifdef __cplusplus

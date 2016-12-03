@@ -25,7 +25,7 @@
 #include <windows.h>
 #endif
 
-
+#include "common/gru_portable.h"
 #include "gru_time_utils.h"
 
 #ifdef __cplusplus
@@ -39,11 +39,11 @@ typedef struct gru_duration_t_ {
 } gru_duration_t;
 
 
-gru_duration_t gru_duration_from_seconds(uint64_t seconds);
-gru_duration_t gru_duration_from_minutes(uint64_t seconds);
+gru_export gru_duration_t gru_duration_from_seconds(uint64_t seconds);
+gru_export gru_duration_t gru_duration_from_minutes(uint64_t seconds);
 
-uint64_t gru_duration_seconds(gru_duration_t duration);
-uint64_t gru_duration_minutes(gru_duration_t duration, double *fractional);
+gru_export uint64_t gru_duration_seconds(gru_duration_t duration);
+gru_export uint64_t gru_duration_minutes(gru_duration_t duration, double *fractional);
 
 #ifdef __cplusplus
 }

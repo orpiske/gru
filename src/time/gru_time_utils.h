@@ -24,12 +24,14 @@
 #include <windows.h>
 #endif
 
+#include "common/gru_portable.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
     
-void gru_time_add_seconds(struct timeval *t, uint64_t count);
-void gru_time_add_minutes(struct timeval *t, uint64_t count);
+gru_export void gru_time_add_seconds(struct timeval *t, uint64_t count);
+gru_export void gru_time_add_minutes(struct timeval *t, uint64_t count);
 
 
 #ifdef __cplusplus
