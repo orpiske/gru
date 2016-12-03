@@ -5,6 +5,8 @@ Build Status
 ----
 Linux Build Status: [![Linux Build Status](https://travis-ci.org/orpiske/gru.svg?branch=master)](https://travis-ci.org/orpiske/gru)
 
+Windows Build Status: [![Windows Build status](https://ci.appveyor.com/api/projects/status/18qfc92iatymg9aw?svg=true)](https://ci.appveyor.com/project/orpiske/gru)
+
 Coverity Scan: [![Coverity Scan Build Status](https://scan.coverity.com/projects/10838/badge.svg)](https://scan.coverity.com/projects/orpiske-gru) 
 
 Introduction:
