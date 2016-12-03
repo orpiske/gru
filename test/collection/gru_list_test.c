@@ -45,7 +45,11 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
+#if !defined(_WIN32) && !defined(_WIN64)
 	uint32_t tmp[list_size];
+#else
+	uint32_t tmp[256];
+#endif
 	for (uint32_t i = 0; i < list_size; i++) {
 		tmp[i] = i;
 		gru_list_append(list, &tmp[i]);
