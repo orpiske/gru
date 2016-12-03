@@ -20,7 +20,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <strings.h>
+#endif
 
 #include "common/gru_status.h"
 #include "io/gru_path.h"

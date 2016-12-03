@@ -17,7 +17,12 @@
 #define GRU_TIME_UTILS_H
 
 #include <stdint.h>
-#include <sys/time.h>
+
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <sys/time.h>
+#else
+#include <windows.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {

@@ -20,7 +20,12 @@
 #include <stdio.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
+
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <unistd.h>
+#else
+ #include <io.h>
+#endif
 #include <string.h>
 #include <stdarg.h>
 

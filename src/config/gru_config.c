@@ -52,15 +52,20 @@ void gru_config_destroy(gru_config_t **config)
 void gru_config_set(char *dest, uint32_t size, const char *fmt, ...)
 {
     va_list ap;
+
+#if !defined(_WIN32) && !defined(_WIN64)
     pthread_mutex_t mutex;
 
     pthread_mutex_lock(&mutex);
+#endif
     va_start(ap, fmt);
 
     vsnprintf(dest, size, fmt, ap);
 
     va_end(ap);
+#if !defined(_WIN32) && !defined(_WIN64)
     pthread_mutex_unlock(&mutex);
+#endif
 }
 
 void gru_config_read(const char *name, FILE *source, void *dest, const char *mask)
