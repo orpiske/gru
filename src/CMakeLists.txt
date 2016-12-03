@@ -9,8 +9,6 @@ if (WIN32)
 		common/windows/contrib/vasprintf.c
 		time/windows/contrib/getimeofday.c
 	)
-
-
 endif(WIN32)
 
 add_library(
