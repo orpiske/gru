@@ -10,7 +10,7 @@ Coverity Scan: [![Coverity Scan Build Status](https://scan.coverity.com/projects
 Introduction:
 ----
 
-This library contains reusable C code for very simple applications.
+This library contains portable and reusable C code for very simple applications.
 
 Dependencies:
 ----
@@ -18,6 +18,21 @@ Dependencies:
 Runtime/Compilation:
 * cmake
 * gcc or clang
+* Microsoft Compiler (ie.: Visual Studio 2015)
+
+Building
+----
+
+- On Linux: 
+```
+mkdir build && cmake ..
+```
+
+- On Windows
+```
+mkdir build && cmake -G "NMake Makefiles" ..
+```
+
 
 License
 ----
