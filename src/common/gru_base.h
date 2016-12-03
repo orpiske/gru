@@ -25,6 +25,8 @@
 #endif
 #include <sys/types.h>
 
+#include "gru_portable.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -32,20 +34,8 @@ extern "C" {
 #define GRU_OPT_MAX_STR_SIZE 256
 #define GRU_OPT_MAX_STR_SIZE_MASK "%256s"
 #define GRU_OPT_MAX_CHAR_SIZE_MASK "%256c"
-
-#if !defined(_WIN32) && !defined(_WIN64)
- #define likely(x)  __builtin_expect((x),1)
- #define unlikely(x)  __builtin_expect((x),0)
- #define gru_export
-#else
- #define likely(x) (x)
- #define unlikely(x) (x)
- #define bzero(b,len) (memset((b), '\0', (len)), (void) 0)
- #define gru_export __declspec( dllexport )
-#endif
-
     
-const char *gru_base_app_home(const char *appname);
+gru_export const char *gru_base_app_home(const char *appname);
     
 #ifdef __cplusplus
 }

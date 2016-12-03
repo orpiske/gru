@@ -42,13 +42,13 @@ typedef struct gru_list_t_ {
  * Creates a new list
  * @return A new gru_list_t object
  */
-gru_list_t *gru_list_new(gru_status_t *status);
+gru_export gru_list_t *gru_list_new(gru_status_t *status);
 
 /**
  * Ensures that the list is properly destroyed
  * @param list the list to destroy
  */
-void gru_list_destroy(gru_list_t **list);
+gru_export void gru_list_destroy(gru_list_t **list);
 
 
 /**
@@ -57,7 +57,7 @@ void gru_list_destroy(gru_list_t **list);
  * @return The number of items
  * @note The list must not be NULL
  */
-uint32_t gru_list_count(const gru_list_t *list);
+gru_export uint32_t gru_list_count(const gru_list_t *list);
 
 
 /**
@@ -69,7 +69,7 @@ uint32_t gru_list_count(const gru_list_t *list);
  * @return A pointer to the new node or NULL if there's not enough memory for the
  * new node
  */
-const gru_node_t *gru_list_append(gru_list_t *list, const void *data);
+gru_export const gru_node_t *gru_list_append(gru_list_t *list, const void *data);
 
 
 /**
@@ -79,7 +79,7 @@ const gru_node_t *gru_list_append(gru_list_t *list, const void *data);
  * @param position The position to insert the data
  * @return A pointer to the new node
  */
-gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t position);
+gru_export gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t position);
 
 
 /**
@@ -88,7 +88,7 @@ gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t positio
  * @param position The position of the item to be removed
  * @return A pointer to the removed node
  */
-gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position);
+gru_export gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position);
 
 
 /**
@@ -98,7 +98,7 @@ gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position);
  * @param other The data to compare the node with
  * @return true if the node was removed or false if it was not found
  */
-bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
+gru_export bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
 		const void *other);
 
 /**
@@ -107,7 +107,7 @@ bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
  * @param position the position
  * @return the node or NULL if not existent
  */
-const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position);
+gru_export const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position);
 
 
 /**
@@ -118,7 +118,7 @@ const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position);
  * @param other
  * @param result
  */
-void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
+gru_export void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
 		compare_function_t comparable, const void *compare, void *result);
 
 
@@ -128,7 +128,7 @@ void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
  * @param handle A pointer to a function of type handle_function_t
  * @param data Payload data for the true_handle and false_handle functions
  */
-void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *data);
+gru_export void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *data);
 
 
 /**
@@ -139,7 +139,7 @@ void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *d
  * @param other
  * @param result
  */
-const void *gru_list_get_item(const gru_list_t *list, compare_function_t comparable, 
+gru_export const void *gru_list_get_item(const gru_list_t *list, compare_function_t comparable,
                           const void *other);
 
 

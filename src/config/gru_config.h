@@ -51,31 +51,31 @@ typedef struct gru_config_t_ {
 } gru_config_t;
 
 
-gru_config_t *gru_config_init(const char *dir, const char *filename, 
+gru_export gru_config_t *gru_config_init(const char *dir, const char *filename,
                               gru_payload_t *payload, gru_status_t *status);
 
-void gru_config_destroy(gru_config_t **config);
+gru_export void gru_config_destroy(gru_config_t **config);
 
-void gru_config_set(char *dest, uint32_t size, const char *fmt, ...);
+gru_export void gru_config_set(char *dest, uint32_t size, const char *fmt, ...);
 
-void gru_config_read(const char *name, FILE *source, void *dest, const char *mask);
+gru_export void gru_config_read(const char *name, FILE *source, void *dest, const char *mask);
 
-void gru_config_read_string(const char *name, FILE *source, char *dest);
-void gru_config_read_short(const char *name, FILE *source, int16_t *dest);
-void gru_config_read_ushort(const char *name, FILE *source, uint16_t *dest);
-void gru_config_read_int(const char *name, FILE *source, int32_t *dest);
-void gru_config_read_uint(const char *name, FILE *source, uint32_t *dest);
-void gru_config_read_long(const char *name, FILE *source, int64_t *dest);
-void gru_config_read_ulong(const char *name, FILE *source, uint64_t *dest);
+gru_export void gru_config_read_string(const char *name, FILE *source, char *dest);
+gru_export void gru_config_read_short(const char *name, FILE *source, int16_t *dest);
+gru_export void gru_config_read_ushort(const char *name, FILE *source, uint16_t *dest);
+gru_export void gru_config_read_int(const char *name, FILE *source, int32_t *dest);
+gru_export void gru_config_read_uint(const char *name, FILE *source, uint32_t *dest);
+gru_export void gru_config_read_long(const char *name, FILE *source, int64_t *dest);
+gru_export void gru_config_read_ulong(const char *name, FILE *source, uint64_t *dest);
 
-void gru_config_write_short(const char *name, FILE *dest, int16_t value);
-void gru_config_write_ushort(const char *name, FILE *dest, uint16_t value);
-void gru_config_write_int(const char *name, FILE *dest, int32_t value);
-void gru_config_write_uint(const char *name, FILE *dest, uint32_t value);
-void gru_config_write_long(const char *name, FILE *dest, int64_t value);
-void gru_config_write_ulong(const char *name, FILE *dest, uint64_t value);
+gru_export void gru_config_write_short(const char *name, FILE *dest, int16_t value);
+gru_export void gru_config_write_ushort(const char *name, FILE *dest, uint16_t value);
+gru_export void gru_config_write_int(const char *name, FILE *dest, int32_t value);
+gru_export void gru_config_write_uint(const char *name, FILE *dest, uint32_t value);
+gru_export void gru_config_write_long(const char *name, FILE *dest, int64_t value);
+gru_export void gru_config_write_ulong(const char *name, FILE *dest, uint64_t value);
 
-void gru_config_write_string(const char *name, FILE *dest, const char *value);
+gru_export void gru_config_write_string(const char *name, FILE *dest, const char *value);
 
 #ifdef __cplusplus
 }

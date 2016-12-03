@@ -34,6 +34,7 @@
 
 #include "gru_path.h"
 #include "common/gru_status.h"
+#include "common/gru_portable.h"
 
 /**
  * @brief IO utilities. Lot's of nonsense here. Most will be fixed/rewritten in 
@@ -53,7 +54,7 @@ extern "C" {
  * failure
  * @return true if remaped or false otherwise (in this case, check status)
  */
-bool gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *status);
+gru_export bool gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *status);
 
 
 /**
@@ -66,7 +67,7 @@ bool gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *sta
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
+gru_export FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
 
 
 /**
@@ -78,7 +79,7 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-FILE *gru_io_open_file_path(const char *path, gru_status_t *status);
+gru_export FILE *gru_io_open_file_path(const char *path, gru_status_t *status);
 
 
 /**
@@ -90,7 +91,7 @@ FILE *gru_io_open_file_path(const char *path, gru_status_t *status);
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *status);
+gru_export FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *status);
 
 
 /**
@@ -101,7 +102,7 @@ FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *sta
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-FILE *gru_io_open_file_read_path(const char *path, gru_status_t *status);
+gru_export FILE *gru_io_open_file_read_path(const char *path, gru_status_t *status);
 
 /**
  * Tries to safely open a file (ie.: creating directories and stuff)
@@ -112,7 +113,7 @@ FILE *gru_io_open_file_read_path(const char *path, gru_status_t *status);
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-FILE *gru_io_open_unique_file(const char *dir, const char *name, gru_status_t *status);
+gru_export FILE *gru_io_open_unique_file(const char *dir, const char *name, gru_status_t *status);
 
 
 
@@ -125,7 +126,7 @@ FILE *gru_io_open_unique_file(const char *dir, const char *name, gru_status_t *s
  * failure
  * @return the amount of bytes read of 0 in case of error
  */
-size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status);
+gru_export size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status);
 
 #ifdef __cplusplus
 }
