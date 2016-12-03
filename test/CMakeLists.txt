@@ -1,6 +1,6 @@
 PROJECT(gru-tests)
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/tests/bin)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
 
 add_executable(gru_node_test
 	collection/gru_node_test.c
