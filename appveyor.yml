@@ -1,0 +1,25 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+configuration: Debug
+platform: x64
+build_script:
+- cmd: >-
+    mkdir build
+
+    cd build
+
+    "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+
+    cmake -G "NMake Makefiles" -DCMAKE_VERBOSE_MAKEFILE=On -DCMAKE_BUILD_TYPE=Release ..
+
+    nmake
+
+    cd ..
+test_script:
+- cmd: >-
+    cd build
+
+    ctest -vv
+
+    cd ..
