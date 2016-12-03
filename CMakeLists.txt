@@ -45,13 +45,15 @@ set(BUILD_WITH_UNIT_TESTS ON CACHE BOOL "Build unit tests")
 #### GNU Compiler flags
 
 if (CMAKE_COMPILER_IS_GNUCXX)
-	set(CMAKE_C_FLAGS "-Wall -Wshadow -std=c99" CACHE STRING
+    set(CMAKE_C_FLAGS "-Wall -Wshadow -std=c99 ${CMAKE_C_FLAGS}" CACHE STRING
 		"Flags used by the compiler during all build types." FORCE
 	)
-        set(CMAKE_C_FLAGS_DEBUG "-fdiagnostics-color=auto -g" CACHE STRING
+
+    set(CMAKE_C_FLAGS_DEBUG "-fdiagnostics-color=auto -g"  CACHE STRING
 		"Flags used by the compiler during debug build." FORCE
 	)
-        set(CMAKE_C_FLAGS_RELEASE "-O2 -fomit-frame-pointer" CACHE STRING
+
+    set(CMAKE_C_FLAGS_RELEASE "-O2 -fomit-frame-pointer" CACHE STRING
 		"Flags used by the compiler during release build." FORCE
 	)
 endif (CMAKE_COMPILER_IS_GNUCXX)
