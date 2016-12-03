@@ -7,6 +7,7 @@ if (WIN32)
 	set(OS_SPECIFIC_FILES
 		common/windows/contrib/asprintf.c
 		common/windows/contrib/vasprintf.c
+		time/windows/contrib/getimeofday.c
 	)
 
 
