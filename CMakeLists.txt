@@ -19,9 +19,22 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 endif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/bin)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
-set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin)
+if (UNIX)
+	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/bin)
+	set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
+	set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin)
+else (UNIX)
+	if (WIN32)
+		set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/bin)
+		set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
+		set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/lib)
+	endif (WIN32)
+endif (UNIX)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	
+endif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+
+
 
 set(RUNTIME_DIR "bin")
 set(CPP_INCLUDE_DIR "include")
