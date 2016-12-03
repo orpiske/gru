@@ -19,7 +19,12 @@
 #include <stdlib.h>
 #include <math.h>
 
+#if !defined(_WIN32) && !defined(_WIN64)
 #include <sys/time.h>
+#else
+#include <windows.h>
+#endif
+
 
 #include "gru_time_utils.h"
 

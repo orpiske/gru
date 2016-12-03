@@ -20,7 +20,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <strings.h>
+
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <strings.h>
+#endif
 #include <stdbool.h>
 #include <stdarg.h>
 

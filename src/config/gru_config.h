@@ -22,7 +22,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
-#include <pthread.h>
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <pthread.h>
+#endif
 #include <inttypes.h>
 #include <assert.h>
 

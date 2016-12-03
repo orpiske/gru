@@ -21,7 +21,17 @@
 #include <fcntl.h>
 #if !defined(_WIN32) && !defined(_WIN64)
  #include <unistd.h>
+#else
+ #include <io.h>
+#include <direct.h>
+ 
+ #define R_OK 4
+ #define W_OK 2
+ #define mkdir(x, y) _mkdir(x)
 #endif // !defined(_WIN32) && !defined(_WIN64)
+
+
+
 #include <sys/types.h>
 #include <sys/stat.h>
 
