@@ -24,6 +24,7 @@ add_library(
         io/gru_ioutils.c
         log/gru_logger.c
         string/gru_util.c
+        string/gru_alt.c
         config/gru_payload.c
         config/gru_config.c
         time/gru_time_utils.c
