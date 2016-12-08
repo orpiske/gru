@@ -21,12 +21,20 @@ const char *gru_base_app_home(const char *appname) {
 #if defined(_WIN32) || defined(_WIN64)
 	const char *home = getenv("HOMEPATH");
 
-	asprintf(&filename, "%s/.%s", home, appname);
+	if (asprintf(&filename, "%s/.%s", home, appname) == -1) {
+            fprintf(stderr, "Unable to allocate memory for the application home directory");
+            
+            return NULL;
+        }
 #else
 	struct passwd *pw = getpwuid(getuid());
         
 
-	asprintf(&filename, "%s/.%s", pw->pw_dir, appname);
+	if (asprintf(&filename, "%s/.%s", pw->pw_dir, appname) == -1) {
+            fprintf(stderr, "Unable to allocate memory for the application home directory");
+            
+            return NULL;
+        }
         
 	
 #endif

@@ -30,7 +30,9 @@ void gru_status_set(gru_status_t *status, gru_status_code_t code,
         va_list ap;
         
         va_start(ap, message);
-        vasprintf(&status->message, message, ap);
+        if (vasprintf(&status->message, message, ap) == -1) {
+            fprintf(stderr, "Unable to allocate memory for the message: %s", message);
+        }
         va_end(ap);
     }
 
