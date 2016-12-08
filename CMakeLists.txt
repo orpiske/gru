@@ -48,7 +48,7 @@ if (CMAKE_COMPILER_IS_GNUCXX)
 		"Flags used by the compiler during debug build." FORCE
 	)
 
-    set(CMAKE_C_FLAGS_RELEASE "-O2 -fomit-frame-pointer" CACHE STRING
+    set(CMAKE_C_FLAGS_RELEASE "-O2 -fomit-frame-pointer -D_FORTIFY_SOURCE=1" CACHE STRING
 		"Flags used by the compiler during release build." FORCE
 	)
 endif (CMAKE_COMPILER_IS_GNUCXX)
