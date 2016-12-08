@@ -30,11 +30,6 @@ else (UNIX)
 		set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/lib)
 	endif (WIN32)
 endif (UNIX)
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	
-endif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-
-
 
 set(RUNTIME_DIR "bin")
 set(CPP_INCLUDE_DIR "include")
@@ -115,6 +110,22 @@ IF (UNIX)
         CHECK_INCLUDE_FILES(pwd.h HAVE_PWD_H)
         FailIfNotSet(HAVE_PWD_H pwd.h)
 ENDIF (UNIX)
+
+
+macro (DefineIfSet VARIABLE)
+    if (${VARIABLE})
+        set(MSG "Adding definition " ${VARIABLE} "")
+        message(STATUS ${MSG})
+
+        add_definitions(-D${VARIABLE})
+    endif (${VARIABLE})
+endmacro(DefineIfSet)
+
+include(CheckFunctionExists)
+if (UNIX)
+    check_function_exists(strlcpy HAVE_STRLCPY)
+    DefineIfSet(HAVE_STRLCPY)
+endif (UNIX)
 
 include_directories(src)
 add_subdirectory(src/ objs)
