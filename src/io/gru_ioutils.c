@@ -142,7 +142,7 @@ size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status) {
     while (true) {
         char c = (char) fgetc(file);
         
-        if (c != EOF) {
+        if (c != EOF && cur <= size) {
             ret[cur] = c;
             cur++;
         }
