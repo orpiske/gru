@@ -38,8 +38,14 @@ extern "C" {
  */
 
 #ifndef HAVE_STRLCPY
-size_t strlcpy(char * restrict dst, const char * restrict src, size_t size);
-#endif
+
+#if !defined(_WIN32) && !defined(_WIN64)
+ size_t strlcpy(char * restrict dst, const char * restrict src, size_t size);
+#else
+ size_t strlcpy(char * dst, const char * src, size_t size);
+#endif // !defined(_WIN32) && !defined(_WIN64)
+
+#endif // HAVE_STRLCPY
 
 #ifdef __cplusplus
 }
