@@ -19,7 +19,7 @@
 size_t strlcpy(char *dst, const char *src, size_t len) {
     size_t size = 0;
     
-    if (size == 0 || unlikely(dst == NULL) || unlikely(src == NULL)) {
+    if (len == 0 || unlikely(dst == NULL) || unlikely(src == NULL)) {
         return 0;
     }
     
@@ -32,6 +32,5 @@ size_t strlcpy(char *dst, const char *src, size_t len) {
     dst[size] = 0;
     
     return size;
-    
 }
 #endif
