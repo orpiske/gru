@@ -43,6 +43,7 @@ void gru_status_reset(gru_status_t *status)
 {
     free(status->message);
     status->message = NULL;
+    status->code = GRU_SUCCESS;
 }
 
 void gru_status_success(gru_status_t *status)
