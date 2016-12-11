@@ -19,6 +19,7 @@
 #include <string.h>
 
 #include "common/gru_base.h"
+#include "common/gru_portable.h"
 
 /**
  * @brief Very simple alternatives to some safer string variables. Do not use unless 
@@ -39,11 +40,8 @@ extern "C" {
 
 #ifndef HAVE_STRLCPY
 
-#if !defined(_WIN32) && !defined(_WIN64)
- size_t strlcpy(char * restrict dst, const char * restrict src, size_t size);
-#else
- size_t strlcpy(char * dst, const char * src, size_t size);
-#endif // !defined(_WIN32) && !defined(_WIN64)
+
+ size_t strlcpy(char * gru_restrict dst, const char * gru_restrict src, size_t size);
 
 #endif // HAVE_STRLCPY
 

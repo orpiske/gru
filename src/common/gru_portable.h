@@ -17,6 +17,7 @@ limitations under the License.
 #define likely(x)  __builtin_expect((x),1)
 #define unlikely(x)  __builtin_expect((x),0)
 #define gru_export
+#define gru_restrict restrict
 #else
 #define likely(x) (x)
 #define unlikely(x) (x)
@@ -25,4 +26,5 @@ limitations under the License.
 #define strncasecmp _strnicmp
 #define strerror_r(errno,buf,len) strerror_s(buf,len,errno)
 #define gru_export __declspec( dllexport )
+#define gru_restrict
 #endif
