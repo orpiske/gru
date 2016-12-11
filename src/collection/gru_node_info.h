@@ -13,22 +13,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-#ifndef GRU_COLLECTION_CALLBACKS_H
-#define GRU_COLLECTION_CALLBACKS_H
+#ifndef GRU_NODE_INFO_H
+#define GRU_NODE_INFO_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef bool(*compare_function_t)(const void *, const void *data, void *result);
-typedef void(*handle_function_t)(const void *, void *);
-typedef void(*handle_function_info_t)(const void *, gru_node_info_t info, void *);
-typedef handle_function_t tree_callback_fn;
+   
+typedef struct gru_node_info_t_ {
+    uint32_t parent_pos; 
+    uint32_t self_pos;
+} gru_node_info_t;
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* GRU_COLLECTION_CALLBACKS_H */
+#endif /* GRU_NODE_INFO_H */
 

@@ -261,6 +261,31 @@ void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *d
 }
 
 
+void gru_list_for_each_ex(const gru_list_t *list, handle_function_info_t handle, 
+        void *data) 
+{
+    gru_node_t *node = NULL;
+
+    if (list == NULL) {
+        return;
+    }
+
+    node = list->root;
+
+    uint32_t pos = 0;
+    while (node) {
+        gru_node_info_t info = { 
+            .parent_pos = 0,
+            .self_pos = pos,
+        };
+        
+        handle(node->data, info, data);
+
+        node = node->next;
+        pos++;
+    }
+}
+
 
 const void *gru_list_get_item(const gru_list_t *list, compare_function_t comparable, 
                           const void *other)

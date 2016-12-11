@@ -24,6 +24,7 @@
 #include <assert.h>
 
 #include "gru_node.h"
+#include "gru_node_info.h"
 #include "gru_collection_callbacks.h"
 #include "common/gru_status.h"
 #include "common/gru_base.h"
@@ -130,6 +131,17 @@ gru_export void gru_list_for_each_compare(const gru_list_t *list, bool uniquenes
  */
 gru_export void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *data);
 
+
+
+/**
+ * Traverses the list executing a set of operations and passes through node 
+ * information (ie.: its position)
+ * @param list The list to be traversed
+ * @param handle A pointer to a function of type handle_function_info_t 
+ * @param data Payload data for the true_handle and false_handle functions
+ */
+gru_export void gru_list_for_each_ex(const gru_list_t *list, handle_function_info_t handle, 
+        void *data);
 
 /**
  * Traverses the list comparing the data. It aborts if the uniqueness is true and
