@@ -31,10 +31,12 @@ typedef struct gru_node_t_ {
 gru_export gru_node_t *gru_node_new(const void *ptr);
 gru_export void gru_node_destroy(gru_node_t **node);
 
-gru_export void gru_node_set_previous(gru_node_t *node, gru_node_t *previous);
-gru_export void gru_node_set_next(gru_node_t *node, gru_node_t *next);
-gru_export void gru_node_reset(gru_node_t *node);
-gru_export void gru_node_unlink(gru_node_t *node);
+gru_export void gru_node_set_previous(gru_node_t * gru_restrict node, 
+        gru_node_t * gru_restrict previous);
+gru_export void gru_node_set_next(gru_node_t * gru_restrict node, 
+        gru_node_t * gru_restrict next);
+gru_export void gru_node_reset(gru_node_t * gru_restrict node);
+gru_export void gru_node_unlink(gru_node_t * gru_restrict node);
 
 
 #define gru_node_get_data_ptr(type, node) (type *) node->data
