@@ -24,6 +24,7 @@ extern "C" {
 gru_export void *gru_alloc(size_t size, gru_status_t *status);
 gru_export void gru_dealloc(void **obj);
 gru_export void gru_dealloc_string(char **obj);
+gru_export void gru_dealloc_const_string(const char **obj);
 
 #define gru_alloc_check(obj, ret) if (obj == NULL) return ret;
 
