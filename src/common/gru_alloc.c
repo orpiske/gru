@@ -28,3 +28,7 @@ void gru_dealloc(void **obj) {
 inline void gru_dealloc_string(char **obj) {
     gru_dealloc((void **)obj);
 }
+
+inline void gru_dealloc_const_string(const char **obj) {
+    gru_dealloc((void **)obj);
+}
