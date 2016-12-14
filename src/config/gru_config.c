@@ -24,16 +24,20 @@ gru_config_t *gru_config_init(const char *dir, const char *filename,
     gru_alloc_check(ret, NULL);
 
     if (asprintf(&ret->dir, "%s", dir) == -1) {
-        gru_status_set(status, GRU_FAILURE, "Unable to allocate memory for initializing the configuration");
-        
+        gru_status_set(status, GRU_FAILURE,
+          "Unable to allocate memory for initializing the configuration");
+
+        gru_dealloc((void **) &ret);
         return NULL;
     }
-    
-    
+
+
     if (asprintf(&ret->filename, "%s", filename) == -1) {
-        gru_status_set(status, GRU_FAILURE, "Unable to allocate memory for initializing the configuration");
-        
+        gru_status_set(status, GRU_FAILURE,
+          "Unable to allocate memory for initializing the configuration");
+
         gru_dealloc_string(&ret->dir);
+        gru_dealloc((void **) &ret);
         return NULL;
     }
 
@@ -86,10 +90,10 @@ void gru_config_read(const char *name, FILE *source, void *dest, const char *mas
         char line[GRU_OPT_MAX_STR_SIZE] = {0};
 
         char *tmp = fgets(line, GRU_OPT_MAX_STR_SIZE - 1, source);
-        if (tmp != NULL) { 
+        if (tmp != NULL) {
             if ((char *) tmp != (char *) &line) {
                 fprintf(stderr, "Error while trying to read configuration buffer\n");
-                
+
                 return;
             }
         }
