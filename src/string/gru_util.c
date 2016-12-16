@@ -58,7 +58,7 @@ char *gru_trim(char *input, size_t size) {
 	char *tmp_string = NULL;
 
 	tmp_string = gru_rtrim(input, size);
-	tmp_size = strlen(tmp_string);
+	tmp_size = strnlen(tmp_string, size);
 
 	return gru_ltrim(tmp_string, tmp_size);
 }
