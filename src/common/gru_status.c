@@ -15,65 +15,59 @@
  */
 #include "gru_status.h"
 
-void gru_status_set(gru_status_t *status, gru_status_code_t code,
-                    const char *message, ...)
-{
-    assert(status);
+void gru_status_set(
+	gru_status_t *status, gru_status_code_t code, const char *message, ...) {
+	assert(status);
 
-    
+	if (status->message != NULL) {
+		gru_status_reset(status);
+	}
 
-    if (status->message != NULL) {
-        gru_status_reset(status);
-    }
+	if (message != NULL) {
+		va_list ap;
 
-    if (message != NULL) {
-        va_list ap;
-        
-        va_start(ap, message);
-        if (vasprintf(&status->message, message, ap) == -1) {
-            fprintf(stderr, "Unable to allocate memory for the message: %s", message);
-        }
-        va_end(ap);
-    }
+		va_start(ap, message);
+		if (vasprintf(&status->message, message, ap) == -1) {
+			fprintf(stderr, "Unable to allocate memory for the message: %s", message);
+		}
+		va_end(ap);
+	}
 
-    status->code = code;
+	status->code = code;
 }
 
-void gru_status_reset(gru_status_t *status)
-{
-    free(status->message);
-    status->message = NULL;
-    status->code = GRU_SUCCESS;
+void gru_status_reset(gru_status_t *status) {
+	free(status->message);
+	status->message = NULL;
+	status->code = GRU_SUCCESS;
 }
 
-void gru_status_success(gru_status_t *status)
-{
-    gru_status_set(status, GRU_SUCCESS, NULL);
+void gru_status_success(gru_status_t *status) {
+	gru_status_set(status, GRU_SUCCESS, NULL);
 }
 
-void gru_status_strerror(gru_status_t *status, gru_status_code_t code, int errnum)
-{
-    gru_status_reset(status);
+void gru_status_strerror(gru_status_t *status, gru_status_code_t code, int errnum) {
+	gru_status_reset(status);
 
 #if defined(_GNU_SOURCE)
 
-    char *message = (char *) calloc(1, GRU_MAX_ERROR_MESSAGE);
-    if (!message) {
-        fprintf(stderr, "Not enough memory to allocate for the error message");
+	char *message = (char *) calloc(1, GRU_MAX_ERROR_MESSAGE);
+	if (!message) {
+		fprintf(stderr, "Not enough memory to allocate for the error message");
 
-        return;
-    }
+		return;
+	}
 
-    char *tmpmsg = strerror_r(errnum, message, GRU_MAX_ERROR_MESSAGE);
-    gru_status_set(status, code, tmpmsg);
+	char *tmpmsg = strerror_r(errnum, message, GRU_MAX_ERROR_MESSAGE);
+	gru_status_set(status, code, tmpmsg);
 
-    free(message);
+	free(message);
 #else
-    char buff[GRU_MAX_ERROR_MESSAGE] = {0};
+	char buff[GRU_MAX_ERROR_MESSAGE] = {0};
 
-    strerror_r(errnum, buff, GRU_MAX_ERROR_MESSAGE);
-    gru_status_set(status, code, buff);
+	strerror_r(errnum, buff, GRU_MAX_ERROR_MESSAGE);
+	gru_status_set(status, code, buff);
 #endif
 
-    return;
+	return;
 }

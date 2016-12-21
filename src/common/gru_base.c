@@ -1,12 +1,12 @@
 /**
  Copyright 2016 Otavio Rodolfo Piske
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,21 +22,19 @@ const char *gru_base_app_home(const char *appname) {
 	const char *home = getenv("HOMEPATH");
 
 	if (asprintf(&filename, "%s/.%s", home, appname) == -1) {
-            fprintf(stderr, "Unable to allocate memory for the application home directory");
-            
-            return NULL;
-        }
+		fprintf(stderr, "Unable to allocate memory for the application home directory");
+
+		return NULL;
+	}
 #else
 	struct passwd *pw = getpwuid(getuid());
-        
 
 	if (asprintf(&filename, "%s/.%s", pw->pw_dir, appname) == -1) {
-            fprintf(stderr, "Unable to allocate memory for the application home directory");
-            
-            return NULL;
-        }
-        
-	
+		fprintf(stderr, "Unable to allocate memory for the application home directory");
+
+		return NULL;
+	}
+
 #endif
 	return filename;
 }

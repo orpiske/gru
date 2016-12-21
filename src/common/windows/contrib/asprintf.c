@@ -1,5 +1,6 @@
 /*
-Copyright (C) 2014 insane coder (http://insanecoding.blogspot.com/, http://asprintf.insanecoding.org/)
+Copyright (C) 2014 insane coder (http://insanecoding.blogspot.com/,
+http://asprintf.insanecoding.org/)
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -16,12 +17,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "asprintf.h"
 
-int asprintf(char **strp, const char *fmt, ...)
-{
-  int r;
-  va_list ap;
-  va_start(ap, fmt);
-  r = vasprintf(strp, fmt, ap);
-  va_end(ap);
-  return(r);
+int asprintf(char **strp, const char *fmt, ...) {
+	int r;
+	va_list ap;
+	va_start(ap, fmt);
+	r = vasprintf(strp, fmt, ap);
+	va_end(ap);
+	return (r);
 }

@@ -1,12 +1,12 @@
 /**
  Copyright 2016 Otavio Rodolfo Piske
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,191 +16,171 @@
 #include "gru_path.h"
 #include "common/gru_alloc.h"
 
-bool gru_path_exists(const char *filename, gru_status_t *status)
-{
-    int ret = 0;
-    struct stat info;
+bool gru_path_exists(const char *filename, gru_status_t *status) {
+	int ret = 0;
+	struct stat info;
 
-    ret = stat(filename, &info);
-    if (ret == 0) {
-        return true;
-    }
-    else {
-        if (errno == ENOENT) {
-            return false;
-        }
-        else {
-            if (status) {
-                gru_status_strerror(status, GRU_FAILURE, errno);
-            }
-        }
-    }
+	ret = stat(filename, &info);
+	if (ret == 0) {
+		return true;
+	} else {
+		if (errno == ENOENT) {
+			return false;
+		} else {
+			if (status) {
+				gru_status_strerror(status, GRU_FAILURE, errno);
+			}
+		}
+	}
 
-    return false;
+	return false;
 }
 
 bool gru_path_fexists(int fd, gru_status_t *status) {
-int ret = 0;
-    struct stat info;
+	int ret = 0;
+	struct stat info;
 
-    ret = fstat(fd, &info);
-    if (ret == 0) {
-        return true;
-    }
-    else {
-        if (errno == ENOENT) {
-            return false;
-        }
-        else {
-            if (status) {
-                gru_status_strerror(status, GRU_FAILURE, errno);
-            }
-        }
-    }
+	ret = fstat(fd, &info);
+	if (ret == 0) {
+		return true;
+	} else {
+		if (errno == ENOENT) {
+			return false;
+		} else {
+			if (status) {
+				gru_status_strerror(status, GRU_FAILURE, errno);
+			}
+		}
+	}
 
-    return false;
+	return false;
 }
 
-bool gru_path_can_read_write(const char *filename, gru_status_t *status)
-{
-    int ret = 0;
+bool gru_path_can_read_write(const char *filename, gru_status_t *status) {
+	int ret = 0;
 
+	ret = access(filename, R_OK | W_OK);
+	if (ret < 0) {
+		switch (errno) {
+			case ENOENT: {
+				gru_status_set(status, GRU_FAILURE, "No such file or directory %s: %s",
+					filename, strerror(errno));
 
-    ret = access(filename, R_OK | W_OK);
-    if (ret < 0) {
-        switch (errno) {
-        case ENOENT:
-        {
-            gru_status_set(status, GRU_FAILURE,
-                           "No such file or directory %s: %s",
-                           filename, strerror(errno));
+				return false;
+			}
+			case EACCES: {
+				gru_status_set(status, GRU_FAILURE,
+					"Access denied (no read/write permission) %s: %s", filename,
+					strerror(errno));
+				return false;
+			}
+			default: {
+				gru_status_strerror(status, GRU_FAILURE, errno);
+				return false;
+			}
+		}
+	}
 
-            return false;
-        }
-        case EACCES:
-        {
-            gru_status_set(status, GRU_FAILURE,
-                           "Access denied (no read/write permission) %s: %s",
-                           filename, strerror(errno));
-            return false;
-        }
-        default:
-        {
-            gru_status_strerror(status, GRU_FAILURE, errno);
-            return false;
-        }
-        }
-    }
-
-    return true;
+	return true;
 }
 
-bool gru_path_rename_cond(const char *filename, gru_path_cond_t cond,
-                          gru_status_t *status)
-{
+bool gru_path_rename_cond(
+	const char *filename, gru_path_cond_t cond, gru_status_t *status) {
 
-    // Return if the condition is already fulfilled
-    if (!cond(filename, status)) {
-        return true;
-    }
+	// Return if the condition is already fulfilled
+	if (!cond(filename, status)) {
+		return true;
+	}
 
-    if (!gru_path_can_read_write(filename, status)) {
-        return false;
-    }
+	if (!gru_path_can_read_write(filename, status)) {
+		return false;
+	}
 
-    int size = strlen(filename) + 16;
-    
-    char *new_file = gru_alloc(size, status);
-    gru_alloc_check(new_file, false);
+	int size = strlen(filename) + 16;
 
-    int i = 0;
-    do {
-        bzero(new_file, size);
-        snprintf(new_file, size, "%s.%03i", filename, i);
+	char *new_file = gru_alloc(size, status);
+	gru_alloc_check(new_file, false);
 
-        if (!cond(new_file, status)) {
-            int ret = 0;
+	int i = 0;
+	do {
+		bzero(new_file, size);
+		snprintf(new_file, size, "%s.%03i", filename, i);
 
-            ret = rename(filename, new_file);
-            if (ret != 0) {
-                gru_status_strerror(status, GRU_FAILURE, errno);
+		if (!cond(new_file, status)) {
+			int ret = 0;
 
-                free(new_file);
-                return false;
-            }
+			ret = rename(filename, new_file);
+			if (ret != 0) {
+				gru_status_strerror(status, GRU_FAILURE, errno);
 
-            break;
-        }
-        i++;
-    }
-    while (true);
+				free(new_file);
+				return false;
+			}
 
-    free(new_file);
-    return true;
+			break;
+		}
+		i++;
+	} while (true);
+
+	free(new_file);
+	return true;
 }
 
-bool gru_path_rename(const char *filename, gru_status_t *status)
-{
-    return gru_path_rename_cond(filename, gru_path_exists, status);
+bool gru_path_rename(const char *filename, gru_status_t *status) {
+	return gru_path_rename_cond(filename, gru_path_exists, status);
 }
 
-char *gru_path_format(const char *dir, const char *name, gru_status_t *status)
-{
-    size_t size = strlen(dir) + APPEND_SIZE_REMAP;
+char *gru_path_format(const char *dir, const char *name, gru_status_t *status) {
+	size_t size = strlen(dir) + APPEND_SIZE_REMAP;
 
-    char *fullpath = gru_alloc(size, status);
-    gru_alloc_check(fullpath, NULL);
+	char *fullpath = gru_alloc(size, status);
+	gru_alloc_check(fullpath, NULL);
 
-    snprintf(fullpath, size - 1, "%s/%s", dir, name);
+	snprintf(fullpath, size - 1, "%s/%s", dir, name);
 
-    return fullpath;
+	return fullpath;
 }
 
-bool gru_path_mkdir(const char *path, gru_status_t *status)
-{
-    int ret = 0;
+bool gru_path_mkdir(const char *path, gru_status_t *status) {
+	int ret = 0;
 
-    ret = mkdir(path, 0774);
-    if (ret != 0) {
+	ret = mkdir(path, 0774);
+	if (ret != 0) {
 
-        gru_status_strerror(status, GRU_FAILURE, errno);
-        return false;
-    }
+		gru_status_strerror(status, GRU_FAILURE, errno);
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
+bool gru_path_mkdirs(const char *path, gru_status_t *status) {
+	const char *ptr = path;
+	int count = 0;
+	int tmp_size = strlen(path) + 1;
+	char *tmp = gru_alloc(tmp_size, status);
+	gru_alloc_check(tmp, false);
 
-bool gru_path_mkdirs(const char *path, gru_status_t *status)
-{
-    const char *ptr = path;
-    int count = 0;
-    int tmp_size = strlen(path) + 1;
-    char *tmp = gru_alloc(tmp_size, status);
-    gru_alloc_check(tmp, false);
+	do {
+		const char *last = ptr;
 
-    do {
-        const char *last = ptr;
+		ptr++;
+		ptr = strstr(ptr, FILE_SEPARATOR);
+		count += ptr - last;
 
-        ptr++;
-        ptr = strstr(ptr, FILE_SEPARATOR);
-        count += ptr - last;
+		snprintf(tmp, tmp_size, "%.*s", count, path);
 
-        snprintf(tmp, tmp_size, "%.*s", count, path);
+		if (gru_path_exists(tmp, status)) {
+			continue;
+		}
 
-        if (gru_path_exists(tmp, status)) {
-            continue;
-        }
+		if (!gru_path_mkdir(tmp, status)) {
+			free(tmp);
 
-        if (!gru_path_mkdir(tmp, status)) {
-            free(tmp);
+			return false;
+		}
+	} while (ptr != NULL);
 
-            return false;
-        }
-    }
-    while (ptr != NULL);
-
-    free(tmp);
-    return true;
+	free(tmp);
+	return true;
 }
-

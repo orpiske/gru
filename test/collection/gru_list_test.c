@@ -14,14 +14,13 @@
  limitations under the License.
  */
 
+#include <inttypes.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <inttypes.h>
 
-#include "collection/gru_node.h"
 #include "collection/gru_list.h"
-
+#include "collection/gru_node.h"
 
 void check_val(const void *nodedata, void *data) {
 	bool *exist = (bool *) data;
@@ -31,7 +30,6 @@ void check_val(const void *nodedata, void *data) {
 		*exist = true;
 	}
 }
-
 
 int main(int argc, char **argv) {
 	gru_status_t status = {0};
@@ -72,8 +70,8 @@ int main(int argc, char **argv) {
 	uint32_t value = gru_node_get_data(uint32_t, node64);
 
 	if (value != 64) {
-		printf("The value of the node does not match the expected: %i != %i\n",
-				value, 64);
+		printf(
+			"The value of the node does not match the expected: %i != %i\n", value, 64);
 
 		goto e_exit;
 	}
@@ -111,7 +109,6 @@ int main(int argc, char **argv) {
 		goto e_exit;
 	}
 
-
 	gru_list_destroy(&list);
 	if (list != NULL) {
 		printf("List incorrectly destroyed\n");
@@ -119,15 +116,13 @@ int main(int argc, char **argv) {
 		goto e_exit;
 	}
 
-
 	return EXIT_SUCCESS;
 
-	e_exit:
+e_exit:
 	gru_list_destroy(&list);
 	if (list != NULL) {
 		printf("List incorrectly destroyed\n");
 	}
 
 	return EXIT_FAILURE;
-
 }

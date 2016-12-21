@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   gru_alloc.h
  * Author: opiske
  *
@@ -20,17 +20,18 @@ extern "C" {
 
 #include "gru_base.h"
 #include "gru_status.h"
-    
+
 gru_export void *gru_alloc(size_t size, gru_status_t *status);
 gru_export void gru_dealloc(void **obj);
 gru_export void gru_dealloc_string(char **obj);
 gru_export void gru_dealloc_const_string(const char **obj);
 
-#define gru_alloc_check(obj, ret) if (obj == NULL) return ret;
+#define gru_alloc_check(obj, ret)                                                        \
+	if (obj == NULL)                                                                     \
+		return ret;
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* GRU_ALLOC_H */
-
