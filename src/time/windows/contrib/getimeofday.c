@@ -15,22 +15,22 @@ limitations under the License.
 */
 #include "getimeofday.h"
 
-static const uint64_t EPOCH = ((uint64_t)116444736000000000ULL);
+static const uint64_t EPOCH = ((uint64_t) 116444736000000000ULL);
 
 /**
- * Modified version from multiple sources found on internet. See the header for 
+ * Modified version from multiple sources found on internet. See the header for
  * references
  */
 int gettimeofday(struct timeval *tp, struct timezone *tzp) {
-	SYSTEMTIME  system_time;
-	FILETIME    file_time;
-	uint64_t    time;
+	SYSTEMTIME system_time;
+	FILETIME file_time;
+	uint64_t time;
 
 	GetSystemTime(&system_time);
 	SystemTimeToFileTime(&system_time, &file_time);
 
-	time = ((uint64_t)file_time.dwLowDateTime);
-	time += ((uint64_t)file_time.dwHighDateTime) << 32;
+	time = ((uint64_t) file_time.dwLowDateTime);
+	time += ((uint64_t) file_time.dwHighDateTime) << 32;
 
 	tp->tv_sec = (long) ((time - EPOCH) / 10000000L);
 	tp->tv_usec = (long) (system_time.wMilliseconds * 1000);

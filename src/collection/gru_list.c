@@ -1,12 +1,12 @@
 /**
  Copyright 2016 Otavio Rodolfo Piske
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,26 +15,23 @@
  */
 #include "gru_list.h"
 
-
 gru_list_t *gru_list_new(gru_status_t *status) {
 	gru_list_t *ret = (gru_list_t *) malloc(sizeof(gru_list_t));
 
 	if (!ret) {
-            if (status) { 
-		gru_status_set(status, GRU_FAILURE, 
-                         "Not enough memory to allocate for a new list");
-            }
-            
-            return NULL;
-	}
-	else {
+		if (status) {
+			gru_status_set(
+				status, GRU_FAILURE, "Not enough memory to allocate for a new list");
+		}
+
+		return NULL;
+	} else {
 		ret->root = NULL;
 		ret->current = NULL;
 	}
 
 	return ret;
 }
-
 
 void gru_list_destroy(gru_list_t **list) {
 	if ((*list) == NULL) {
@@ -62,7 +59,6 @@ inline static bool can_continue(uint32_t count, uint32_t position) {
 	return false;
 }
 
-
 static gru_node_t *go_to(const gru_list_t *list, uint32_t position, uint32_t *count) {
 	gru_node_t *node = list->root;
 
@@ -75,7 +71,6 @@ static gru_node_t *go_to(const gru_list_t *list, uint32_t position, uint32_t *co
 	return node;
 }
 
-
 static gru_node_t *go_to_end(gru_list_t *list) {
 	gru_node_t *node = list->root;
 
@@ -85,8 +80,6 @@ static gru_node_t *go_to_end(gru_list_t *list) {
 
 	return node;
 }
-
-
 
 uint32_t gru_list_count(const gru_list_t *list) {
 	uint32_t count = 0;
@@ -103,29 +96,26 @@ uint32_t gru_list_count(const gru_list_t *list) {
 	return count;
 }
 
-
 const gru_node_t *gru_list_append(gru_list_t *list, const void *data) {
 	gru_node_t *last = go_to_end(list);
 	gru_node_t *node = NULL;
 
 	node = gru_node_new(data);
-        
-        if (!node) {
-            return NULL;
-        }
+
+	if (!node) {
+		return NULL;
+	}
 
 	if (!last) {
 		list->root = node;
 		list->current = node;
-	}
-	else {
+	} else {
 		gru_node_set_next(last, node);
 		gru_node_set_previous(node, last);
 	}
 
 	return node;
 }
-
 
 gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t position) {
 	gru_node_t *current = NULL;
@@ -141,8 +131,7 @@ gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t positio
 	if (current == NULL) {
 		list->root = node;
 		list->current = node;
-	}
-	else {
+	} else {
 		gru_node_set_next(current->previous, node);
 		gru_node_set_previous(node, current->previous);
 
@@ -152,7 +141,6 @@ gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t positio
 
 	return node;
 }
-
 
 gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position) {
 	gru_node_t *node = NULL;
@@ -173,10 +161,8 @@ gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position) {
 	return node;
 }
 
-
-bool gru_list_remove_item(gru_list_t *list, compare_function_t comparable,
-		const void *other)
-{
+bool gru_list_remove_item(
+	gru_list_t *list, compare_function_t comparable, const void *other) {
 	uint32_t i = 0;
 	gru_node_t *node = NULL;
 
@@ -218,11 +204,8 @@ const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position) {
 	return node;
 }
 
-
-
 void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
-		compare_function_t comparable, const void *other, void *result)
-{
+	compare_function_t comparable, const void *other, void *result) {
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {
@@ -241,10 +224,7 @@ void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
 	}
 }
 
-
-
-void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *data)
-{
+void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *data) {
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {
@@ -260,36 +240,31 @@ void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *d
 	}
 }
 
+void gru_list_for_each_ex(
+	const gru_list_t *list, handle_function_info_t handle, void *data) {
+	gru_node_t *node = NULL;
 
-void gru_list_for_each_ex(const gru_list_t *list, handle_function_info_t handle, 
-        void *data) 
-{
-    gru_node_t *node = NULL;
+	if (list == NULL) {
+		return;
+	}
 
-    if (list == NULL) {
-        return;
-    }
+	node = list->root;
 
-    node = list->root;
+	uint32_t pos = 0;
+	while (node) {
+		gru_node_info_t info = {
+			.parent_pos = 0, .self_pos = pos,
+		};
 
-    uint32_t pos = 0;
-    while (node) {
-        gru_node_info_t info = { 
-            .parent_pos = 0,
-            .self_pos = pos,
-        };
-        
-        handle(node->data, info, data);
+		handle(node->data, info, data);
 
-        node = node->next;
-        pos++;
-    }
+		node = node->next;
+		pos++;
+	}
 }
 
-
-const void *gru_list_get_item(const gru_list_t *list, compare_function_t comparable, 
-                          const void *other)
-{
+const void *gru_list_get_item(
+	const gru_list_t *list, compare_function_t comparable, const void *other) {
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {

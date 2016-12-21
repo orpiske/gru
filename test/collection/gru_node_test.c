@@ -1,12 +1,12 @@
 /**
  Copyright 2016 Otavio Rodolfo Piske
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,10 +14,10 @@
  limitations under the License.
  */
 
+#include <inttypes.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <inttypes.h>
 
 #include "collection/gru_node.h"
 
@@ -44,7 +44,6 @@ static bool test_set_next() {
 				printf("Node incorrectly destroyed\n");
 
 				return false;
-
 			}
 
 			return true;
@@ -83,7 +82,6 @@ static bool test_set_previous() {
 				printf("Node incorrectly destroyed\n");
 
 				return false;
-
 			}
 
 			return true;
@@ -100,9 +98,9 @@ static bool test_set_previous() {
 }
 
 /*
- * 
+ *
  */
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
 	if (test_set_next()) {
 		if (test_set_previous()) {
 			return EXIT_SUCCESS;
@@ -111,4 +109,3 @@ int main(int argc, char** argv) {
 
 	return EXIT_FAILURE;
 }
-

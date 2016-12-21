@@ -14,17 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #if !defined(_WIN32) && !defined(_WIN64)
-#define likely(x)  __builtin_expect((x),1)
-#define unlikely(x)  __builtin_expect((x),0)
+#define likely(x) __builtin_expect((x), 1)
+#define unlikely(x) __builtin_expect((x), 0)
 #define gru_export
 #define gru_restrict restrict
 #else
 #define likely(x) (x)
 #define unlikely(x) (x)
-#define bzero(b,len) (memset((b), '\0', (len)), (void) 0)
-#define strcasecmp _stricmp 
+#define bzero(b, len) (memset((b), '\0', (len)), (void) 0)
+#define strcasecmp _stricmp
 #define strncasecmp _strnicmp
-#define strerror_r(errno,buf,len) strerror_s(buf,len,errno)
-#define gru_export __declspec( dllexport )
+#define strerror_r(errno, buf, len) strerror_s(buf, len, errno)
+#define gru_export __declspec(dllexport)
 #define gru_restrict
 #endif

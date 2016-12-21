@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <windows.h>
 #include <stdint.h>
+#include <windows.h>
 
 /**
- * This is a getimeofday implementation modified from 
+ * This is a getimeofday implementation modified from
  * http://stackoverflow.com/questions/10905892/equivalent-of-gettimeday-for-windows
  */
 
