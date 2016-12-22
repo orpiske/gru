@@ -30,6 +30,9 @@
 extern "C" {
 #endif
 
+
+#ifndef HAVE_STRLCPY
+
 /**
  * Poor man's implementation of strlcpy (works just like strncpy, but copies size - 1)
  * @param dst destination buffer
@@ -37,10 +40,17 @@ extern "C" {
  * @param size amount of bytes to copy
  * @return The amount of bytes copied
  */
-
-#ifndef HAVE_STRLCPY
-
 size_t strlcpy(char *gru_restrict dst, const char *gru_restrict src, size_t size);
+
+
+/**
+ * Poor man's implementation of strlcat
+ * @param dst destination buffer
+ * @param src source buffer
+ * @param size amount of bytes to copy
+ * @return The total length of the string they tried to create
+ */
+size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size);
 
 #endif // HAVE_STRLCPY
 
