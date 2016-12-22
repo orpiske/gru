@@ -26,13 +26,13 @@ gru_duration_t gru_duration_from_seconds(uint64_t seconds) {
 	return duration;
 }
 
-gru_duration_t gru_duration_from_minutes(uint64_t seconds) {
+gru_duration_t gru_duration_from_minutes(uint64_t minutes) {
 	gru_duration_t duration = {0};
 
 	gettimeofday(&duration.start, NULL);
 	duration.end = duration.start;
 
-	gru_time_add_minutes(&duration.end, seconds);
+	gru_time_add_minutes(&duration.end, minutes);
 
 	return duration;
 }
