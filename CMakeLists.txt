@@ -126,6 +126,8 @@ if (UNIX)
 	DefineIfSet(HAVE_STRLCPY)
 endif (UNIX)
 
+link_libraries(uriparser)
+
 include_directories(src)
 add_subdirectory(src/ objs)
 

@@ -30,8 +30,8 @@ add_library(
 	config/gru_config.c
 	time/gru_time_utils.c
 	time/gru_duration.c
+	network/gru_uri.c
 )
-
 
 install(
 	TARGETS gru
@@ -81,6 +81,12 @@ install(
 
 install(
 	DIRECTORY time
+	DESTINATION include/${PROJECT_NAME}
+	FILES_MATCHING PATTERN "*.h"
+)
+
+install(
+	DIRECTORY network
 	DESTINATION include/${PROJECT_NAME}
 	FILES_MATCHING PATTERN "*.h"
 )

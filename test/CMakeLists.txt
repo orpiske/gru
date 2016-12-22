@@ -1,6 +1,10 @@
 project(gru-tests)
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
+if (WIN32)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
+else (WIN32)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/tests/bin)
+endif (WIN32)
 
 add_executable(
 	gru_node_test
@@ -67,4 +71,51 @@ add_test(
 	NAME gru-config-read
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
 	COMMAND gru_config_test "read"
+)
+
+
+add_executable(gru_uri_test
+	network/gru_uri_test.c
+)
+
+target_link_libraries(
+	gru_uri_test
+	gru
+)
+
+add_test(
+	NAME gru-uri-test-1
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_uri_test amqp://localhost:61613/queue amqp localhost 61613 /queue
+)
+
+add_test(
+	NAME gru-uri-test-2
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_uri_test http://localhost/ http localhost "" /
+)
+
+add_test(
+	NAME gru-uri-test-3
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_uri_test http://localhost/path http localhost "" /path
+)
+
+
+add_test(
+	NAME gru-uri-test-4
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_uri_test http://localhost/path/subpath http localhost "" /path/subpath
+)
+
+add_test(
+	NAME gru-uri-test-5
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_uri_test https://10.0.0.1/path/subpath https 10.0.0.1 "" /path/subpath
+)
+
+add_test(
+	NAME gru-uri-test-6
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_uri_test https://10.0.0.1 https 10.0.0.1 "" ""
 )
