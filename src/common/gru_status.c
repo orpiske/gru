@@ -15,6 +15,15 @@
  */
 #include "gru_status.h"
 
+gru_export inline gru_status_t gru_status_new() {
+	gru_status_t ret = {
+		.code = GRU_SUCCESS,
+		.message = NULL,
+	};
+
+	return ret;
+}
+
 void gru_status_set(
 	gru_status_t *status, gru_status_code_t code, const char *message, ...) {
 	assert(status);
