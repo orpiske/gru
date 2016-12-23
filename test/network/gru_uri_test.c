@@ -19,7 +19,7 @@
 // amqp://localhost:61613/queue amq localhost 61613 queue
 int main(int argc, char **argv) {
 	gru_uri_t uri = {0};
-	gru_status_t status = {0};
+	gru_status_t status = gru_status_new();
 
 	if (argc < 6) {
 		fprintf(stderr, "Missing arguments\n");

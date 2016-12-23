@@ -64,7 +64,7 @@ void read_options(FILE *file, void *data) {
 
 int test_write_init(int argc, char **argv) {
 	test_options_t options = {0};
-	gru_status_t status = {0};
+	gru_status_t status = gru_status_new();
 
 	gru_payload_t *payload = gru_payload_init(
 		initialize_options, save_options, read_options, &options, &status);
@@ -102,7 +102,7 @@ int test_write_init(int argc, char **argv) {
 
 int test_read_init(int argc, char **argv) {
 	test_options_t options = {0};
-	gru_status_t status = {0};
+	gru_status_t status = gru_status_new();
 
 	gru_payload_t *payload = gru_payload_init(
 		initialize_options, save_options, read_options, &options, &status);

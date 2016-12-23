@@ -32,7 +32,7 @@ void check_val(const void *nodedata, void *data) {
 }
 
 int main(int argc, char **argv) {
-	gru_status_t status = {0};
+	gru_status_t status = gru_status_new();
 	uint32_t list_size = 256;
 
 	gru_list_t *list = gru_list_new(&status);
