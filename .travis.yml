@@ -23,8 +23,8 @@ script:
 addons:
   apt:
     packages:
-      - uriparser
-      - uriparser-dev
+      - liburiparser
+      - liburiparser-dev
   coverity_scan:
     project:
       name: "orpiske/gru"
