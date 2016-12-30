@@ -21,6 +21,7 @@ Runtime/Compilation:
 * cmake
 * gcc or clang
 * Microsoft Compiler (ie.: Visual Studio 2015)
+* [uriparser](http://uriparser.sourceforge.net/)
 
 Building
 ----
