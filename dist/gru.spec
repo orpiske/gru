@@ -12,6 +12,7 @@ URL:                https://github.com/orpiske/gru
 BuildRequires:      cmake
 BuildRequires:      make
 BuildRequires:      gcc
+Requires:           uriparser
 
 
 %description
@@ -21,6 +22,7 @@ This library implements reusable C/C++ utilities, algorithms and features.
 %package devel
 Summary:            Generic Reusable Utilities (GRU) development kit
 Requires:           gcc
+Requires:           uriparser-devel
 Group:              Development/Libraries
 
 %description devel
