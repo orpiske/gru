@@ -12,6 +12,7 @@ URL:                https://github.com/orpiske/gru
 BuildRequires:      cmake
 BuildRequires:      make
 BuildRequires:      gcc
+BuildRequires:      uriparser-devel
 Requires:           uriparser
 
 
