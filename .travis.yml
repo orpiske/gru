@@ -21,6 +21,10 @@ script:
   - make all
   - cd ..
 addons:
+  apt:
+    packages:
+      - uriparser
+      - uriparser-dev
   coverity_scan:
     project:
       name: "orpiske/gru"
