@@ -16,6 +16,7 @@
 #ifndef GRU_URI_H
 #define GRU_URI_H
 
+#include <inttypes.h>
 #include <stdbool.h>
 
 #include <common/gru_status.h>
@@ -35,6 +36,7 @@ typedef struct gru_uri_t_ {
 } gru_uri_t;
 
 gru_uri_t gru_uri_parse(const char * gru_restrict uri, gru_status_t * gru_restrict status);
+char *gru_uri_simple_format(gru_uri_t * gru_restrict uri, gru_status_t * gru_restrict status);
 void gru_uri_cleanup(gru_uri_t *uri);
 
 

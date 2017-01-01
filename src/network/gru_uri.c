@@ -128,6 +128,42 @@ gru_uri_t gru_uri_parse(const char *url, gru_status_t *status) {
 	return ret;
 }
 
+/*
+ char *scheme;
+    char *host;
+    uint16_t port;
+    char *path;
+ */
+
+char *gru_uri_simple_format(gru_uri_t *uri, gru_status_t *status) {
+    char *ret = {0};
+    int rc = 0;
+    
+    if (uri->port != 0) {
+        if (uri->path) {
+            rc = asprintf(&ret, "%s://%s:%" PRIu16 "%s", uri->scheme, uri->host, 
+                    uri->port, uri->path);
+        } else {
+            rc = asprintf(&ret, "%s://%s:%" PRIu16 "", uri->scheme, uri->host, uri->port);
+        }
+    }
+    else {
+        if (uri->path) {
+            rc = asprintf(&ret, "%s://%s%s", uri->scheme, uri->host, uri->path);
+        } else {
+            rc = asprintf(&ret, "%s://%s", uri->scheme, uri->host);
+        }
+    }
+    
+    if (rc == -1) {
+        gru_status_set(status, GRU_FAILURE, "Not enough memory to format the URI");
+        
+        return NULL;
+    }
+    
+    return ret;
+}
+
 
 void gru_uri_cleanup(gru_uri_t *uri) {
 	gru_dealloc_string(&uri->host);

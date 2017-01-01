@@ -119,3 +119,19 @@ add_test(
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
 	COMMAND gru_uri_test https://10.0.0.1 https 10.0.0.1 "" ""
 )
+
+
+add_executable(gru_uri_format_test
+	network/gru_uri_format_test.c
+)
+
+target_link_libraries(
+	gru_uri_format_test
+	gru
+)
+
+add_test(
+	NAME gru-uri-format-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_uri_format_test
+)
