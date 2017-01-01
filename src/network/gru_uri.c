@@ -174,6 +174,22 @@ bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme) {
     return true;
 }
 
+bool gru_uri_set_path(gru_uri_t *uri, const char *path) {
+    gru_dealloc_string(&uri->path);
+    
+    if (path) { 
+        if (asprintf(&uri->path, "%s", path) == -1) {
+            return false;
+        }
+    }
+    else {
+        uri->path = NULL;
+    }
+    
+    return true;
+
+}
+
 
 void gru_uri_cleanup(gru_uri_t *uri) {
 	gru_dealloc_string(&uri->host);
