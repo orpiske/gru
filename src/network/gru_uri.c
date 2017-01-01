@@ -164,6 +164,16 @@ char *gru_uri_simple_format(gru_uri_t *uri, gru_status_t *status) {
     return ret;
 }
 
+bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme) {
+    gru_dealloc_string(&uri->scheme);
+    
+    if (asprintf(&uri->scheme, "%s", scheme) == -1) {
+        return false;
+    }
+    
+    return true;
+}
+
 
 void gru_uri_cleanup(gru_uri_t *uri) {
 	gru_dealloc_string(&uri->host);

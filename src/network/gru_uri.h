@@ -37,6 +37,9 @@ typedef struct gru_uri_t_ {
 
 gru_uri_t gru_uri_parse(const char * gru_restrict uri, gru_status_t * gru_restrict status);
 char *gru_uri_simple_format(gru_uri_t * gru_restrict uri, gru_status_t * gru_restrict status);
+
+bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme);
+
 void gru_uri_cleanup(gru_uri_t *uri);
 
 
