@@ -14,9 +14,18 @@
  limitations under the License.
  */
 #include "gru_base.h"
+#include "gru_alloc.h"
+
+static const char *filename;
+
+static void gru_base_app_home_release() {
+	gru_dealloc(&filename);
+}
 
 const char *gru_base_app_home(const char *appname) {
-	char *filename = NULL;
+	if (filename) {
+		return filename;
+	}
 
 #if defined(_WIN32) || defined(_WIN64)
 	const char *home = getenv("HOMEPATH");
@@ -36,5 +45,7 @@ const char *gru_base_app_home(const char *appname) {
 	}
 
 #endif
+
+	atexit(gru_base_app_home_release);
 	return filename;
 }
