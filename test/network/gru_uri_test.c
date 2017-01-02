@@ -15,7 +15,6 @@
  */
 #include <network/gru_uri.h>
 
-
 // amqp://localhost:61613/queue amq localhost 61613 queue
 int main(int argc, char **argv) {
 	gru_uri_t uri = {0};
@@ -36,30 +35,28 @@ int main(int argc, char **argv) {
 
 	if (strcmp(uri.scheme, argv[2]) != 0) {
 		fprintf(stderr, "Expected scheme %s does not match returned one %s", argv[2],
-			 uri.scheme);
+			uri.scheme);
 
 		goto err_exit;
 	}
 
 	if (strcmp(uri.host, argv[3]) != 0) {
-		fprintf(stderr, "Expected host %s does not match returned one %s", argv[3],
-			 uri.host);
+		fprintf(
+			stderr, "Expected host %s does not match returned one %s", argv[3], uri.host);
 
 		goto err_exit;
 	}
-
 
 	if (uri.port != atoi(argv[4])) {
-		fprintf(stderr, "Expected port %s does not match returned one %d", argv[2],
-			 uri.port);
+		fprintf(
+			stderr, "Expected port %s does not match returned one %d", argv[2], uri.port);
 
 		goto err_exit;
 	}
 
-
 	if (strcmp(uri.path, argv[5]) != 0) {
-		fprintf(stderr, "Expected path %s does not match returned one %s", argv[5],
-			 uri.path);
+		fprintf(
+			stderr, "Expected path %s does not match returned one %s", argv[5], uri.path);
 
 		goto err_exit;
 	}
@@ -67,7 +64,7 @@ int main(int argc, char **argv) {
 	gru_uri_cleanup(&uri);
 	return EXIT_SUCCESS;
 
-	err_exit:
+err_exit:
 	gru_uri_cleanup(&uri);
 	return EXIT_FAILURE;
 }
