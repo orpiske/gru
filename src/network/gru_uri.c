@@ -49,7 +49,7 @@ static uint16_t gru_uri_get_port(UriTextRangeA *range, gru_status_t *status) {
 		return 0;
 	}
 
-	ret = atoi(port);
+	ret = (uint16_t) atoi(port);
 	gru_dealloc_const_string(&port);
 
 	return ret;

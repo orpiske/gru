@@ -96,7 +96,7 @@ bool gru_path_rename_cond(
 		return false;
 	}
 
-	int size = strlen(filename) + 16;
+	size_t size = strlen(filename) + 16;
 
 	char *new_file = gru_alloc(size, status);
 	gru_alloc_check(new_file, false);
@@ -157,7 +157,7 @@ bool gru_path_mkdir(const char *path, gru_status_t *status) {
 bool gru_path_mkdirs(const char *path, gru_status_t *status) {
 	const char *ptr = path;
 	int count = 0;
-	int tmp_size = strlen(path) + 1;
+	size_t tmp_size = strlen(path) + 1;
 	char *tmp = gru_alloc(tmp_size, status);
 	gru_alloc_check(tmp, false);
 
@@ -166,7 +166,7 @@ bool gru_path_mkdirs(const char *path, gru_status_t *status) {
 
 		ptr++;
 		ptr = strstr(ptr, FILE_SEPARATOR);
-		count += ptr - last;
+		count += (int) (ptr - last);
 
 		snprintf(tmp, tmp_size, "%.*s", count, path);
 

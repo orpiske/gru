@@ -118,9 +118,15 @@ size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status) {
 	fseek(file, 0L, SEEK_END);
 
 	long size = ftell(file);
+	if (size == -1) {
+		gru_status_strerror(status, GRU_FAILURE, errno);
+
+		return 0;
+	}
+
 	rewind(file);
 
-	char *ret = gru_alloc(size + 1, status);
+	char *ret = gru_alloc((size_t) size + 1, status);
 	gru_alloc_check(ret, 0);
 
 	long cur = 0;
@@ -128,7 +134,7 @@ size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status) {
 		int c = fgetc(file);
 
 		if (c != EOF && cur <= size) {
-			ret[cur] = c;
+			ret[cur] = (char) c;
 			cur++;
 		} else {
 			break;
@@ -143,5 +149,5 @@ size_t gru_io_read_text_into(char **dest, FILE *file, gru_status_t *status) {
 	}
 
 	*dest = ret;
-	return size;
+	return (size_t) size;
 }
