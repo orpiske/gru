@@ -30,7 +30,6 @@
 extern "C" {
 #endif
 
-
 #ifndef HAVE_STRLCPY
 
 /**
@@ -41,7 +40,6 @@ extern "C" {
  * @return The amount of bytes copied
  */
 size_t strlcpy(char *gru_restrict dst, const char *gru_restrict src, size_t size);
-
 
 /**
  * Poor man's implementation of strlcat

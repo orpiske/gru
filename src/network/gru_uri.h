@@ -29,25 +29,23 @@ extern "C" {
 #endif
 
 typedef struct gru_uri_t_ {
-    char *scheme;
-    char *host;
-    uint16_t port;
-    char *path;
+	char *scheme;
+	char *host;
+	uint16_t port;
+	char *path;
 } gru_uri_t;
 
-gru_uri_t gru_uri_parse(const char * gru_restrict uri, gru_status_t * gru_restrict status);
-char *gru_uri_simple_format(gru_uri_t * gru_restrict uri, gru_status_t * gru_restrict status);
+gru_uri_t gru_uri_parse(const char *gru_restrict uri, gru_status_t *gru_restrict status);
+char *gru_uri_simple_format(
+	gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
 
 bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme);
 bool gru_uri_set_path(gru_uri_t *uri, const char *path);
 
 void gru_uri_cleanup(gru_uri_t *uri);
 
-
-
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* GRU_URI_H */
-

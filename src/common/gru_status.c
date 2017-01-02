@@ -17,8 +17,7 @@
 
 gru_export inline gru_status_t gru_status_new() {
 	gru_status_t ret = {
-		.code = GRU_SUCCESS,
-		.message = NULL,
+		.code = GRU_SUCCESS, .message = NULL,
 	};
 
 	return ret;

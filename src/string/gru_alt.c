@@ -34,7 +34,6 @@ size_t strlcpy(char *dst, const char *src, size_t len) {
 	return size;
 }
 
-
 size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size) {
 	size_t src_len = strlen(src);
 	size_t dst_len = strlen(dst);
@@ -48,6 +47,5 @@ size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size
 
 	return dst_len + src_len;
 }
-
 
 #endif

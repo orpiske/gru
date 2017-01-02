@@ -48,7 +48,6 @@ typedef struct gru_status_t_ {
 	char *message;
 } gru_status_t;
 
-
 /**
  * Create a new status object
  * @return a new status object
