@@ -44,11 +44,11 @@ if (CMAKE_COMPILER_IS_GNUCXX)
 		"Flags used by the compiler during all build types." FORCE
 	)
 
-	set(CMAKE_C_FLAGS_DEBUG "-fdiagnostics-color=auto -g"  CACHE STRING
+	set(CMAKE_C_FLAGS_DEBUG "-fdiagnostics-color=auto -g ${CMAKE_USER_C_FLAGS}"  CACHE STRING
 		"Flags used by the compiler during debug build." FORCE
 	)
 
-	set(CMAKE_C_FLAGS_RELEASE "-O2 -fomit-frame-pointer -D_FORTIFY_SOURCE=1" CACHE STRING
+	set(CMAKE_C_FLAGS_RELEASE "-O2 -fomit-frame-pointer -D_FORTIFY_SOURCE=1 ${CMAKE_USER_C_FLAGS}" CACHE STRING
 		"Flags used by the compiler during release build." FORCE
 	)
 endif (CMAKE_COMPILER_IS_GNUCXX)
