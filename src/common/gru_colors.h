@@ -48,6 +48,8 @@
 #define BG_WHITE "\x1B[02;47m"
 
 #define RESET "\x1B[00m"
+
+#define CLEAR_LINE "\x1B[2K\r"
 #define CLEAR_SCREEN "\e[1;1H\e[2J"
 
 #endif // GRU_COLORS_H
