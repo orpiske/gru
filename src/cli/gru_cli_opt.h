@@ -13,13 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/**
- * File:   gru_cli_opt.h
- * Author: Otavio Piske <angusyoung@gmail.com>
- *
- * Created on January 4, 2017, 8:33 AM
- */
 #include <stdio.h>
 
 #include "common/gru_colors.h"
@@ -46,6 +39,22 @@ gru_export void gru_cli_option_help(const char *long_opt, const char *short_opt,
  * @param program_name Program name
  */
 gru_export void gru_cli_program_usage(const char *appname, const char *program_name);
+
+
+/**
+ * Prints program description for composed programs
+ * @param appname Application name
+ * @param description Description
+ */
+gru_export void gru_cli_program_description(const char *program,
+                                            const char *description);
+
+
+/**
+ * Prints program basic usage
+ * @param appname Application name
+ */
+gru_export void gru_cli_general_usage(const char *appname);
 
 #ifdef __cplusplus
 }

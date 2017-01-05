@@ -24,3 +24,14 @@ void gru_cli_program_usage(const char *appname, const char *program_name) {
 	printf("%s%sUsage:%s\n%s %s <options>\n\nValid options:\n\n", RESET, LIGHT_WHITE,
 		RESET, appname, program_name);
 }
+
+
+void gru_cli_program_description(const char *program, const char *description) {
+	printf("\t%s%s%-15s%s\t%s\n", RESET, LIGHT_WHITE, program, RESET, description);
+}
+
+
+void gru_cli_general_usage(const char *appname) {
+	printf("%s%sUsage:%s\n%s <program> <options>\n\nValid programs:\n\n", RESET,
+		LIGHT_WHITE, appname, RESET);
+}
