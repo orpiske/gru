@@ -127,7 +127,7 @@ if (UNIX)
 endif (UNIX)
 
 if (WIN32)
-	add_subdirectory(deps/uriparser objs)
+	add_subdirectory(deps/uriparser)
 	include_directories(${CMAKE_BINARY_DIR}/target/include/)
 endif (WIN32)
 
