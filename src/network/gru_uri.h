@@ -35,14 +35,14 @@ typedef struct gru_uri_t_ {
 	char *path;
 } gru_uri_t;
 
-gru_uri_t gru_uri_parse(const char *gru_restrict uri, gru_status_t *gru_restrict status);
-char *gru_uri_simple_format(
+gru_export gru_uri_t gru_uri_parse(const char *gru_restrict uri, gru_status_t *gru_restrict status);
+gru_export char *gru_uri_simple_format(
 	gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
 
-bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme);
-bool gru_uri_set_path(gru_uri_t *uri, const char *path);
+gru_export bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme);
+gru_export bool gru_uri_set_path(gru_uri_t *uri, const char *path);
 
-void gru_uri_cleanup(gru_uri_t *uri);
+gru_export void gru_uri_cleanup(gru_uri_t *uri);
 
 #ifdef __cplusplus
 }
