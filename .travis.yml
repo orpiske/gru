@@ -23,7 +23,6 @@ script:
 addons:
   apt:
     packages:
-      - liburiparser
       - liburiparser-dev
   coverity_scan:
     project:
