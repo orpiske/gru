@@ -19,7 +19,7 @@ set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/lib)
 include_directories(${CMAKE_BINARY_DIR}/uriparser/include ${CMAKE_BINARY_DIR}/uriparser/src)
 
 add_library(
-	uriparser SHARED
+	uriparser STATIC
 	${CMAKE_BINARY_DIR}/uriparser/src/UriCommon.c
 	${CMAKE_BINARY_DIR}/uriparser/src/UriCompare.c
 	${CMAKE_BINARY_DIR}/uriparser/src/UriEscape.c
