@@ -28,9 +28,10 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	endif(EXISTS "/etc/ubuntu-release")
 else (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	message(STATUS "Compiling for " ${CMAKE_SYSTEM_NAME} "")
+	set(CPP_LIBRARY_DIR "lib")
+
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-		set(CMAKE_MACOSX_RPATH TRUE)
-		set(CPP_LIBRARY_DIR "lib")
+		set(CMAKE_MACOSX_RPATH TRUE)	
 		add_definitions(-D__OSX__)
 	endif (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 
