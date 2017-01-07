@@ -29,6 +29,10 @@ static inline size_t gru_uri_calc_buffer_size(UriTextRangeA *range) {
 }
 
 static char *gru_uri_get_ranged_data(UriTextRangeA *range, gru_status_t *status) {
+	if (!range->first || !range->afterLast) {
+		return NULL;
+	}
+
 	size_t len = gru_uri_calc_buffer_size(range);
 
 	size_t buff_size = len + 1;
