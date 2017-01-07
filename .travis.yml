@@ -18,8 +18,9 @@ before_install:
 script:
   - mkdir -p build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+  - cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_VERBOSE_MAKEFILE=On ..
   - make all
+  - ctest -VV
   - cd ..
 addons:
   apt:
