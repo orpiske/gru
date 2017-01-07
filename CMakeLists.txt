@@ -30,6 +30,7 @@ else (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	message(STATUS "Compiling for " ${CMAKE_SYSTEM_NAME} "")
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 		set(CMAKE_MACOSX_RPATH TRUE)
+		set(CPP_LIBRARY_DIR "lib")
 		add_definitions(-D__OSX__)
 	endif (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 
