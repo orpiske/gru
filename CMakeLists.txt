@@ -128,7 +128,7 @@ endif (UNIX)
 
 if (WIN32)
 	add_subdirectory(deps/uriparser)
-	include_directories(${CMAKE_BINARY_DIR}/target/include/)
+	include_directories(${CMAKE_BINARY_DIR}/uriparser/include)
 endif (WIN32)
 
 link_libraries(uriparser)

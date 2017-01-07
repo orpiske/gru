@@ -35,8 +35,3 @@ add_library(
 	${CMAKE_BINARY_DIR}/uriparser/src/UriResolve.c
 	${CMAKE_BINARY_DIR}/uriparser/src/UriShorten.c
 )
-
-message("Copying uriparser headers")
-add_custom_command(TARGET uriparser POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/uriparser/include ${CMAKE_BINARY_DIR}/target/
-)
