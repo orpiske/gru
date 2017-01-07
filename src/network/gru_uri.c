@@ -101,9 +101,10 @@ static char *gru_uri_path(UriUriA *gru_restrict uri, gru_status_t *gru_restrict 
 		}
 		else {
 			if (status->code != GRU_SUCCESS) {
+				gru_dealloc_string(&ret);
 				gru_dealloc_const_string(&cur_path);
 
-				return 0;
+				return NULL;
 			}
 
 		}
