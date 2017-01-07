@@ -126,9 +126,14 @@ if (UNIX)
 	DefineIfSet(HAVE_STRLCPY)
 endif (UNIX)
 
-link_libraries(uriparser)
+if (WIN32)
+	add_subdirectory(deps/uriparser objs)
+	include_directories(${CMAKE_BINARY_DIR}/target/include/)
+endif (WIN32)
 
+link_libraries(uriparser)
 include_directories(src)
+
 add_subdirectory(src/ objs)
 
 if (BUILD_WITH_UNIT_TESTS)
