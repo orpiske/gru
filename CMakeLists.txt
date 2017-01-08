@@ -22,13 +22,6 @@ else (UNIX)
 	endif (WIN32)
 endif(UNIX)
 
-if (WIN32)
-
-else (WIN32)
-	find_library(URIPARSER_LIB NAMES uriparser liburiparser)
-
-endif (WIN32)
-
 link_libraries(${URIPARSER_LIB})
 include_directories(src)
 
