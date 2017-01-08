@@ -36,3 +36,6 @@ endif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
 set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin)
+
+find_library(URIPARSER_LIB NAMES uriparser liburiparser)
+link_libraries(${URIPARSER_LIB})
