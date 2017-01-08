@@ -12,6 +12,10 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 		set(CPP_LIBRARY_DIR "lib")
 	endif (CMAKE_SIZEOF_VOID_P EQUAL 8)
 
+	if(EXISTS "/etc/debian_version")
+			set(CPP_LIBRARY_DIR "lib")
+	endif(EXISTS "/etc/debian_version")
+
 else (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	message(STATUS "Compiling for " ${CMAKE_SYSTEM_NAME} "")
 	set(CPP_LIBRARY_DIR "lib")
