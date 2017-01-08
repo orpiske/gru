@@ -7,7 +7,11 @@ Linux Build Status: [![Linux Build Status](https://travis-ci.org/orpiske/gru.svg
 
 Windows Build Status: [![Windows Build status](https://ci.appveyor.com/api/projects/status/18qfc92iatymg9aw?svg=true)](https://ci.appveyor.com/project/orpiske/gru)
 
-Coverity Scan: [![Coverity Scan Build Status](https://scan.coverity.com/projects/10838/badge.svg)](https://scan.coverity.com/projects/orpiske-gru) 
+Coverity Scan: [![Coverity Scan Build Status](https://scan.coverity.com/projects/10838/badge.svg)](https://scan.coverity.com/projects/orpiske-gru)
+
+Packaging Status
+----
+Fedora: [![Fedora COPR (Testing Repo) Status](https://copr.fedorainfracloud.org/coprs/orpiske/gru-testing/package/gru/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/orpiske/gru-testing/package/gru/) 
 
 Introduction:
 ----
@@ -26,7 +30,7 @@ Runtime/Compilation:
 Building
 ----
 
-- On Linux: 
+- On Linux:
 ```
 mkdir build && cmake ..
 ```
