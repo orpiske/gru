@@ -12,17 +12,6 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 		set(CPP_LIBRARY_DIR "lib")
 	endif (CMAKE_SIZEOF_VOID_P EQUAL 8)
 
-	if(EXISTS "/etc/redhat-release")
-			add_definitions(-D__RH_DISTRO__)
-	endif(EXISTS "/etc/redhat-release")
-
-	if(EXISTS "/etc/debian_version")
-			add_definitions(-D__DEBIAN_DISTRO__)
-	endif(EXISTS "/etc/debian_version")
-
-	if(EXISTS "/etc/ubuntu-release")
-			add_definitions(-D__UBUNTU_DISTRO__)
-	endif(EXISTS "/etc/ubuntu-release")
 else (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	message(STATUS "Compiling for " ${CMAKE_SYSTEM_NAME} "")
 	set(CPP_LIBRARY_DIR "lib")
