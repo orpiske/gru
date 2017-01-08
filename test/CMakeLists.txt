@@ -13,7 +13,8 @@ add_executable(
 
 target_link_libraries(
 	gru_node_test
-	gru)
+	gru-${GRU_VERSION_MAJOR}
+)
 
 add_test(
 	NAME gru-node
@@ -27,7 +28,7 @@ add_executable(gru_list_test
 
 target_link_libraries(
 	gru_list_test
-	gru
+	gru-${GRU_VERSION_MAJOR}
 )
 
 add_test(
@@ -43,7 +44,7 @@ add_executable(
 
 target_link_libraries(
 	gru_tree_test
-	gru
+	gru-${GRU_VERSION_MAJOR}
 )
 
 add_test(
@@ -59,7 +60,8 @@ add_executable(
 
 target_link_libraries(
 	gru_config_test
-	gru)
+	gru-${GRU_VERSION_MAJOR}
+)
 
 add_test(
 	NAME gru-config-write
@@ -80,7 +82,7 @@ add_executable(gru_uri_test
 
 target_link_libraries(
 	gru_uri_test
-	gru
+	gru-${GRU_VERSION_MAJOR}
 )
 
 add_test(
@@ -127,7 +129,7 @@ add_executable(gru_uri_format_test
 
 target_link_libraries(
 	gru_uri_format_test
-	gru
+	gru-${GRU_VERSION_MAJOR}
 )
 
 add_test(
