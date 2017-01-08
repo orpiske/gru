@@ -25,9 +25,11 @@ endif(UNIX)
 if (WIN32)
 	add_subdirectory(deps/uriparser)
 	include_directories(${CMAKE_BINARY_DIR}/uriparser/include)
+else (WIN32)
+	find_library(URIPARSER_LIB NAMES uriparser liburiparser)
 endif (WIN32)
 
-link_libraries(uriparser)
+link_libraries(${URIPARSER_LIB})
 include_directories(src)
 
 add_subdirectory(src/ objs)
