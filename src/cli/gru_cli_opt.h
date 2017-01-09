@@ -31,7 +31,8 @@ extern "C" {
  * @param short_opt short option
  * @param desc description
  */
-gru_export void gru_cli_option_help(const char *long_opt, const char *short_opt, const char *desc);
+gru_export void gru_cli_option_help(
+	const char *long_opt, const char *short_opt, const char *desc);
 
 /**
  * Prints program usage for composed program types
@@ -40,15 +41,12 @@ gru_export void gru_cli_option_help(const char *long_opt, const char *short_opt,
  */
 gru_export void gru_cli_program_usage(const char *appname, const char *program_name);
 
-
 /**
  * Prints program description for composed programs
  * @param appname Application name
  * @param description Description
  */
-gru_export void gru_cli_program_description(const char *program,
-                                            const char *description);
-
+gru_export void gru_cli_program_description(const char *program, const char *description);
 
 /**
  * Prints program basic usage
@@ -61,4 +59,3 @@ gru_export void gru_cli_general_usage(const char *appname);
 #endif
 
 #endif /* GRU_CLI_OPT_H */
-

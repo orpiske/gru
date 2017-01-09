@@ -29,7 +29,7 @@ int test_with_strip(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	uri = gru_uri_parse_ex(argv[1],	GRU_URI_PARSE_STRIP, &status);
+	uri = gru_uri_parse_ex(argv[1], GRU_URI_PARSE_STRIP, &status);
 
 	if (status.code != GRU_SUCCESS) {
 		fprintf(stderr, "%s", status.message);
@@ -73,6 +73,4 @@ err_exit:
 	return EXIT_FAILURE;
 }
 
-int main(int argc, char **argv) {
-	return test_with_strip(argc, argv);
-}
+int main(int argc, char **argv) { return test_with_strip(argc, argv); }

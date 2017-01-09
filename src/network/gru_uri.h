@@ -29,15 +29,16 @@ extern "C" {
 #endif
 
 typedef enum gru_uri_parse_opt_t_ {
-    GRU_URI_PARSE_DEFAULT = 0,
-    GRU_URI_PARSE_STRIP = 1,
+	GRU_URI_PARSE_DEFAULT = 0,
+	GRU_URI_PARSE_STRIP = 1,
 } gru_uri_parse_opt_t;
 
 typedef enum gru_uri_format_opt_t_ {
-    GRU_URI_FORMAT_NONE = 0, /** Formats only scheme and host */
-    GRU_URI_FORMAT_PORT = 1, /** Formats only scheme, host and port if available*/
-    GRU_URI_FORMAT_PATH = 2, /** Formats scheme, host, port and path if available */
-    GRU_URI_FORMAT_DEFAULT = GRU_URI_FORMAT_PORT | GRU_URI_FORMAT_PATH, /** Default (everything) */
+	GRU_URI_FORMAT_NONE = 0, /** Formats only scheme and host */
+	GRU_URI_FORMAT_PORT = 1, /** Formats only scheme, host and port if available*/
+	GRU_URI_FORMAT_PATH = 2, /** Formats scheme, host, port and path if available */
+	GRU_URI_FORMAT_DEFAULT =
+		GRU_URI_FORMAT_PORT | GRU_URI_FORMAT_PATH, /** Default (everything) */
 } gru_uri_format_opt_t;
 
 typedef struct gru_uri_t_ {
@@ -47,18 +48,16 @@ typedef struct gru_uri_t_ {
 	char *path;
 } gru_uri_t;
 
-
-gru_export gru_uri_t gru_uri_parse(const char *gru_restrict uri,
-                                   gru_status_t *gru_restrict status);
+gru_export gru_uri_t gru_uri_parse(
+	const char *gru_restrict uri, gru_status_t *gru_restrict status);
 gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
-                                    gru_uri_parse_opt_t parseopt,
-                                    gru_status_t *gru_restrict status);
+	gru_uri_parse_opt_t parseopt, gru_status_t *gru_restrict status);
 
 gru_export char *gru_uri_simple_format(
 	gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
 
 gru_export char *gru_uri_format(gru_uri_t *gru_restrict uri, gru_uri_format_opt_t fopt,
-                                gru_status_t *gru_restrict status);
+	gru_status_t *gru_restrict status);
 
 gru_export bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme);
 gru_export bool gru_uri_set_path(gru_uri_t *uri, const char *path);

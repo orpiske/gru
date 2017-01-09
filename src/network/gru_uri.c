@@ -86,7 +86,7 @@ static size_t gru_uri_calc_path_size(UriUriA *uri) {
 }
 
 static char *gru_uri_path(UriUriA *gru_restrict uri, gru_uri_parse_opt_t parseopt,
-						  gru_status_t *gru_restrict status) {
+	gru_status_t *gru_restrict status) {
 	size_t total = gru_uri_calc_path_size(uri);
 
 	char *ret = gru_alloc(total, status);
@@ -99,21 +99,18 @@ static char *gru_uri_path(UriUriA *gru_restrict uri, gru_uri_parse_opt_t parseop
 			gru_dealloc_string(&ret);
 
 			return NULL;
-		}
-		else {
+		} else {
 			if (status->code != GRU_SUCCESS) {
 				gru_dealloc_string(&ret);
 				gru_dealloc_const_string(&cur_path);
 
 				return NULL;
 			}
-
 		}
 
 		if (!(parseopt & GRU_URI_PARSE_STRIP)) {
 			strlcat(ret, "/", total);
 		}
-
 
 		strlcat(ret, cur_path, total);
 
@@ -121,8 +118,7 @@ static char *gru_uri_path(UriUriA *gru_restrict uri, gru_uri_parse_opt_t parseop
 
 		if (!(parseopt & GRU_URI_PARSE_STRIP)) {
 			cur = cur->next;
-		}
-		else {
+		} else {
 			break;
 		}
 	}
@@ -135,9 +131,7 @@ gru_uri_t gru_uri_parse(const char *url, gru_status_t *status) {
 }
 
 gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
-									  gru_uri_parse_opt_t parseopt,
-                                   gru_status_t *gru_restrict status)
-{
+	gru_uri_parse_opt_t parseopt, gru_status_t *gru_restrict status) {
 	gru_uri_t ret = {0};
 	UriParserStateA state;
 	UriUriA uri;
@@ -276,7 +270,7 @@ gru_export gru_uri_t gru_uri_clone(gru_uri_t other, gru_status_t *status) {
 
 	return ret;
 
-	err_exit:
+err_exit:
 	gru_uri_cleanup(&ret);
 	gru_status_set(status, GRU_FAILURE, "Not enough memory");
 	return ret;

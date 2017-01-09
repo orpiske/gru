@@ -25,15 +25,14 @@
 #define GRU_PRINT_H
 
 #include <stdarg.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "common/gru_colors.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 void gru_print_err(const char *msg, ...);
 
@@ -42,4 +41,3 @@ void gru_print_err(const char *msg, ...);
 #endif
 
 #endif /* GRU_PRINT_H */
-
