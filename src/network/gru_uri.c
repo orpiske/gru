@@ -85,7 +85,8 @@ static size_t gru_uri_calc_path_size(UriUriA *uri) {
 	return total;
 }
 
-static char *gru_uri_path(UriUriA *gru_restrict uri, gru_status_t *gru_restrict status) {
+static char *gru_uri_path(UriUriA *gru_restrict uri, gru_uri_parse_opt_t parseopt,
+						  gru_status_t *gru_restrict status) {
 	size_t total = gru_uri_calc_path_size(uri);
 
 	char *ret = gru_alloc(total, status);
@@ -109,18 +110,34 @@ static char *gru_uri_path(UriUriA *gru_restrict uri, gru_status_t *gru_restrict 
 
 		}
 
-		strlcat(ret, "/", total);
+		if (!(parseopt & GRU_URI_PARSE_STRIP)) {
+			strlcat(ret, "/", total);
+		}
+
+
 		strlcat(ret, cur_path, total);
 
 		gru_dealloc_const_string(&cur_path);
 
-		cur = cur->next;
+		if (!(parseopt & GRU_URI_PARSE_STRIP)) {
+			cur = cur->next;
+		}
+		else {
+			break;
+		}
 	}
 
 	return ret;
 }
 
 gru_uri_t gru_uri_parse(const char *url, gru_status_t *status) {
+	return gru_uri_parse_ex(url, GRU_URI_PARSE_DEFAULT, status);
+}
+
+gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
+									  gru_uri_parse_opt_t parseopt,
+                                   gru_status_t *gru_restrict status)
+{
 	gru_uri_t ret = {0};
 	UriParserStateA state;
 	UriUriA uri;
@@ -135,20 +152,13 @@ gru_uri_t gru_uri_parse(const char *url, gru_status_t *status) {
 
 	ret.host = gru_uri_get_ranged_data(&uri.hostText, status);
 	ret.port = gru_uri_get_port(&uri.portText, status);
-	ret.path = gru_uri_path(&uri, status);
+	ret.path = gru_uri_path(&uri, parseopt, status);
 	ret.scheme = gru_uri_get_ranged_data(&uri.scheme, status);
 
 	uriFreeUriMembersA(&uri);
 
 	return ret;
 }
-
-/*
- char *scheme;
-	char *host;
-	uint16_t port;
-	char *path;
- */
 
 char *gru_uri_simple_format(gru_uri_t *uri, gru_status_t *status) {
 	char *ret = {0};
@@ -163,6 +173,41 @@ char *gru_uri_simple_format(gru_uri_t *uri, gru_status_t *status) {
 		}
 	} else {
 		if (uri->path) {
+			rc = asprintf(&ret, "%s://%s%s", uri->scheme, uri->host, uri->path);
+		} else {
+			rc = asprintf(&ret, "%s://%s", uri->scheme, uri->host);
+		}
+	}
+
+	if (rc == -1) {
+		gru_status_set(status, GRU_FAILURE, "Not enough memory to format the URI");
+
+		return NULL;
+	}
+
+	return ret;
+}
+
+/*
+ char *scheme;
+	char *host;
+	uint16_t port;
+	char *path;
+ */
+
+char *gru_uri_format(gru_uri_t *uri, gru_uri_format_opt_t fopt, gru_status_t *status) {
+	char *ret = {0};
+	int rc = 0;
+
+	if (uri->port != 0 && (fopt & GRU_URI_FORMAT_PORT)) {
+		if (uri->path && (fopt & GRU_URI_FORMAT_PATH)) {
+			rc = asprintf(&ret, "%s://%s:%" PRIu16 "%s", uri->scheme, uri->host,
+				uri->port, uri->path);
+		} else {
+			rc = asprintf(&ret, "%s://%s:%" PRIu16 "", uri->scheme, uri->host, uri->port);
+		}
+	} else {
+		if (uri->path && (fopt & GRU_URI_FORMAT_PATH)) {
 			rc = asprintf(&ret, "%s://%s%s", uri->scheme, uri->host, uri->path);
 		} else {
 			rc = asprintf(&ret, "%s://%s", uri->scheme, uri->host);
@@ -200,6 +245,41 @@ bool gru_uri_set_path(gru_uri_t *uri, const char *path) {
 	}
 
 	return true;
+}
+
+gru_export gru_uri_t gru_uri_clone(gru_uri_t other, gru_status_t *status) {
+	gru_uri_t ret = {0};
+
+	if (other.host) {
+		ret.host = strdup(other.host);
+		if (!ret.host) {
+			goto err_exit;
+		}
+	}
+
+	if (other.path) {
+		ret.path = strdup(other.path);
+
+		if (!ret.path) {
+			goto err_exit;
+		}
+	}
+
+	ret.port = other.port;
+
+	if (other.scheme) {
+		ret.scheme = strdup(other.scheme);
+		if (!ret.scheme) {
+			goto err_exit;
+		}
+	}
+
+	return ret;
+
+	err_exit:
+	gru_uri_cleanup(&ret);
+	gru_status_set(status, GRU_FAILURE, "Not enough memory");
+	return ret;
 }
 
 void gru_uri_cleanup(gru_uri_t *uri) {

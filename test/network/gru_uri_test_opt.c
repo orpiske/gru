@@ -15,8 +15,12 @@
  */
 #include <network/gru_uri.h>
 
-// amqp://localhost:61613/queue amq localhost 61613 /queue
-int main(int argc, char **argv) {
+/**
+ * Test code reserved for testing other URI parsing options
+ */
+
+// amqp://localhost:61613/queue amq localhost 61613 queue
+int test_with_strip(int argc, char **argv) {
 	gru_uri_t uri = {0};
 	gru_status_t status = gru_status_new();
 
@@ -25,7 +29,7 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	uri = gru_uri_parse(argv[1], &status);
+	uri = gru_uri_parse_ex(argv[1],	GRU_URI_PARSE_STRIP, &status);
 
 	if (status.code != GRU_SUCCESS) {
 		fprintf(stderr, "%s", status.message);
@@ -67,4 +71,8 @@ int main(int argc, char **argv) {
 err_exit:
 	gru_uri_cleanup(&uri);
 	return EXIT_FAILURE;
+}
+
+int main(int argc, char **argv) {
+	return test_with_strip(argc, argv);
 }

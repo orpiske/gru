@@ -32,6 +32,7 @@ add_library(
 	time/gru_duration.c
 	network/gru_uri.c
 	cli/gru_cli_opt.c
+	cli/gru_print.c
 )
 
 install(
