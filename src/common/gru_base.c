@@ -34,13 +34,15 @@ const char *gru_base_app_home(const char *appname) {
 		return NULL;
 	}
 #else
+	char *tmp = NULL;
 	struct passwd *pw = getpwuid(getuid());
-
-	if (asprintf(&filename, "%s/.%s", pw->pw_dir, appname) == -1) {
+	
+	if (asprintf(&tmp, "%s/.%s", pw->pw_dir, appname) == -1) {
 		fprintf(stderr, "Unable to allocate memory for the application home directory");
 
 		return NULL;
 	}
+	filename = tmp;
 
 #endif
 
