@@ -18,7 +18,7 @@
 
 static const char *filename;
 
-static void gru_base_app_home_release() { gru_dealloc(&filename); }
+static void gru_base_app_home_release() { gru_dealloc_const_string(&filename); }
 
 const char *gru_base_app_home(const char *appname) {
 	if (filename) {
