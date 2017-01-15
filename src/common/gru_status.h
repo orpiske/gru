@@ -44,8 +44,8 @@ typedef enum gru_status_code_t_ {
  * Status type
  */
 typedef struct gru_status_t_ {
-	gru_status_code_t code;
-	char *message;
+    char *message;
+    gru_status_code_t code;
 } gru_status_t;
 
 /**

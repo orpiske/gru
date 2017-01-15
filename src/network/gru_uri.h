@@ -44,8 +44,8 @@ typedef enum gru_uri_format_opt_t_ {
 typedef struct gru_uri_t_ {
 	char *scheme;
 	char *host;
-	uint16_t port;
 	char *path;
+	uint16_t port;
 } gru_uri_t;
 
 gru_export gru_uri_t gru_uri_parse(
