@@ -37,9 +37,16 @@ gru_export void gru_time_add_minutes(struct timeval *t, uint64_t count);
 /**
  * Read a string in the format seconds.microseconds and return a struct timeval
  * @param str The string in the format seconds.microseconds
- * @return
+ * @return a timeval struct with the parsed data
  */
 gru_export struct timeval gru_time_read_str(const char *str);
+
+/**
+ * Write a timeval structure to a string.
+ * @param t the timeval structure
+ * @return A string that must be free'd after use
+ */
+gru_export char *gru_time_write_str(const struct timeval *t);
 
 #ifdef __cplusplus
 }

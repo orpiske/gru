@@ -13,6 +13,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
+#include <inttypes.h>
+
 #include "gru_time_utils.h"
 
 void gru_time_add_seconds(struct timeval *t, uint64_t count) {
@@ -48,6 +50,17 @@ struct timeval gru_time_read_str(const char *str) {
 
 	ret.tv_sec = atol(sec);
 	ret.tv_usec = atol(usec);
+
+	return ret;
+}
+
+
+char *gru_time_write_str(const struct timeval *t) {
+	char *ret = NULL;
+
+	if (asprintf(&ret, "%"PRIu64".%"PRIu64"", t->tv_sec, t->tv_usec) == -1) {
+		return NULL;
+	}
 
 	return ret;
 }

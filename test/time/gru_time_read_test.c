@@ -13,30 +13,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdint.h>
 
 #include "time/gru_time_utils.h"
 
-
-// 1483228862.529
-int main(int argc, char **argv) {
-	char *str = "1483228862.529";
-	const long expected_sec = 1483228862;
-	const long expected_usec = 529;
-
+static bool test_read_ex(const char *str, const long expected_sec, const long expected_usec) {
 	struct timeval t = gru_time_read_str(str);
 
 	if (t.tv_sec != expected_sec) {
-		fprintf(stderr, "The sec value %ld does not match the expected %ld",
+		fprintf(stderr, "The sec value %ld does not match the expected %ld\n",
 			 t.tv_sec, expected_sec);
 
-		return EXIT_FAILURE;
+		return false;
 	}
 
 	if (t.tv_usec != expected_usec) {
-		fprintf(stderr, "The usec value %li does not match the expected %li",
+		fprintf(stderr, "The usec value %li does not match the expected %li\n",
 			 t.tv_usec, expected_usec);
 
-		return EXIT_FAILURE;
+		return false;
 	}
 
+	return true;
+}
+
+static bool test_read() {
+	return test_read_ex("1483228862.529", 1483228862, 529);
+}
+
+
+static bool test_write() {
+	struct timeval t;
+
+	t.tv_sec = 1562377512;
+	t.tv_usec = 671;
+	char *tmp = gru_time_write_str(&t);
+	if (strcmp(tmp, "1562377512.671") == 0) {
+		free(tmp);
+		return true;
+	}
+
+	fprintf(stderr, "Formatted time %s does not match the expected value 1562377512.671\n",
+			 tmp);
+	free(tmp);
+	return false;
+}
+
+// 1483228862.529
+int main(int argc, char **argv) {
+	if (test_read()) {
+		if (test_write()) {
+			return EXIT_SUCCESS;
+		}
+	}
+
+	return EXIT_FAILURE;
 }
