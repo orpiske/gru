@@ -25,6 +25,7 @@
 #endif
 
 #include "common/gru_portable.h"
+#include "common/gru_alloc.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,6 +33,13 @@ extern "C" {
 
 gru_export void gru_time_add_seconds(struct timeval *t, uint64_t count);
 gru_export void gru_time_add_minutes(struct timeval *t, uint64_t count);
+
+/**
+ * Read a string in the format seconds.microseconds and return a struct timeval
+ * @param str The string in the format seconds.microseconds
+ * @return
+ */
+gru_export struct timeval gru_time_read_str(const char *str);
 
 #ifdef __cplusplus
 }

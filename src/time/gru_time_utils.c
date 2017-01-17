@@ -22,3 +22,32 @@ void gru_time_add_seconds(struct timeval *t, uint64_t count) {
 void gru_time_add_minutes(struct timeval *t, uint64_t count) {
 	gru_time_add_seconds(t, (count * 60));
 }
+
+
+struct timeval gru_time_read_str(const char *str) {
+	struct timeval ret = {0};
+	int pos = 0;
+
+	// This, I hope, should be sufficient for years to come ...
+	char sec[16] = {0};
+	char usec[16] = {0};
+
+	while (isdigit(str[pos]) && pos < sizeof(sec)) {
+		sec[pos] = str[pos];
+		pos++;
+	}
+
+
+	pos++;
+	int usecl = 0;
+	while (isdigit(str[pos]) && usecl < sizeof(usec)) {
+		usec[usecl] = str[pos];
+		pos++;
+		usecl++;
+	}
+
+	ret.tv_sec = atol(sec);
+	ret.tv_usec = atol(usec);
+
+	return ret;
+}

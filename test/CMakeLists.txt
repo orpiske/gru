@@ -153,3 +153,20 @@ add_test(
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
 	COMMAND gru_uri_test_opt amqp://localhost:61613/queue amqp localhost 61613 queue
 )
+
+
+
+add_executable(gru_time_read_test
+	time/gru_time_read_test.c
+)
+
+target_link_libraries(
+	gru_time_read_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-time-read-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_time_read_test
+)
