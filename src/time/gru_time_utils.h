@@ -92,6 +92,9 @@ gru_export gru_timestamp_t gru_time_from_milli_char(const char *ts);
  */
 gru_export gru_timestamp_t gru_time_from_milli(int64_t timestamp);
 
+#ifndef __linux__
+int timersub(struct timeval *start, struct timeval *end, struct timeval *result);
+#endif
 
 #ifdef __cplusplus
 }
