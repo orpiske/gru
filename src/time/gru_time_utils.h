@@ -17,12 +17,18 @@
 #define GRU_TIME_UTILS_H
 
 #include <stdint.h>
+#include <inttypes.h>
+#include <math.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <ctype.h>
 
 #if !defined(_WIN32) && !defined(_WIN64)
 #include <sys/time.h>
 #else
 #include <windows.h>
 #endif
+
 
 #include "common/gru_portable.h"
 #include "common/gru_alloc.h"
@@ -31,22 +37,61 @@
 extern "C" {
 #endif
 
-gru_export void gru_time_add_seconds(struct timeval *t, uint64_t count);
-gru_export void gru_time_add_minutes(struct timeval *t, uint64_t count);
+/**
+ * An alias to struct timeval
+ */
+typedef struct timeval gru_timestamp_t;
+
+/**
+ * Add seconds to a timestamp object
+ * @param t timestamp
+ * @param count number of seconds to add
+ */
+gru_export void gru_time_add_seconds(gru_timestamp_t *t, uint64_t count);
+
+
+/**
+ * Add minutes to a timestamp object
+ * @param t timestamp
+ * @param count number of minutes to add
+ */
+gru_export void gru_time_add_minutes(gru_timestamp_t *t, uint64_t count);
 
 /**
  * Read a string in the format seconds.microseconds and return a struct timeval
  * @param str The string in the format seconds.microseconds
- * @return a timeval struct with the parsed data
+ * @return a timestamp object with the parsed data
  */
-gru_export struct timeval gru_time_read_str(const char *str);
+gru_export gru_timestamp_t gru_time_read_str(const char *str);
 
 /**
  * Write a timeval structure to a string.
  * @param t the timeval structure
  * @return A string that must be free'd after use
  */
-gru_export char *gru_time_write_str(const struct timeval *t);
+gru_export char *gru_time_write_str(const gru_timestamp_t *t);
+
+/**
+ * Gets the current moment in time
+ * @return a timestamp object with the current point in time
+ */
+gru_export gru_timestamp_t gru_time_now();
+
+/**
+ * Converts an unformatted string of milliseconds since epoch to a timespamp
+ * @param ts A numeric string representing the milliseconds since epoch (ie.:
+ * 1484719545264)
+ * @return a timestamp object with the parsed data
+ */
+gru_export gru_timestamp_t gru_time_from_milli_char(const char *ts);
+
+/**
+ * Converts milliseconds since epoch to a timestamp
+ * @param timestamp milliseconds since Epoch
+ * @return a timestamp object with the converted data
+ */
+gru_export gru_timestamp_t gru_time_from_milli(int64_t timestamp);
+
 
 #ifdef __cplusplus
 }

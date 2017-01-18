@@ -13,21 +13,19 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-#include <inttypes.h>
-
 #include "gru_time_utils.h"
 
-void gru_time_add_seconds(struct timeval *t, uint64_t count) {
+void gru_time_add_seconds(gru_timestamp_t *t, uint64_t count) {
 	t->tv_sec = t->tv_sec + count;
 }
 
-void gru_time_add_minutes(struct timeval *t, uint64_t count) {
+void gru_time_add_minutes(gru_timestamp_t *t, uint64_t count) {
 	gru_time_add_seconds(t, (count * 60));
 }
 
 
-struct timeval gru_time_read_str(const char *str) {
-	struct timeval ret = {0};
+gru_timestamp_t gru_time_read_str(const char *str) {
+	gru_timestamp_t ret = {0};
 	int pos = 0;
 
 	// This, I hope, should be sufficient for years to come ...
@@ -55,7 +53,7 @@ struct timeval gru_time_read_str(const char *str) {
 }
 
 
-char *gru_time_write_str(const struct timeval *t) {
+char *gru_time_write_str(const gru_timestamp_t *t) {
 	char *ret = NULL;
 
 	if (asprintf(&ret, "%"PRIu64".%"PRIu64"", t->tv_sec, t->tv_usec) == -1) {
@@ -63,4 +61,31 @@ char *gru_time_write_str(const struct timeval *t) {
 	}
 
 	return ret;
+}
+
+
+gru_timestamp_t gru_time_now() {
+	gru_timestamp_t ret = {.tv_sec = 0, .tv_usec = 0};
+
+	gettimeofday(&ret, NULL);
+	return ret;
+}
+
+gru_timestamp_t gru_time_from_milli(int64_t timestamp) {
+
+	gru_timestamp_t ret = {0};
+
+	double ts = ((double) timestamp / 1000);
+	double integral;
+
+	ret.tv_usec = modf(ts, &integral) * 1000000;
+	ret.tv_sec = integral;
+
+	return ret;
+}
+
+gru_timestamp_t gru_time_from_milli_char(const char *ts) {
+	uint64_t ms = strtoull(ts, NULL, 10);
+
+	return gru_time_from_milli(ms);
 }
