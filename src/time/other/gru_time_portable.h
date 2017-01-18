@@ -31,8 +31,10 @@
 extern "C" {
 #endif
 
-#ifndef __linux__
-int timersub(struct timeval *start, struct timeval *end, struct timeval *result);
+#if !defined __linux__ && !defined timersub
+int gru_time_timersub(struct timeval *start, struct timeval *end, struct timeval *result);
+
+#define timersub(start, end, result) gru_time_timersub(start, end, result)
 #endif
 
 
@@ -41,4 +43,3 @@ int timersub(struct timeval *start, struct timeval *end, struct timeval *result)
 #endif
 
 #endif /* GRU_TIME_PORTABLE_H */
-
