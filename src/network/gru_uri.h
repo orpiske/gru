@@ -48,22 +48,78 @@ typedef struct gru_uri_t_ {
 	uint16_t port;
 } gru_uri_t;
 
+/**
+ * Default URI parser
+ * @param uri URI string (ie.: scheme://host:port/path)
+ * @param status status object
+ * @return A parsed URI object with each component of the URI broken down
+ */
 gru_export gru_uri_t gru_uri_parse(
 	const char *gru_restrict uri, gru_status_t *gru_restrict status);
+
+
+/**
+ * URI parser with additional options
+ * @param uri URI string (ie.: scheme://host:port/path)
+ * @param parseopt parse options (see gru_uri_format_opt_t)
+ * @param status status object
+ * @return A parsed URI object with each component of the URI broken down
+ */
 gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 	gru_uri_parse_opt_t parseopt, gru_status_t *gru_restrict status);
 
+
+/**
+ * Converts a URI object to a string
+ * @param uri a pointer to an URI object
+ * @param status status object
+ * @return a new URI string that must be free'd after use
+ */
 gru_export char *gru_uri_simple_format(
 	gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
 
+
+/**
+ * A more elaborate URI string converter that can filter parts of the URI
+ * @param uri a pointer to an URI object
+ * @param fopt formatting options (see gru_uri_format_opt_t)
+ * @param status status object
+ * @return a new URI string that must be free'd after use
+ */
 gru_export char *gru_uri_format(gru_uri_t *gru_restrict uri, gru_uri_format_opt_t fopt,
 	gru_status_t *gru_restrict status);
 
+/**
+ * Sets the scheme in a URI object
+ * @param uri a pointer to an URI object
+ * @param scheme the scheme to set it to
+ * @return true if success or false otherwise
+ */
 gru_export bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme);
+
+/**
+ * Sets the URI path
+ * @param uri a pointer to an URI object
+ * @param path the path
+ * @return true if success or false otherwise
+ */
 gru_export bool gru_uri_set_path(gru_uri_t *uri, const char *path);
 
+
+/**
+ * Clone a URI object
+ * @param other the object to clone
+ * @param status status object
+ * @return A cloned object that must's be cleaned up after use. Check the status object
+ * to determine whether cloning was successful or not
+ */
 gru_export gru_uri_t gru_uri_clone(gru_uri_t other, gru_status_t *status);
 
+
+/**
+ * Cleans up a URI object
+ * @param uri a pointer to a URI object to clean
+ */
 gru_export void gru_uri_cleanup(gru_uri_t *uri);
 
 #ifdef __cplusplus
