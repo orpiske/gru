@@ -76,7 +76,7 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
  * @return a new URI string that must be free'd after use
  */
 gru_export char *gru_uri_simple_format(
-	gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
+	const gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
 
 
 /**
@@ -86,7 +86,7 @@ gru_export char *gru_uri_simple_format(
  * @param status status object
  * @return a new URI string that must be free'd after use
  */
-gru_export char *gru_uri_format(gru_uri_t *gru_restrict uri, gru_uri_format_opt_t fopt,
+gru_export char *gru_uri_format(const gru_uri_t *gru_restrict uri, gru_uri_format_opt_t fopt,
 	gru_status_t *gru_restrict status);
 
 /**

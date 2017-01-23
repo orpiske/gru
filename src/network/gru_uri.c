@@ -154,7 +154,7 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 	return ret;
 }
 
-char *gru_uri_simple_format(gru_uri_t *uri, gru_status_t *status) {
+char *gru_uri_simple_format(const gru_uri_t *uri, gru_status_t *status) {
 	char *ret = {0};
 	int rc = 0;
 
@@ -189,7 +189,7 @@ char *gru_uri_simple_format(gru_uri_t *uri, gru_status_t *status) {
 	char *path;
  */
 
-char *gru_uri_format(gru_uri_t *uri, gru_uri_format_opt_t fopt, gru_status_t *status) {
+char *gru_uri_format(const gru_uri_t *uri, gru_uri_format_opt_t fopt, gru_status_t *status) {
 	char *ret = {0};
 	int rc = 0;
 
