@@ -170,3 +170,35 @@ add_test(
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
 	COMMAND gru_time_read_test
 )
+
+add_executable(
+	gru_split_test
+	string/gru_split_test.c
+)
+
+target_link_libraries(
+	gru_split_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-split
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_split_test
+)
+
+add_executable(
+	gru_serialize_test
+	string/gru_serialize_test.c
+)
+
+target_link_libraries(
+	gru_serialize_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-serialize
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_serialize_test
+)

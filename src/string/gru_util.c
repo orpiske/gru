@@ -13,7 +13,11 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
+#include <stdint.h>
+
 #include "gru_util.h"
+#include "common/gru_alloc.h"
+#include "collection/gru_list.h"
 
 char *gru_rtrim(char *input, size_t size) {
 	size_t i = size;
@@ -70,4 +74,63 @@ const char *gru_get_name_from_url(const char *url, size_t size) {
 	}
 
 	return NULL;
+}
+
+
+gru_list_t *gru_split(const char *str, char sep, gru_status_t *status) {
+	gru_list_t *ret = gru_list_new(status);
+	gru_alloc_check(ret, NULL);
+
+	size_t len = strlen(str);
+	uint32_t last = 0;
+	for (int i = 0; i < len; i++) {
+		if (str[i] == sep) {
+			char *tok = strndup(str + last, i - last);
+			printf("Appending %s\n", tok);
+			gru_list_append(ret, tok);
+			last = i + 1;
+		}
+	}
+
+	return ret;
+}
+
+static void gru_split_node_destroy(const void *nodedata, void *payload) {
+	gru_dealloc((void **) &nodedata);
+}
+
+void gru_split_clean(gru_list_t *list) {
+	if (list) {
+		gru_list_for_each(list, gru_split_node_destroy, NULL);
+	}
+}
+
+
+char *gru_str_serialize(gru_list_t *list, char sep, gru_status_t *status) {
+	uint32_t lsize = gru_list_count(list);
+	uint32_t strsize = 0;
+
+	for (uint32_t i = 0; i < lsize; i++) {
+		gru_node_t *node = gru_list_get(list, i);
+		const char *str = (const char *) node->data;
+		strsize += strlen(str) + 1;
+	}
+
+	char *ret = gru_alloc(strsize + 1, status);
+	if (!ret) {
+		return NULL;
+	}
+
+	char sep2[2] = {0};
+	sep2[0] = sep;
+
+	for (uint32_t i = 0; i < lsize; i++) {
+		gru_node_t *node = gru_list_get(list, i);
+		const char *str = (const char *) node->data;
+
+		strlcat(ret, str, strsize);
+		strlcat(ret, sep2, strsize);
+	}
+
+	return ret;
 }
