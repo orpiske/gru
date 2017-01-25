@@ -125,7 +125,7 @@ char *gru_str_serialize(gru_list_t *list, char sep, gru_status_t *status) {
 	sep2[0] = sep;
 
 	for (uint32_t i = 0; i < lsize; i++) {
-		gru_node_t *node = gru_list_get(list, i);
+		const gru_node_t *node = gru_list_get(list, i);
 		const char *str = (const char *) node->data;
 
 		strlcat(ret, str, strsize);
