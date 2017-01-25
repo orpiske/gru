@@ -40,11 +40,11 @@ int main(int argc, char **argv) {
 			 str);
 
 		gru_dealloc_string(&str);
-		gru_list_destroy(list);
+		gru_list_destroy(&list);
 		return EXIT_FAILURE;
 	}
 
 	gru_dealloc_string(&str);
-	gru_list_destroy(list);
+	gru_list_destroy(&list);
 	return EXIT_SUCCESS;
 }
