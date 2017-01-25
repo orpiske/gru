@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
 	};
 
 	for (uint32_t i = 0; i < list_size; i++) {
-		gru_node_t *node = gru_list_get(list, i);
+		const gru_node_t *node = gru_list_get(list, i);
 		char *data = (char *) node->data;
 		printf("%d = %s\n", i, data);
 		if (strcmp(data, expected[i]) != 0) {

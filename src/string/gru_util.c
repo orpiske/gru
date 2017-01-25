@@ -108,10 +108,10 @@ void gru_split_clean(gru_list_t *list) {
 
 char *gru_str_serialize(gru_list_t *list, char sep, gru_status_t *status) {
 	uint32_t lsize = gru_list_count(list);
-	uint32_t strsize = 0;
+	size_t strsize = 0;
 
 	for (uint32_t i = 0; i < lsize; i++) {
-		gru_node_t *node = gru_list_get(list, i);
+		const gru_node_t *node = gru_list_get(list, i);
 		const char *str = (const char *) node->data;
 		strsize += strlen(str) + 1;
 	}
