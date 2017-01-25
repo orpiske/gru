@@ -51,7 +51,7 @@ FILE *gru_payload_init_data(
 		return NULL;
 	}
 
-	if (!gru_path_exists(fullpath, status) && status->code == GRU_SUCCESS) {
+	if (!gru_path_exists(fullpath, status) && gru_status_success(status)) {
 		config_file = gru_io_open_file(dir, name, status);
 		if (!config_file) {
 			goto e_exit;

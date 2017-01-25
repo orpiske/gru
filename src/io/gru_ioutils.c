@@ -63,7 +63,7 @@ FILE *gru_io_open_file(const char *dir, const char *name, gru_status_t *status) 
 
 	char *fullpath = gru_path_format(dir, name, status);
 
-	if (!gru_path_exists(fullpath, status) && (status->code == GRU_SUCCESS)) {
+	if (!gru_path_exists(fullpath, status) && gru_status_success(status)) {
 		if (!gru_path_mkdirs(dir, status)) {
 
 			gru_dealloc_string(&fullpath);
@@ -81,7 +81,7 @@ FILE *gru_io_open_file_read(const char *dir, const char *name, gru_status_t *sta
 
 	char *fullpath = gru_path_format(dir, name, status);
 
-	if (!gru_path_exists(fullpath, status) && (status->code == GRU_SUCCESS)) {
+	if (!gru_path_exists(fullpath, status) && gru_status_success(status)) {
 		if (!gru_path_mkdirs(dir, status)) {
 
 			gru_dealloc_string(&fullpath);

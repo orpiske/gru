@@ -50,7 +50,7 @@ void gru_status_reset(gru_status_t *status) {
 	status->code = GRU_SUCCESS;
 }
 
-void gru_status_success(gru_status_t *status) {
+void gru_status_set_success(gru_status_t *status) {
 	gru_status_set(status, GRU_SUCCESS, NULL);
 }
 

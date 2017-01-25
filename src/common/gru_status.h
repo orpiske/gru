@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "common/gru_portable.h"
 
@@ -83,7 +84,26 @@ gru_export void gru_status_reset(gru_status_t *status);
  * Sets the status to success
  * @param status an instance of the status object to set
  */
-gru_export void gru_status_success(gru_status_t *status);
+gru_export void gru_status_set_success(gru_status_t *status);
+
+
+/**
+ * Checks for error status
+ * @param status the status object to check
+ * @return true if an error or false otherwise
+ */
+gru_export static inline bool gru_status_error(const gru_status_t *status) {
+    return status->code == GRU_FAILURE;
+}
+
+/**
+ * Checks for success status
+ * @param status the status object to check
+ * @return true if success or false otherwise
+ */
+gru_export static inline bool gru_status_success(const gru_status_t *status) {
+    return status->code == GRU_SUCCESS;
+}
 
 #ifdef __cplusplus
 }
