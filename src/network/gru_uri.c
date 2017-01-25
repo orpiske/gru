@@ -53,7 +53,7 @@ static uint16_t gru_uri_get_port(UriTextRangeA *range, gru_status_t *status) {
 		return 0;
 	}
 
-	if (status->code != GRU_SUCCESS) {
+	if (gru_status_error(status)) {
 		gru_dealloc_const_string(&port);
 
 		return 0;
@@ -100,7 +100,7 @@ static char *gru_uri_path(UriUriA *gru_restrict uri, gru_uri_parse_opt_t parseop
 
 			return NULL;
 		} else {
-			if (status->code != GRU_SUCCESS) {
+			if (gru_status_error(status)) {
 				gru_dealloc_string(&ret);
 				gru_dealloc_const_string(&cur_path);
 

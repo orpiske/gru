@@ -31,7 +31,7 @@ int test_with_strip(int argc, char **argv) {
 
 	uri = gru_uri_parse_ex(argv[1], GRU_URI_PARSE_STRIP, &status);
 
-	if (status.code != GRU_SUCCESS) {
+	if (gru_status_error(&status)) {
 		fprintf(stderr, "%s", status.message);
 
 		goto err_exit;

@@ -45,7 +45,7 @@ FILE *gru_payload_init_data(
 		return NULL;
 	}
 
-	if (status->code != GRU_SUCCESS) {
+	if (gru_status_error(status)) {
 		gru_dealloc_string(&fullpath);
 
 		return NULL;

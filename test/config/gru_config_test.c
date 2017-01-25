@@ -86,7 +86,7 @@ int test_write_init(int argc, char **argv) {
 	}
 
 	if (!gru_path_fexists(fileno(config->file), &status)) {
-		if (status.code != GRU_SUCCESS) {
+		if (gru_status_error(&status)) {
 			fprintf(stderr, "Unable to check if file exists: %s\n", status.message);
 		}
 
@@ -124,7 +124,7 @@ int test_read_init(int argc, char **argv) {
 	}
 
 	if (!gru_path_fexists(fileno(config->file), &status)) {
-		if (status.code != GRU_SUCCESS) {
+		if (gru_status_error(&status)) {
 			fprintf(stderr, "Unable to check if file exists: %s\n", status.message);
 		}
 

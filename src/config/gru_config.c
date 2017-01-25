@@ -41,7 +41,7 @@ gru_config_t *gru_config_init(
 
 	ret->file = gru_payload_init_data(payload, ret->dir, ret->filename, status);
 
-	if (ret->file == NULL && status->code != GRU_SUCCESS) {
+	if (ret->file == NULL && gru_status_error(status)) {
 		gru_config_destroy(&ret);
 
 		return NULL;

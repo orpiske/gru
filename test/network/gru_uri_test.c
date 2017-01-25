@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
 	uri = gru_uri_parse(argv[1], &status);
 
-	if (status.code != GRU_SUCCESS) {
+	if (gru_status_error(&status)) {
 		fprintf(stderr, "%s", status.message);
 
 		goto err_exit;

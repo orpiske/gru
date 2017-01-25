@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 								 &status);
 	uint32_t expected_size = 5;
 
-	if (status.code != GRU_SUCCESS) {
+	if (gru_status_error(&status)) {
 		fprintf(stderr, "%s\n", status.message);
 
 		goto err_failure;
