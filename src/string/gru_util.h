@@ -26,6 +26,7 @@
 
 #include "common/gru_portable.h"
 #include "collection/gru_list.h"
+#include "string/gru_alt.h"
 
 #ifdef __cplusplus
 extern "C" {
