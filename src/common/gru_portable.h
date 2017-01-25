@@ -18,6 +18,7 @@ limitations under the License.
 #define unlikely(x) __builtin_expect((x), 0)
 #define gru_export
 #define gru_restrict restrict
+#define gru_attr_unused __attribute__((unused))
 #else
 #define likely(x) (x)
 #define unlikely(x) (x)
@@ -27,4 +28,5 @@ limitations under the License.
 #define strerror_r(errno, buf, len) strerror_s(buf, len, errno)
 #define gru_export __declspec(dllexport)
 #define gru_restrict
+#define gru_attr_unused
 #endif

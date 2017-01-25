@@ -28,15 +28,15 @@ static gru_tree_node_t *build_paths() {
 	gru_tree_node_t *usr = gru_tree_add_child(root, "usr");
 	gru_tree_node_t *opt = gru_tree_add_child(root, "opt");
 	gru_tree_node_t *var = gru_tree_add_child(root, "var");
-	gru_tree_node_t *dev = gru_tree_add_child(root, "dev");
+	gru_tree_node_t *dev gru_attr_unused = gru_tree_add_child(root, "dev");
 
-	gru_tree_node_t *usr_bin = gru_tree_add_child(usr, "bin");
-	gru_tree_node_t *opt_other = gru_tree_add_child(opt, "other");
+	gru_tree_node_t *usr_bin gru_attr_unused = gru_tree_add_child(usr, "bin");
+	gru_tree_node_t *opt_other gru_attr_unused = gru_tree_add_child(opt, "other");
 
 	gru_tree_node_t *var_log = gru_tree_add_child(var, "log");
 	gru_tree_node_t *var_log_a = gru_tree_add_child(var_log, "a");
 	gru_tree_node_t *var_log_a_b = gru_tree_add_child(var_log_a, "b");
-	gru_tree_node_t *var_log_a_c = gru_tree_add_child(var_log_a_b, "c");
+	gru_tree_node_t *var_log_a_c gru_attr_unused = gru_tree_add_child(var_log_a_b, "c");
 
 	return root;
 }
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	const gru_tree_node_t *c = gru_tree_search(root, compare_file_name, "c");
+	const gru_tree_node_t *c gru_attr_unused = gru_tree_search(root, compare_file_name, "c");
 
 	gru_tree_for_each(root, print_path, NULL);
 
