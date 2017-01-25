@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 		char *data = (char *) node->data;
 		printf("%d = %s\n", i, data);
 		if (strcmp(data, expected[i]) != 0) {
-			fprintf("Execpted %s but got %s\n", expected[i], data);
+			fprintf(stderr, "Expected %s but got %s\n", expected[i], data);
 			goto err_failure;
 		}
 	}
