@@ -23,9 +23,8 @@
 
 int main(int argc, char **argv) {
 	gru_status_t status = gru_status_new();
-	gru_list_t *list = gru_split("fedora,freebsd,gentoo,debian,ubuntu,red hat", ',',
-								 &status);
-	uint32_t expected_size = 6;
+	gru_list_t *list = gru_split(argv[1], argv[2][0], &status);
+	uint32_t expected_size = 5;
 
 	if (gru_status_error(&status)) {
 		fprintf(stderr, "%s\n", status.message);
@@ -33,28 +32,12 @@ int main(int argc, char **argv) {
 		goto err_failure;
 	}
 
-	uint32_t list_size = gru_list_count(list);
-	if (list_size != expected_size) {
-		fprintf(stderr, "Expected %d but got %d\n", expected_size, list_size);
-
-		goto err_failure;
-	}
-
-	const char *expected[] = {
-		"fedora",
-		"freebsd",
-		"gentoo",
-		"debian",
-		"ubuntu",
-		"red hat"
-	};
-
-	for (uint32_t i = 0; i < list_size; i++) {
+	for (uint32_t i = 0; i < argc - 3; i++) {
 		const gru_node_t *node = gru_list_get(list, i);
 		char *data = (char *) node->data;
 		printf("%d = %s\n", i, data);
-		if (strcmp(data, expected[i]) != 0) {
-			fprintf(stderr, "Expected %s but got %s\n", expected[i], data);
+		if (strcmp(data, argv[i + 3]) != 0) {
+			fprintf(stderr, "Expected %s but got %s\n", argv[i + 3], data);
 			goto err_failure;
 		}
 	}

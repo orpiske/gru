@@ -83,12 +83,16 @@ gru_list_t *gru_split(const char *str, char sep, gru_status_t *status) {
 
 	size_t len = strlen(str);
 	uint32_t last = 0;
-	for (int i = 0; i < len; i++) {
-		if (str[i] == sep) {
+	for (int i = 0; i <= len; i++) {
+		if (str[i] == sep || str[i] == 0) {
 			char *tok = strndup(str + last, i - last);
 			printf("Appending %s\n", tok);
 			gru_list_append(ret, tok);
 			last = i + 1;
+
+			if (str[i] == 0) {
+				break;
+			}
 		}
 	}
 

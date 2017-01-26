@@ -187,6 +187,23 @@ add_test(
 	COMMAND gru_split_test
 )
 
+
+add_executable(
+	gru_split_test_2
+	string/gru_split_test_2.c
+)
+
+target_link_libraries(
+	gru_split_test_2
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-split-2
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_split_test_2 "net,java" "," "net" "java"
+)
+
 add_executable(
 	gru_serialize_test
 	string/gru_serialize_test.c
