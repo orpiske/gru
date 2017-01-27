@@ -7,6 +7,7 @@ set(GRU_VERSION_MAJOR 0)
 set(GRU_VERSION_MINOR 1)
 set(GRU_VERSION_PATCH 0)
 
+include(GNUInstallDirs)
 include(CheckLists.cmake)
 include(CMakeLists.default.cmake)
 

@@ -7,10 +7,6 @@ configure_file(
 add_custom_target(uninstall
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/dist/cmake_uninstall.cmake)
 
-set(RUNTIME_DIR "bin")
-set(CPP_INCLUDE_DIR "include")
-set(SHARED_DIR "share")
-
 if (CMAKE_COMPILER_IS_GNUCXX)
 	set(CMAKE_C_FLAGS "-Wall -Wshadow -Wconversion -Wno-sign-conversion -fstrict-aliasing -fstack-protector-all -std=c99 ${CMAKE_USER_C_FLAGS}" CACHE STRING
 		"Flags used by the compiler during all build types." FORCE

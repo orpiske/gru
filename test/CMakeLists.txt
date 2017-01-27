@@ -1,9 +1,9 @@
 project(gru-tests)
 
 if (WIN32)
-    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/lib)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/${CMAKE_INSTALL_LIBDIR})
 else (WIN32)
-    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/tests/bin)
+    set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR})
 endif (WIN32)
 
 add_executable(
@@ -33,7 +33,7 @@ target_link_libraries(
 
 add_test(
 	NAME gru-list
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_list_test
 )
 
@@ -49,7 +49,7 @@ target_link_libraries(
 
 add_test(
 	NAME gru-tree
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_tree_test
 )
 
@@ -65,13 +65,13 @@ target_link_libraries(
 
 add_test(
 	NAME gru-config-write
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_config_test "write"
 )
 
 add_test(
 	NAME gru-config-read
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_config_test "read"
 )
 
@@ -87,38 +87,38 @@ target_link_libraries(
 
 add_test(
 	NAME gru-uri-test-1
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_test amqp://localhost:61613/queue amqp localhost 61613 /queue
 )
 
 add_test(
 	NAME gru-uri-test-2
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_test http://localhost/ http localhost "" /
 )
 
 add_test(
 	NAME gru-uri-test-3
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_test http://localhost/path http localhost "" /path
 )
 
 
 add_test(
 	NAME gru-uri-test-4
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_test http://localhost/path/subpath http localhost "" /path/subpath
 )
 
 add_test(
 	NAME gru-uri-test-5
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_test https://10.0.0.1/path/subpath https 10.0.0.1 "" /path/subpath
 )
 
 add_test(
 	NAME gru-uri-test-6
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_test https://10.0.0.1 https 10.0.0.1 "" ""
 )
 
@@ -134,7 +134,7 @@ target_link_libraries(
 
 add_test(
 	NAME gru-uri-format-test
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_format_test
 )
 
@@ -150,7 +150,7 @@ target_link_libraries(
 
 add_test(
 	NAME gru-uri-test-opt
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_uri_test_opt amqp://localhost:61613/queue amqp localhost 61613 queue
 )
 
@@ -167,7 +167,7 @@ target_link_libraries(
 
 add_test(
 	NAME gru-time-read-test
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_time_read_test
 )
 
@@ -183,7 +183,7 @@ target_link_libraries(
 
 add_test(
 	NAME gru-split
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_split_test
 )
 
@@ -200,7 +200,7 @@ target_link_libraries(
 
 add_test(
 	NAME gru-split-2
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_split_test_2 "net,java" "," "net" "java"
 )
 
@@ -216,6 +216,6 @@ target_link_libraries(
 
 add_test(
 	NAME gru-serialize
-	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_serialize_test
 )
