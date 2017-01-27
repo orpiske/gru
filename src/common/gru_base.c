@@ -18,7 +18,9 @@
 
 static const char *filename;
 
-static void gru_base_app_home_release() { gru_dealloc_const_string(&filename); }
+static void gru_base_app_home_release() {
+	gru_dealloc_const_string(&filename);
+}
 
 const char *gru_base_app_home(const char *appname) {
 	if (filename) {
@@ -36,7 +38,7 @@ const char *gru_base_app_home(const char *appname) {
 #else
 	char *tmp = NULL;
 	struct passwd *pw = getpwuid(getuid());
-	
+
 	if (asprintf(&tmp, "%s/.%s", pw->pw_dir, appname) == -1) {
 		fprintf(stderr, "Unable to allocate memory for the application home directory");
 

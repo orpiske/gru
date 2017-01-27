@@ -23,7 +23,8 @@ gru_config_t *gru_config_init(
 	gru_alloc_check(ret, NULL);
 
 	if (asprintf(&ret->dir, "%s", dir) == -1) {
-		gru_status_set(status, GRU_FAILURE,
+		gru_status_set(status,
+			GRU_FAILURE,
 			"Unable to allocate memory for initializing the configuration");
 
 		gru_dealloc((void **) &ret);
@@ -31,7 +32,8 @@ gru_config_t *gru_config_init(
 	}
 
 	if (asprintf(&ret->filename, "%s", filename) == -1) {
-		gru_status_set(status, GRU_FAILURE,
+		gru_status_set(status,
+			GRU_FAILURE,
 			"Unable to allocate memory for initializing the configuration");
 
 		gru_dealloc_string(&ret->dir);

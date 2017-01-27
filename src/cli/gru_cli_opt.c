@@ -16,13 +16,22 @@
 #include "gru_cli_opt.h"
 
 void gru_cli_option_help(const char *long_opt, const char *short_opt, const char *desc) {
-	printf("\t%s%s--%s (-%s short option) %s\n\t\t%s\n\n", RESET, LIGHT_WHITE, long_opt,
-		short_opt, RESET, desc);
+	printf("\t%s%s--%s (-%s short option) %s\n\t\t%s\n\n",
+		RESET,
+		LIGHT_WHITE,
+		long_opt,
+		short_opt,
+		RESET,
+		desc);
 }
 
 void gru_cli_program_usage(const char *appname, const char *program_name) {
-	printf("%s%sUsage:%s\n%s %s <options>\n\nValid options:\n\n", RESET, LIGHT_WHITE,
-		RESET, appname, program_name);
+	printf("%s%sUsage:%s\n%s %s <options>\n\nValid options:\n\n",
+		RESET,
+		LIGHT_WHITE,
+		RESET,
+		appname,
+		program_name);
 }
 
 void gru_cli_program_description(const char *program, const char *description) {
@@ -30,6 +39,9 @@ void gru_cli_program_description(const char *program, const char *description) {
 }
 
 void gru_cli_general_usage(const char *appname) {
-	printf("%s%sUsage:%s\n%s <program> <options>\n\nValid programs:\n\n", RESET,
-		LIGHT_WHITE, appname, RESET);
+	printf("%s%sUsage:%s\n%s <program> <options>\n\nValid programs:\n\n",
+		RESET,
+		LIGHT_WHITE,
+		appname,
+		RESET);
 }

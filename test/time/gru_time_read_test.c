@@ -14,24 +14,29 @@
  * limitations under the License.
  */
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include "time/gru_time_utils.h"
 
-static bool test_read_ex(const char *str, const long expected_sec, const long expected_usec) {
+static bool test_read_ex(
+	const char *str, const long expected_sec, const long expected_usec) {
 	struct timeval t = gru_time_read_str(str);
 
 	if (t.tv_sec != expected_sec) {
-		fprintf(stderr, "The sec value %ld does not match the expected %ld\n",
-			 t.tv_sec, expected_sec);
+		fprintf(stderr,
+			"The sec value %ld does not match the expected %ld\n",
+			t.tv_sec,
+			expected_sec);
 
 		return false;
 	}
 
 	if (t.tv_usec != expected_usec) {
-		fprintf(stderr, "The usec value %li does not match the expected %li\n",
-			 t.tv_usec, expected_usec);
+		fprintf(stderr,
+			"The usec value %li does not match the expected %li\n",
+			t.tv_usec,
+			expected_usec);
 
 		return false;
 	}
@@ -42,7 +47,6 @@ static bool test_read_ex(const char *str, const long expected_sec, const long ex
 static bool test_read() {
 	return test_read_ex("1483228862.529", 1483228862, 529);
 }
-
 
 static bool test_write() {
 	struct timeval t;
@@ -55,8 +59,9 @@ static bool test_write() {
 		return true;
 	}
 
-	fprintf(stderr, "Formatted time %s does not match the expected value 1562377512.671\n",
-			 tmp);
+	fprintf(stderr,
+		"Formatted time %s does not match the expected value 1562377512.671\n",
+		tmp);
 	free(tmp);
 	return false;
 }

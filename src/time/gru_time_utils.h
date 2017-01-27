@@ -16,12 +16,12 @@
 #ifndef GRU_TIME_UTILS_H
 #define GRU_TIME_UTILS_H
 
-#include <stdint.h>
+#include <ctype.h>
 #include <inttypes.h>
 #include <math.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <ctype.h>
 
 #if !defined(_WIN32) && !defined(_WIN64)
 #include <sys/time.h>
@@ -29,9 +29,8 @@
 #include <windows.h>
 #endif
 
-
-#include "common/gru_portable.h"
 #include "common/gru_alloc.h"
+#include "common/gru_portable.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,7 +47,6 @@ typedef struct timeval gru_timestamp_t;
  * @param count number of seconds to add
  */
 gru_export void gru_time_add_seconds(gru_timestamp_t *t, uint64_t count);
-
 
 /**
  * Add minutes to a timestamp object

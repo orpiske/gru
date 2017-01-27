@@ -37,7 +37,6 @@ int gru_time_timersub(struct timeval *start, struct timeval *end, struct timeval
 #define timersub(start, end, result) gru_time_timersub(start, end, result)
 #endif
 
-
 #ifdef __cplusplus
 }
 #endif

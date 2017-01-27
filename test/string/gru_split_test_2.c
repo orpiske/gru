@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-#include "string/gru_util.h"
 #include "collection/gru_list.h"
 #include "common/gru_alloc.h"
-
+#include "string/gru_util.h"
 
 int main(int argc, char **argv) {
 	gru_status_t status = gru_status_new();
@@ -42,12 +41,11 @@ int main(int argc, char **argv) {
 		}
 	}
 
-
 	gru_split_clean(list);
 	gru_list_destroy(&list);
 	return EXIT_SUCCESS;
 
-	err_failure:
+err_failure:
 	gru_split_clean(list);
 	gru_list_destroy(&list);
 	return EXIT_FAILURE;

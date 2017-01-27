@@ -18,13 +18,21 @@
 static logger_t logger = NULL;
 static log_level_t minimum = INFO;
 
-void gru_logger_set(logger_t new_logger) { logger = new_logger; }
+void gru_logger_set(logger_t new_logger) {
+	logger = new_logger;
+}
 
-logger_t gru_logger_get(void) { return logger; }
+logger_t gru_logger_get(void) {
+	return logger;
+}
 
-void gru_logger_set_mininum(log_level_t new_minimum) { minimum = new_minimum; }
+void gru_logger_set_mininum(log_level_t new_minimum) {
+	minimum = new_minimum;
+}
 
-log_level_t gru_logger_get_mininum() { return minimum; }
+log_level_t gru_logger_get_mininum() {
+	return minimum;
+}
 
 bool gru_logger_can_log(log_level_t current) {
 	if (current >= minimum) {

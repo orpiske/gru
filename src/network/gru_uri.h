@@ -57,7 +57,6 @@ typedef struct gru_uri_t_ {
 gru_export gru_uri_t gru_uri_parse(
 	const char *gru_restrict uri, gru_status_t *gru_restrict status);
 
-
 /**
  * URI parser with additional options
  * @param uri URI string (ie.: scheme://host:port/path)
@@ -68,7 +67,6 @@ gru_export gru_uri_t gru_uri_parse(
 gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 	gru_uri_parse_opt_t parseopt, gru_status_t *gru_restrict status);
 
-
 /**
  * Converts a URI object to a string
  * @param uri a pointer to an URI object
@@ -78,7 +76,6 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 gru_export char *gru_uri_simple_format(
 	const gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
 
-
 /**
  * A more elaborate URI string converter that can filter parts of the URI
  * @param uri a pointer to an URI object
@@ -86,8 +83,8 @@ gru_export char *gru_uri_simple_format(
  * @param status status object
  * @return a new URI string that must be free'd after use
  */
-gru_export char *gru_uri_format(const gru_uri_t *gru_restrict uri, gru_uri_format_opt_t fopt,
-	gru_status_t *gru_restrict status);
+gru_export char *gru_uri_format(const gru_uri_t *gru_restrict uri,
+	gru_uri_format_opt_t fopt, gru_status_t *gru_restrict status);
 
 /**
  * Sets the scheme in a URI object
@@ -105,7 +102,6 @@ gru_export bool gru_uri_set_scheme(gru_uri_t *uri, const char *scheme);
  */
 gru_export bool gru_uri_set_path(gru_uri_t *uri, const char *path);
 
-
 /**
  * Clone a URI object
  * @param other the object to clone
@@ -114,7 +110,6 @@ gru_export bool gru_uri_set_path(gru_uri_t *uri, const char *path);
  * to determine whether cloning was successful or not
  */
 gru_export gru_uri_t gru_uri_clone(gru_uri_t other, gru_status_t *status);
-
 
 /**
  * Cleans up a URI object

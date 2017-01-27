@@ -15,9 +15,9 @@
  */
 #include <stdint.h>
 
-#include "gru_util.h"
-#include "common/gru_alloc.h"
 #include "collection/gru_list.h"
+#include "common/gru_alloc.h"
+#include "gru_util.h"
 
 char *gru_rtrim(char *input, size_t size) {
 	size_t i = size;
@@ -76,7 +76,6 @@ const char *gru_get_name_from_url(const char *url, size_t size) {
 	return NULL;
 }
 
-
 gru_list_t *gru_split(const char *str, char sep, gru_status_t *status) {
 	gru_list_t *ret = gru_list_new(status);
 	gru_alloc_check(ret, NULL);
@@ -108,7 +107,6 @@ void gru_split_clean(gru_list_t *list) {
 		gru_list_for_each(list, gru_split_node_destroy, NULL);
 	}
 }
-
 
 char *gru_str_serialize(gru_list_t *list, char sep, gru_status_t *status) {
 	uint32_t lsize = gru_list_count(list);

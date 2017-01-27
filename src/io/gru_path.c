@@ -63,14 +63,19 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status) {
 	if (ret < 0) {
 		switch (errno) {
 			case ENOENT: {
-				gru_status_set(status, GRU_FAILURE, "No such file or directory %s: %s",
-					filename, strerror(errno));
+				gru_status_set(status,
+					GRU_FAILURE,
+					"No such file or directory %s: %s",
+					filename,
+					strerror(errno));
 
 				return false;
 			}
 			case EACCES: {
-				gru_status_set(status, GRU_FAILURE,
-					"Access denied (no read/write permission) %s: %s", filename,
+				gru_status_set(status,
+					GRU_FAILURE,
+					"Access denied (no read/write permission) %s: %s",
+					filename,
 					strerror(errno));
 				return false;
 			}

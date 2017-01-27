@@ -160,8 +160,12 @@ char *gru_uri_simple_format(const gru_uri_t *uri, gru_status_t *status) {
 
 	if (uri->port != 0) {
 		if (uri->path) {
-			rc = asprintf(&ret, "%s://%s:%" PRIu16 "%s", uri->scheme, uri->host,
-				uri->port, uri->path);
+			rc = asprintf(&ret,
+				"%s://%s:%" PRIu16 "%s",
+				uri->scheme,
+				uri->host,
+				uri->port,
+				uri->path);
 		} else {
 			rc = asprintf(&ret, "%s://%s:%" PRIu16 "", uri->scheme, uri->host, uri->port);
 		}
@@ -189,14 +193,19 @@ char *gru_uri_simple_format(const gru_uri_t *uri, gru_status_t *status) {
 	char *path;
  */
 
-char *gru_uri_format(const gru_uri_t *uri, gru_uri_format_opt_t fopt, gru_status_t *status) {
+char *gru_uri_format(
+	const gru_uri_t *uri, gru_uri_format_opt_t fopt, gru_status_t *status) {
 	char *ret = {0};
 	int rc = 0;
 
 	if (uri->port != 0 && (fopt & GRU_URI_FORMAT_PORT)) {
 		if (uri->path && (fopt & GRU_URI_FORMAT_PATH)) {
-			rc = asprintf(&ret, "%s://%s:%" PRIu16 "%s", uri->scheme, uri->host,
-				uri->port, uri->path);
+			rc = asprintf(&ret,
+				"%s://%s:%" PRIu16 "%s",
+				uri->scheme,
+				uri->host,
+				uri->port,
+				uri->path);
 		} else {
 			rc = asprintf(&ret, "%s://%s:%" PRIu16 "", uri->scheme, uri->host, uri->port);
 		}

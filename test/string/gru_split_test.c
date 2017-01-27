@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-#include "string/gru_util.h"
 #include "collection/gru_list.h"
 #include "common/gru_alloc.h"
-
+#include "string/gru_util.h"
 
 int main(int argc, char **argv) {
 	gru_status_t status = gru_status_new();
-	gru_list_t *list = gru_split("fedora,freebsd,gentoo,debian,ubuntu,red hat", ',',
-								 &status);
+	gru_list_t *list =
+		gru_split("fedora,freebsd,gentoo,debian,ubuntu,red hat", ',', &status);
 	uint32_t expected_size = 6;
 
 	if (gru_status_error(&status)) {
@@ -41,13 +40,7 @@ int main(int argc, char **argv) {
 	}
 
 	const char *expected[] = {
-		"fedora",
-		"freebsd",
-		"gentoo",
-		"debian",
-		"ubuntu",
-		"red hat"
-	};
+		"fedora", "freebsd", "gentoo", "debian", "ubuntu", "red hat"};
 
 	for (uint32_t i = 0; i < list_size; i++) {
 		const gru_node_t *node = gru_list_get(list, i);
@@ -59,12 +52,11 @@ int main(int argc, char **argv) {
 		}
 	}
 
-
 	gru_split_clean(list);
 	gru_list_destroy(&list);
 	return EXIT_SUCCESS;
 
-	err_failure:
+err_failure:
 	gru_split_clean(list);
 	gru_list_destroy(&list);
 	return EXIT_FAILURE;

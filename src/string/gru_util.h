@@ -24,8 +24,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "common/gru_portable.h"
 #include "collection/gru_list.h"
+#include "common/gru_portable.h"
 #include "string/gru_alt.h"
 
 #ifdef __cplusplus
@@ -63,7 +63,6 @@ gru_export char *gru_trim(char *input, size_t size);
  */
 gru_export const char *gru_get_name_from_url(const char *url, size_t size);
 
-
 /**
  * Split a string
  * @param str the string to split
@@ -80,7 +79,6 @@ gru_export gru_list_t *gru_split(const char *str, char sep, gru_status_t *status
  * @param list the list to clean
  */
 gru_export void gru_split_clean(gru_list_t *list);
-
 
 /**
  * Serializes a string list

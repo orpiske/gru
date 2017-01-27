@@ -74,7 +74,8 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	const gru_tree_node_t *c gru_attr_unused = gru_tree_search(root, compare_file_name, "c");
+	const gru_tree_node_t *c gru_attr_unused =
+		gru_tree_search(root, compare_file_name, "c");
 
 	gru_tree_for_each(root, print_path, NULL);
 

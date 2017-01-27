@@ -23,7 +23,6 @@ void gru_time_add_minutes(gru_timestamp_t *t, uint64_t count) {
 	gru_time_add_seconds(t, (count * 60));
 }
 
-
 gru_timestamp_t gru_time_read_str(const char *str) {
 	gru_timestamp_t ret = {0};
 	int pos = 0;
@@ -36,7 +35,6 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 		sec[pos] = str[pos];
 		pos++;
 	}
-
 
 	pos++;
 	int usecl = 0;
@@ -52,17 +50,15 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 	return ret;
 }
 
-
 char *gru_time_write_str(const gru_timestamp_t *t) {
 	char *ret = NULL;
 
-	if (asprintf(&ret, "%"PRIu64".%"PRIu64"", t->tv_sec, t->tv_usec) == -1) {
+	if (asprintf(&ret, "%" PRIu64 ".%" PRIu64 "", t->tv_sec, t->tv_usec) == -1) {
 		return NULL;
 	}
 
 	return ret;
 }
-
 
 gru_timestamp_t gru_time_now() {
 	gru_timestamp_t ret = {.tv_sec = 0, .tv_usec = 0};

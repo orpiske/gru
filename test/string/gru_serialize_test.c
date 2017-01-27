@@ -13,19 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-#include "common/gru_status.h"
-#include "string/gru_util.h"
 #include "collection/gru_list.h"
 #include "common/gru_alloc.h"
-
+#include "common/gru_status.h"
+#include "string/gru_util.h"
 
 int main(int argc, char **argv) {
 	gru_status_t status = gru_status_new();
 	gru_list_t *list = gru_list_new(&status);
-
 
 	gru_list_append(list, "fedora");
 	gru_list_append(list, "freebsd");
@@ -36,8 +34,8 @@ int main(int argc, char **argv) {
 
 	char *str = gru_str_serialize(list, ',', &status);
 	if (strcmp(str, "fedora,freebsd,gentoo,debian,ubuntu,red hat") != 0) {
-		fprintf(stderr, "The returned string '%s' does not match the expected one\n",
-			 str);
+		fprintf(
+			stderr, "The returned string '%s' does not match the expected one\n", str);
 
 		gru_dealloc_string(&str);
 		gru_list_destroy(&list);

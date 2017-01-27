@@ -19,11 +19,11 @@
 #include <assert.h>
 #include <errno.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 #include "common/gru_portable.h"
 
@@ -45,8 +45,8 @@ typedef enum gru_status_code_t_ {
  * Status type
  */
 typedef struct gru_status_t_ {
-    char *message;
-    gru_status_code_t code;
+	char *message;
+	gru_status_code_t code;
 } gru_status_t;
 
 /**
@@ -86,14 +86,13 @@ gru_export void gru_status_reset(gru_status_t *status);
  */
 gru_export void gru_status_set_success(gru_status_t *status);
 
-
 /**
  * Checks for error status
  * @param status the status object to check
  * @return true if an error or false otherwise
  */
 gru_export static inline bool gru_status_error(const gru_status_t *status) {
-    return status->code == GRU_FAILURE;
+	return status->code == GRU_FAILURE;
 }
 
 /**
@@ -102,7 +101,7 @@ gru_export static inline bool gru_status_error(const gru_status_t *status) {
  * @return true if success or false otherwise
  */
 gru_export static inline bool gru_status_success(const gru_status_t *status) {
-    return status->code == GRU_SUCCESS;
+	return status->code == GRU_SUCCESS;
 }
 
 #ifdef __cplusplus

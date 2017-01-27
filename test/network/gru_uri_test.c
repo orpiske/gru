@@ -34,7 +34,9 @@ int main(int argc, char **argv) {
 	}
 
 	if (strcmp(uri.scheme, argv[2]) != 0) {
-		fprintf(stderr, "Expected scheme %s does not match returned one %s", argv[2],
+		fprintf(stderr,
+			"Expected scheme %s does not match returned one %s",
+			argv[2],
 			uri.scheme);
 
 		goto err_exit;
