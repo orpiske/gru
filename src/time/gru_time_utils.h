@@ -21,10 +21,10 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 #if !defined(_WIN32) && !defined(_WIN64)
 #include <sys/time.h>
+#include <unistd.h>
 #else
 #include <windows.h>
 #endif
