@@ -91,18 +91,14 @@ gru_export void gru_status_set_success(gru_status_t *status);
  * @param status the status object to check
  * @return true if an error or false otherwise
  */
-gru_export static inline bool gru_status_error(const gru_status_t *status) {
-	return status->code == GRU_FAILURE;
-}
+gru_export bool gru_status_error(const gru_status_t *status);
 
 /**
  * Checks for success status
  * @param status the status object to check
  * @return true if success or false otherwise
  */
-gru_export static inline bool gru_status_success(const gru_status_t *status) {
-	return status->code == GRU_SUCCESS;
-}
+gru_export bool gru_status_success(const gru_status_t *status);
 
 #ifdef __cplusplus
 }
