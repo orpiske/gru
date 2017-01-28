@@ -70,3 +70,6 @@ if (UNIX)
 	check_function_exists(strlcpy HAVE_STRLCPY)
 	DefineIfSet(HAVE_STRLCPY)
 endif (UNIX)
+
+check_function_exists(strndup HAVE_STRNDUP)
+DefineIfSet(HAVE_STRNDUP)

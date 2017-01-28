@@ -52,6 +52,17 @@ size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size
 
 #endif // HAVE_STRLCPY
 
+
+#ifndef HAVE_STRNDUP
+
+/**
+ * Poor man's implementation of strndup (duplicate a string)
+ * @param source source string
+ * @param limit maximum number of bytes to copy
+ */
+char *strndup(const char *source, size_t limit);
+#endif // HAVE_STRNDUP
+
 #ifdef __cplusplus
 }
 #endif

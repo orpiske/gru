@@ -48,4 +48,24 @@ size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size
 	return dst_len + src_len;
 }
 
-#endif
+#endif // HAVE_STRLCPY
+
+
+#ifndef HAVE_STRNDUP
+char *strndup (const char *source, size_t limit) {
+	size_t len = strlen(source);
+
+	if (limit < len) { 
+		len = limit;
+	}
+
+	char *result = (char *) calloc(1, len + 1);
+	if (!result) { 
+		return NULL;
+	}
+
+
+	return (char *) memcpy(result, source, len);
+}
+
+#endif // HAVE_STRNDUP
