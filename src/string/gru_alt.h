@@ -39,7 +39,7 @@ extern "C" {
  * @param size amount of bytes to copy
  * @return The amount of bytes copied
  */
-size_t strlcpy(char *gru_restrict dst, const char *gru_restrict src, size_t size);
+gru_export size_t strlcpy(char *gru_restrict dst, const char *gru_restrict src, size_t size);
 
 /**
  * Poor man's implementation of strlcat
@@ -48,7 +48,7 @@ size_t strlcpy(char *gru_restrict dst, const char *gru_restrict src, size_t size
  * @param size amount of bytes to copy
  * @return The total length of the string they tried to create
  */
-size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size);
+gru_export size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size);
 
 #endif // HAVE_STRLCPY
 
@@ -60,7 +60,7 @@ size_t strlcat(char *gru_restrict dst, const char *gru_restrict src, size_t size
  * @param source source string
  * @param limit maximum number of bytes to copy
  */
-char *strndup(const char *source, size_t limit);
+gru_export char *strndup(const char *source, size_t limit);
 #endif // HAVE_STRNDUP
 
 #ifdef __cplusplus

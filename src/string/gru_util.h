@@ -87,7 +87,7 @@ gru_export void gru_split_clean(gru_list_t *list);
  * @param status
  * @return
  */
-char *gru_str_serialize(gru_list_t *list, char sep, gru_status_t *status);
+gru_export char *gru_str_serialize(gru_list_t *list, char sep, gru_status_t *status);
 
 #ifdef __cplusplus
 }
