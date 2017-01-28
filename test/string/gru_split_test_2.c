@@ -23,7 +23,6 @@
 int main(int argc, char **argv) {
 	gru_status_t status = gru_status_new();
 	gru_list_t *list = gru_split(argv[1], argv[2][0], &status);
-	uint32_t expected_size = 5;
 
 	if (gru_status_error(&status)) {
 		fprintf(stderr, "%s\n", status.message);
