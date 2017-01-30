@@ -1,7 +1,3 @@
-if (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
- add_definitions(-D_GNU_SOURCE -DLINUX_BUILD)
-endif (${CMAKE_SYSTEM_NAME} EQUAL "Linux")
-
 if (WIN32)
 	message(STATUS "Adding Windows specific files")
 	set(
