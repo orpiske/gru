@@ -76,6 +76,12 @@ gru_export char *gru_time_write_str(const gru_timestamp_t *t);
 gru_export gru_timestamp_t gru_time_now();
 
 /**
+ * Gets the current moment in time in milliseconds
+ * @return current time in milliseconds since Epoch
+ */
+gru_export uint64_t gru_time_now_milli();
+
+/**
  * Converts an unformatted string of milliseconds since epoch to a timestamp
  * @param ts A numeric string representing the milliseconds since epoch (ie.:
  * 1484719545264)

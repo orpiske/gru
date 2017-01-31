@@ -67,6 +67,12 @@ gru_timestamp_t gru_time_now() {
 	return ret;
 }
 
+uint64_t gru_time_now_milli() {
+	gru_timestamp_t now = gru_time_now();
+
+	return gru_time_to_milli(&now);
+}
+
 gru_timestamp_t gru_time_from_milli(int64_t timestamp) {
 
 	gru_timestamp_t ret = {0};
