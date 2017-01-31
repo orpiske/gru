@@ -56,8 +56,8 @@ gru_export void gru_time_add_seconds(gru_timestamp_t *t, uint64_t count);
 gru_export void gru_time_add_minutes(gru_timestamp_t *t, uint64_t count);
 
 /**
- * Read a string in the format seconds.microseconds and return a struct timeval
- * @param str The string in the format seconds.microseconds
+ * Read a string in the format seconds.milliseconds and return a struct timeval
+ * @param str The string in the format seconds.milliseconds
  * @return a timestamp object with the parsed data
  */
 gru_export gru_timestamp_t gru_time_read_str(const char *str);
@@ -76,7 +76,7 @@ gru_export char *gru_time_write_str(const gru_timestamp_t *t);
 gru_export gru_timestamp_t gru_time_now();
 
 /**
- * Converts an unformatted string of milliseconds since epoch to a timespamp
+ * Converts an unformatted string of milliseconds since epoch to a timestamp
  * @param ts A numeric string representing the milliseconds since epoch (ie.:
  * 1484719545264)
  * @return a timestamp object with the parsed data
@@ -89,6 +89,8 @@ gru_export gru_timestamp_t gru_time_from_milli_char(const char *ts);
  * @return a timestamp object with the converted data
  */
 gru_export gru_timestamp_t gru_time_from_milli(int64_t timestamp);
+
+
 
 #ifdef __cplusplus
 }

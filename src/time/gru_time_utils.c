@@ -45,7 +45,7 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 	}
 
 	ret.tv_sec = atol(sec);
-	ret.tv_usec = atol(usec);
+	ret.tv_usec = atol(usec) * 1000;
 
 	return ret;
 }
@@ -84,4 +84,10 @@ gru_timestamp_t gru_time_from_milli_char(const char *ts) {
 	uint64_t ms = strtoull(ts, NULL, 10);
 
 	return gru_time_from_milli(ms);
+}
+
+uint64_t gru_time_to_milli(const gru_timestamp_t *ts) {
+	uint64_t ret = (ts->tv_sec * 1000) + (ts->tv_usec / 1000000);
+
+	return ret;
 }
