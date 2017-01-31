@@ -155,7 +155,6 @@ add_test(
 )
 
 
-
 add_executable(gru_time_read_test
 	time/gru_time_read_test.c
 )
@@ -169,6 +168,22 @@ add_test(
 	NAME gru-time-read-test
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_time_read_test
+)
+
+
+add_executable(gru_time_conversion_test
+	time/gru_time_conversion_test.c
+)
+
+target_link_libraries(
+	gru_time_conversion_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-time-conversion-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+	COMMAND gru_time_conversion_test
 )
 
 add_executable(
