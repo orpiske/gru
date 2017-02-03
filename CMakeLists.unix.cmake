@@ -14,5 +14,11 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/${CMAKE_INSTALL_BINDIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/${CMAKE_INSTALL_LIBDIR})
 set (CTEST_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR})
 
+
+find_path(URIPARSER_INCLUDE_DIR uriparser/Uri.h)
 find_library(URIPARSER_LIB NAMES uriparser liburiparser)
+
+message(STATUS "URIParser found on ${URIPARSER_INCLUDE_DIR}")
+
+include_directories(${URIPARSER_INCLUDE_DIR})
 link_libraries(${URIPARSER_LIB})
