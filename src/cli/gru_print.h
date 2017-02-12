@@ -34,6 +34,9 @@
 extern "C" {
 #endif
 
+/**
+ * Utility to print a formatted error message to stderr
+ */
 void gru_print_err(const char *msg, ...);
 
 #ifdef __cplusplus

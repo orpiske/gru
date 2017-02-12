@@ -22,9 +22,12 @@
 extern "C" {
 #endif
 
+/**
+ * Node information container
+ */
 typedef struct gru_node_info_t_ {
-	uint32_t parent_pos;
-	uint32_t self_pos;
+	uint32_t parent_pos; /* Parent node position */
+	uint32_t self_pos; /* Self position */
 } gru_node_info_t;
 
 #ifdef __cplusplus

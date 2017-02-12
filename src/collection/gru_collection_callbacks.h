@@ -24,9 +24,21 @@
 extern "C" {
 #endif
 
+/**
+ * Comparator function for the collections module
+ */
 typedef bool (*compare_function_t)(const void *, const void *data, void *result);
+
+/**
+ * Handler function for the collections module
+ */
 typedef void (*handle_function_t)(const void *, void *);
+
+/**
+ * A handler function for the collections module that also receiver node information
+ */
 typedef void (*handle_function_info_t)(const void *, gru_node_info_t info, void *);
+
 typedef handle_function_t tree_callback_fn;
 
 #ifdef __cplusplus
