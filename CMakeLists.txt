@@ -13,7 +13,7 @@ include(CMakeLists.default.cmake)
 
 
 set(BUILD_WITH_UNIT_TESTS ON CACHE BOOL "Build unit tests")
-set(BUILD_WITH_DOCUMENTATION ON CACHE BOOL "Build documentation")
+set(BUILD_WITH_DOCUMENTATION OFF CACHE BOOL "Build documentation")
 
 if (UNIX)
 	message(STATUS "Adding Unix related build rules")
