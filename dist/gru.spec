@@ -12,6 +12,7 @@ URL:                https://github.com/orpiske/gru
 BuildRequires:      cmake
 BuildRequires:      make
 BuildRequires:      gcc
+BuildRequires:      doxygen
 BuildRequires:      uriparser-devel
 Requires:           uriparser
 
@@ -28,6 +29,13 @@ Group:              Development/Libraries
 
 %description devel
 Development packages for the GRU library
+
+%package devel-docs
+Summary:            Generic Reusable Utilities (GRU) development kit documentation
+Group:              Development/Libraries
+
+%description devel-docs
+Development documentation for the GRU library
 
 %prep
 %autosetup -n gru-%{version}
@@ -48,6 +56,9 @@ make install
 
 %files devel
 %{_includedir}/*
+
+%files devel-docs
+%{_datadir}/*
 
 
 %changelog
