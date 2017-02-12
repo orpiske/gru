@@ -11,10 +11,9 @@ include(GNUInstallDirs)
 include(CheckLists.cmake)
 include(CMakeLists.default.cmake)
 
-add_custom_target(documentation
-    COMMAND ${CMAKE_COMMAND} -P ../documentation.cmake)
 
 set(BUILD_WITH_UNIT_TESTS ON CACHE BOOL "Build unit tests")
+set(BUILD_WITH_DOCUMENTATION ON CACHE BOOL "Build documentation")
 
 if (UNIX)
 	message(STATUS "Adding Unix related build rules")
@@ -42,3 +41,12 @@ add_custom_target(format
 	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/util/format.sh
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+if (BUILD_WITH_DOCUMENTATION)
+	add_custom_target(documentation
+		COMMAND ${CMAKE_COMMAND} -P ../documentation.cmake)
+	install(
+		DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/target/doc 
+		DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}-${GRU_VERSION_MAJOR}
+	)
+endif(BUILD_WITH_DOCUMENTATION)
