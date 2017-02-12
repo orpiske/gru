@@ -11,6 +11,9 @@ include(GNUInstallDirs)
 include(CheckLists.cmake)
 include(CMakeLists.default.cmake)
 
+add_custom_target(documentation
+    COMMAND ${CMAKE_COMMAND} -P ../documentation.cmake)
+
 set(BUILD_WITH_UNIT_TESTS ON CACHE BOOL "Build unit tests")
 
 if (UNIX)
