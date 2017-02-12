@@ -26,9 +26,11 @@ int main(int argc, char **argv) {
 	uint64_t ret = gru_time_to_milli(&ts);
 
 	if (ret != expected) {
-		printf("Returned value %" PRIu64 " does not mach the expected value %"
-			PRIu64 "\n", ret, expected);
-		
+		printf("Returned value %" PRIu64 " does not mach the expected value %" PRIu64
+			   "\n",
+			ret,
+			expected);
+
 		return EXIT_FAILURE;
 	}
 

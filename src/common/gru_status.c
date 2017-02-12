@@ -80,7 +80,6 @@ void gru_status_strerror(gru_status_t *status, gru_status_code_t code, int errnu
 	return;
 }
 
-
 inline bool gru_status_error(const gru_status_t *status) {
 	return status->code == GRU_FAILURE;
 }

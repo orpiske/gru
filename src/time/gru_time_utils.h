@@ -96,7 +96,6 @@ gru_export gru_timestamp_t gru_time_from_milli_char(const char *ts);
  */
 gru_export gru_timestamp_t gru_time_from_milli(int64_t timestamp);
 
-
 /**
  * Converst a timestamp to milliseconds
  * @param ts A pointer to a timestamp structure
