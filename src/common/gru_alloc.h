@@ -23,7 +23,7 @@ extern "C" {
 
 /**
  * Allocate a block of memory
- * @param size the amount of memory (in bytes) to allocate 
+ * @param size the amount of memory (in bytes) to allocate
  * @param status a status pointer that will be set in case of failure
  * @return a pointer to the newly allocated memory or NULL if failed
  */

@@ -41,24 +41,24 @@ gru_export gru_node_t *gru_node_new(const void *ptr);
  */
 gru_export void gru_node_destroy(gru_node_t **node);
 
-/** 
- * Sets the previous node for a given node 
+/**
+ * Sets the previous node for a given node
  * @param node the node to set
- * @param previous the node to be set as a previous to the node 
+ * @param previous the node to be set as a previous to the node
  */
 gru_export void gru_node_set_previous(
 	gru_node_t *gru_restrict node, gru_node_t *gru_restrict previous);
 
-/** 
- * Sets the next node for a given node 
+/**
+ * Sets the next node for a given node
  * @param node the node to set
- * @param next the node to be set as the next to the node 
+ * @param next the node to be set as the next to the node
  */
 gru_export void gru_node_set_next(
 	gru_node_t *gru_restrict node, gru_node_t *gru_restrict next);
 
 /**
- * Reset the pointers for the node and unassign the next and previous pointers 
+ * Reset the pointers for the node and unassign the next and previous pointers
  * @param node the node to reset
  */
 gru_export void gru_node_reset(gru_node_t *gru_restrict node);
@@ -66,7 +66,7 @@ gru_export void gru_node_reset(gru_node_t *gru_restrict node);
 /**
  * Unlink a node from it's previous and next node and resets it
  * @param node the node to unlink
- */ 
+ */
 gru_export void gru_node_unlink(gru_node_t *gru_restrict node);
 
 #define gru_node_get_data_ptr(type, node) (type *) node->data
