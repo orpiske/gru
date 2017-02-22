@@ -1,4 +1,4 @@
-/**
+/*
  Copyright 2016 Otavio Rodolfo Piske
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,6 +27,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+@example config/gru_config_test.c
+*/
 
 typedef enum gru_uri_parse_opt_t_ {
 	GRU_URI_PARSE_DEFAULT = 0,

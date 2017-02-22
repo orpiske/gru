@@ -1,4 +1,4 @@
-/**
+/*
  Copyright 2016 Otavio Rodolfo Piske
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,10 +37,36 @@ typedef struct gru_duration_t_ {
 	struct timeval end;
 } gru_duration_t;
 
+/**
+ * Builds a duration struct that represents a duration. That means, the current time + 
+ * the given number of seconds
+ * @param seconds the duration in seconds
+ * @return a duration object
+ */
 gru_export gru_duration_t gru_duration_from_seconds(uint64_t seconds);
+
+/**
+ * Builds a duration struct that represents a duration. That means, the current time + 
+ * the given number of minutes
+ * @param minutes the duration in minutes
+ * @return a duration object
+ */
 gru_export gru_duration_t gru_duration_from_minutes(uint64_t minutes);
 
+/**
+ * Given a duration object, return the number of seconds between its start and end 
+ * time
+ * @param duration a duration object to calculate
+ * @return the time difference in seconds
+ */
 gru_export uint64_t gru_duration_seconds(gru_duration_t duration);
+
+/**
+ * Given a duration object, return the number of minutes between its start and end 
+ * time
+ * @param duration a duration object to calculate
+ * @return the time difference in minutes
+ */
 gru_export uint64_t gru_duration_minutes(gru_duration_t duration, double *fractional);
 
 #ifdef __cplusplus

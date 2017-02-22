@@ -1,4 +1,4 @@
-/**
+/*
  Copyright 2016 Otavio Rodolfo Piske
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,6 +48,9 @@ typedef struct gru_config_t_ {
 	gru_payload_t *payload;
 } gru_config_t;
 
+/**
+ * Initializes a new configuration object
+ */
 gru_export gru_config_t *gru_config_init(
 	const char *dir, const char *filename, gru_payload_t *payload, gru_status_t *status);
 
