@@ -23,7 +23,7 @@ This library implements reusable C/C++ utilities, algorithms and features.
 
 %package devel
 Summary:            Generic Reusable Utilities (GRU) development kit
-Requires:           gcc
+Requires:           gru
 Requires:           uriparser-devel
 Group:              Development/Libraries
 
