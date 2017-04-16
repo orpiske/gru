@@ -35,6 +35,12 @@ extern "C" {
 #define GRU_OPT_MAX_STR_SIZE_MASK "%256s"
 #define GRU_OPT_MAX_CHAR_SIZE_MASK "%256c"
 
+/**
+ * Returns the base directory for the application given an application name
+ * For Unix-like, that would be: $HOME/.appname
+ * @param appname Application name
+ * @return a pointer to a static buffer that will be automatically free'd at exit
+ */
 gru_export const char *gru_base_app_home(const char *appname);
 
 #ifdef __cplusplus
