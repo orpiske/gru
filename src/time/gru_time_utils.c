@@ -40,7 +40,7 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 
 	pos++;
 	int usecl = 0;
-	while (isdigit(str[pos]) && usecl < sizeof(usec)) {
+	while (isdigit(str[pos]) && usecl < (sizeof(usec) - 1)) {
 		usec[usecl] = str[pos];
 		pos++;
 		usecl++;
