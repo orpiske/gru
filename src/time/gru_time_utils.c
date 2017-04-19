@@ -29,7 +29,9 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 
 	// This, I hope, should be sufficient for years to come ...
 	char sec[16] = {0};
-	char usec[16] = {0};
+
+	// 999999
+	char usec[7] = {0};
 
 	while (isdigit(str[pos]) && pos < sizeof(sec)) {
 		sec[pos] = str[pos];
@@ -45,7 +47,7 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 	}
 
 	ret.tv_sec = atol(sec);
-	ret.tv_usec = atol(usec) * 1000;
+	ret.tv_usec = atol(usec);
 
 	return ret;
 }

@@ -19,7 +19,7 @@
 
 #include "time/gru_time_utils.h"
 
-int main(int argc, char **argv) {
+int test1() {
 	gru_timestamp_t ts = gru_time_read_str("1483228862.529");
 	uint64_t expected = 1483228862529;
 
@@ -35,4 +35,29 @@ int main(int argc, char **argv) {
 	}
 
 	return EXIT_SUCCESS;
+}
+
+
+int test2() {
+	gru_timestamp_t ts = gru_time_read_str("1492582746.567");
+	uint64_t expected = 1492582746567;
+
+	uint64_t ret = gru_time_to_milli(&ts);
+
+	if (ret != expected) {
+		printf("Returned value %" PRIu64 " does not mach the expected value %" PRIu64
+			   "\n",
+			ret,
+			expected);
+
+		return EXIT_FAILURE;
+	}
+
+	return EXIT_SUCCESS;
+}
+
+int main(int argc, char **argv) {
+	if (test1() == EXIT_SUCCESS) {
+		return test2();
+	}
 }

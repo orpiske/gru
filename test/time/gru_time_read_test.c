@@ -45,7 +45,7 @@ static bool test_read_ex(
 }
 
 static bool test_read() {
-	return test_read_ex("1483228862.529", 1483228862, 529000);
+	return test_read_ex("1483228862.529000", 1483228862, 529000);
 }
 
 static bool test_write() {
