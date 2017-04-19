@@ -43,7 +43,7 @@ add_custom_target(format
 )
 
 if (BUILD_WITH_DOCUMENTATION)
-	add_custom_target(documentation
+	add_custom_target(documentation ALL
 		COMMAND ${CMAKE_COMMAND} -P ../documentation.cmake)
 	install(
 		DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/target/share/doc 
