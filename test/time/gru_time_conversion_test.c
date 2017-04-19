@@ -60,4 +60,6 @@ int main(int argc, char **argv) {
 	if (test1() == EXIT_SUCCESS) {
 		return test2();
 	}
+
+	return EXIT_FAILURE;
 }
