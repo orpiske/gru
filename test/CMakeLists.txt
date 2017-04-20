@@ -186,6 +186,23 @@ add_test(
 	COMMAND gru_time_conversion_test
 )
 
+
+
+add_executable(gru_time_elapsed_test
+	time/gru_time_elapsed_test.c
+)
+
+target_link_libraries(
+	gru_time_elapsed_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-time-elapsed-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+	COMMAND gru_time_elapsed_test
+)
+
 add_executable(
 	gru_split_test
 	string/gru_split_test.c

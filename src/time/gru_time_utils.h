@@ -106,6 +106,25 @@ gru_export gru_timestamp_t gru_time_from_milli(int64_t timestamp);
  */
 gru_export uint64_t gru_time_to_milli(const gru_timestamp_t *ts);
 
+/**
+ * Calculates the elapsed time between two timestamps
+ * @param start Start time 
+ * @param end End time 
+ * @note The behavior is undefined if the end time is smaller than the start time
+ * @return The elapsed time in seconds
+ */
+gru_export uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end);
+
+
+/**
+ * Calculates the elapsed time between two timestamps
+ * @param start Start time 
+ * @param end End time 
+ * @note The behavior is undefined if the end time is smaller than the start time
+ * @return The elapsed time in milliseconds
+ */
+gru_export uint64_t gru_time_elapsed_milli(gru_timestamp_t start, gru_timestamp_t end);
+
 #ifdef __cplusplus
 }
 #endif
