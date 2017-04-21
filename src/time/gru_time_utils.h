@@ -21,6 +21,7 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <time.h>
 
 #if !defined(_WIN32) && !defined(_WIN64)
 #include <sys/time.h>
@@ -71,6 +72,18 @@ gru_export gru_timestamp_t gru_time_read_str(const char *str);
  * @return A string that must be free'd after use
  */
 gru_export char *gru_time_write_str(const gru_timestamp_t *t);
+
+
+/**
+ * Writes the input timestamp value according to the given format
+ * @param t Input timestamp structure
+ * @param format output format
+ * @param status status structure that may contain error details in case of failure
+ * @return A pointer to a formatted string or NULL in case of failure. The returned string
+ * must be free'd after use
+ */
+gru_export char *gru_time_write_format(const gru_timestamp_t *t, const char *format, 
+	gru_status_t *status);
 
 /**
  * Gets the current moment in time
