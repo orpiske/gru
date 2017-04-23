@@ -124,7 +124,7 @@ gru_timestamp_t gru_time_from_milli_char(const char *ts) {
 }
 
 uint64_t gru_time_to_milli(const gru_timestamp_t *ts) {
-	uint64_t ret = (ts->tv_sec * 1000) + (ts->tv_usec / 1000);
+	uint64_t ret = ((uint64_t) ts->tv_sec * 1000) + ((uint64_t) ts->tv_usec / 1000);
 
 	return ret;
 }
