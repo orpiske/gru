@@ -24,8 +24,9 @@ add_library(
 	string/gru_alt.c
 	config/gru_payload.c
 	config/gru_config.c
-	time/gru_time_utils.c
 	time/other/gru_time_portable.c
+	time/gru_time_utils.c
+	time/gru_localtime.c
 	time/gru_duration.c
 	network/gru_uri.c
 	cli/gru_cli_opt.c

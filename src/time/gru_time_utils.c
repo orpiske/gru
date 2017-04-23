@@ -63,19 +63,27 @@ char *gru_time_write_str(const gru_timestamp_t *t) {
 }
 
 char *gru_time_write_format(const gru_timestamp_t *t, const char *format, gru_status_t *status) {
-	char tm_creation_buff[64] = {0};
+	char tmp_buff[64] = {0};
 
 	struct tm result;
-	struct tm *creation_tm = localtime_r(&t->tv_sec, &result);
 
-	if (!creation_tm) {
-		gru_status_set(status, GRU_FAILURE, "Unable to obtain local time from the given input");
-		
+	if (!gru_localtime(&t->tv_sec, &result, status)) {
 		return NULL;
 	}
+// #if !defined(_WIN32) && !defined(_WIN64)
+// 	struct tm *creation_tm = localtime_r(&t->tv_sec, &result);
 
-	strftime(tm_creation_buff, sizeof(tm_creation_buff), format, creation_tm);
-	char *ret = strdup(tm_creation_buff);
+// 	if (!creation_tm) {
+// 		gru_status_set(status, GRU_FAILURE, "Unable to obtain local time from the given input");
+		
+// 		return NULL;
+// 	}
+// #else
+// 	localtime_s(&result, &t->tv_sec);
+// #endif
+
+	strftime(tmp_buff, sizeof(tmp_buff), format, &result);
+	char *ret = strdup(tmp_buff);
 	if (!ret) {
 		gru_status_strerror(status, GRU_FAILURE, errno);
 	}

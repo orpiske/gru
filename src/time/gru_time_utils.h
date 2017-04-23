@@ -28,10 +28,14 @@
 #include <unistd.h>
 #else
 #include <windows.h>
+
+#include "time/other/gru_time_portable.h"
+
 #endif
 
 #include "common/gru_alloc.h"
 #include "common/gru_portable.h"
+#include "gru_localtime.h"
 
 #ifdef __cplusplus
 extern "C" {

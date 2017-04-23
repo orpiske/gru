@@ -15,7 +15,7 @@
  */
 #include "gru_time_portable.h"
 
-#if !defined __linux__ && !defined timersub
+#if !defined __linux__ || !defined timersub
 /*
  * Timer subtraction, highly inspired on the code shown at:
  * http://www.gnu.org/software/libc/manual/html_node/Elapsed-Time.html
@@ -40,3 +40,4 @@ int gru_time_timersub(
 	return start->tv_sec < end->tv_sec;
 }
 #endif
+
