@@ -54,12 +54,17 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 
 char *gru_time_write_str(const gru_timestamp_t *t) {
 	char *ret = NULL;
-
-	if (asprintf(&ret, "%" PRIu64 ".%" PRIu64 "", t->tv_sec, t->tv_usec) == -1) {
+#if defined(__arm__) && !defined(_LP64)
+    if (asprintf(&ret, "%" PRIu32 ".%" PRIu32 "", t->tv_sec, t->tv_usec) == -1) {
 		return NULL;
 	}
+#else 
+    if (asprintf(&ret, "%" PRIu64 ".%" PRIu64 "", t->tv_sec, t->tv_usec) == -1) {
+		return NULL;
+	}
+#endif // __arm__
 
-	return ret;
+    return ret;
 }
 
 char *gru_time_write_format(const gru_timestamp_t *t, const char *format, gru_status_t *status) {
