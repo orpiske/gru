@@ -87,6 +87,15 @@ gru_export gru_node_t *gru_list_insert(
  */
 gru_export gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position);
 
+
+/**
+ * Removes a node from a list
+ * @param list The list to remove the item
+ * @param node The node to be removed
+ * @return A pointer to the removed node
+ */
+gru_export gru_node_t *gru_list_remove_node(gru_list_t *list, gru_node_t *node);
+
 /**
  * Removes a node that matches a given data as returned by comparable
  * @param list The list to remove the node from

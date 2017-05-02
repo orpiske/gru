@@ -129,7 +129,7 @@ e_exit:
 
 static int add_remove_test() {
 	gru_status_t status = gru_status_new();
-	uint32_t list_size = 5;
+	uint32_t list_size = 15;
 
 	gru_list_t *list = gru_list_new(&status);
 
@@ -159,7 +159,18 @@ static int add_remove_test() {
 		return EXIT_FAILURE;
 	}
 
-	for (uint32_t i = 0; i < (list_size - 1); i++) {
+	gru_node_t *sec = gru_list_get(list, 1); 
+	if (!gru_list_remove_node(list, sec)) {
+		fprintf(stderr, "Unable to remove specific node\n");
+		return EXIT_FAILURE;
+	}
+
+	if (gru_list_count(list) != list_size - 2) {
+		fprintf(stderr, "Invalid node count\n");
+		return EXIT_FAILURE;
+	}
+
+	for (uint32_t i = 0; i < (list_size - 2); i++) {
 		gru_node_t *n1 = gru_list_remove(list, 0);
 		if (!n1) {
 			fprintf(stderr, "There should still be a node at position 0\n");

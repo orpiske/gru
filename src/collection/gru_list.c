@@ -165,6 +165,30 @@ gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position) {
 	return node;
 }
 
+
+gru_node_t *gru_list_remove_node(gru_list_t *list, gru_node_t *node) {
+	if (!list->root || !node) {
+		return NULL;
+	}
+
+	if (node == list->root) {
+		list->root = list->root->next;
+		list->current = list->root;
+	}
+
+	gru_node_t *curr = list->root; 
+
+	while(curr) {
+		if (curr == node) {
+			gru_node_unlink(node);
+			return node;
+		}
+		curr = curr->next;
+	}
+
+	return NULL;
+}
+
 bool gru_list_remove_item(
 	gru_list_t *list, compare_function_t comparable, const void *other) {
 	uint32_t i = 0;
