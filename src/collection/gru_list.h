@@ -35,7 +35,6 @@ extern "C" {
 
 typedef struct gru_list_t_ {
 	gru_node_t *root;
-	gru_node_t *current;
 } gru_list_t;
 
 /**
