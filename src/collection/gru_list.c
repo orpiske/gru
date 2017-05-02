@@ -169,16 +169,19 @@ gru_node_t *gru_list_remove_node(gru_list_t *list, gru_node_t *node) {
 
 	if (node == list->root) {
 		list->root = list->root->next;
+		gru_node_unlink(node);
+		return node;
 	}
+	else {
+		gru_node_t *curr = list->root; 
 
-	gru_node_t *curr = list->root; 
-
-	while(curr) {
-		if (curr == node) {
-			gru_node_unlink(node);
-			return node;
+		while(curr) {
+			if (curr == node) {
+				gru_node_unlink(node);
+				return node;
+			}
+			curr = curr->next;
 		}
-		curr = curr->next;
 	}
 
 	return NULL;
