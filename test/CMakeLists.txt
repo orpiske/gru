@@ -32,10 +32,17 @@ target_link_libraries(
 )
 
 add_test(
-	NAME gru-list
+	NAME gru-list-comprehensive
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
-	COMMAND gru_list_test
+	COMMAND gru_list_test "comprehensive"
 )
+
+add_test(
+	NAME gru-list-add-remove
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+	COMMAND gru_list_test "addremove"
+)
+
 
 add_executable(
 	gru_tree_test

@@ -155,6 +155,10 @@ gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position) {
 		return node;
 	}
 
+	if (position == 0) {
+		list->root = node->next;
+	}
+
 	gru_node_unlink(node);
 	list->current = node->previous;
 

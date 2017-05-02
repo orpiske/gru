@@ -31,7 +31,7 @@ void check_val(const void *nodedata, void *data) {
 	}
 }
 
-int main(int argc, char **argv) {
+static int comprehensive_test(int argc, char **argv) {
 	gru_status_t status = gru_status_new();
 	uint32_t list_size = 256;
 
@@ -125,4 +125,64 @@ e_exit:
 	}
 
 	return EXIT_FAILURE;
+}
+
+static int add_remove_test() {
+	gru_status_t status = gru_status_new();
+	uint32_t list_size = 5;
+
+	gru_list_t *list = gru_list_new(&status);
+
+	if (!list) {
+		fprintf(stderr, "Unable to create a new list: %s\n", status.message);
+
+		return EXIT_FAILURE;
+	}
+
+#if !defined(_WIN32) && !defined(_WIN64)
+	uint32_t tmp[list_size];
+#else
+	uint32_t tmp[256];
+#endif
+	for (uint32_t i = 0; i < list_size; i++) {
+		tmp[i] = i;
+		gru_list_append(list, &tmp[i]);
+	}
+
+
+
+	// gru_node_t *root = list->root; 
+	
+	gru_node_t *orphan = gru_list_remove(list, 0);
+	if (list->root == orphan) {
+		fprintf(stderr, "Removing the first node, should have updated the root\n");
+		return EXIT_FAILURE;
+	}
+
+	for (uint32_t i = 0; i < (list_size - 1); i++) {
+		gru_node_t *n1 = gru_list_remove(list, 0);
+		if (!n1) {
+			fprintf(stderr, "There should still be a node at position 0\n");
+			return EXIT_FAILURE;
+		}
+		gru_node_destroy(&n1);
+	}
+
+	return EXIT_SUCCESS;	
+}
+
+int main(int argc, char **argv) {
+	if (argc < 2) {
+		return EXIT_FAILURE;
+	} else {
+		if (strncmp(argv[1], "comprehensive", 4) == 0) {
+			return comprehensive_test((argc - 1), &argv[1]);
+		} else if (strncmp(argv[1], "addremove", 4) == 0) {
+			return add_remove_test((argc - 1), &argv[1]);
+		} else {
+			return EXIT_FAILURE;
+		}
+	}
+
+	return EXIT_SUCCESS;
 }
