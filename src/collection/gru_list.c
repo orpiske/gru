@@ -84,7 +84,9 @@ uint32_t gru_list_count(const gru_list_t *list) {
 	uint32_t count = 0;
 	gru_node_t *node = NULL;
 
-	assert(list != NULL);
+	if (list == NULL) {
+		return 0;
+	}
 
 	node = list->root;
 	while (node) {
