@@ -11,7 +11,10 @@ Coverity Scan: [![Coverity Scan Build Status](https://scan.coverity.com/projects
 
 Packaging Status
 ----
-Fedora: [![Fedora COPR (Testing Repo) Status](https://copr.fedorainfracloud.org/coprs/orpiske/gru-testing/package/gru/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/orpiske/gru-testing/package/gru/) 
+Fedora (GRU Testing): [![Fedora COPR (Testing Repo) Status](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-testing/package/gru/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-testing/package/gru/) 
+
+Fedora (GRU Stable): [![Fedora COPR (Stable Repo) Status](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-stable/package/gru/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-stable/package/gru/) 
+
 
 Introduction:
 ----
