@@ -189,7 +189,7 @@ int main(int argc, char **argv) {
 		if (strncmp(argv[1], "comprehensive", 4) == 0) {
 			return comprehensive_test((argc - 1), &argv[1]);
 		} else if (strncmp(argv[1], "addremove", 4) == 0) {
-			return add_remove_test((argc - 1), &argv[1]);
+			return add_remove_test();
 		} else {
 			return EXIT_FAILURE;
 		}
