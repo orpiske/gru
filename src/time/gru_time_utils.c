@@ -23,6 +23,14 @@ void gru_time_add_minutes(gru_timestamp_t *t, uint64_t count) {
 	gru_time_add_seconds(t, (count * 60));
 }
 
+void gru_time_add_hours(gru_timestamp_t *t, uint64_t count) {
+	gru_time_add_minutes(t, (count * 60));
+}
+
+void gru_time_add_days(gru_timestamp_t *t, uint64_t count) {
+	gru_time_add_hours(t, (count * 24));
+}
+
 gru_timestamp_t gru_time_read_str(const char *str) {
 	gru_timestamp_t ret = {0};
 	int pos = 0;

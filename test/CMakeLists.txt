@@ -194,7 +194,6 @@ add_test(
 )
 
 
-
 add_executable(gru_time_elapsed_test
 	time/gru_time_elapsed_test.c
 )
@@ -208,6 +207,21 @@ add_test(
 	NAME gru-time-elapsed-test
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_time_elapsed_test
+)
+
+add_executable(gru_duration_parse_test
+	time/gru_duration_parse_test.c
+)
+
+target_link_libraries(
+	gru_duration_parse_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-duration-parse-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+	COMMAND gru_duration_parse_test
 )
 
 add_executable(

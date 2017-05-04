@@ -15,6 +15,15 @@
  */
 #include "gru_duration.h"
 
+gru_duration_t gru_duration_new() {
+	gru_duration_t duration = {0};
+
+	gettimeofday(&duration.start, NULL);
+	duration.end = duration.start;
+
+	return duration;
+}
+
 gru_duration_t gru_duration_from_seconds(uint64_t seconds) {
 	gru_duration_t duration = {0};
 
@@ -58,4 +67,63 @@ uint64_t gru_duration_minutes(gru_duration_t duration, double *fractional) {
 	}
 
 	return (uint64_t) integral;
+}
+
+
+bool gru_duration_parse(gru_duration_t *duration, const char *str) {
+	if (!duration || !str) {
+		return false;
+	}
+
+	char tmp[64] = {0};
+	size_t len = strlen(str);
+
+	if (len > sizeof(tmp)) {
+		return false;
+	}
+
+	int16_t r = 0;
+	for (size_t i = 0; i < len; i++) {
+		if (str[i] == 's')	{
+			if (strlen(tmp) == 0) {
+				return false;
+			}
+
+			gru_time_add_seconds(&duration->end, atol(tmp));
+			bzero(&tmp, sizeof(tmp));
+			r = 0;
+		} else if (str[i] == 'm')	{
+			if (strlen(tmp) == 0) {
+				return false;
+			}
+
+			gru_time_add_minutes(&duration->end, atol(tmp));
+			bzero(&tmp, sizeof(tmp));
+			r = 0;
+		} else if (str[i] == 'h')	{
+			if (strlen(tmp) == 0) {
+				return false;
+			}
+
+			gru_time_add_hours(&duration->end, atol(tmp));
+			bzero(&tmp, sizeof(tmp));
+			r = 0;
+		} else if (str[i] == 'd')	{
+			if (strlen(tmp) == 0) {
+				return false;
+			}
+
+			gru_time_add_days(&duration->end, atol(tmp));
+			bzero(&tmp, sizeof(tmp));
+			r = 0;
+		} else {
+			tmp[r] = str[i];
+			r++;
+			if (i == (len - 1)) {
+				return false;
+			}
+		}
+	}
+
+	return true;
 }

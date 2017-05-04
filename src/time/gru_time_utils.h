@@ -61,6 +61,20 @@ gru_export void gru_time_add_seconds(gru_timestamp_t *t, uint64_t count);
 gru_export void gru_time_add_minutes(gru_timestamp_t *t, uint64_t count);
 
 /**
+ * Add hours to a timestamp object
+ * @param t timestamp
+ * @param count number of hours to add
+ */
+gru_export void gru_time_add_hours(gru_timestamp_t *t, uint64_t count);
+
+/**
+ * Add days to a timestamp object
+ * @param t timestamp
+ * @param count number of days to add
+ */
+gru_export void gru_time_add_days(gru_timestamp_t *t, uint64_t count);
+
+/**
  * Read a string in the format seconds.microseconds and return a struct timeval. The
  * microseconds represents the fraction of the seconds value and should not be equal or
  * greater than 1000000. Otherwise, the code will only consider the first 6 bytes of the

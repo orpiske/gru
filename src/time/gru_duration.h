@@ -37,6 +37,13 @@ typedef struct gru_duration_t_ {
 	struct timeval end;
 } gru_duration_t;
 
+
+/**
+ * Creates an new duration object
+ * @return a new duration object
+ */
+gru_export gru_duration_t gru_duration_new();
+
 /**
  * Builds a duration struct that represents a duration. That means, the current time +
  * the given number of seconds
@@ -68,6 +75,18 @@ gru_export uint64_t gru_duration_seconds(gru_duration_t duration);
  * @return the time difference in minutes
  */
 gru_export uint64_t gru_duration_minutes(gru_duration_t duration, double *fractional);
+
+
+/**
+ * Parses a string containing a time representation with a suffix and returns its duration
+ * in relation to the current time. The suffix may be 's' for seconds, 'm' for minutes,
+ * 'h' for hours or 'd' for days. There can be one or more suffixes (ie.: 1h15m, 1d1h)
+ * @param out parsed duration
+ * @param str string to parse (up to a maximum size of 63 bytes)
+ * @return bool if successfully parse the string or false if it's not parseable or too
+ * large.
+ */
+gru_export bool gru_duration_parse(gru_duration_t *out, const char *str);
 
 #ifdef __cplusplus
 }
