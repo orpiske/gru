@@ -41,6 +41,15 @@
 extern "C" {
 #endif
 
+/** Maximum size for the second part for a GRU-parseable timestamp string */
+#define GRU_TS_STRING_SEC_MAX 16
+
+/** Maximum size for the microsecond part for a GRU-parseable timestamp string */
+#define GRU_TS_STRING_USEC_MAX 7
+
+/** Maximum size for a GRU-parseable timestamp string (ie.: seconds.microseconds) */
+#define GRU_TS_STRING_MAX GRU_TS_STRING_SEC_MAX + GRU_TS_STRING_USEC_MAX + 1
+
 /**
  * An alias to struct timeval
  */

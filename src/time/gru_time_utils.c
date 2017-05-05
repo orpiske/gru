@@ -36,10 +36,10 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 	int pos = 0;
 
 	// This, I hope, should be sufficient for years to come ...
-	char sec[16] = {0};
+	char sec[GRU_TS_STRING_SEC_MAX] = {0};
 
 	// 999999
-	char usec[7] = {0};
+	char usec[GRU_TS_STRING_USEC_MAX] = {0};
 
 	while (isdigit(str[pos]) && pos < sizeof(sec)) {
 		sec[pos] = str[pos];
