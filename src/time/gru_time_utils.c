@@ -83,17 +83,6 @@ char *gru_time_write_format(const gru_timestamp_t *t, const char *format, gru_st
 	if (!gru_localtime(&t->tv_sec, &result, status)) {
 		return NULL;
 	}
-// #if !defined(_WIN32) && !defined(_WIN64)
-// 	struct tm *creation_tm = localtime_r(&t->tv_sec, &result);
-
-// 	if (!creation_tm) {
-// 		gru_status_set(status, GRU_FAILURE, "Unable to obtain local time from the given input");
-		
-// 		return NULL;
-// 	}
-// #else
-// 	localtime_s(&result, &t->tv_sec);
-// #endif
 
 	strftime(tmp_buff, sizeof(tmp_buff), format, &result);
 	char *ret = strdup(tmp_buff);
