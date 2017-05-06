@@ -15,7 +15,7 @@
  */
 #include "gru_time_portable.h"
 
-#if !defined __linux__ || !defined timersub
+#if (!defined __linux__ && !defined __APPLE__)
 /*
  * Timer subtraction, highly inspired on the code shown at:
  * http://www.gnu.org/software/libc/manual/html_node/Elapsed-Time.html
