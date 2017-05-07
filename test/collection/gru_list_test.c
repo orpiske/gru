@@ -148,26 +148,27 @@ static int add_remove_test() {
 		tmp[i] = i;
 		gru_list_append(list, &tmp[i]);
 	}
-
-
-
-	// gru_node_t *root = list->root; 
 	
 	gru_node_t *orphan = gru_list_remove(list, 0);
 	if (list->root == orphan) {
 		fprintf(stderr, "Removing the first node, should have updated the root\n");
-		return EXIT_FAILURE;
+		
+		goto e_exit;
 	}
+	gru_node_destroy(&orphan);
 
-	gru_node_t *sec = gru_list_get(list, 1); 
+	gru_node_t *sec = (gru_node_t *) gru_list_get(list, 1); 
 	if (!gru_list_remove_node(list, sec)) {
 		fprintf(stderr, "Unable to remove specific node\n");
-		return EXIT_FAILURE;
+		
+		goto e_exit;
 	}
+	gru_node_destroy(&sec);
 
 	if (gru_list_count(list) != list_size - 2) {
 		fprintf(stderr, "Invalid node count\n");
-		return EXIT_FAILURE;
+		
+		goto e_exit;
 	}
 
 	for (uint32_t i = 0; i < (list_size - 2); i++) {
@@ -179,7 +180,19 @@ static int add_remove_test() {
 		gru_node_destroy(&n1);
 	}
 
-	return EXIT_SUCCESS;	
+	gru_list_destroy(&list);
+	if (list != NULL) {
+		printf("List incorrectly destroyed\n");
+	}
+	return EXIT_SUCCESS;
+
+	e_exit:
+	gru_list_destroy(&list);
+	if (list != NULL) {
+		printf("List incorrectly destroyed\n");
+	}
+
+	return EXIT_FAILURE;	
 }
 
 int main(int argc, char **argv) {
