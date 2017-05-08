@@ -5,8 +5,17 @@ if (WIN32)
 		common/windows/contrib/asprintf.c
 		common/windows/contrib/vasprintf.c
 		time/windows/contrib/getimeofday.c
+		network/windows/gru_sock.c
 	)
 endif(WIN32)
+
+if (UNIX)
+	message(STATUS "Adding OS specific files")
+	set(
+		OS_SPECIFIC_FILES
+		network/linux/gru_sock.c
+	)
+endif (UNIX)
 
 add_library(
 	gru-${GRU_VERSION_MAJOR} SHARED
