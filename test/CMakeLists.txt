@@ -6,6 +6,23 @@ else (WIN32)
     set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR})
 endif (WIN32)
 
+
+add_executable(
+	gru_units_test
+	common/gru_units_test.c
+)
+
+target_link_libraries(
+	gru_units_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-units-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_units_test
+)
+
 add_executable(
 	gru_node_test
 	collection/gru_node_test.c
