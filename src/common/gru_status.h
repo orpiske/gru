@@ -62,8 +62,10 @@ gru_export gru_status_t gru_status_new();
  * @param message the status message followed by any other parameter as accepted
  * by vasprintf
  */
-gru_export void gru_status_set(
-	gru_status_t *status, gru_status_code_t code, const char *message, ...);
+gru_export void gru_status_set(gru_status_t *status,
+	gru_status_code_t code,
+	const char *message,
+	...);
 
 /**
  * Sets the status from the errno
@@ -71,8 +73,8 @@ gru_export void gru_status_set(
  * @param code the code to set the object to
  * @param errnum the error number (as in errno)
  */
-gru_export void gru_status_strerror(
-	gru_status_t *status, gru_status_code_t code, int errnum);
+gru_export void
+	gru_status_strerror(gru_status_t *status, gru_status_code_t code, int errnum);
 
 /**
  * Resets the status

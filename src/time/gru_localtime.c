@@ -15,22 +15,24 @@
  */
 #include "gru_localtime.h"
 
-bool gru_localtime(const time_t *timep, struct tm *result, gru_status_t *status) { 
-    #if !defined(_WIN32) && !defined(_WIN64)
-        struct tm *creation_tm = localtime_r(timep, result);
+bool gru_localtime(const time_t *timep, struct tm *result, gru_status_t *status) {
+#if !defined(_WIN32) && !defined(_WIN64)
+	struct tm *creation_tm = localtime_r(timep, result);
 
-        if (!creation_tm) {
-            gru_status_set(status, GRU_FAILURE, "Unable to obtain local time from the given input");
-            
-            return false;
-        }
-    #else
-        if (localtime_s(result, timep) != 0) {
-            gru_status_set(status, GRU_FAILURE, "Unable to obtain local time from the given input");
-            
-            return false;
-        }
-    #endif
+	if (!creation_tm) {
+		gru_status_set(
+			status, GRU_FAILURE, "Unable to obtain local time from the given input");
 
-    return true;
+		return false;
+	}
+#else
+	if (localtime_s(result, timep) != 0) {
+		gru_status_set(
+			status, GRU_FAILURE, "Unable to obtain local time from the given input");
+
+		return false;
+	}
+#endif
+
+	return true;
 }

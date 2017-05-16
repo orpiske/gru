@@ -89,8 +89,9 @@ bool gru_path_can_read_write(const char *filename, gru_status_t *status) {
 	return true;
 }
 
-bool gru_path_rename_cond(
-	const char *filename, gru_path_cond_t cond, gru_status_t *status) {
+bool gru_path_rename_cond(const char *filename,
+	gru_path_cond_t cond,
+	gru_status_t *status) {
 
 	// Return if the condition is already fulfilled
 	if (!cond(filename, status)) {

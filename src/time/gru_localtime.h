@@ -27,6 +27,7 @@
 
 #include <common/gru_status.h>
 
-gru_export bool gru_localtime(const time_t *timep, struct tm *result, gru_status_t *status);
+gru_export bool
+	gru_localtime(const time_t *timep, struct tm *result, gru_status_t *status);
 
 #endif // GRU_LOCALTIME_H_

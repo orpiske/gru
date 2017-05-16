@@ -83,8 +83,9 @@ gru_export bool gru_path_can_read_write(const char *filename, gru_status_t *stat
  * failure
  * @return true if successful or false otherwise
  */
-gru_export bool gru_path_rename_cond(
-	const char *filename, gru_path_cond_t cond, gru_status_t *status);
+gru_export bool gru_path_rename_cond(const char *filename,
+	gru_path_cond_t cond,
+	gru_status_t *status);
 
 /**
  * Renames a file

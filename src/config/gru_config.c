@@ -15,8 +15,10 @@
  */
 #include "gru_config.h"
 
-gru_config_t *gru_config_init(
-	const char *dir, const char *filename, gru_payload_t *payload, gru_status_t *status) {
+gru_config_t *gru_config_init(const char *dir,
+	const char *filename,
+	gru_payload_t *payload,
+	gru_status_t *status) {
 	assert(status && dir && filename);
 
 	gru_config_t *ret = gru_alloc(sizeof(gru_config_t), status);

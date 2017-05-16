@@ -54,8 +54,8 @@ extern "C" {
  * failure
  * @return true if remaped or false otherwise (in this case, check status)
  */
-gru_export bool gru_io_remap(
-	const char *dir, const char *name, FILE *fd, gru_status_t *status);
+gru_export bool
+	gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *status);
 
 /**
  * Tries to safely open a file (ie.: creating directories and stuff). Truncates
@@ -67,8 +67,8 @@ gru_export bool gru_io_remap(
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-gru_export FILE *gru_io_open_file(
-	const char *dir, const char *name, gru_status_t *status);
+gru_export FILE *
+	gru_io_open_file(const char *dir, const char *name, gru_status_t *status);
 
 /**
  * Tries to safely open a file (ie.: creating directories and stuff). Truncates
@@ -90,8 +90,8 @@ gru_export FILE *gru_io_open_file_path(const char *path, gru_status_t *status);
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-gru_export FILE *gru_io_open_file_read(
-	const char *dir, const char *name, gru_status_t *status);
+gru_export FILE *
+	gru_io_open_file_read(const char *dir, const char *name, gru_status_t *status);
 
 /**
  * Tries to safely open a file (ie.: creating directories and stuff)
@@ -112,8 +112,8 @@ gru_export FILE *gru_io_open_file_read_path(const char *path, gru_status_t *stat
  * @return a FILE descriptor for the opened file or NULL otherwise (in this case,
  * check status)
  */
-gru_export FILE *gru_io_open_unique_file(
-	const char *dir, const char *name, gru_status_t *status);
+gru_export FILE *
+	gru_io_open_unique_file(const char *dir, const char *name, gru_status_t *status);
 
 /**
  * Reads the file pointed by file into the destination buffer. The memory for

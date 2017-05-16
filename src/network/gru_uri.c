@@ -85,7 +85,8 @@ static size_t gru_uri_calc_path_size(UriUriA *uri) {
 	return total;
 }
 
-static char *gru_uri_path(UriUriA *gru_restrict uri, gru_uri_parse_opt_t parseopt,
+static char *gru_uri_path(UriUriA *gru_restrict uri,
+	gru_uri_parse_opt_t parseopt,
 	gru_status_t *gru_restrict status) {
 	size_t total = gru_uri_calc_path_size(uri);
 
@@ -131,7 +132,8 @@ gru_uri_t gru_uri_parse(const char *url, gru_status_t *status) {
 }
 
 gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
-	gru_uri_parse_opt_t parseopt, gru_status_t *gru_restrict status) {
+	gru_uri_parse_opt_t parseopt,
+	gru_status_t *gru_restrict status) {
 	gru_uri_t ret = {0};
 	UriParserStateA state;
 	UriUriA uri;
@@ -193,8 +195,9 @@ char *gru_uri_simple_format(const gru_uri_t *uri, gru_status_t *status) {
 	char *path;
  */
 
-char *gru_uri_format(
-	const gru_uri_t *uri, gru_uri_format_opt_t fopt, gru_status_t *status) {
+char *gru_uri_format(const gru_uri_t *uri,
+	gru_uri_format_opt_t fopt,
+	gru_status_t *status) {
 	char *ret = {0};
 	int rc = 0;
 

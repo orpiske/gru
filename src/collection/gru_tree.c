@@ -75,8 +75,9 @@ gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node, const void *data) {
 	return child;
 }
 
-const gru_tree_node_t *gru_tree_search(
-	gru_tree_node_t *node, compare_function_t comparable, const void *other) {
+const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
+	compare_function_t comparable,
+	const void *other) {
 	if (!node) {
 		return NULL;
 	}
@@ -105,8 +106,9 @@ const gru_tree_node_t *gru_tree_search(
 	return NULL;
 }
 
-bool gru_tree_remove_child(
-	gru_tree_node_t *node, compare_function_t comparable, const void *other) {
+bool gru_tree_remove_child(gru_tree_node_t *node,
+	compare_function_t comparable,
+	const void *other) {
 	if (!node) {
 		return false;
 	}
@@ -138,8 +140,8 @@ bool gru_tree_remove_child(
 	return false;
 }
 
-const gru_tree_node_t *gru_tree_for_each(
-	gru_tree_node_t *node, tree_callback_fn callback, void *payload) {
+const gru_tree_node_t *
+	gru_tree_for_each(gru_tree_node_t *node, tree_callback_fn callback, void *payload) {
 	if (!node) {
 		return NULL;
 	}
@@ -185,8 +187,9 @@ static void gru_tree_for_each_wrapper(const void *ptr, void *envelope) {
 	wrapper->callback(node->data, wrapper->payload);
 }
 
-void gru_tree_for_each_child(
-	gru_tree_node_t *node, tree_callback_fn callback, void *payload) {
+void gru_tree_for_each_child(gru_tree_node_t *node,
+	tree_callback_fn callback,
+	void *payload) {
 	if (!node) {
 		return;
 	}
@@ -231,8 +234,9 @@ uint32_t gru_tree_count(gru_tree_node_t *node) {
 	return ret;
 }
 
-const gru_tree_node_t *gru_tree_search_child(
-	gru_tree_node_t *node, compare_function_t comparable, const void *other) {
+const gru_tree_node_t *gru_tree_search_child(gru_tree_node_t *node,
+	compare_function_t comparable,
+	const void *other) {
 	if (!node) {
 		return NULL;
 	}

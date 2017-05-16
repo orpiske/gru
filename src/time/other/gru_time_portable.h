@@ -34,7 +34,8 @@ extern "C" {
 #endif
 
 #if (!defined __linux__ && !defined __APPLE__)
-gru_export int gru_time_timersub(struct timeval *start, struct timeval *end, struct timeval *result);
+gru_export int
+	gru_time_timersub(struct timeval *start, struct timeval *end, struct timeval *result);
 
 #define timersub(start, end, result) gru_time_timersub(start, end, result)
 #endif

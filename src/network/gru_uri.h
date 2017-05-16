@@ -58,8 +58,8 @@ typedef struct gru_uri_t_ {
  * @param status status object
  * @return A parsed URI object with each component of the URI broken down
  */
-gru_export gru_uri_t gru_uri_parse(
-	const char *gru_restrict uri, gru_status_t *gru_restrict status);
+gru_export gru_uri_t gru_uri_parse(const char *gru_restrict uri,
+	gru_status_t *gru_restrict status);
 
 /**
  * URI parser with additional options
@@ -69,7 +69,8 @@ gru_export gru_uri_t gru_uri_parse(
  * @return A parsed URI object with each component of the URI broken down
  */
 gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
-	gru_uri_parse_opt_t parseopt, gru_status_t *gru_restrict status);
+	gru_uri_parse_opt_t parseopt,
+	gru_status_t *gru_restrict status);
 
 /**
  * Converts a URI object to a string
@@ -77,8 +78,8 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
  * @param status status object
  * @return a new URI string that must be free'd after use
  */
-gru_export char *gru_uri_simple_format(
-	const gru_uri_t *gru_restrict uri, gru_status_t *gru_restrict status);
+gru_export char *gru_uri_simple_format(const gru_uri_t *gru_restrict uri,
+	gru_status_t *gru_restrict status);
 
 /**
  * A more elaborate URI string converter that can filter parts of the URI
@@ -88,7 +89,8 @@ gru_export char *gru_uri_simple_format(
  * @return a new URI string that must be free'd after use
  */
 gru_export char *gru_uri_format(const gru_uri_t *gru_restrict uri,
-	gru_uri_format_opt_t fopt, gru_status_t *gru_restrict status);
+	gru_uri_format_opt_t fopt,
+	gru_status_t *gru_restrict status);
 
 /**
  * Sets the scheme in a URI object

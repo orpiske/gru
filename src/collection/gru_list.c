@@ -173,11 +173,10 @@ gru_node_t *gru_list_remove_node(gru_list_t *list, gru_node_t *node) {
 		list->root = list->root->next;
 		gru_node_unlink(node);
 		return node;
-	}
-	else {
-		gru_node_t *curr = list->root; 
+	} else {
+		gru_node_t *curr = list->root;
 
-		while(curr) {
+		while (curr) {
 			if (curr == node) {
 				gru_node_unlink(node);
 				return node;
@@ -189,8 +188,9 @@ gru_node_t *gru_list_remove_node(gru_list_t *list, gru_node_t *node) {
 	return NULL;
 }
 
-bool gru_list_remove_item(
-	gru_list_t *list, compare_function_t comparable, const void *other) {
+bool gru_list_remove_item(gru_list_t *list,
+	compare_function_t comparable,
+	const void *other) {
 	uint32_t i = 0;
 	gru_node_t *node = NULL;
 
@@ -230,8 +230,11 @@ const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position) {
 	return node;
 }
 
-void gru_list_for_each_compare(const gru_list_t *list, bool uniqueness,
-	compare_function_t comparable, const void *other, void *result) {
+void gru_list_for_each_compare(const gru_list_t *list,
+	bool uniqueness,
+	compare_function_t comparable,
+	const void *other,
+	void *result) {
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {
@@ -266,8 +269,9 @@ void gru_list_for_each(const gru_list_t *list, handle_function_t handle, void *d
 	}
 }
 
-void gru_list_for_each_ex(
-	const gru_list_t *list, handle_function_info_t handle, void *data) {
+void gru_list_for_each_ex(const gru_list_t *list,
+	handle_function_info_t handle,
+	void *data) {
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {
@@ -289,8 +293,9 @@ void gru_list_for_each_ex(
 	}
 }
 
-const void *gru_list_get_item(
-	const gru_list_t *list, compare_function_t comparable, const void *other) {
+const void *gru_list_get_item(const gru_list_t *list,
+	compare_function_t comparable,
+	const void *other) {
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {

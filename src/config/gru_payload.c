@@ -18,7 +18,9 @@
 #include "common/gru_alloc.h"
 
 gru_payload_t *gru_payload_init(gru_payload_data_init_t init,
-	gru_payload_data_save_t save, gru_payload_data_read_t read, void *data,
+	gru_payload_data_save_t save,
+	gru_payload_data_read_t read,
+	void *data,
 	gru_status_t *status) {
 	gru_payload_t *ret = gru_alloc(sizeof(gru_payload_t), status);
 	gru_alloc_check(ret, NULL);
@@ -36,8 +38,10 @@ void gru_payload_destroy(gru_payload_t **payload) {
 	*payload = NULL;
 }
 
-FILE *gru_payload_init_data(
-	gru_payload_t *payload, const char *dir, const char *name, gru_status_t *status) {
+FILE *gru_payload_init_data(gru_payload_t *payload,
+	const char *dir,
+	const char *name,
+	gru_status_t *status) {
 	FILE *config_file;
 
 	char *fullpath = gru_path_format(dir, name, status);

@@ -31,8 +31,8 @@ extern "C" {
  * @param short_opt short option
  * @param desc description
  */
-gru_export void gru_cli_option_help(
-	const char *long_opt, const char *short_opt, const char *desc);
+gru_export void
+	gru_cli_option_help(const char *long_opt, const char *short_opt, const char *desc);
 
 /**
  * Prints program usage for composed program types

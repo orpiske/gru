@@ -63,19 +63,21 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 char *gru_time_write_str(const gru_timestamp_t *t) {
 	char *ret = NULL;
 #if defined(__arm__) && !defined(_LP64)
-    if (asprintf(&ret, "%" PRIu32 ".%" PRIu32 "", t->tv_sec, t->tv_usec) == -1) {
+	if (asprintf(&ret, "%" PRIu32 ".%" PRIu32 "", t->tv_sec, t->tv_usec) == -1) {
 		return NULL;
 	}
-#else 
-    if (asprintf(&ret, "%" PRIu64 ".%" PRIu64 "", t->tv_sec, t->tv_usec) == -1) {
+#else
+	if (asprintf(&ret, "%" PRIu64 ".%" PRIu64 "", t->tv_sec, t->tv_usec) == -1) {
 		return NULL;
 	}
 #endif // __arm__
 
-    return ret;
+	return ret;
 }
 
-char *gru_time_write_format(const gru_timestamp_t *t, const char *format, gru_status_t *status) {
+char *gru_time_write_format(const gru_timestamp_t *t,
+	const char *format,
+	gru_status_t *status) {
 	char tmp_buff[64] = {0};
 
 	struct tm result;
@@ -134,7 +136,7 @@ uint64_t gru_time_to_milli(const gru_timestamp_t *ts) {
 
 uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end) {
 	gru_timestamp_t ret = {.tv_sec = 0, .tv_usec = 0};
-	
+
 	timersub(&end, &start, &ret);
 
 	return ret.tv_sec;
@@ -142,7 +144,7 @@ uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end) {
 
 uint64_t gru_time_elapsed_milli(gru_timestamp_t start, gru_timestamp_t end) {
 	gru_timestamp_t ret = {.tv_sec = 0, .tv_usec = 0};
-	
+
 	timersub(&end, &start, &ret);
 
 	return gru_time_to_milli(&ret);

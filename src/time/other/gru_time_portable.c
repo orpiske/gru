@@ -21,8 +21,9 @@
  * http://www.gnu.org/software/libc/manual/html_node/Elapsed-Time.html
  */
 
-int gru_time_timersub(
-	struct timeval *start, struct timeval *end, struct timeval *result) {
+int gru_time_timersub(struct timeval *start,
+	struct timeval *end,
+	struct timeval *result) {
 	if (start->tv_usec < end->tv_usec) {
 		int nsec = (end->tv_usec - start->tv_usec) / 1000000 + 1;
 		end->tv_usec -= 1000000 * nsec;
@@ -40,4 +41,3 @@ int gru_time_timersub(
 	return start->tv_sec < end->tv_sec;
 }
 #endif
-

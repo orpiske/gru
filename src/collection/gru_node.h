@@ -46,16 +46,16 @@ gru_export void gru_node_destroy(gru_node_t **node);
  * @param node the node to set
  * @param previous the node to be set as a previous to the node
  */
-gru_export void gru_node_set_previous(
-	gru_node_t *gru_restrict node, gru_node_t *gru_restrict previous);
+gru_export void gru_node_set_previous(gru_node_t *gru_restrict node,
+	gru_node_t *gru_restrict previous);
 
 /**
  * Sets the next node for a given node
  * @param node the node to set
  * @param next the node to be set as the next to the node
  */
-gru_export void gru_node_set_next(
-	gru_node_t *gru_restrict node, gru_node_t *gru_restrict next);
+gru_export void gru_node_set_next(gru_node_t *gru_restrict node,
+	gru_node_t *gru_restrict next);
 
 /**
  * Reset the pointers for the node and unassign the next and previous pointers

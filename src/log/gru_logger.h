@@ -98,8 +98,8 @@ gru_export void gru_logger_default_printer(log_level_t level, const char *msg, .
  * @param msg the message + additional parameters
  * @param ap va_list object for variable argument list
   */
-gru_export void gru_logger_default_do_print(
-	log_level_t level, const char *msg, va_list ap);
+gru_export void
+	gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap);
 
 #ifdef __cplusplus
 }

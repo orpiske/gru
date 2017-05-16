@@ -109,7 +109,8 @@ gru_export char *gru_time_write_str(const gru_timestamp_t *t);
  * @return A pointer to a formatted string or NULL in case of failure. The returned string
  * must be free'd after use
  */
-gru_export char *gru_time_write_format(const gru_timestamp_t *t, const char *format, 
+gru_export char *gru_time_write_format(const gru_timestamp_t *t,
+	const char *format,
 	gru_status_t *status);
 
 /**
@@ -148,8 +149,8 @@ gru_export uint64_t gru_time_to_milli(const gru_timestamp_t *ts);
 
 /**
  * Calculates the elapsed time between two timestamps
- * @param start Start time 
- * @param end End time 
+ * @param start Start time
+ * @param end End time
  * @note The behavior is undefined if the end time is smaller than the start time
  * @return The elapsed time in seconds
  */
@@ -158,8 +159,8 @@ gru_export uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t
 
 /**
  * Calculates the elapsed time between two timestamps
- * @param start Start time 
- * @param end End time 
+ * @param start Start time
+ * @param end End time
  * @note The behavior is undefined if the end time is smaller than the start time
  * @return The elapsed time in milliseconds
  */

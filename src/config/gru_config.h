@@ -51,15 +51,17 @@ typedef struct gru_config_t_ {
 /**
  * Initializes a new configuration object
  */
-gru_export gru_config_t *gru_config_init(
-	const char *dir, const char *filename, gru_payload_t *payload, gru_status_t *status);
+gru_export gru_config_t *gru_config_init(const char *dir,
+	const char *filename,
+	gru_payload_t *payload,
+	gru_status_t *status);
 
 gru_export void gru_config_destroy(gru_config_t **config);
 
 gru_export void gru_config_set(char *dest, uint32_t size, const char *fmt, ...);
 
-gru_export void gru_config_read(
-	const char *name, FILE *source, void *dest, const char *mask);
+gru_export void
+	gru_config_read(const char *name, FILE *source, void *dest, const char *mask);
 
 gru_export void gru_config_read_string(const char *name, FILE *source, char *dest);
 gru_export void gru_config_read_short(const char *name, FILE *source, int16_t *dest);

@@ -64,8 +64,9 @@ gru_export gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node, const void
  * @param other The data to compare to
  * @return A pointer to the node or NULL if not found
  */
-gru_export const gru_tree_node_t *gru_tree_search(
-	gru_tree_node_t *node, compare_function_t comparable, const void *other);
+gru_export const gru_tree_node_t *gru_tree_search(gru_tree_node_t *node,
+	compare_function_t comparable,
+	const void *other);
 
 /**
  * Searches only the immediate children of the node
@@ -74,8 +75,9 @@ gru_export const gru_tree_node_t *gru_tree_search(
  * @param other The data to compare to
  * @return A pointer to the node or NULL if not found
  */
-gru_export const gru_tree_node_t *gru_tree_search_child(
-	gru_tree_node_t *node, compare_function_t comparable, const void *other);
+gru_export const gru_tree_node_t *gru_tree_search_child(gru_tree_node_t *node,
+	compare_function_t comparable,
+	const void *other);
 
 /**
  * Removes a direct descendant of a node
@@ -84,8 +86,9 @@ gru_export const gru_tree_node_t *gru_tree_search_child(
  * @param other The data to compare to
  * @return true if removed or false otherwise
  */
-gru_export bool gru_tree_remove_child(
-	gru_tree_node_t *node, compare_function_t comparable, const void *other);
+gru_export bool gru_tree_remove_child(gru_tree_node_t *node,
+	compare_function_t comparable,
+	const void *other);
 
 /**
  * Traverses the tree executing a set of operations
@@ -94,8 +97,8 @@ gru_export bool gru_tree_remove_child(
  * @param payload Payload data to be passed to the passed to the callback
  * @return A pointer to the node or NULL if not found
  */
-gru_export const gru_tree_node_t *gru_tree_for_each(
-	gru_tree_node_t *node, tree_callback_fn callback, void *payload);
+gru_export const gru_tree_node_t *
+	gru_tree_for_each(gru_tree_node_t *node, tree_callback_fn callback, void *payload);
 
 /**
  * Executes an operation on each child of the given node
@@ -103,8 +106,9 @@ gru_export const gru_tree_node_t *gru_tree_for_each(
  * @param callback A callback function to be executed for all the nodes
  * @param payload Payload data to be passed to the passed to the callback
  */
-gru_export void gru_tree_for_each_child(
-	gru_tree_node_t *node, tree_callback_fn callback, void *payload);
+gru_export void gru_tree_for_each_child(gru_tree_node_t *node,
+	tree_callback_fn callback,
+	void *payload);
 
 /**
  * Returns the number of children of a node

@@ -84,7 +84,7 @@ bool gru_duration_parse(gru_duration_t *duration, const char *str) {
 
 	int16_t r = 0;
 	for (size_t i = 0; i < len; i++) {
-		if (str[i] == 's')	{
+		if (str[i] == 's') {
 			if (strlen(tmp) == 0) {
 				return false;
 			}
@@ -92,7 +92,7 @@ bool gru_duration_parse(gru_duration_t *duration, const char *str) {
 			gru_time_add_seconds(&duration->end, atol(tmp));
 			bzero(&tmp, sizeof(tmp));
 			r = 0;
-		} else if (str[i] == 'm')	{
+		} else if (str[i] == 'm') {
 			if (strlen(tmp) == 0) {
 				return false;
 			}
@@ -100,7 +100,7 @@ bool gru_duration_parse(gru_duration_t *duration, const char *str) {
 			gru_time_add_minutes(&duration->end, atol(tmp));
 			bzero(&tmp, sizeof(tmp));
 			r = 0;
-		} else if (str[i] == 'h')	{
+		} else if (str[i] == 'h') {
 			if (strlen(tmp) == 0) {
 				return false;
 			}
@@ -108,7 +108,7 @@ bool gru_duration_parse(gru_duration_t *duration, const char *str) {
 			gru_time_add_hours(&duration->end, atol(tmp));
 			bzero(&tmp, sizeof(tmp));
 			r = 0;
-		} else if (str[i] == 'd')	{
+		} else if (str[i] == 'd') {
 			if (strlen(tmp) == 0) {
 				return false;
 			}

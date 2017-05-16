@@ -40,8 +40,8 @@ bool gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *sta
 	return true;
 }
 
-static FILE *gru_io_open_file_path_int(
-	const char *path, const char *mode, gru_status_t *status) {
+static FILE *
+	gru_io_open_file_path_int(const char *path, const char *mode, gru_status_t *status) {
 	FILE *f = fopen(path, mode);
 	if (f == NULL) {
 		gru_status_t lc_status = {0};
