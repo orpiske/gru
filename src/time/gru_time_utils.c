@@ -41,14 +41,14 @@ gru_timestamp_t gru_time_read_str(const char *str) {
 	// 999999
 	char usec[GRU_TS_STRING_USEC_MAX] = {0};
 
-	while (isdigit(str[pos]) && pos < sizeof(sec)) {
+	while (pos < sizeof(sec) && isdigit(str[pos])) {
 		sec[pos] = str[pos];
 		pos++;
 	}
 
 	pos++;
 	int usecl = 0;
-	while (isdigit(str[pos]) && usecl < (sizeof(usec) - 1)) {
+	while (usecl < (sizeof(usec) - 1) && isdigit(str[pos])) {
 		usec[usecl] = str[pos];
 		pos++;
 		usecl++;
