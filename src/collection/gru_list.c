@@ -190,7 +190,6 @@ gru_node_t *gru_list_remove_node(gru_list_t *list, gru_node_t *node) {
 bool gru_list_remove_item(gru_list_t *list,
 	compare_function_t comparable,
 	const void *other) {
-	uint32_t i = 0;
 	gru_node_t *node = NULL;
 
 	if (list == NULL) {
@@ -200,8 +199,6 @@ bool gru_list_remove_item(gru_list_t *list,
 	node = list->root;
 
 	while (node) {
-		i++;
-
 		bool ret = comparable(node->data, other, NULL);
 		if (ret == true) {
 			gru_node_unlink(node);
