@@ -80,7 +80,7 @@ static int comprehensive_test(int argc, char **argv) {
 	gru_node_t *node = gru_list_insert(list, &new_value, 200);
 	count = gru_list_count(list);
 	if (count != 257) {
-		printf("Unexpected list size: %i != %i\n", count, list_size + 1);
+		printf("Unexpected list size: %" PRId32 "  != %" PRIu32 "\n", count, list_size + 1);
 
 		goto e_exit;
 	}
