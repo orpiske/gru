@@ -19,12 +19,15 @@
 
 #include "time/gru_time_utils.h"
 
-static bool run_calc_secs(gru_timestamp_t start, gru_timestamp_t end, const uint64_t expected) {
+static bool
+	run_calc_secs(gru_timestamp_t start, gru_timestamp_t end, const uint64_t expected) {
 	uint64_t elapsed = gru_time_elapsed_secs(start, end);
 
 	if (elapsed != expected) {
-		fprintf(stderr, "Elapsed time  %" PRIi64 " does not the expected %" PRIi64 "\n", 
-			elapsed, expected);
+		fprintf(stderr,
+			"Elapsed time  %" PRIi64 " does not the expected %" PRIi64 "\n",
+			elapsed,
+			expected);
 
 		return false;
 	}
@@ -32,12 +35,15 @@ static bool run_calc_secs(gru_timestamp_t start, gru_timestamp_t end, const uint
 	return true;
 }
 
-static bool run_calc_milli(gru_timestamp_t start, gru_timestamp_t end, const uint64_t expected) {
+static bool
+	run_calc_milli(gru_timestamp_t start, gru_timestamp_t end, const uint64_t expected) {
 	uint64_t elapsed = gru_time_elapsed_milli(start, end);
 
 	if (elapsed != expected) {
-		fprintf(stderr, "Elapsed time  %" PRIi64 " does not the expected %" PRIi64 "\n", 
-			elapsed, expected);
+		fprintf(stderr,
+			"Elapsed time  %" PRIi64 " does not the expected %" PRIi64 "\n",
+			elapsed,
+			expected);
 
 		return false;
 	}
@@ -46,14 +52,12 @@ static bool run_calc_milli(gru_timestamp_t start, gru_timestamp_t end, const uin
 }
 
 bool test_sec_same_milli() {
-	gru_timestamp_t start = { 
-		.tv_sec = 1562377512,
-		.tv_usec = 671,
+	gru_timestamp_t start = {
+		.tv_sec = 1562377512, .tv_usec = 671,
 	};
 
-	gru_timestamp_t end = { 
-		.tv_sec = 1562377522,
-		.tv_usec = 671,
+	gru_timestamp_t end = {
+		.tv_sec = 1562377522, .tv_usec = 671,
 	};
 
 	const uint64_t expected = 10;
@@ -63,14 +67,12 @@ bool test_sec_same_milli() {
 
 
 bool test_sec_diff_milli() {
-	gru_timestamp_t start = { 
-		.tv_sec = 1562377512,
-		.tv_usec = 671,
+	gru_timestamp_t start = {
+		.tv_sec = 1562377512, .tv_usec = 671,
 	};
 
-	gru_timestamp_t end = { 
-		.tv_sec = 1562377522,
-		.tv_usec = 571,
+	gru_timestamp_t end = {
+		.tv_sec = 1562377522, .tv_usec = 571,
 	};
 
 	const uint64_t expected = 9;
@@ -80,14 +82,12 @@ bool test_sec_diff_milli() {
 
 
 bool test_milli_same_sec() {
-	gru_timestamp_t start = { 
-		.tv_sec = 1562377512,
-		.tv_usec = 5000,
+	gru_timestamp_t start = {
+		.tv_sec = 1562377512, .tv_usec = 5000,
 	};
 
-	gru_timestamp_t end = { 
-		.tv_sec = 1562377512,
-		.tv_usec = 104000,
+	gru_timestamp_t end = {
+		.tv_sec = 1562377512, .tv_usec = 104000,
 	};
 
 	const uint64_t expected = 99;
@@ -96,12 +96,11 @@ bool test_milli_same_sec() {
 }
 
 bool test_milli_diff_sec() {
-	gru_timestamp_t start = { 
-		.tv_sec = 1562377512,
-		.tv_usec = 5000,
+	gru_timestamp_t start = {
+		.tv_sec = 1562377512, .tv_usec = 5000,
 	};
 
-	gru_timestamp_t end = { 
+	gru_timestamp_t end = {
 		.tv_sec = 1562377513,
 		.tv_usec = 5001, // The 1 microsecond gets discarded.
 	};
@@ -113,7 +112,7 @@ bool test_milli_diff_sec() {
 
 
 int main(int argc, char **argv) {
-	
+
 	if (test_sec_same_milli()) {
 		if (test_sec_diff_milli()) {
 			if (test_milli_same_sec()) {

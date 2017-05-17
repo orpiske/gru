@@ -19,8 +19,8 @@
 
 #include "time/gru_time_utils.h"
 
-static bool test_read_ex(
-	const char *str, const long expected_sec, const long expected_usec) {
+static bool
+	test_read_ex(const char *str, const long expected_sec, const long expected_usec) {
 	struct timeval t = gru_time_read_str(str);
 
 	if (t.tv_sec != expected_sec) {

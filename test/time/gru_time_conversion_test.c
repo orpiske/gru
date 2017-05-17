@@ -41,7 +41,8 @@ int test_lost_precision_1() {
 }
 
 /**
- * Uses usec value that would cause the conversion to lost some precision (ie: usec > 1000)
+ * Uses usec value that would cause the conversion to lost some precision (ie: usec >
+ * 1000)
  */
 int test_lost_precision_2() {
 	// 1999 = 1 millisecond
@@ -63,7 +64,6 @@ int test_lost_precision_2() {
 
 	return EXIT_SUCCESS;
 }
-
 
 
 int test_lost_precision_3() {

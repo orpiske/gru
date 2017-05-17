@@ -20,24 +20,26 @@
 #include "time/gru_duration.h"
 
 bool convert_and_check(const char *str, uint64_t expected) {
-	gru_duration_t test1 = gru_duration_new(); 
+	gru_duration_t test1 = gru_duration_new();
 
 	if (!gru_duration_parse(&test1, str)) {
 		fprintf(stderr, "Unable to parse the given date: %s\n", str);
 
 		return false;
-	}
-	else {
-		uint64_t seconds = gru_time_elapsed_secs(test1.start , test1.end);
+	} else {
+		uint64_t seconds = gru_time_elapsed_secs(test1.start, test1.end);
 		if (seconds != expected) {
-			fprintf(stderr, "Invalid number of seconds: %"PRIu64" / expected %"PRIu64"\n", 
-				seconds, expected);
+			fprintf(stderr,
+				"Invalid number of seconds: %" PRIu64 " / expected %" PRIu64 "\n",
+				seconds,
+				expected);
 
 			return false;
-		}
-		else {
-			fprintf(stderr, "Returned number of seconds: %"PRIu64" / expected %"PRIu64"\n", 
-				seconds, expected);
+		} else {
+			fprintf(stderr,
+				"Returned number of seconds: %" PRIu64 " / expected %" PRIu64 "\n",
+				seconds,
+				expected);
 		}
 	}
 
