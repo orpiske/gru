@@ -142,10 +142,9 @@ gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t positio
 }
 
 gru_node_t *gru_list_remove(gru_list_t *list, uint32_t position) {
-	gru_node_t *node = NULL;
 	uint32_t count = 0;
 
-	node = go_to(list, position, &count);
+	gru_node_t *node = go_to(list, position, &count);
 	if (count != position) {
 		return NULL;
 	}
