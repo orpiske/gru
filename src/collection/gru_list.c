@@ -99,9 +99,7 @@ uint32_t gru_list_count(const gru_list_t *list) {
 
 const gru_node_t *gru_list_append(gru_list_t *list, const void *data) {
 	gru_node_t *last = go_to_end(list);
-	gru_node_t *node = NULL;
-
-	node = gru_node_new(data);
+	gru_node_t *node = gru_node_new(data);
 
 	if (!node) {
 		return NULL;
@@ -119,7 +117,6 @@ const gru_node_t *gru_list_append(gru_list_t *list, const void *data) {
 
 gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t position) {
 	gru_node_t *current = NULL;
-	gru_node_t *node = NULL;
 	uint32_t count = 0;
 
 	current = go_to(list, position, &count);
@@ -127,7 +124,7 @@ gru_node_t *gru_list_insert(gru_list_t *list, const void *data, uint32_t positio
 		return NULL;
 	}
 
-	node = gru_node_new(data);
+	gru_node_t *node = gru_node_new(data);
 	if (current == NULL) {
 		list->root = node;
 	} else {
@@ -215,10 +212,9 @@ bool gru_list_remove_item(gru_list_t *list,
 }
 
 const gru_node_t *gru_list_get(const gru_list_t *list, uint32_t position) {
-	gru_node_t *node = NULL;
 	uint32_t count = 0;
 
-	node = go_to(list, position, &count);
+	gru_node_t *node = go_to(list, position, &count);
 	if (count != position) {
 		return NULL;
 	}
