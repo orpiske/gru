@@ -307,3 +307,17 @@ const void *gru_list_get_item(const gru_list_t *list,
 
 	return NULL;
 }
+
+static void gru_list_node_destroy(const void *nodedata, void *payload) {
+	if (payload) {
+		gru_nodedata_destructor destructor = (gru_nodedata_destructor) payload;
+
+		destructor((void **) &nodedata);
+	}
+}
+
+gru_export void gru_list_clean(gru_list_t *list, gru_nodedata_destructor destructor) {
+	if (list) {
+		gru_list_for_each(list, gru_list_node_destroy, destructor);
+	}
+}

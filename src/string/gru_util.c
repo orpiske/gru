@@ -96,14 +96,8 @@ gru_list_t *gru_split(const char *str, char sep, gru_status_t *status) {
 	return ret;
 }
 
-static void gru_split_node_destroy(const void *nodedata, void *payload) {
-	gru_dealloc((void **) &nodedata);
-}
-
 void gru_split_clean(gru_list_t *list) {
-	if (list) {
-		gru_list_for_each(list, gru_split_node_destroy, NULL);
-	}
+	gru_list_clean(list, gru_dealloc);
 }
 
 char *gru_str_serialize(gru_list_t *list, char sep, gru_status_t *status) {

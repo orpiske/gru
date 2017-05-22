@@ -33,6 +33,11 @@
 extern "C" {
 #endif
 
+/**
+ * Reusable destructor for cleaning list data
+ */
+typedef void (*gru_nodedata_destructor)(void **);
+
 typedef struct gru_list_t_ { gru_node_t *root; } gru_list_t;
 
 /**
@@ -157,6 +162,9 @@ gru_export void gru_list_for_each_ex(const gru_list_t *list,
 gru_export const void *gru_list_get_item(const gru_list_t *list,
 	compare_function_t comparable,
 	const void *other);
+
+
+gru_export void gru_list_clean(gru_list_t *list, gru_nodedata_destructor destructor);
 
 #ifdef __cplusplus
 }
