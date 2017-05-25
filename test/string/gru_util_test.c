@@ -44,8 +44,10 @@ int main(int argc, char **argv) {
 	if (strcmp(str1,"123") != 0) {
 		fprintf(stderr, "Failed to trim string");
 
+		free(str1);
 		return EXIT_FAILURE;
 	}
+	free(str1);
 
 	return EXIT_SUCCESS;
 }
