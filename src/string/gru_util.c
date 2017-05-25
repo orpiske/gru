@@ -47,7 +47,7 @@ char *gru_ltrim(char *input, size_t size) {
 	}
 
 	if (i > 0) {
-		memcpy(input, input + i, size - i);
+		memmove(input, input + i, size - i);
 		memset(input + (size - i), 0, i);
 	}
 
