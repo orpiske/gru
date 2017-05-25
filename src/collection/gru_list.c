@@ -308,16 +308,23 @@ const void *gru_list_get_item(const gru_list_t *list,
 	return NULL;
 }
 
+struct gru_list_pl {
+	gru_nodedata_destructor destructor;
+};
+
 static void gru_list_node_destroy(const void *nodedata, void *payload) {
 	if (payload) {
-		gru_nodedata_destructor destructor = (gru_nodedata_destructor) payload;
+		struct gru_list_pl *pl = (struct gru_list_pl *) payload;
 
-		destructor((void **) &nodedata);
+		pl->destructor((void **) &nodedata);
 	}
 }
 
 gru_export void gru_list_clean(gru_list_t *list, gru_nodedata_destructor destructor) {
 	if (list) {
-		gru_list_for_each(list, gru_list_node_destroy, destructor);
+		struct gru_list_pl pl;
+
+		pl.destructor = destructor;
+		gru_list_for_each(list, gru_list_node_destroy, &pl);
 	}
 }
