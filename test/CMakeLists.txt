@@ -289,3 +289,19 @@ add_test(
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
 	COMMAND gru_serialize_test
 )
+
+add_executable(
+	gru_util_test
+	string/gru_util_test.c
+)
+
+target_link_libraries(
+	gru_util_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-util-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+	COMMAND gru_util_test
+)

@@ -20,7 +20,7 @@
 #include "gru_util.h"
 
 char *gru_rtrim(char *input, size_t size) {
-	size_t i = size;
+	size_t i = size - 1;
 
 	assert(input != NULL);
 
