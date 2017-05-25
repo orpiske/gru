@@ -42,7 +42,7 @@ char *gru_ltrim(char *input, size_t size) {
 	size_t i = 0;
 	assert(input != NULL);
 
-	while (isspace(input[i])) {
+	while (isspace(input[i]) && (i < (size - 1))) {
 		i++;
 	}
 
