@@ -14,6 +14,7 @@ add_library(
 	common/gru_status.c
 	common/gru_alloc.c
 	common/gru_variant.c
+	common/gru_keypair.c
 	${OS_SPECIFIC_FILES}
 	collection/gru_node.c
 	collection/gru_list.c
