@@ -85,3 +85,34 @@ bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key) {
 
 	return false;
 }
+
+gru_keypair_t *gru_keypair_parse(const char *str, gru_status_t *status) {
+	gru_keypair_t *ret = gru_keypair_new(status);
+	gru_alloc_check(ret, NULL);
+
+	size_t len = strlen(str);
+	uint32_t last = 0;
+	for (int i = 0; i <= len; i++) {
+		if (str[i] == '=' || str[i] == 0) {
+			ret->key = strndup(str, i);
+
+			ret->pair->type = GRU_STRING;
+
+			size_t after_sep = i + 1;
+			if (after_sep < len) {
+				ret->pair->variant.string = strdup(str + after_sep);
+			}
+			else {
+				gru_keypair_destroy(&ret);
+
+				gru_status_set(status, GRU_FAILURE, "Invalid key/pair string: %s", str);
+
+				return NULL;
+			}
+
+			break;
+		}
+	}
+
+	return ret;
+}

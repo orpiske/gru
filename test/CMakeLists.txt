@@ -24,6 +24,23 @@ add_test(
 )
 
 add_executable(
+	gru_keypair_test
+	common/gru_keypair_test.c
+)
+
+target_link_libraries(
+	gru_keypair_test
+	gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+	NAME gru-keypair-test
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+	COMMAND gru_keypair_test "key1=pair1" key1 pair1
+)
+
+
+add_executable(
 	gru_node_test
 	collection/gru_node_test.c
 )

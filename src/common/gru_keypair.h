@@ -83,6 +83,15 @@ gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
  */
 bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key);
 
+
+/**
+ * Parse a string in the format key=pair and returns an gru_keypair_t
+ * @param str
+ * @param status
+ * @return
+ */
+gru_keypair_t *gru_keypair_parse(const char *str, gru_status_t *status);
+
 #ifdef __cplusplus
 }
 #endif
