@@ -74,6 +74,15 @@ bool gru_keypair_set_key(gru_keypair_t *kp, const char *key);
  */
 gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
 
+
+/**
+ * Checks whether a key/pair struct matches the key
+ * @param kp
+ * @param key
+ * @return
+ */
+bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key);
+
 #ifdef __cplusplus
 }
 #endif
