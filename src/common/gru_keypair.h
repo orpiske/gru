@@ -35,15 +35,43 @@ typedef struct gru_keypair_t_ {
   gru_variant_t *pair;
 } gru_keypair_t;
 
+/**
+ * Creates a new key/pair struct
+ * @param status
+ * @return
+ */
 gru_keypair_t *gru_keypair_new(gru_status_t *status);
+
+/**
+ * Destroys a key/pair struct
+ * @param ptr
+ */
 void gru_keypair_destroy(gru_keypair_t **ptr);
 
+/**
+ * Destructor wrapper for gru_list_clean
+ * @param ptr
+ */
 inline static void gru_keypair_destroy_list_item(void **ptr) {
 	gru_keypair_destroy((gru_keypair_t **) ptr);
 }
 
+
+/**
+ * Sets the key
+ * @param kp
+ * @param key
+ * @return
+ */
 bool gru_keypair_set_key(gru_keypair_t *kp, const char *key);
 
+
+/**
+ * Clone a key/pair struct
+ * @param kp
+ * @param status
+ * @return
+ */
 gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
 
 #ifdef __cplusplus
