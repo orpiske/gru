@@ -162,6 +162,13 @@ add_test(
 	COMMAND gru_uri_test_query http://localhost/path?key1=value1&key2=value2&key3 http localhost "" /path key1 value1 key2 value2 key3
 )
 
+add_test(
+		NAME gru-uri-test-query-2
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_uri_test_query http://localhost/path?key1=value1&key2=other1=another1,other2=another2&key3 http localhost "" /path key1 value1 key2 "other1=another1,other2=another2" key3
+)
+
+
 add_executable(gru_uri_format_test
 	network/gru_uri_format_test.c
 )
