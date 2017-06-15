@@ -13,6 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
+#include <log/gru_logger.h>
 #include "gru_variant.h"
 
 bool gru_variant_set_string(gru_variant_t *variant, const char *str) {
@@ -52,7 +53,7 @@ typedef enum conversion_stat_t_ {
   VAR_NOT_CONVERSIBLE = 4,
 } conversion_stat_t;
 
-static conversion_stat_t gru_variant_try_uint(const char *str, uint64_t *out, gru_status_t *status) {
+static conversion_stat_t gru_variant_try_uint(const char *str, uint64_t *out) {
 	const int base = 10;
 	char *end;
 
@@ -60,7 +61,8 @@ static conversion_stat_t gru_variant_try_uint(const char *str, uint64_t *out, gr
 	*out = strtol(str, &end, base);
 
 	if ((errno == ERANGE && (*out == LONG_MAX || *out == LONG_MIN)) || (errno != 0 && *out == 0)) {
-		gru_status_set(status, GRU_FAILURE, "Out of range");
+		logger_t logger = gru_logger_get();
+		logger(WARNING, "Cannot convert the value %s because it's out of range");
 
 		return VAR_ERROR | VAR_OUT_OF_RANGE;
 	}
@@ -72,14 +74,15 @@ static conversion_stat_t gru_variant_try_uint(const char *str, uint64_t *out, gr
 	return VAR_SUCCESS;
 }
 
-static conversion_stat_t gru_variant_try_double(const char *str, long double *out, gru_status_t *status) {
+static conversion_stat_t gru_variant_try_double(const char *str, long double *out) {
 	char *end;
 
 	errno = 0;
 	*out = strtold(str, &end);
 
 	if (errno == ERANGE) {
-		gru_status_set(status, GRU_FAILURE, "Out of range");
+		logger_t logger = gru_logger_get();
+		logger(WARNING, "Cannot convert the value %s because it's out of range");
 
 		return VAR_ERROR | VAR_OUT_OF_RANGE;
 	}
@@ -91,22 +94,24 @@ static conversion_stat_t gru_variant_try_double(const char *str, long double *ou
 	return VAR_SUCCESS;
 }
 
-gru_variant_t gru_variant_parse(const char *str, gru_status_t *status) {
+gru_variant_t gru_variant_parse(const char *str) {
 	gru_variant_t var = {0};
 	conversion_stat_t ret;
 
-	ret = gru_variant_try_uint(str, &var.variant.inumber, status);
-	if (ret == VAR_SUCCESS) {
-		var.type = GRU_INTEGER;
+	if (str) {
+		ret = gru_variant_try_uint(str, &var.variant.inumber);
+		if (ret == VAR_SUCCESS) {
+			var.type = GRU_INTEGER;
 
-		return var;
-	}
+			return var;
+		}
 
-	ret = gru_variant_try_double(str, &var.variant.fnumber, status);
-	if (ret == VAR_SUCCESS) {
-		var.type = GRU_DOUBLE;
+		ret = gru_variant_try_double(str, &var.variant.fnumber);
+		if (ret == VAR_SUCCESS) {
+			var.type = GRU_DOUBLE;
 
-		return var;
+			return var;
+		}
 	}
 
 	gru_variant_set_string(&var, str);

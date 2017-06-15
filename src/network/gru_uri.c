@@ -166,7 +166,9 @@ static gru_list_t *gru_uri_parse_query(UriUriA *uri, gru_status_t *status) {
 		}
 
 		gru_keypair_set_key(kp, ptr->key);
-		gru_variant_set_string(kp->pair, ptr->value);
+
+		*kp->pair = gru_variant_parse(ptr->value);
+
 		gru_list_append(ret, kp);
 
 		ptr = ptr->next;
@@ -239,13 +241,6 @@ char *gru_uri_simple_format(const gru_uri_t *uri, gru_status_t *status) {
 
 	return ret;
 }
-
-/*
- char *scheme;
-	char *host;
-	uint16_t port;
-	char *path;
- */
 
 char *gru_uri_format(const gru_uri_t *uri,
 	gru_uri_format_opt_t fopt,

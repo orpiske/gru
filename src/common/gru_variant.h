@@ -74,10 +74,9 @@ void gru_variant_clean(gru_variant_t *variant);
 /**
  * Parses a string and sets it to the most appropriate type
  * @param str the string to parse
- * @param status the status code
  * @return a variant (if all conversion fails, it defaults to string)
  */
-gru_variant_t gru_variant_parse(const char *str, gru_status_t *status);
+gru_variant_t gru_variant_parse(const char *str);
 
 #ifdef __cplusplus
 }

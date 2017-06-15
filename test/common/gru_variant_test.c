@@ -24,8 +24,7 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	gru_status_t status = gru_status_new();
-	gru_variant_t var = gru_variant_parse(argv[1], &status);
+	gru_variant_t var = gru_variant_parse(argv[1]);
 
 	switch (var.type) {
 	case GRU_STRING: {
