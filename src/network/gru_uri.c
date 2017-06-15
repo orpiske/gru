@@ -137,6 +137,10 @@ static gru_list_t *gru_uri_parse_query(UriUriA *uri, gru_status_t *status) {
 	UriQueryListA *query_list;
 	int items = 0;
 
+	if (uri->query.first == 0 && uri->query.afterLast == 0) {
+		return NULL;
+	}
+
 	if (uriDissectQueryMallocA(&query_list, &items, uri->query.first, uri->query.afterLast) != URI_SUCCESS) {
 		uriFreeUriMembersA(uri);
 		gru_status_set(status, GRU_FAILURE, "Unable to parse query string from URL");
