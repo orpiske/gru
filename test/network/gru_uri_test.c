@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 
 	if (strcmp(uri.scheme, argv[2]) != 0) {
 		fprintf(stderr,
-			"Expected scheme %s does not match returned one %s",
+			"Expected scheme '%s' does not match returned one '%s'\n",
 			argv[2],
 			uri.scheme);
 
@@ -44,21 +44,21 @@ int main(int argc, char **argv) {
 
 	if (strcmp(uri.host, argv[3]) != 0) {
 		fprintf(
-			stderr, "Expected host %s does not match returned one %s", argv[3], uri.host);
+			stderr, "Expected host '%s' does not match returned one '%s'\n", argv[3], uri.host);
 
 		goto err_exit;
 	}
 
 	if (uri.port != atoi(argv[4])) {
 		fprintf(
-			stderr, "Expected port %s does not match returned one %d", argv[2], uri.port);
+			stderr, "Expected port '%s' does not match returned one '%d'\n", argv[2], uri.port);
 
 		goto err_exit;
 	}
 
 	if (strcmp(uri.path, argv[5]) != 0) {
 		fprintf(
-			stderr, "Expected path %s does not match returned one %s", argv[5], uri.path);
+			stderr, "Expected path '%s' does not match returned one '%s'\n", argv[5], uri.path);
 
 		goto err_exit;
 	}
