@@ -44,6 +44,8 @@ inline static void gru_keypair_destroy_list_item(void **ptr) {
 
 bool gru_keypair_set_key(gru_keypair_t *kp, const char *key);
 
+gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
+
 #ifdef __cplusplus
 }
 #endif

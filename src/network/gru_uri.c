@@ -332,6 +332,24 @@ gru_export gru_uri_t gru_uri_clone(gru_uri_t other, gru_status_t *status) {
 		}
 	}
 
+	if (other.query) {
+		ret.query = gru_list_new(status);
+
+
+		gru_node_t *node = other.query->root;
+
+		while (node) {
+			gru_keypair_t *kp = (gru_keypair_t *) node->data;
+			gru_keypair_t *clone = gru_keypair_clone(kp, status);
+
+			if (!gru_list_append(ret.query, clone)) {
+				goto err_exit;
+			}
+
+			node = node->next;
+		}
+	}
+
 	return ret;
 
 err_exit:

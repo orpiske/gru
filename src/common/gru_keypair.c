@@ -14,6 +14,7 @@
  limitations under the License.
  */
 #include "gru_keypair.h"
+#include "gru_variant.h"
 
 gru_keypair_t *gru_keypair_new(gru_status_t *status) {
 	gru_keypair_t *kp = gru_alloc(sizeof(gru_keypair_t), status);
@@ -45,4 +46,28 @@ void gru_keypair_destroy(gru_keypair_t **ptr) {
 
 bool gru_keypair_set_key(gru_keypair_t *kp, const char *key) {
 	kp->key = strdup(key);
+}
+
+gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status) {
+	gru_keypair_t *ret = gru_keypair_new(status);
+	if (!ret) {
+		return NULL;
+	}
+
+	ret->key = strdup(kp->key);
+	ret->pair->type = kp->pair->type;
+
+	if (ret->pair->type == GRU_STRING) {
+		if (kp->pair->variant.string) {
+			ret->pair->variant.string = strdup(kp->pair->variant.string);
+		}
+		else {
+			ret->pair->variant.string = kp->pair->variant.string;
+		}
+	}
+	else {
+		ret->pair->variant.inumber = kp->pair->variant.inumber;
+	}
+
+
 }
