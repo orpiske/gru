@@ -13,6 +13,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
+#include <common/gru_keypair.h>
+#include <common/gru_variant.h>
 #include "gru_uri.h"
 #include "common/gru_alloc.h"
 
@@ -131,6 +133,45 @@ gru_uri_t gru_uri_parse(const char *url, gru_status_t *status) {
 	return gru_uri_parse_ex(url, GRU_URI_PARSE_DEFAULT, status);
 }
 
+static gru_list_t *gru_uri_parse_query(UriUriA *uri, gru_status_t *status) {
+	UriQueryListA *query_list;
+	int items = 0;
+
+	if (uriDissectQueryMallocA(&query_list, &items, uri->query.first, uri->query.afterLast) != URI_SUCCESS) {
+		uriFreeUriMembersA(uri);
+		gru_status_set(status, GRU_FAILURE, "Unable to parse query string from URL");
+
+		return false;
+	}
+
+	if (items == 0) {
+		return NULL;
+	}
+
+	gru_list_t *ret = gru_list_new(status);
+	gru_alloc_check(ret, NULL);
+
+	struct UriQueryListStructA *ptr = query_list;
+	for (int i = 0; i < items; i++) {
+
+		gru_keypair_t *kp = gru_keypair_new(status);
+		if (!kp) {
+			uriFreeQueryListA(query_list);
+
+			return NULL;
+		}
+
+		gru_keypair_set_key(kp, ptr->key);
+		gru_variant_set_string(kp->pair, ptr->value);
+		gru_list_append(ret, kp);
+
+		ptr = ptr->next;
+	}
+
+	uriFreeQueryListA(query_list);
+	return ret;
+}
+
 gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 	gru_uri_parse_opt_t parseopt,
 	gru_status_t *gru_restrict status) {
@@ -150,6 +191,13 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 	ret.port = gru_uri_get_port(&uri.portText, status);
 	ret.path = gru_uri_path(&uri, parseopt, status);
 	ret.scheme = gru_uri_get_ranged_data(&uri.scheme, status);
+
+	ret.query = gru_uri_parse_query(&uri, status);
+	if (!gru_status_success(status)) {
+		uriFreeUriMembersA(&uri);
+
+		return ret;
+	}
 
 	uriFreeUriMembersA(&uri);
 
@@ -289,7 +337,17 @@ err_exit:
 }
 
 void gru_uri_cleanup(gru_uri_t *uri) {
+	if (!uri) {
+		return;
+	}
+
 	gru_dealloc_string(&uri->host);
 	gru_dealloc_string(&uri->path);
 	gru_dealloc_string(&uri->scheme);
+
+	if (uri->query) {
+		gru_list_clean(uri->query, gru_keypair_destroy_list_item);
+
+		gru_list_destroy(&uri->query);
+	}
 }

@@ -109,6 +109,15 @@ target_link_libraries(
 	gru-${GRU_VERSION_MAJOR}
 )
 
+add_executable(gru_uri_test_query
+		network/gru_uri_test_query.c
+		)
+
+target_link_libraries(
+		gru_uri_test_query
+		gru-${GRU_VERSION_MAJOR}
+)
+
 add_test(
 	NAME gru-uri-test-1
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
@@ -146,6 +155,12 @@ add_test(
 	COMMAND gru_uri_test https://10.0.0.1 https 10.0.0.1 "" ""
 )
 
+
+add_test(
+	NAME gru-uri-test-query-1
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+	COMMAND gru_uri_test_query http://localhost/path?key1=value1&key2=value2&key3 http localhost "" /path key1 value1 key2 value2 key3
+)
 
 add_executable(gru_uri_format_test
 	network/gru_uri_format_test.c

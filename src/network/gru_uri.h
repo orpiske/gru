@@ -23,6 +23,7 @@
 #include <string/gru_alt.h>
 
 #include <uriparser/Uri.h>
+#include <collection/gru_list.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,6 +51,7 @@ typedef struct gru_uri_t_ {
 	char *host;
 	char *path;
 	uint16_t port;
+  	gru_list_t *query;
 } gru_uri_t;
 
 /**
