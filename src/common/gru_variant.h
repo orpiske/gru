@@ -19,6 +19,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
+#include <limits.h>
 
 #include <common/gru_alloc.h>
 
@@ -30,6 +32,7 @@ extern "C" {
 typedef enum gru_variant_type_t_ {
   GRU_STRING,
   GRU_INTEGER,
+  GRU_DOUBLE,
 } gru_variant_type_t;
 
 
@@ -40,6 +43,7 @@ typedef struct gru_variant_t_ {
   gru_variant_type_t type;
   union {
 	uint64_t inumber;
+	long double fnumber;
 	char *string;
   } variant;
 } gru_variant_t;
@@ -66,6 +70,14 @@ void gru_variant_set_integer(gru_variant_t *variant, uint64_t number);
  * @param variant the variant to release
  */
 void gru_variant_clean(gru_variant_t *variant);
+
+/**
+ * Parses a string and sets it to the most appropriate type
+ * @param str the string to parse
+ * @param status the status code
+ * @return a variant (if all conversion fails, it defaults to string)
+ */
+gru_variant_t gru_variant_parse(const char *str, gru_status_t *status);
 
 #ifdef __cplusplus
 }

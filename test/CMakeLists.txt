@@ -41,6 +41,46 @@ add_test(
 
 
 add_executable(
+        gru_variant_test
+        common/gru_variant_test.c
+)
+
+target_link_libraries(
+        gru_variant_test
+        gru-${GRU_VERSION_MAJOR}
+)
+
+add_test(
+        NAME gru-variant-test-str
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+        COMMAND gru_variant_test "somestring" somestring
+)
+
+add_test(
+        NAME gru-variant-test-int
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+        COMMAND gru_variant_test "1234" 1234
+)
+
+add_test(
+        NAME gru-variant-test-double
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+        COMMAND gru_variant_test "3.14" 3.14
+)
+
+add_test(
+        NAME gru-variant-test-str-2
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+        COMMAND gru_variant_test "123somestring" 123somestring
+)
+
+add_test(
+        NAME gru-variant-test-str-3
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+        COMMAND gru_variant_test "somestring123" somestring123
+)
+
+add_executable(
 	gru_node_test
 	collection/gru_node_test.c
 )
