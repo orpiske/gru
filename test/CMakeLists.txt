@@ -80,6 +80,18 @@ add_test(
         COMMAND gru_variant_test "somestring123" somestring123
 )
 
+add_test(
+        NAME gru-variant-test-bool-1
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+        COMMAND gru_variant_test "false" false
+)
+
+add_test(
+        NAME gru-variant-test-bool-2
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/bin
+        COMMAND gru_variant_test "true" true
+)
+
 add_executable(
 	gru_node_test
 	collection/gru_node_test.c

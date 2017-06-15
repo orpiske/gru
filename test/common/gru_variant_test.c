@@ -60,6 +60,22 @@ int main(int argc, char **argv) {
 
 		break;
 	}
+	case GRU_BOOLEAN: {
+		bool flag = false;
+
+		if (strcmp(argv[2], "true") == 0) {
+			flag = true;
+		}
+		if (var.variant.flag != flag) {
+			fprintf(stderr, "The parsed value '%s' does not match the expected boolean value '%s'\n",
+					(var.variant.flag ? "true" : "false"), argv[2]);
+
+			gru_variant_clean(&var);
+			return EXIT_FAILURE;
+		}
+
+		break;
+	}
 	}
 	gru_variant_clean(&var);
 	return EXIT_SUCCESS;

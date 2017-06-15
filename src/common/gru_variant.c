@@ -94,6 +94,24 @@ static conversion_stat_t gru_variant_try_double(const char *str, long double *ou
 	return VAR_SUCCESS;
 }
 
+
+static conversion_stat_t gru_variant_try_bool(const char *str, bool *out) {
+	if (strcmp(str, "true") == 0) {
+		*out = true;
+
+		return VAR_SUCCESS;
+	}
+	else {
+		if (strcmp(str, "false") == 0) {
+			*out = false;
+
+			return VAR_SUCCESS;
+		}
+	}
+
+	return VAR_ERROR | VAR_NOT_CONVERSIBLE;
+}
+
 gru_variant_t gru_variant_parse(const char *str) {
 	gru_variant_t var = {0};
 	conversion_stat_t ret;
@@ -109,6 +127,13 @@ gru_variant_t gru_variant_parse(const char *str) {
 		ret = gru_variant_try_double(str, &var.variant.fnumber);
 		if (ret == VAR_SUCCESS) {
 			var.type = GRU_DOUBLE;
+
+			return var;
+		}
+
+		ret = gru_variant_try_bool(str, &var.variant.flag);
+		if (ret == VAR_SUCCESS) {
+			var.type = GRU_BOOLEAN;
 
 			return var;
 		}

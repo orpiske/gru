@@ -33,6 +33,7 @@ typedef enum gru_variant_type_t_ {
   GRU_STRING,
   GRU_INTEGER,
   GRU_DOUBLE,
+  GRU_BOOLEAN,
 } gru_variant_type_t;
 
 
@@ -45,6 +46,7 @@ typedef struct gru_variant_t_ {
 	uint64_t inumber;
 	long double fnumber;
 	char *string;
+	bool flag;
   } variant;
 } gru_variant_t;
 
