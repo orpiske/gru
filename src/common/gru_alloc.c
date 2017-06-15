@@ -19,8 +19,14 @@ void *gru_alloc(size_t size, gru_status_t *status) {
 }
 
 void gru_dealloc(void **obj) {
-	free(*(obj));
-	*obj = NULL;
+	void *ptr = *obj;
+
+	if (ptr == NULL) {
+		return;
+	}
+
+	free(ptr);
+	ptr = NULL;
 }
 
 inline void gru_dealloc_string(char **obj) {
