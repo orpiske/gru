@@ -57,28 +57,28 @@ typedef struct gru_variant_t_ {
  * @param str the string to set
  * @return false if unable to allocate memory for the string or true otherwise
  */
-bool gru_variant_set_string(gru_variant_t *variant, const char *str);
+gru_export bool gru_variant_set_string(gru_variant_t *variant, const char *str);
 
 /**
  * Set the variant value to an integer
  * @param variant the variant to hold the data
  * @param number the number to set
  */
-void gru_variant_set_integer(gru_variant_t *variant, uint64_t number);
+gru_export void gru_variant_set_integer(gru_variant_t *variant, uint64_t number);
 
 /**
  * Release the memory used by a variant (if any used at all). It's safe to
  * pass any variant even if no memory is used at all
  * @param variant the variant to release
  */
-void gru_variant_clean(gru_variant_t *variant);
+gru_export void gru_variant_clean(gru_variant_t *variant);
 
 /**
  * Parses a string and sets it to the most appropriate type
  * @param str the string to parse
  * @return a variant (if all conversion fails, it defaults to string)
  */
-gru_variant_t gru_variant_parse(const char *str);
+gru_export gru_variant_t gru_variant_parse(const char *str);
 
 #ifdef __cplusplus
 }

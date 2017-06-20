@@ -20,6 +20,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "gru_portable.h"
 #include "gru_status.h"
 #include "gru_variant.h"
 
@@ -40,19 +41,19 @@ typedef struct gru_keypair_t_ {
  * @param status
  * @return
  */
-gru_keypair_t *gru_keypair_new(gru_status_t *status);
+gru_export gru_keypair_t *gru_keypair_new(gru_status_t *status);
 
 /**
  * Destroys a key/pair struct
  * @param ptr
  */
-void gru_keypair_destroy(gru_keypair_t **ptr);
+gru_export void gru_keypair_destroy(gru_keypair_t **ptr);
 
 /**
  * Destructor wrapper for gru_list_clean
  * @param ptr
  */
-inline static void gru_keypair_destroy_list_item(void **ptr) {
+gru_export inline static void gru_keypair_destroy_list_item(void **ptr) {
 	gru_keypair_destroy((gru_keypair_t **) ptr);
 }
 
@@ -63,7 +64,7 @@ inline static void gru_keypair_destroy_list_item(void **ptr) {
  * @param key
  * @return
  */
-bool gru_keypair_set_key(gru_keypair_t *kp, const char *key);
+gru_export bool gru_keypair_set_key(gru_keypair_t *kp, const char *key);
 
 
 /**
@@ -72,7 +73,7 @@ bool gru_keypair_set_key(gru_keypair_t *kp, const char *key);
  * @param status
  * @return
  */
-gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
+gru_export gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
 
 
 /**
@@ -81,7 +82,7 @@ gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
  * @param key
  * @return
  */
-bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key);
+gru_export bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key);
 
 
 /**
@@ -90,7 +91,7 @@ bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key);
  * @param status
  * @return
  */
-gru_keypair_t *gru_keypair_parse(const char *str, gru_status_t *status);
+gru_export gru_keypair_t *gru_keypair_parse(const char *str, gru_status_t *status);
 
 #ifdef __cplusplus
 }
