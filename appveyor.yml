@@ -1,6 +1,7 @@
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: true
+skip_tags: true
 configuration: Debug
 platform: x64
 build_script:
@@ -15,11 +16,11 @@ build_script:
 
     nmake
 
-    cd ..
-test_script:
-- cmd: >-
-    cd build
-
-    ctest -vv
+    ctest -T test -VV
 
     cd ..
+test:
+  assemblies:
+    only:
+    - build/Testing/*/Test.xml
+
