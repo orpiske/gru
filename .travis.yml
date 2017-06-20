@@ -9,6 +9,7 @@ os:
   - osx
 
 sudo: true
+group: edge
 language:
   - c
 before_install:
