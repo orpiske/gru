@@ -320,7 +320,7 @@ static void gru_list_node_destroy(const void *nodedata, void *payload) {
 	}
 }
 
-gru_export void gru_list_clean(gru_list_t *list, gru_nodedata_destructor destructor) {
+void gru_list_clean(gru_list_t *list, gru_nodedata_destructor destructor) {
 	if (list) {
 		struct gru_list_pl pl;
 
