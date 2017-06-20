@@ -53,9 +53,7 @@ gru_export void gru_keypair_destroy(gru_keypair_t **ptr);
  * Destructor wrapper for gru_list_clean
  * @param ptr
  */
-gru_export inline static void gru_keypair_destroy_list_item(void **ptr) {
-	gru_keypair_destroy((gru_keypair_t **) ptr);
-}
+gru_export void gru_keypair_destroy_list_item(void **ptr);
 
 
 /**

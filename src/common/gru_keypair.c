@@ -44,6 +44,10 @@ void gru_keypair_destroy(gru_keypair_t **ptr) {
 	gru_dealloc((void **) ptr);
 }
 
+inline void gru_keypair_destroy_list_item(void **ptr) {
+	gru_keypair_destroy((gru_keypair_t **) ptr);
+}
+
 bool gru_keypair_set_key(gru_keypair_t *kp, const char *key) {
 	kp->key = strdup(key);
 
