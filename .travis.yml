@@ -31,6 +31,6 @@ addons:
       name: "orpiske/gru"
       description: "Generic Reusable Utilities"
     notification_email: angusyoung@gmail.com
-    build_command_prepend: "mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE .."
+    build_command_prepend: "mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=DEBUG .."
     build_command: "make all"
     branch_pattern: coverity_scan
