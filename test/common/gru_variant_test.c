@@ -18,6 +18,7 @@
 
 #include <common/gru_status.h>
 #include <common/gru_variant.h>
+#include <log/gru_logger.h>
 
 int main(int argc, char **argv) {
 	if (argc < 3) {
@@ -25,6 +26,7 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
+	gru_logger_set(gru_logger_default_printer);
 	gru_variant_t var = gru_variant_parse(argv[1]);
 
 	switch (var.type) {
