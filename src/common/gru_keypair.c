@@ -90,6 +90,10 @@ bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key) {
 	return false;
 }
 
+#if !defined(HAVE_STRNDUP)
+char *strndup(const char *source, size_t limit);
+#endif // HAVE_STRNDUP
+
 gru_keypair_t *gru_keypair_parse(const char *str, gru_status_t *status) {
 	gru_keypair_t *ret = gru_keypair_new(status);
 	gru_alloc_check(ret, NULL);
