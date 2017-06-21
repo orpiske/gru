@@ -14,6 +14,7 @@
  limitations under the License.
  */
 #include <math.h>
+#include <inttypes.h>
 
 #include <common/gru_status.h>
 #include <common/gru_variant.h>
@@ -40,7 +41,7 @@ int main(int argc, char **argv) {
 	}
 	case GRU_INTEGER: {
 		if (var.variant.inumber != atoll(argv[2])) {
-			fprintf(stderr, "The parsed value '%ld' does not match the expected number value '%s'\n",
+			fprintf(stderr, "The parsed value '%"PRIu64"' does not match the expected number value '%s'\n",
 					var.variant.inumber, argv[2]);
 
 			gru_variant_clean(&var);
