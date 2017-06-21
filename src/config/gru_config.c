@@ -83,7 +83,7 @@ void gru_config_set(char *dest, uint32_t size, const char *fmt, ...) {
 #endif
 }
 
-void gru_config_read(const char *name, FILE *source, void *dest, const char *mask) {
+static void gru_config_read(const char *name, FILE *source, void *dest, const char *mask) {
 	rewind(source);
 	while (!feof(source)) {
 		char line[GRU_OPT_MAX_STR_SIZE] = {0};
@@ -100,9 +100,8 @@ void gru_config_read(const char *name, FILE *source, void *dest, const char *mas
 		if (strstr(line, name) != NULL) {
 			char *filtered = gru_trim(line, (sizeof(line) - 1));
 
-			char none[GRU_OPT_MAX_STR_SIZE];
+			char none[GRU_OPT_MAX_STR_SIZE] = {0};
 
-			bzero(none, sizeof(none));
 			sscanf(filtered, mask, none, dest);
 
 			break;
