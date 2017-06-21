@@ -16,6 +16,7 @@
 #include <network/gru_uri.h>
 #include <common/gru_keypair.h>
 #include <common/gru_variant.h>
+#include <log/gru_logger.h>
 
 static bool query_check(gru_uri_t *uri, uint32_t  pos, const char *expected_key, const char *expected_value) {
 	const gru_node_t *node = gru_list_get(uri->query, pos);
@@ -49,6 +50,8 @@ static bool query_check(gru_uri_t *uri, uint32_t  pos, const char *expected_key,
 int main(int argc, char **argv) {
 	gru_uri_t uri = {0};
 	gru_status_t status = gru_status_new();
+
+	gru_logger_set(gru_logger_default_printer);
 
 	if (argc < 3) {
 		fprintf(stderr, "Missing arguments\n");
