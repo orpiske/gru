@@ -25,6 +25,9 @@ limitations under the License.
 #define bzero(b, len) (memset((b), '\0', (len)), (void) 0)
 #define strcasecmp _stricmp
 #define strncasecmp _strnicmp
+#define strdup _strdup
+#define access _access
+#define fileno _fileno
 #define strerror_r(errno, buf, len) strerror_s(buf, len, errno)
 #define gru_export __declspec(dllexport)
 #define gru_restrict
