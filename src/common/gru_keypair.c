@@ -34,10 +34,11 @@ gru_keypair_t *gru_keypair_new(gru_status_t *status) {
 void gru_keypair_destroy(gru_keypair_t **ptr) {
 	gru_keypair_t *kp = *ptr;
 
-	if (kp) {
-		gru_variant_clean(kp->pair);
+	if (!kp) {
+		return;
 	}
 
+	gru_variant_clean(kp->pair);
 	gru_dealloc_string(&kp->key);
 
 	gru_dealloc((void **) &kp->pair);
