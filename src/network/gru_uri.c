@@ -162,6 +162,9 @@ static gru_list_t *gru_uri_parse_query(UriUriA *uri, gru_status_t *status) {
 		if (!kp) {
 			uriFreeQueryListA(query_list);
 
+			gru_list_clean(ret, gru_keypair_destroy_list_item);
+
+			gru_list_destroy(&ret);
 			return NULL;
 		}
 
