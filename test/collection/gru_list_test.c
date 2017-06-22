@@ -175,7 +175,7 @@ static int add_remove_test() {
 		gru_node_t *n1 = gru_list_remove(list, 0);
 		if (!n1) {
 			fprintf(stderr, "There should still be a node at position 0\n");
-			return EXIT_FAILURE;
+			goto e_exit;
 		}
 		gru_node_destroy(&n1);
 	}
