@@ -24,7 +24,7 @@ if (CMAKE_COMPILER_IS_GNUCXX)
 		set(COMPILER_COLOR_FLAGS_OPTS "")
 	endif (HAS_COMPILER_COLORS)
 
-	set(CMAKE_C_FLAGS "-Wall -Wshadow -Wconversion -Wno-sign-conversion -pedantic-errors -fstrict-aliasing -fstack-protector-all -std=c99 ${COMPILER_COLOR_FLAGS_OPTS}  ${CMAKE_USER_C_FLAGS}" CACHE STRING
+	set(CMAKE_C_FLAGS "-Wall -Wshadow -Wconversion -Wno-sign-conversion -pedantic-errors -fstrict-aliasing -fstack-protector-all -std=c99 ${COMPILER_COLOR_FLAGS_OPTS} ${CMAKE_USER_C_FLAGS}" CACHE STRING
 		"Flags used by the compiler during all build types." FORCE
 	)
 
