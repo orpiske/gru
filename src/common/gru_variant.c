@@ -143,3 +143,19 @@ gru_variant_t gru_variant_parse(const char *str) {
 
 	return var;
 }
+
+bool gru_variant_equals_str(gru_variant_t *variant, const char *str) {
+	if (!variant) {
+		return false;
+	}
+
+	if (variant->type != GRU_STRING) {
+		return false;
+	}
+
+	if (strcmp(variant->variant.string, str) == 0) {
+		return true;
+	}
+
+	return false;
+}

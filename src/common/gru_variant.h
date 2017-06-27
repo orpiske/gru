@@ -80,6 +80,15 @@ gru_export void gru_variant_clean(gru_variant_t *variant);
  */
 gru_export gru_variant_t gru_variant_parse(const char *str);
 
+
+/**
+ * Simple equality check to test if the variant value matches a given string
+ * @param variant the variant to compare with
+ * @param str the string to check
+ * @return true if it's equal or false otherwise
+ */
+bool gru_variant_equals_str(gru_variant_t *variant, const char *str);
+
 #ifdef __cplusplus
 }
 #endif

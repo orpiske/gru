@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
 	switch (var.type) {
 	case GRU_STRING: {
-		if (strcmp(var.variant.string, argv[2]) != 0) {
+		if (!gru_variant_equals_str(&var, argv[2])) {
 			fprintf(stderr, "The parsed value '%s' does not match the expected value '%s'\n",
 					var.variant.string, argv[2]);
 
