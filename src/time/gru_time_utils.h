@@ -56,6 +56,13 @@ extern "C" {
 typedef struct timeval gru_timestamp_t;
 
 /**
+ * Add microseconds to a timestamp object
+ * @param t timestamp
+ * @param count number of microtseconds to add
+ */
+void gru_time_add_microseconds(gru_timestamp_t *t, uint64_t count);
+
+/**
  * Add seconds to a timestamp object
  * @param t timestamp
  * @param count number of seconds to add

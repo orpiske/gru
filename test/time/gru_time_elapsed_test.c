@@ -111,15 +111,53 @@ bool test_milli_diff_sec() {
 }
 
 
-int main(int argc, char **argv) {
+bool test_add_micro() {
+	gru_timestamp_t start = {
+		.tv_sec = 1562377512, .tv_usec = 5000,
+	};
 
-	if (test_sec_same_milli()) {
+	// Add 2,5 seconds
+	gru_time_add_microseconds(&start, 2500000);
+
+	if (start.tv_sec != 1562377514) {
+		fprintf(stderr, "Unexpected time: %"PRIu64"\n", start.tv_sec);
+		return false;
+	}
+	if (start.tv_usec != 505000) {
+		fprintf(stderr, "Unexpected time: %"PRIu64"\n", start.tv_usec);
+		return false;
+	}
+
+	return true;
+}
+
+
+int main(int argc, char **argv) {
+	if (argc < 2) {
+		fprintf(stderr, "Missing test case name\n");
+
+		return EXIT_FAILURE;
+	}
+
+	if (strcmp(argv[1], "same-milli") == 0) {
+		if (test_sec_same_milli()) {
+			return EXIT_SUCCESS;
+		}
+	} else if (strcmp(argv[1], "diff-milli") == 0) {
 		if (test_sec_diff_milli()) {
-			if (test_milli_same_sec()) {
-				if (test_milli_diff_sec()) {
-					return EXIT_SUCCESS;
-				}
-			}
+			return EXIT_SUCCESS;
+		}
+	} else if (strcmp(argv[1], "same-sec") == 0) {
+		if (test_milli_same_sec()) {
+			return EXIT_SUCCESS;
+		}
+	} else if (strcmp(argv[1], "diff-sec") == 0) {
+		if (test_milli_diff_sec()) {
+			return EXIT_SUCCESS;
+		}
+	} else if (strcmp(argv[1], "add-micro") == 0) {
+		if (test_add_micro()) {
+			return EXIT_SUCCESS;
 		}
 	}
 

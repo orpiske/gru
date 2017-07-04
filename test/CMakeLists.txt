@@ -312,10 +312,35 @@ target_link_libraries(
 )
 
 add_test(
-	NAME gru-time-elapsed-test
+	NAME gru-time-elapsed-test-same-milli
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
-	COMMAND gru_time_elapsed_test
+	COMMAND gru_time_elapsed_test same-milli
 )
+
+add_test(
+		NAME gru-time-elapsed-test-diff-milli
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_time_elapsed_test diff-milli
+)
+
+add_test(
+		NAME gru-time-elapsed-test-same-sec
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_time_elapsed_test same-sec
+)
+
+add_test(
+		NAME gru-time-elapsed-test-diff-sec
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_time_elapsed_test diff-sec
+)
+
+add_test(
+		NAME gru-time-elapsed-test-add-micro
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_time_elapsed_test add-micro
+)
+
 
 add_executable(gru_duration_parse_test
 	time/gru_duration_parse_test.c
