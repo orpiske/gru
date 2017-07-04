@@ -136,14 +136,14 @@ gru_timestamp_t gru_time_from_milli_char(const char *ts) {
 	return gru_time_from_milli(ms);
 }
 
-uint64_t gru_time_to_milli(const gru_timestamp_t *ts) {
-	uint64_t ret = ((uint64_t) ts->tv_sec * 1000) + ((uint64_t) ts->tv_usec / 1000);
+int64_t gru_time_to_milli(const gru_timestamp_t *ts) {
+	int64_t ret = ((int64_t) ts->tv_sec * 1000) + ((int64_t) ts->tv_usec / 1000);
 
 	return ret;
 }
 
 
-uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end) {
+int64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end) {
 	gru_timestamp_t ret = {.tv_sec = 0, .tv_usec = 0};
 
 	timersub(&end, &start, &ret);
@@ -151,10 +151,10 @@ uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end) {
 	return ret.tv_sec;
 }
 
-uint64_t gru_time_elapsed_milli(gru_timestamp_t start, gru_timestamp_t end) {
+int64_t gru_time_elapsed_milli(gru_timestamp_t start, gru_timestamp_t end) {
 	gru_timestamp_t ret = {.tv_sec = 0, .tv_usec = 0};
 
 	timersub(&end, &start, &ret);
 
-	return gru_time_to_milli(&ret);
+	return (int64_t) gru_time_to_milli(&ret);
 }

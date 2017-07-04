@@ -341,6 +341,18 @@ add_test(
 		COMMAND gru_time_elapsed_test add-micro
 )
 
+add_test(
+		NAME gru-time-elapsed-test-sec-past
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_time_elapsed_test sec-past
+)
+
+add_test(
+		NAME gru-time-elapsed-test-diff-sec-past
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_time_elapsed_test diff-sec-past
+)
+
 
 add_executable(gru_duration_parse_test
 	time/gru_duration_parse_test.c

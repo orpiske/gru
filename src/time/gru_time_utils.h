@@ -148,11 +148,11 @@ gru_export gru_timestamp_t gru_time_from_milli_char(const char *ts);
 gru_export gru_timestamp_t gru_time_from_milli(int64_t timestamp);
 
 /**
- * Converst a timestamp to milliseconds
+ * Converts a timestamp to milliseconds
  * @param ts A pointer to a timestamp structure
  * @return the timestamp as a milliseconds since epoch
  */
-gru_export uint64_t gru_time_to_milli(const gru_timestamp_t *ts);
+gru_export int64_t gru_time_to_milli(const gru_timestamp_t *ts);
 
 /**
  * Calculates the elapsed time between two timestamps
@@ -161,7 +161,7 @@ gru_export uint64_t gru_time_to_milli(const gru_timestamp_t *ts);
  * @note The behavior is undefined if the end time is smaller than the start time
  * @return The elapsed time in seconds
  */
-gru_export uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end);
+gru_export int64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t end);
 
 
 /**
@@ -171,7 +171,7 @@ gru_export uint64_t gru_time_elapsed_secs(gru_timestamp_t start, gru_timestamp_t
  * @note The behavior is undefined if the end time is smaller than the start time
  * @return The elapsed time in milliseconds
  */
-gru_export uint64_t gru_time_elapsed_milli(gru_timestamp_t start, gru_timestamp_t end);
+gru_export int64_t gru_time_elapsed_milli(gru_timestamp_t start, gru_timestamp_t end);
 
 #ifdef __cplusplus
 }
