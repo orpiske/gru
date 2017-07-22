@@ -54,22 +54,45 @@ typedef struct gru_variant_t_ {
 /**
  * Initializer for the string variant type
  */
-#define GRU_VARIANT_STRING_INITIALIZER { .type = GRU_STRING, .variant.string = NULL }
+#define GRU_VARIANT_STRING_INITIALIZER(x) { .type = GRU_STRING, .variant.string = x }
+
+/**
+ * Default string initializer
+ */
+#define GRU_VARIANT_STRING_DEFAULT_INITIALIZER GRU_VARIANT_STRING_INITIALIZER(NULL)
 
 /**
  * Initializer for the integer variant type
  */
-#define GRU_VARIANT_INTEGER_INITIALIZER { .type = GRU_INTEGER, .variant.inumber = 0 }
+#define GRU_VARIANT_INTEGER_INITIALIZER(x) { .type = GRU_INTEGER, .variant.inumber = x }
+
+
+/**
+ * Default integer initializer
+ */
+#define GRU_VARIANT_INTEGER_DEFAULT_INITIALIZER GRU_VARIANT_INTEGER_INITIALIZER(0)
 
 /**
  * Initializer for the double variant type
  */
-#define GRU_VARIANT_DOUBLE_INITIALIZER { .type = GRU_DOUBLE, .variant.fnumber = 0.0 }
+#define GRU_VARIANT_DOUBLE_INITIALIZER(x) { .type = GRU_DOUBLE, .variant.fnumber = x }
+
+
+/**
+ * Default double initializer
+ */
+#define GRU_VARIANT_DOUBLE_DEFAULT_INITIALIZER GRU_VARIANT_DOUBLE_INITIALIZER(0.0)
 
 /**
  * Initializer for the boolean variant type
  */
-#define GRU_VARIANT_BOOLEAN_INITIALIZER { .type = GRU_BOOLEAN, .variant.flag = false }
+#define GRU_VARIANT_BOOLEAN_INITIALIZER(x) { .type = GRU_BOOLEAN, .variant.flag = x }
+
+
+/**
+ * Default boolean initializer
+ */
+#define GRU_VARIANT_BOOLEAN_DEFAULT_INITIALIZER GRU_VARIANT_BOOLEAN_INITIALIZER(false)
 
 
 
