@@ -53,7 +53,15 @@ int main(int argc, char **argv) {
 		break;
 	}
 	case GRU_DOUBLE: {
-		if (fabsl(var.variant.fnumber) != fabsl(atof(argv[2]))) {
+		if (fabsl(var.variant.fnumber) > (fabsl(atof(argv[2])) + 0.001)) {
+			fprintf(stderr, "The parsed value '%Lf' does not match the expected float value '%s'\n",
+					var.variant.fnumber, argv[2]);
+
+			gru_variant_clean(&var);
+			return EXIT_FAILURE;
+		}
+
+		if (fabsl(var.variant.fnumber) < (fabsl(atof(argv[2])) - 0.001)) {
 			fprintf(stderr, "The parsed value '%Lf' does not match the expected float value '%s'\n",
 					var.variant.fnumber, argv[2]);
 
