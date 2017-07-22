@@ -52,6 +52,28 @@ typedef struct gru_variant_t_ {
 
 
 /**
+ * Initializer for the string variant type
+ */
+#define GRU_VARIANT_STRING_INITIALIZER { .type = GRU_STRING, .variant.string = NULL }
+
+/**
+ * Initializer for the integer variant type
+ */
+#define GRU_VARIANT_INTEGER_INITIALIZER { .type = GRU_INTEGER, .variant.inumber = 0 }
+
+/**
+ * Initializer for the double variant type
+ */
+#define GRU_VARIANT_DOUBLE_INITIALIZER { .type = GRU_DOUBLE, .variant.fnumber = 0.0 }
+
+/**
+ * Initializer for the boolean variant type
+ */
+#define GRU_VARIANT_BOOLEAN_INITIALIZER { .type = GRU_BOOLEAN, .variant.flag = false }
+
+
+
+/**
  * Set the variant value to a string
  * @param variant the variant hold the data
  * @param str the string to set
