@@ -139,7 +139,7 @@ void gru_logger_timed_do_print(log_level_t level, const char *msg, va_list ap) {
 	gru_timestamp_t now = gru_time_now();
 	gru_status_t status = gru_status_new();
 
-	char *str = gru_time_write_format(&now, "%Y-%m-%d %H:%M:%S ", &status);
+	char *str = gru_time_write_format(&now, "%Y-%m-%d %H:%M:%S", &status);
 	if (unlikely(!str)) {
 		fprintf(stderr, "NOMEM ");
 	}
