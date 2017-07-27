@@ -29,6 +29,7 @@
 #include <stdbool.h>
 
 #include "common/gru_base.h"
+#include "time/gru_time_utils.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -100,6 +101,22 @@ gru_export void gru_logger_default_printer(log_level_t level, const char *msg, .
   */
 gru_export void
 	gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap);
+
+
+/**
+ * A simple logger that logs to stderr including the time when the even happened
+ * @param level message level
+ * @param msg the message + additional parameters
+  */
+gru_export void gru_logger_default_printer(log_level_t level, const char *msg, ...);
+
+/**
+ * Utility printing function that can be used by implementations of the timed logger printer
+ * @param level message level
+ * @param msg the message + additional parameters
+ * @param ap va_list object for variable argument list
+  */
+gru_export void gru_logger_timed_do_print(log_level_t level, const char *msg, va_list ap);
 
 #ifdef __cplusplus
 }

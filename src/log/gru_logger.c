@@ -120,3 +120,63 @@ void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap)
 	vfprintf(stderr, msg, ap);
 	fprintf(stderr, "\n");
 }
+
+
+void gru_logger_timed_printer(log_level_t level, const char *msg, ...) {
+	if (!gru_logger_can_log(level)) {
+		return;
+	}
+
+	va_list ap;
+
+	va_start(ap, msg);
+	gru_logger_timed_do_print(level, msg, ap);
+	va_end(ap);
+}
+
+
+void gru_logger_timed_do_print(log_level_t level, const char *msg, va_list ap) {
+	gru_timestamp_t now = gru_time_now();
+	gru_status_t status = gru_status_new();
+
+	char *str = gru_time_write_format(&now, "%Y-%m-%d %H:%M:%S ", &status);
+	if (unlikely(!str)) {
+		fprintf(stderr, "NOMEM ");
+	}
+	else {
+		fprintf(stderr, "%s ", str);
+		gru_dealloc_string(&str);
+	}
+
+	switch (level) {
+	case TRACE:
+		fprintf(stderr, "[TRACE]: ");
+		break;
+	case DEBUG:
+		fprintf(stderr, "[DEBUG]: ");
+		break;
+	case INFO:
+		fprintf(stderr, "[INFO]: ");
+		break;
+	case STAT:
+		fprintf(stderr, "[STAT]: ");
+		break;
+	case WARNING:
+		fprintf(stderr, "[WARNING]: ");
+		break;
+	case ERROR:
+		fprintf(stderr, "[ERROR]: ");
+		break;
+	case FATAL:
+		fprintf(stderr, "[FATAL]: ");
+		break;
+	default:
+		fprintf(stderr, "[MSG]: ");
+		break;
+	}
+
+	// TODO: this is possibly unsafe and should be replaced with something safer in the
+	// future
+	vfprintf(stderr, msg, ap);
+	fprintf(stderr, "\n");
+}
