@@ -144,34 +144,36 @@ void gru_logger_timed_do_print(log_level_t level, const char *msg, va_list ap) {
 		fprintf(stderr, "NOMEM ");
 	}
 	else {
-		fprintf(stderr, "%s ", str);
+		uint32_t milli = (uint32_t) now.tv_usec / 1000;
+
+		fprintf(stderr, "%s.%03"PRId32" ", str);
 		gru_dealloc_string(&str);
 	}
 
 	switch (level) {
 	case TRACE:
-		fprintf(stderr, "[TRACE]: ");
+		fprintf(stderr, "TRACE: ");
 		break;
 	case DEBUG:
-		fprintf(stderr, "[DEBUG]: ");
+		fprintf(stderr, "DEBUG: ");
 		break;
 	case INFO:
-		fprintf(stderr, "[INFO]: ");
+		fprintf(stderr, "INFO: ");
 		break;
 	case STAT:
-		fprintf(stderr, "[STAT]: ");
+		fprintf(stderr, "STAT: ");
 		break;
 	case WARNING:
-		fprintf(stderr, "[WARNING]: ");
+		fprintf(stderr, "WARNING: ");
 		break;
 	case ERROR:
-		fprintf(stderr, "[ERROR]: ");
+		fprintf(stderr, "ERROR: ");
 		break;
 	case FATAL:
-		fprintf(stderr, "[FATAL]: ");
+		fprintf(stderr, "FATAL: ");
 		break;
 	default:
-		fprintf(stderr, "[MSG]: ");
+		fprintf(stderr, "MSG: ");
 		break;
 	}
 
