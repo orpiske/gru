@@ -1,7 +1,7 @@
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
 Version:            0.2.0
-Release:            2%{?dist}
+Release:            3%{?dist}
 License:            Apache-2.0
 Group:              Development/Tools
 Source:             gru-%{version}.tar.gz
@@ -59,6 +59,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Fri Jul 28 2017 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-3
+- Updated to contain timed logger fixes
+
 * Thu Jul 27 2017 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-2
 - Updated package to comply with Fedora packaging guidelines
 - Enabled generation of debuginfo package
