@@ -146,7 +146,7 @@ void gru_logger_timed_do_print(log_level_t level, const char *msg, va_list ap) {
 	else {
 		uint32_t milli = (uint32_t) now.tv_usec / 1000;
 
-		fprintf(stderr, "%s.%03"PRId32" ", str);
+		fprintf(stderr, "%s.%03"PRId32" ", str, milli);
 		gru_dealloc_string(&str);
 	}
 
