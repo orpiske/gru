@@ -4,8 +4,7 @@ if (WIN32)
 		OS_SPECIFIC_FILES
 		common/windows/contrib/asprintf.c
 		common/windows/contrib/vasprintf.c
-		time/windows/contrib/getimeofday.c
-	)
+		time/windows/contrib/getimeofday.c)
 endif(WIN32)
 
 add_library(
@@ -31,6 +30,8 @@ add_library(
 	time/gru_localtime.c
 	time/gru_duration.c
 	network/gru_uri.c
+	network/contrib/sts_net.c
+	network/gru_net.c
 	cli/gru_cli_opt.c
 )
 

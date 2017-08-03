@@ -178,6 +178,15 @@ target_link_libraries(
 	gru-${GRU_VERSION_MAJOR}
 )
 
+add_executable(gru_sts_net_example
+	network/sts_net_example.c
+)
+
+target_link_libraries(
+		gru_sts_net_example
+		gru-${GRU_VERSION_MAJOR}
+)
+
 add_executable(gru_uri_test_query
 		network/gru_uri_test_query.c
 		)
