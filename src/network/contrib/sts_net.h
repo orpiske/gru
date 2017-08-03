@@ -67,6 +67,8 @@
 #ifndef __INCLUDED__STS_NET_H__
 #define __INCLUDED__STS_NET_H__
 
+#include <common/gru_portable.h>
+
 
 #ifndef STS_NET_SET_SOCKETS
 // define a bigger default if needed
@@ -137,19 +139,19 @@ typedef struct {
  * Get the last error from sts_net (can be called even before sts_net_init)
  */
 
-const char* sts_net_get_last_error();
+gru_export const char* sts_net_get_last_error();
 
 /**
  * Initializes the sts_net library. You have to call this before any other
  * function (except sts_net_get_last_error)
  */
 
-int sts_net_init();
+gru_export int sts_net_init();
 
 /**
  * Shutdown the sts_net library.
  */
-void sts_net_shutdown();
+gru_export void sts_net_shutdown();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -162,14 +164,14 @@ void sts_net_shutdown();
  * Reset a socket (clears the structure). THIS WILL NOT CLOSE the socket.
  * It's meant to "clear" the socket structure.
  */
-void sts_net_reset_socket(sts_net_socket_t* socket);
+gru_export void sts_net_reset_socket(sts_net_socket_t* socket);
 
 /**
  * Check if the socket structure contains a "valid" socket.
  * @param socket
  * @return
  */
-int sts_net_is_socket_valid(sts_net_socket_t* socket);
+gru_export int sts_net_is_socket_valid(sts_net_socket_t* socket);
 
 /**
  * Open a (TCP) socket. If you provide "host" sts_net will try to connect to a remove host.
@@ -179,13 +181,13 @@ int sts_net_is_socket_valid(sts_net_socket_t* socket);
  * @param service
  * @return
  */
-int sts_net_open_socket(sts_net_socket_t* socket, const char* host, const char* service);
+gru_export int sts_net_open_socket(sts_net_socket_t* socket, const char* host, const char* service);
 
 /**
  * Closes the socket.
  * @param socket
  */
-void sts_net_close_socket(sts_net_socket_t* socket);
+gru_export void sts_net_close_socket(sts_net_socket_t* socket);
 
 /**
  * Try to accept a connection from the given server socket.
@@ -193,7 +195,7 @@ void sts_net_close_socket(sts_net_socket_t* socket);
  * @param remote_socket
  * @return
  */
-int sts_net_accept_socket(sts_net_socket_t* listen_socket, sts_net_socket_t* remote_socket);
+gru_export int sts_net_accept_socket(sts_net_socket_t* listen_socket, sts_net_socket_t* remote_socket);
 
 /**
  * Send data to the socket.
@@ -202,7 +204,7 @@ int sts_net_accept_socket(sts_net_socket_t* listen_socket, sts_net_socket_t* rem
  * @param length
  * @return
  */
-int sts_net_send(sts_net_socket_t* socket, const void* data, int length);
+gru_export int sts_net_send(sts_net_socket_t* socket, const void* data, int length);
 
 /**
  * Receive data from the socket.
@@ -212,13 +214,13 @@ int sts_net_send(sts_net_socket_t* socket, const void* data, int length);
  * @param length
  * @return
  */
-int sts_net_recv(sts_net_socket_t* socket, void* data, int length);
+gru_export int sts_net_recv(sts_net_socket_t* socket, void* data, int length);
 
 /**
  * Initializes a socket set.
  * @param set
  */
-void sts_net_init_socket_set(sts_net_set_t* set);
+gru_export void sts_net_init_socket_set(sts_net_set_t* set);
 
 /**
  * Adds a socket to the socket set.
@@ -226,7 +228,7 @@ void sts_net_init_socket_set(sts_net_set_t* set);
  * @param set
  * @return
  */
-int sts_net_add_socket_to_set(sts_net_socket_t* socket, sts_net_set_t* set);
+gru_export int sts_net_add_socket_to_set(sts_net_socket_t* socket, sts_net_set_t* set);
 
 /**
  * Remove a socket from the socket set. You have to remove the socket from a set manually.
@@ -235,7 +237,7 @@ int sts_net_add_socket_to_set(sts_net_socket_t* socket, sts_net_set_t* set);
  * @param set
  * @return
  */
-int sts_net_remove_socket_from_set(sts_net_socket_t* socket, sts_net_set_t* set);
+gru_export int sts_net_remove_socket_from_set(sts_net_socket_t* socket, sts_net_set_t* set);
 
 /**
  * Checks for activity on all sockets in the given socket set. If you want to peek for
@@ -243,6 +245,6 @@ int sts_net_remove_socket_from_set(sts_net_socket_t* socket, sts_net_set_t* set)
  * non-zero if you can read data from it, or can accept connections.
  * @return -1  on errors, 0  if there was no activity, >0  amount of sockets with activity
  */
-int sts_net_check_socket_set(sts_net_set_t* set, const float timeout);
+gru_export int sts_net_check_socket_set(sts_net_set_t* set, const float timeout);
 
 #endif // __INCLUDED__STS_NET_H__
