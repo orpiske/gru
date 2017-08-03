@@ -19,6 +19,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
+#include <common/gru_portable.h>
 #include <common/gru_status.h>
 #include <string/gru_alt.h>
 
