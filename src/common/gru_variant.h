@@ -132,7 +132,7 @@ gru_export gru_variant_t gru_variant_parse(const char *str);
  * @param str the string to check
  * @return true if it's equal or false otherwise
  */
-bool gru_variant_equals_str(gru_variant_t *variant, const char *str);
+gru_export bool gru_variant_equals_str(gru_variant_t *variant, const char *str);
 
 #ifdef __cplusplus
 }

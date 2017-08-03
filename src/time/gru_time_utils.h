@@ -60,7 +60,7 @@ typedef struct timeval gru_timestamp_t;
  * @param t timestamp
  * @param count number of microtseconds to add
  */
-void gru_time_add_microseconds(gru_timestamp_t *t, uint64_t count);
+gru_export void gru_time_add_microseconds(gru_timestamp_t *t, uint64_t count);
 
 /**
  * Add seconds to a timestamp object
