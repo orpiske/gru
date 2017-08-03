@@ -62,7 +62,7 @@ static conversion_stat_t gru_variant_try_uint(const char *str, uint64_t *out) {
 
 	if ((errno == ERANGE && (*out == LONG_MAX || *out == LONG_MIN)) || (errno != 0 && *out == 0)) {
 		logger_t logger = gru_logger_get();
-		logger(WARNING, "Cannot convert the value %s because it's out of range", str);
+		logger(GRU_WARNING, "Cannot convert the value %s because it's out of range", str);
 
 		return VAR_ERROR | VAR_OUT_OF_RANGE;
 	}
@@ -82,7 +82,7 @@ static conversion_stat_t gru_variant_try_double(const char *str, long double *ou
 
 	if (errno == ERANGE) {
 		logger_t logger = gru_logger_get();
-		logger(WARNING, "Cannot convert the value %s because it's out of range", str);
+		logger(GRU_WARNING, "Cannot convert the value %s because it's out of range", str);
 
 		return VAR_ERROR | VAR_OUT_OF_RANGE;
 	}

@@ -16,7 +16,7 @@
 #include "gru_logger.h"
 
 static logger_t logger = NULL;
-static log_level_t minimum = INFO;
+static log_level_t minimum = GRU_INFO;
 
 void gru_logger_set(logger_t new_logger) {
 	logger = new_logger;
@@ -44,35 +44,35 @@ bool gru_logger_can_log(log_level_t current) {
 
 log_level_t gru_logger_get_level(const char *str) {
 	if (strncasecmp("TRACE", str, 5) == 0) {
-		return TRACE;
+		return GRU_TRACE;
 	}
 
 	if (strncasecmp("DEBUG", str, 5) == 0) {
-		return DEBUG;
+		return GRU_DEBUG;
 	}
 
 	if (strncasecmp("INFO", str, 4) == 0) {
-		return INFO;
+		return GRU_INFO;
 	}
 
 	if (strncasecmp("WARNING", str, 7) == 0) {
-		return WARNING;
+		return GRU_WARNING;
 	}
 
 	if (strncasecmp("ERROR", str, 5) == 0) {
-		return ERROR;
+		return GRU_ERROR;
 	}
 
 	if (strncasecmp("FATAL", str, 5) == 0) {
-		return FATAL;
+		return GRU_FATAL;
 	}
 
 	if (strncasecmp("STAT", str, 4) == 0) {
-		return STAT;
+		return GRU_STAT;
 	}
 
 	fprintf(stderr, "Invalid log level %s.\n Using INFO as default\n", str);
-	return INFO;
+	return GRU_INFO;
 }
 
 void gru_logger_default_printer(log_level_t level, const char *msg, ...) {
@@ -89,25 +89,25 @@ void gru_logger_default_printer(log_level_t level, const char *msg, ...) {
 
 void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap) {
 	switch (level) {
-		case TRACE:
+		case GRU_TRACE:
 			fprintf(stderr, "[TRACE]: ");
 			break;
-		case DEBUG:
+		case GRU_DEBUG:
 			fprintf(stderr, "[DEBUG]: ");
 			break;
-		case INFO:
+		case GRU_INFO:
 			fprintf(stderr, "[INFO]: ");
 			break;
-		case STAT:
+		case GRU_STAT:
 			fprintf(stderr, "[STAT]: ");
 			break;
-		case WARNING:
+		case GRU_WARNING:
 			fprintf(stderr, "[WARNING]: ");
 			break;
-		case ERROR:
+		case GRU_ERROR:
 			fprintf(stderr, "[ERROR]: ");
 			break;
-		case FATAL:
+		case GRU_FATAL:
 			fprintf(stderr, "[FATAL]: ");
 			break;
 		default:
@@ -151,25 +151,25 @@ void gru_logger_timed_do_print(log_level_t level, const char *msg, va_list ap) {
 	}
 
 	switch (level) {
-	case TRACE:
+	case GRU_TRACE:
 		fprintf(stderr, "TRACE: ");
 		break;
-	case DEBUG:
+	case GRU_DEBUG:
 		fprintf(stderr, "DEBUG: ");
 		break;
-	case INFO:
+	case GRU_INFO:
 		fprintf(stderr, "INFO: ");
 		break;
-	case STAT:
+	case GRU_STAT:
 		fprintf(stderr, "STAT: ");
 		break;
-	case WARNING:
+	case GRU_WARNING:
 		fprintf(stderr, "WARNING: ");
 		break;
-	case ERROR:
+	case GRU_ERROR:
 		fprintf(stderr, "ERROR: ");
 		break;
-	case FATAL:
+	case GRU_FATAL:
 		fprintf(stderr, "FATAL: ");
 		break;
 	default:
