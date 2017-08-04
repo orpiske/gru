@@ -36,12 +36,12 @@ extern "C" {
 #endif
 
 typedef enum log_level_t_ {
-	GRU_TRACE = 0,
-	GRU_DEBUG = 1,
-	GRU_INFO = 2,
-	GRU_WARNING = 4,
-	GRU_ERROR = 5,
-	GRU_FATAL = 6,
+	GRU_TRACE,
+	GRU_DEBUG,
+	GRU_INFO,
+	GRU_WARNING,
+	GRU_ERROR,
+	GRU_FATAL,
 } log_level_t;
 
 typedef void (*logger_t)(log_level_t level, const char *message, ...);
