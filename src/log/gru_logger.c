@@ -67,10 +67,6 @@ log_level_t gru_logger_get_level(const char *str) {
 		return GRU_FATAL;
 	}
 
-	if (strncasecmp("STAT", str, 4) == 0) {
-		return GRU_STAT;
-	}
-
 	fprintf(stderr, "Invalid log level %s.\n Using INFO as default\n", str);
 	return GRU_INFO;
 }
@@ -97,9 +93,6 @@ void gru_logger_default_do_print(log_level_t level, const char *msg, va_list ap)
 			break;
 		case GRU_INFO:
 			fprintf(stderr, "[INFO]: ");
-			break;
-		case GRU_STAT:
-			fprintf(stderr, "[STAT]: ");
 			break;
 		case GRU_WARNING:
 			fprintf(stderr, "[WARNING]: ");
@@ -159,9 +152,6 @@ void gru_logger_timed_do_print(log_level_t level, const char *msg, va_list ap) {
 		break;
 	case GRU_INFO:
 		fprintf(stderr, "INFO: ");
-		break;
-	case GRU_STAT:
-		fprintf(stderr, "STAT: ");
 		break;
 	case GRU_WARNING:
 		fprintf(stderr, "WARNING: ");
