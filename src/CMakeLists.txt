@@ -8,6 +8,11 @@ if (WIN32)
 endif(WIN32)
 
 add_library(
+		sts-${GRU_VERSION_MAJOR} STATIC
+		network/contrib/sts_net.c
+)
+
+add_library(
 	gru-${GRU_VERSION_MAJOR} SHARED
 	common/gru_base.c
 	common/gru_status.c
@@ -30,9 +35,13 @@ add_library(
 	time/gru_localtime.c
 	time/gru_duration.c
 	network/gru_uri.c
-	network/contrib/sts_net.c
 	network/gru_net.c
 	cli/gru_cli_opt.c
+)
+
+target_link_libraries(
+		gru-${GRU_VERSION_MAJOR}
+		sts-${GRU_VERSION_MAJOR}
 )
 
 install(
