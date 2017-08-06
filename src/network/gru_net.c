@@ -45,7 +45,7 @@ void gru_net_close_socket(gru_net_socket_t *socket) {
     gru_net_close_socket(socket);
 }
 
-int gru_net_accept_socket(gru_net_socket_t *listen_socket, sts_net_socket_t *remote_socket) {
+int gru_net_accept_socket(gru_net_socket_t *listen_socket, gru_net_socket_t *remote_socket) {
     return sts_net_accept_socket(listen_socket, remote_socket);
 }
 

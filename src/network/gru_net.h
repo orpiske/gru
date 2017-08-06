@@ -47,7 +47,7 @@ gru_export int gru_net_open_socket(gru_net_socket_t *socket, const char *host, c
 
 gru_export void gru_net_close_socket(gru_net_socket_t *socket);
 
-gru_export int gru_net_accept_socket(gru_net_socket_t *listen_socket, sts_net_socket_t *remote_socket);
+gru_export int gru_net_accept_socket(gru_net_socket_t *listen_socket, gru_net_socket_t *remote_socket);
 
 gru_export int gru_net_send(gru_net_socket_t *socket, const void *data, int length);
 
