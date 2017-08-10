@@ -49,12 +49,27 @@ typedef struct gru_config_t_ {
 } gru_config_t;
 
 /**
+ * Creates a new configuration object
+ * @param dir directory
+ * @param filename filename
+ * @param status status container
+ * @return a new configuration object or false otherwise
+ */
+gru_export gru_config_t *gru_config_new(const char *dir, const char *filename, gru_status_t *status);
+
+/**
  * Initializes a new configuration object
  */
-gru_export gru_config_t *gru_config_init(const char *dir,
-	const char *filename,
-	gru_payload_t *payload,
-	gru_status_t *status);
+gru_export bool gru_config_init_from_payload(gru_config_t *config, gru_payload_t *payload, gru_status_t *status);
+
+/**
+ * Don't really initialize the config, just dump the payload
+ * @param config
+ * @param payload
+ * @param status
+ * @return
+ */
+gru_export bool gru_config_init_for_dump(gru_config_t *config, gru_payload_t *payload, gru_status_t *status);
 
 gru_export void gru_config_destroy(gru_config_t **config);
 

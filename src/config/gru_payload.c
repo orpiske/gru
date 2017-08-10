@@ -38,27 +38,13 @@ void gru_payload_destroy(gru_payload_t **payload) {
 	*payload = NULL;
 }
 
-FILE *gru_payload_init_data(gru_payload_t *payload,
-	const char *dir,
-	const char *name,
-	gru_status_t *status) {
+FILE *gru_payload_init_data(gru_payload_t *payload, const char *filename, gru_status_t *status) {
 	FILE *config_file;
 
-	char *fullpath = gru_path_format(dir, name, status);
-	if (fullpath == NULL) {
-		return NULL;
-	}
-
-	if (gru_status_error(status)) {
-		gru_dealloc_string(&fullpath);
-
-		return NULL;
-	}
-
-	if (!gru_path_exists(fullpath, status) && gru_status_success(status)) {
-		config_file = gru_io_open_file(dir, name, status);
+	if (!gru_path_exists(filename, status) && gru_status_success(status)) {
+		config_file = gru_io_open_file_path(filename, status);
 		if (!config_file) {
-			goto e_exit;
+			return NULL;
 		}
 
 		// set defaults
@@ -69,18 +55,31 @@ FILE *gru_payload_init_data(gru_payload_t *payload,
 
 		fflush(config_file);
 	} else {
-		config_file = gru_io_open_file_read(dir, name, status);
+		config_file = gru_io_open_file_read_path(filename, status);
 		if (!config_file) {
-			goto e_exit;
+			return NULL;
 		}
 
 		payload->read(config_file, payload->data);
 	}
 
-	free(fullpath);
 	return config_file;
+}
 
-e_exit:
-	free(fullpath);
-	return NULL;
+
+FILE *gru_payload_for_dump(gru_payload_t *payload, const char *filename, gru_status_t *status) {
+	FILE *config_file;
+
+	config_file = gru_io_open_file_path(filename, status);
+	if (!config_file) {
+		return NULL;
+	}
+
+	// write configs
+	payload->save(config_file, payload->data);
+
+	fflush(config_file);
+
+
+	return config_file;
 }

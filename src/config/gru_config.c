@@ -15,51 +15,56 @@
  */
 #include "gru_config.h"
 
-gru_config_t *gru_config_init(const char *dir,
-	const char *filename,
-	gru_payload_t *payload,
-	gru_status_t *status) {
+gru_config_t *gru_config_new(const char *dir, const char *filename, gru_status_t *status) {
 	assert(status && dir && filename);
 
 	gru_config_t *ret = gru_alloc(sizeof(gru_config_t), status);
 	gru_alloc_check(ret, NULL);
 
-	if (asprintf(&ret->dir, "%s", dir) == -1) {
+	if (asprintf(&ret->filename, "%s/%s", dir, filename) == -1) {
 		gru_status_set(status,
-			GRU_FAILURE,
-			"Unable to allocate memory for initializing the configuration");
+					   GRU_FAILURE,
+					   "Unable to allocate memory for initializing the configuration");
 
 		gru_dealloc((void **) &ret);
 		return NULL;
 	}
-
-	if (asprintf(&ret->filename, "%s", filename) == -1) {
-		gru_status_set(status,
-			GRU_FAILURE,
-			"Unable to allocate memory for initializing the configuration");
-
-		gru_dealloc_string(&ret->dir);
-		gru_dealloc((void **) &ret);
-		return NULL;
-	}
-
-	ret->file = gru_payload_init_data(payload, ret->dir, ret->filename, status);
-
-	if (ret->file == NULL && gru_status_error(status)) {
-		gru_config_destroy(&ret);
-
-		return NULL;
-	}
-
-	ret->payload = payload;
 
 	return ret;
+}
+
+bool gru_config_init_from_payload(gru_config_t *config, gru_payload_t *payload, gru_status_t *status) {
+	config->file = gru_payload_init_data(payload, config->filename, status);
+
+	if (config->file == NULL && gru_status_error(status)) {
+		gru_config_destroy(&config);
+
+		return false;
+	}
+
+	config->payload = payload;
+
+	return true;
+}
+
+
+bool gru_config_init_for_dump(gru_config_t *config, gru_payload_t *payload, gru_status_t *status) {
+	config->file = gru_payload_for_dump(payload, config->filename, status);
+
+	if (config->file == NULL && gru_status_error(status)) {
+		gru_config_destroy(&config);
+
+		return false;
+	}
+
+	config->payload = payload;
+
+	return true;
 }
 
 void gru_config_destroy(gru_config_t **config) {
 	fclose((*config)->file);
 
-	free((*config)->dir);
 	free((*config)->filename);
 	free(*config);
 	*config = NULL;

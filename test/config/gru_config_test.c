@@ -76,12 +76,19 @@ int test_write_init(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	gru_config_t *config = gru_config_init(".", "test.cfg", payload, &status);
-
+	gru_config_t *config = gru_config_new(".", "test.cfg", &status);
 	if (!config) {
+		fprintf(stderr, "Unable to create a new configuration: %s\n", status.message);
+
+		gru_payload_destroy(&payload);
+		return EXIT_FAILURE;
+	}
+
+	if (!gru_config_init_from_payload(config, payload, &status)) {
 		fprintf(stderr, "Unable to initialize the configuration: %s\n", status.message);
 
 		gru_payload_destroy(&payload);
+		gru_config_destroy(&config);
 		return EXIT_FAILURE;
 	}
 
@@ -114,12 +121,19 @@ int test_read_init(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	gru_config_t *config = gru_config_init(".", "test.cfg", payload, &status);
-
+	gru_config_t *config = gru_config_new(".", "test.cfg", &status);
 	if (!config) {
+		fprintf(stderr, "Unable to create a new configuration: %s\n", status.message);
+
+		gru_payload_destroy(&payload);
+		return EXIT_FAILURE;
+	}
+
+	if (!gru_config_init_from_payload(config, payload, &status)) {
 		fprintf(stderr, "Unable to initialize the configuration: %s\n", status.message);
 
 		gru_payload_destroy(&payload);
+		gru_config_destroy(&config);
 		return EXIT_FAILURE;
 	}
 

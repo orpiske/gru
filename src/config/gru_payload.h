@@ -53,10 +53,8 @@ gru_export gru_payload_t *gru_payload_init(gru_payload_data_init_t init,
 
 gru_export void gru_payload_destroy(gru_payload_t **payload);
 
-gru_export FILE *gru_payload_init_data(gru_payload_t *payload,
-	const char *dir,
-	const char *name,
-	gru_status_t *status);
+gru_export FILE *gru_payload_init_data(gru_payload_t *payload, const char *filename, gru_status_t *status);
+gru_export FILE *gru_payload_for_dump(gru_payload_t *payload, const char *filename, gru_status_t *status);
 
 #ifdef __cplusplus
 }
