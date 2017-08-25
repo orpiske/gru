@@ -77,13 +77,13 @@ gru_export logger_t gru_logger_get(void);
  * Sets the minimum log level
  * @param minimum the minimum log level
  */
-gru_export void gru_logger_set_mininum(log_level_t minimum);
+gru_export void gru_logger_set_minimum(log_level_t minimum);
 
 /**
  * Gets the minimum log level
  * @return the minimum log level
  */
-gru_export log_level_t gru_logger_get_mininum();
+gru_export log_level_t gru_logger_get_minimum();
 
 /**
  * Default logger that logs to stdout
