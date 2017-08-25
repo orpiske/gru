@@ -139,14 +139,15 @@ bool gru_path_rename(const char *filename, gru_status_t *status) {
 }
 
 char *gru_path_format(const char *dir, const char *name, gru_status_t *status) {
-	size_t size = strlen(dir) + APPEND_SIZE_REMAP;
+	char *ret = NULL;
+	
+	if (asprintf(&ret, "%s/%s", dir, name)) {
+		gru_status_set(status, GRU_FAILURE, "Not enough memory to format the path");
 
-	char *fullpath = gru_alloc(size, status);
-	gru_alloc_check(fullpath, NULL);
+		return NULL;
+	}
 
-	snprintf(fullpath, size - 1, "%s/%s", dir, name);
-
-	return fullpath;
+	return ret;
 }
 
 bool gru_path_mkdir(const char *path, gru_status_t *status) {
