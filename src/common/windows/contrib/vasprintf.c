@@ -29,7 +29,8 @@ but a simple copying of va_list does the trick
 */
 
 int vasprintf(char **strp, const char *fmt, va_list ap) {
-	int r = -1, size;
+	int r = -1;
+	size_t size;
 
 	va_list ap2;
 	va_copy(ap2, ap);

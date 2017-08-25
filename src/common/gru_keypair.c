@@ -100,7 +100,7 @@ gru_keypair_t *gru_keypair_parse(const char *str, gru_status_t *status) {
 	gru_alloc_check(ret, NULL);
 
 	size_t len = strlen(str);
-	for (int i = 0; i <= len; i++) {
+	for (size_t i = 0; i <= len; i++) {
 		if (str[i] == '=' || str[i] == 0) {
 			ret->key = strndup(str, i);
 
