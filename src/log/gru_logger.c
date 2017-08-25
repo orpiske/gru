@@ -26,11 +26,11 @@ logger_t gru_logger_get(void) {
 	return logger;
 }
 
-void gru_logger_set_mininum(log_level_t new_minimum) {
+void gru_logger_set_minimum(log_level_t new_minimum) {
 	minimum = new_minimum;
 }
 
-log_level_t gru_logger_get_mininum() {
+log_level_t gru_logger_get_minimum() {
 	return minimum;
 }
 
