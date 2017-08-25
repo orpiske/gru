@@ -102,15 +102,16 @@ bool gru_path_rename_cond(const char *filename,
 		return false;
 	}
 
-	size_t size = strlen(filename) + 16;
-
-	char *new_file = gru_alloc(size, status);
-	gru_alloc_check(new_file, false);
+	char *new_file = NULL;
 
 	int i = 0;
 	do {
-		bzero(new_file, size);
-		snprintf(new_file, size, "%s.%03i", filename, i);
+
+		if (asprintf(&new_file, "%s.%03i", filename, i) == -1) {
+			gru_status_set(status, GRU_FAILURE, "Not enough memory to create a new filename");
+
+			return false;
+		}
 
 		if (!cond(new_file, status)) {
 			int ret = 0;
@@ -125,6 +126,7 @@ bool gru_path_rename_cond(const char *filename,
 
 			break;
 		}
+
 		i++;
 	} while (true);
 
