@@ -105,7 +105,7 @@ gru_export bool gru_path_rename(const char *filename, gru_status_t *status);
 gru_export char *gru_path_format(const char *dir, const char *name, gru_status_t *status);
 
 /**
- * Create a directory
+ * Create a directory. Callers should beware of potential race conditions.
  * @param path directory path
  * @param status status structure containing error code/description in case of
  * failure
