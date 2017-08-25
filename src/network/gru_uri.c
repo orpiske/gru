@@ -25,9 +25,10 @@ static inline size_t gru_uri_calc_buffer_size(UriTextRangeA *range) {
 
 	if (range->afterLast) {
 		return range->afterLast - range->first;
-	} else {
-		return strlen(range->first);
 	}
+
+	return strlen(range->first);
+
 }
 
 static char *gru_uri_get_ranged_data(UriTextRangeA *range, gru_status_t *status) {
@@ -102,13 +103,13 @@ static char *gru_uri_path(UriUriA *gru_restrict uri,
 			gru_dealloc_string(&ret);
 
 			return NULL;
-		} else {
-			if (gru_status_error(status)) {
-				gru_dealloc_string(&ret);
-				gru_dealloc_const_string(&cur_path);
+		}
 
-				return NULL;
-			}
+		if (gru_status_error(status)) {
+			gru_dealloc_string(&ret);
+			gru_dealloc_const_string(&cur_path);
+
+			return NULL;
 		}
 
 		if (!(parseopt & GRU_URI_PARSE_STRIP)) {

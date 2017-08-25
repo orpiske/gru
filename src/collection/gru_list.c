@@ -25,9 +25,9 @@ gru_list_t *gru_list_new(gru_status_t *status) {
 		}
 
 		return NULL;
-	} else {
-		ret->root = NULL;
 	}
+
+	ret->root = NULL;
 
 	return ret;
 }
@@ -169,16 +169,16 @@ gru_node_t *gru_list_remove_node(gru_list_t *list, gru_node_t *node) {
 		list->root = list->root->next;
 		gru_node_unlink(node);
 		return node;
-	} else {
-		gru_node_t *curr = list->root;
+	}
 
-		while (curr) {
-			if (curr == node) {
-				gru_node_unlink(node);
-				return node;
-			}
-			curr = curr->next;
+	gru_node_t *curr = list->root;
+
+	while (curr) {
+		if (curr == node) {
+			gru_node_unlink(node);
+			return node;
 		}
+		curr = curr->next;
 	}
 
 	return NULL;
