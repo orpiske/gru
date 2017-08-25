@@ -69,7 +69,7 @@ gru_export void gru_node_reset(gru_node_t *gru_restrict node);
  */
 gru_export void gru_node_unlink(gru_node_t *gru_restrict node);
 
-#define gru_node_get_data_ptr(type, node) (type *) node->data
+#define gru_node_get_data_ptr(type, node) (type *) (node)->data
 #define gru_node_get_data(type, node) (*(gru_node_get_data_ptr(type, node)))
 
 #endif

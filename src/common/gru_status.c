@@ -78,8 +78,6 @@ void gru_status_strerror(gru_status_t *status, gru_status_code_t code, int errnu
 	strerror_r(errnum, buff, GRU_MAX_ERROR_MESSAGE);
 	gru_status_set(status, code, buff);
 #endif
-
-	return;
 }
 
 inline bool gru_status_error(const gru_status_t *status) {

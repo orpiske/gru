@@ -101,12 +101,11 @@ static conversion_stat_t gru_variant_try_bool(const char *str, bool *out) {
 
 		return VAR_SUCCESS;
 	}
-	else {
-		if (strcmp(str, "false") == 0) {
-			*out = false;
 
-			return VAR_SUCCESS;
-		}
+	if (strcmp(str, "false") == 0) {
+		*out = false;
+
+		return VAR_SUCCESS;
 	}
 
 	return VAR_ERROR | VAR_NOT_CONVERSIBLE;
