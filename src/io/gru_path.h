@@ -40,8 +40,6 @@
 extern "C" {
 #endif
 
-#define APPEND_SIZE_REMAP 64
-
 #ifndef FILE_SEPARATOR
 #define FILE_SEPARATOR "/"
 #endif
