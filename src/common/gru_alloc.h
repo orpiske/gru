@@ -48,7 +48,7 @@ gru_export void gru_dealloc_string(char **obj);
 gru_export void gru_dealloc_const_string(const char **obj);
 
 /**
- * Check whether the allocation was successfull otherwise return whatever set as ret
+ * Check whether the allocation was successful otherwise return whatever set as ret
  */
 #define gru_alloc_check(obj, ret)                                                        \
 	if ((obj) == NULL)                                                                     \
