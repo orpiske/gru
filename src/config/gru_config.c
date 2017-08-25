@@ -95,7 +95,7 @@ static void gru_config_read(const char *name, FILE *source, void *dest, const ch
 
 		char *tmp = fgets(line, GRU_OPT_MAX_STR_SIZE - 1, source);
 		if (tmp != NULL) {
-			if ((char *) tmp != (char *) &line) {
+			if (tmp != (char *) &line) {
 				fprintf(stderr, "Error while trying to read configuration buffer\n");
 
 				return;
