@@ -55,7 +55,7 @@ void gru_tree_destroy(gru_tree_node_t **ptr) {
 	}
 
 	free(node);
-	node = NULL;
+	*ptr = NULL;
 }
 
 gru_tree_node_t *gru_tree_add_child(gru_tree_node_t *node, const void *data) {
