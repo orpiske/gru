@@ -52,7 +52,7 @@ extern "C" {
  * @param fd file descriptor to remap
  * @param status status structure containing error code/description in case of
  * failure
- * @return true if remaped or false otherwise (in this case, check status)
+ * @return true if remapped or false otherwise (in this case, check status)
  */
 gru_export bool
 	gru_io_remap(const char *dir, const char *name, FILE *fd, gru_status_t *status);
