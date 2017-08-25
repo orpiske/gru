@@ -13,10 +13,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-#include <common/gru_keypair.h>
-#include <common/gru_variant.h>
+
 #include "gru_uri.h"
-#include "common/gru_alloc.h"
 
 static inline size_t gru_uri_calc_buffer_size(UriTextRangeA *range) {
 	if (!range || !range->first) {

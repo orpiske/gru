@@ -14,7 +14,6 @@
  limitations under the License.
  */
 #include "gru_keypair.h"
-#include "gru_variant.h"
 
 gru_keypair_t *gru_keypair_new(gru_status_t *status) {
 	gru_keypair_t *kp = gru_alloc(sizeof(gru_keypair_t), status);
