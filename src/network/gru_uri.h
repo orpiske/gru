@@ -22,6 +22,8 @@
 #include <common/gru_portable.h>
 #include <common/gru_status.h>
 #include <string/gru_alt.h>
+#include <common/gru_keypair.h>
+#include <common/gru_variant.h>
 
 #include <uriparser/Uri.h>
 #include <collection/gru_list.h>
