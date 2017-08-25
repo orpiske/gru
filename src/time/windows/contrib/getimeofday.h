@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#if defined(_WIN32) || defined(_WIN64)
 #include <stdint.h>
 #include <windows.h>
 
@@ -23,3 +24,4 @@ limitations under the License.
  */
 
 int gettimeofday(struct timeval *tp, struct timezone *tzp);
+#endif

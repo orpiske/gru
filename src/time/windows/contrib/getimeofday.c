@@ -15,6 +15,7 @@ limitations under the License.
 */
 #include "getimeofday.h"
 
+#if defined(_WIN32) || defined(_WIN64)
 static const uint64_t EPOCH = ((uint64_t) 116444736000000000ULL);
 
 /**
@@ -36,3 +37,4 @@ int gettimeofday(struct timeval *tp, struct timezone *tzp) {
 	tp->tv_usec = (long) (system_time.wMilliseconds * 1000);
 	return 0;
 }
+#endif
