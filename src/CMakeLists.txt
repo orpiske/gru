@@ -39,10 +39,17 @@ add_library(
 	cli/gru_cli_opt.c
 )
 
+
 target_link_libraries(
 		gru-${GRU_VERSION_MAJOR}
 		sts-${GRU_VERSION_MAJOR}
 )
+
+SET_TARGET_PROPERTIES(
+	gru-${GRU_VERSION_MAJOR} PROPERTIES
+	VERSION ${GRU_VERSION}
+	SOVERSION ${GRU_VERSION_MAJOR})
+
 
 install(
 	TARGETS gru-${GRU_VERSION_MAJOR}
