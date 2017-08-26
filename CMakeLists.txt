@@ -2,10 +2,10 @@ project(gru)
 cmake_minimum_required(VERSION 2.6)
 
 # Manually sets the version to remain compatible w/ cmake older than 3.0
-set(GRU_VERSION 0.2.0)
 set(GRU_VERSION_MAJOR 0)
 set(GRU_VERSION_MINOR 2)
 set(GRU_VERSION_PATCH 0)
+set(GRU_VERSION ${GRU_VERSION_MAJOR}.${GRU_VERSION_MINOR}.${GRU_VERSION_PATCH})
 
 include(GNUInstallDirs)
 include(CheckLists.cmake)
