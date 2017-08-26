@@ -1,9 +1,8 @@
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
 Version:            0.2.0
-Release:            3%{?dist}
+Release:            4%{?dist}
 License:            Apache-2.0
-Group:              Development/Tools
 Source:             gru-%{version}.tar.gz
 URL:                https://github.com/orpiske/gru
 BuildRequires:      cmake
@@ -11,7 +10,6 @@ BuildRequires:      make
 BuildRequires:      gcc
 BuildRequires:      doxygen
 BuildRequires:      uriparser-devel
-Requires:           uriparser
 
 
 %description
@@ -20,18 +18,17 @@ This library implements reusable C/C++ utilities, algorithms and features.
 
 %package devel
 Summary:            Generic Reusable Utilities (GRU) development kit
-Requires:           gru
-Requires:           uriparser-devel
-Group:              Development/Libraries
+Requires:           %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Development packages for the GRU library
 
-%package devel-docs
+%package devel-doc
 Summary:            Generic Reusable Utilities (GRU) development kit documentation
-Group:              Development/Libraries
+BuildArch:          noarch
+Obsoletes:          gru-devel-docs
 
-%description devel-docs
+%description devel-doc
 Development documentation for the GRU library
 
 %prep
@@ -40,25 +37,38 @@ Development documentation for the GRU library
 %build
 mkdir build && cd build
 %cmake -DBUILD_WITH_DOCUMENTATION=ON -DCMAKE_USER_C_FLAGS="-fPIC" ..
-make all documentation
+%make_build all documentation
 
 %install
 cd build
-make install DESTDIR=%{buildroot}
+%make_install
 
 %files
-%doc AUTHORS README.md LICENSE COPYING
-%{_libdir}/*
+%doc AUTHORS README.md
+%license LICENSE COPYING
+%{_libdir}/*.so.*
 
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
 
 %files devel
 %{_includedir}/*
+%{_libdir}/*.so
 
-%files devel-docs
+%post devel -p /sbin/ldconfig
+
+%postun devel -p /sbin/ldconfig
+
+%files devel-doc
+%license LICENSE COPYING
 %{_datadir}/*
 
 
 %changelog
+* Sat Aug 26 2017 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-4
+- Adjusted to match fedora packaging guidelines
+
 * Fri Jul 28 2017 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-3
 - Updated to contain timed logger fixes
 
