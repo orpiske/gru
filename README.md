@@ -23,6 +23,39 @@ Introduction:
 
 This library contains portable and reusable C code for very simple applications.
 
+Installation:
+----
+
+**Testing**
+
+1. Enable my testing COPR.
+
+```dnf copr enable orpiske/orp-tools-testing```
+
+2. Install the runtime only:
+```dnf install -y gru```
+
+3. (Alternative) Install the development packages: 
+```dnf install -y gru gru-devel gru-devel-doc```
+
+Note: the testing packages are the **recommended** packages for this project.
+
+
+**Stable**
+
+1. Enable my testing COPR.
+
+```dnf copr enable orpiske/orpiske/orp-tools-stable ```
+
+2. Install the runtime only:
+```dnf install -y gru```
+
+3. (Alternative) Install the development packages: 
+```dnf install -y gru gru-devel gru-devel-doc```
+
+Note: at the moment, they are outdated and do not support latest versions of Apache Artemis.
+
+
 Dependencies:
 ----
 
