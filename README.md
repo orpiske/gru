@@ -15,6 +15,8 @@ Packaging Status
 ----
 Fedora (GRU Testing): [![Fedora COPR (Testing Repo) Status](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-testing/package/gru/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-testing/package/gru/)
 
+Fedora (GRU Testing Legacy): [![Fedora COPR (Testing Repo) Status](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-testing-legacy/package/gru/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-testing-legacy/package/gru/)
+
 Fedora (GRU Stable): [![Fedora COPR (Stable Repo) Status](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-stable/package/gru/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/orpiske/orp-tools-stable/package/gru/)
 
 
@@ -25,6 +27,9 @@ This library contains portable and reusable C code for very simple applications.
 
 Installation:
 ----
+
+The code can be installed via Fedora COPR. Packages are available for CentOS 6, 7, Fedora 25 
+or greater and RHEL 6 and 7. For CentOS 6 and RHEL 6, please use the legacy repos (check the notes below). 
 
 **Testing**
 
@@ -38,8 +43,9 @@ Installation:
 3. (Alternative) Install the development packages: 
 ```dnf install -y gru gru-devel gru-devel-doc```
 
-Note: the testing packages are the **recommended** packages for this project.
+**Note**: the testing packages are the **recommended** packages for this project.
 
+**Note**: for RHEL 6 or CentOS 6, use the orp-tools-testing-legacy repository.
 
 **Stable**
 
@@ -52,8 +58,6 @@ Note: the testing packages are the **recommended** packages for this project.
 
 3. (Alternative) Install the development packages: 
 ```dnf install -y gru gru-devel gru-devel-doc```
-
-Note: at the moment, they are outdated and do not support latest versions of Apache Artemis.
 
 
 Dependencies:
