@@ -195,10 +195,6 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 		return ret;
 	}
 
-	if (uri.hostData.ip6) {
-		printf("This is an IPv6 address");
-	}
-
 	ret.host = gru_uri_get_ranged_data(&uri.hostText, status);
 	ret.port = gru_uri_get_port(&uri.portText, status);
 	ret.path = gru_uri_path(&uri, parseopt, status);
