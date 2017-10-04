@@ -1,7 +1,7 @@
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
 Version:            0.2.0
-Release:            4%{?dist}
+Release:            5%{?dist}
 License:            Apache-2.0
 Source:             gru-%{version}.tar.gz
 URL:                https://github.com/orpiske/gru
@@ -66,6 +66,9 @@ cd build
 
 
 %changelog
+* Wed Oct 04 2017 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-5
+- IPv6 handling fixes
+
 * Sat Aug 26 2017 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-4
 - Adjusted to match fedora packaging guidelines
 

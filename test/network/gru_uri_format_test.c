@@ -36,7 +36,7 @@ bool test1() {
 	}
 
 	if (strcmp(uri_str, "test://localhost:90/root/path") != 0) {
-		fprintf(stderr, "Invalid URI: %s", uri_str);
+		fprintf(stderr, "Test 1 failed due to invalid URI: %s", uri_str);
 		free(uri_str);
 		return false;
 	}
@@ -62,7 +62,7 @@ bool test2() {
 	}
 
 	if (strcmp(uri_str, "test://localhost/root/path") != 0) {
-		fprintf(stderr, "Invalid URI: %s", uri_str);
+		fprintf(stderr, "Test 2 failed due to invalid URI: %s", uri_str);
 		free(uri_str);
 		return false;
 	}
@@ -88,7 +88,7 @@ bool test3() {
 	}
 
 	if (strcmp(uri_str, "test://localhost") != 0) {
-		fprintf(stderr, "Invalid URI: %s", uri_str);
+		fprintf(stderr, "Test 3 failed due to invalid URI: %s", uri_str);
 		free(uri_str);
 		return false;
 	}
@@ -114,7 +114,33 @@ bool test4() {
 	}
 
 	if (strcmp(uri_str, "test://localhost:99") != 0) {
-		fprintf(stderr, "Invalid URI: %s", uri_str);
+		fprintf(stderr, "Test 4 failed due to invalid URI: %s", uri_str);
+		free(uri_str);
+		return false;
+	}
+
+	free(uri_str);
+	return true;
+}
+
+bool test5() {
+	gru_uri_t uri = {0};
+	gru_status_t status = gru_status_new();
+
+	uri.scheme = "test";
+	uri.host = "2620:52:0:2880:223:7dff:fe4a:743d";
+	uri.port = 99;
+	uri.path = NULL;
+
+	char *uri_str = gru_uri_simple_format(&uri, &status);
+	if (!uri_str) {
+		fprintf(stderr, "%s", status.message);
+
+		return false;
+	}
+
+	if (strcmp(uri_str, "test://[2620:52:0:2880:223:7dff:fe4a:743d]:99") != 0) {
+		fprintf(stderr, "Test 5 failed due to invalid URI: %s", uri_str);
 		free(uri_str);
 		return false;
 	}
@@ -124,11 +150,15 @@ bool test4() {
 }
 
 int main(int argc, char **argv) {
+
+	// TODO: Not my best work. To be refactored ...
 	if (test1()) {
 		if (test2()) {
 			if (test3()) {
 				if (test4()) {
-					return EXIT_SUCCESS;
+					if (test5()) {
+						return EXIT_SUCCESS;
+					}
 				}
 			}
 		}
