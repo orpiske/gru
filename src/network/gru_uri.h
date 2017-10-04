@@ -19,6 +19,13 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
+#if !defined(_WIN32) && !defined(_WIN64)
+ #include <arpa/inet.h>
+#else
+ #include <winsock2.h>
+ #include <ws2tcpip.h>
+#endif
+
 #include <common/gru_portable.h>
 #include <common/gru_status.h>
 #include <string/gru_alt.h>
@@ -59,7 +66,7 @@ typedef struct gru_uri_t_ {
 
 /**
  * Default URI parser
- * @param uri URI string (ie.: scheme://host:port/path)
+ * @param uri URI string  (ie.: scheme://host:port/path)
  * @param status status object
  * @return A parsed URI object with each component of the URI broken down
  */

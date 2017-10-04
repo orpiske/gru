@@ -195,6 +195,10 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 		return ret;
 	}
 
+	if (uri.hostData.ip6) {
+		printf("This is an IPv6 address");
+	}
+
 	ret.host = gru_uri_get_ranged_data(&uri.hostText, status);
 	ret.port = gru_uri_get_port(&uri.portText, status);
 	ret.path = gru_uri_path(&uri, parseopt, status);
@@ -212,26 +216,42 @@ gru_export gru_uri_t gru_uri_parse_ex(const char *gru_restrict url,
 	return ret;
 }
 
+static bool gru_uri_ipv6_host(const char *host) {
+	char str[INET6_ADDRSTRLEN];
+
+	if (inet_pton(AF_INET6, host, str)) {
+		return true;
+	}
+
+	return false;
+}
+
 char *gru_uri_simple_format(const gru_uri_t *uri, gru_status_t *status) {
 	char *ret = {0};
 	int rc = 0;
 
+	bool is_ipv6 = gru_uri_ipv6_host(uri->host);
+
 	if (uri->port != 0) {
 		if (uri->path) {
 			rc = asprintf(&ret,
-				"%s://%s:%" PRIu16 "%s",
+				"%s://%s%s%s:%" PRIu16 "%s",
 				uri->scheme,
+				(is_ipv6 ? "[" : ""),
 				uri->host,
+				(is_ipv6 ? "]" : ""),
 				uri->port,
 				uri->path);
 		} else {
-			rc = asprintf(&ret, "%s://%s:%" PRIu16 "", uri->scheme, uri->host, uri->port);
+			rc = asprintf(&ret, "%s://%s%s%s:%" PRIu16 "", uri->scheme, (is_ipv6 ? "[" : ""), uri->host,
+						  (is_ipv6 ? "]" : ""), uri->port);
 		}
 	} else {
 		if (uri->path) {
-			rc = asprintf(&ret, "%s://%s%s", uri->scheme, uri->host, uri->path);
+			rc = asprintf(&ret, "%s://%s%s%s%s", uri->scheme, (is_ipv6 ? "[" : ""), uri->host,
+						  (is_ipv6 ? "]" : ""), uri->path);
 		} else {
-			rc = asprintf(&ret, "%s://%s", uri->scheme, uri->host);
+			rc = asprintf(&ret, "%s://%s%s%s", uri->scheme, (is_ipv6 ? "[" : ""), uri->host, (is_ipv6 ? "]" : ""));
 		}
 	}
 
@@ -250,22 +270,28 @@ char *gru_uri_format(const gru_uri_t *uri,
 	char *ret = {0};
 	int rc = 0;
 
+	bool is_ipv6 = gru_uri_ipv6_host(uri->host);
+
 	if (uri->port != 0 && (fopt & GRU_URI_FORMAT_PORT)) {
 		if (uri->path && (fopt & GRU_URI_FORMAT_PATH)) {
 			rc = asprintf(&ret,
-				"%s://%s:%" PRIu16 "%s",
+				"%s://%s%s%s:%" PRIu16 "%s",
 				uri->scheme,
+				(is_ipv6 ? "[" : ""),
 				uri->host,
+				(is_ipv6 ? "]" : ""),
 				uri->port,
 				uri->path);
 		} else {
-			rc = asprintf(&ret, "%s://%s:%" PRIu16 "", uri->scheme, uri->host, uri->port);
+			rc = asprintf(&ret, "%s://%s%s%s:%" PRIu16 "", uri->scheme, (is_ipv6 ? "[" : ""),uri->host,
+						  (is_ipv6 ? "]" : ""), uri->port);
 		}
 	} else {
 		if (uri->path && (fopt & GRU_URI_FORMAT_PATH)) {
-			rc = asprintf(&ret, "%s://%s%s", uri->scheme, uri->host, uri->path);
+			rc = asprintf(&ret, "%s://%s%s%s%s", uri->scheme, (is_ipv6 ? "[" : ""), uri->host, (is_ipv6 ? "]" : ""),
+						  uri->path);
 		} else {
-			rc = asprintf(&ret, "%s://%s", uri->scheme, uri->host);
+			rc = asprintf(&ret, "%s://%s%s%s", uri->scheme, (is_ipv6 ? "[" : ""), uri->host, (is_ipv6 ? "]" : ""));
 		}
 	}
 
