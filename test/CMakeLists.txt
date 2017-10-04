@@ -233,6 +233,11 @@ add_test(
 	COMMAND gru_uri_test https://10.0.0.1 https 10.0.0.1 "" ""
 )
 
+add_test(
+		NAME gru-uri-test-7
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/target/tests/${CMAKE_INSTALL_BINDIR}
+		COMMAND gru_uri_test http://[2620:52:0:2880:223:7dff:fe4a:743d]/path/subpath http 2620:52:0:2880:223:7dff:fe4a:743d "" /path/subpath
+)
 
 add_test(
 	NAME gru-uri-test-query-1
