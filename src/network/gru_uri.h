@@ -24,6 +24,8 @@
 #else
  #include <winsock2.h>
  #include <ws2tcpip.h>
+
+ #define inet_pton(a,b,c) InetPton(a,b,c)
 #endif
 
 #include <common/gru_portable.h>
