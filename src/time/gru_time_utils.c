@@ -16,7 +16,11 @@
 #include "gru_time_utils.h"
 
 void gru_time_add_microseconds(gru_timestamp_t *t, uint64_t count) {
-	t->tv_usec = t->tv_usec + count;
+	#if !defined(_WIN32) && !defined(_WIN64)
+	 t->tv_usec = t->tv_usec + count;
+	#else
+	 t->tv_usec = t->tv_usec + (long) count;
+	#endif
 
 	while (t->tv_usec >= 1000000) {
 		t->tv_sec++;
@@ -25,7 +29,11 @@ void gru_time_add_microseconds(gru_timestamp_t *t, uint64_t count) {
 }
 
 void gru_time_add_seconds(gru_timestamp_t *t, uint64_t count) {
+   #if !defined(_WIN32) && !defined(_WIN64)
 	t->tv_sec = t->tv_sec + count;
+   #else
+	t->tv_sec = t->tv_sec + (long) count;
+   #endif
 }
 
 void gru_time_add_minutes(gru_timestamp_t *t, uint64_t count) {
