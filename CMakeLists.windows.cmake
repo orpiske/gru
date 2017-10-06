@@ -7,3 +7,4 @@ add_subdirectory(deps/uriparser)
 include_directories(${CMAKE_BINARY_DIR}/uriparser/${CMAKE_INSTALL_INCLUDEDIR})
 
 set(URIPARSER_LIB "uriparser")
+link_libraries("Ws2_32")

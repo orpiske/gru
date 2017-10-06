@@ -19,13 +19,12 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
+
 #if !defined(_WIN32) && !defined(_WIN64)
- #include <arpa/inet.h>
+ #include <arpa/inet.h> 
 #else
  #include <winsock2.h>
  #include <ws2tcpip.h>
-
- #define inet_pton(a,b,c) InetPton(a,b,c)
 #endif
 
 #include <common/gru_portable.h>
