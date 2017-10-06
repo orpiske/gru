@@ -30,8 +30,6 @@
 #include <windows.h>
 
 #include "time/other/gru_time_portable.h"
-
-extern int asprintf(char **strp, const char *fmt, ...);
 #endif
 
 #include "common/gru_alloc.h"
