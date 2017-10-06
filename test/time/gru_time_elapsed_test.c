@@ -152,14 +152,20 @@ bool test_add_micro() {
 	// Add 2,5 seconds
 	gru_time_add_microseconds(&start, 2500000);
 
+#if !defined(_WIN32) && !defined(_WIN64)
+ #define GRU_SEC_TYPE PRIu64 
+#else
+ #define GRU_SEC_TYPE "lu"
+#endif
 	if (start.tv_sec != 1562377514) {
-		fprintf(stderr, "Unexpected time: %"PRIu64"\n", start.tv_sec);
+		fprintf(stderr, "Unexpected time: %"GRU_SEC_TYPE"\n", start.tv_sec);
 		return false;
 	}
 	if (start.tv_usec != 505000) {
-		fprintf(stderr, "Unexpected time: %"PRIu64"\n", start.tv_usec);
+		fprintf(stderr, "Unexpected time: %"GRU_SEC_TYPE"\n", start.tv_usec);
 		return false;
 	}
+
 
 	return true;
 }
