@@ -32,4 +32,7 @@ limitations under the License.
 #define gru_export __declspec(dllexport)
 #define gru_restrict
 #define gru_attr_unused
+
+extern int asprintf(char **strp, const char *fmt, ...);
+extern int gettimeofday(struct timeval *tp, struct timezone *tzp);
 #endif
