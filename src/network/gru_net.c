@@ -42,7 +42,7 @@ int gru_net_open_socket(gru_net_socket_t *socket, const char *host, const char *
 }
 
 void gru_net_close_socket(gru_net_socket_t *socket) {
-    gru_net_close_socket(socket);
+    sts_net_close_socket(socket);
 }
 
 int gru_net_accept_socket(gru_net_socket_t *listen_socket, gru_net_socket_t *remote_socket) {
@@ -59,7 +59,7 @@ int gru_net_recv(gru_net_socket_t *socket, void *data, int length) {
 }
 
 void gru_net_init_socket_set(gru_net_set_t *set) {
-    gru_net_init_socket_set(set);
+    sts_net_init_socket_set(set);
 }
 
 int gru_net_add_socket_to_set(gru_net_socket_t *socket, gru_net_set_t *set) {
