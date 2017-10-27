@@ -16,6 +16,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-fdiagnostics-color=auto" HAS_COMPILER_COLORS)
+CHECK_CXX_COMPILER_FLAG("-fPIC" HAS_COMPILER_FPIC)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
 	if (HAS_COMPILER_COLORS)
@@ -24,7 +25,13 @@ if (CMAKE_COMPILER_IS_GNUCXX)
 		set(COMPILER_COLOR_FLAGS_OPTS "")
 	endif (HAS_COMPILER_COLORS)
 
-	set(CMAKE_C_FLAGS "-Wall -Wshadow -Wconversion -Wno-sign-conversion -pedantic-errors -fstrict-aliasing -fstack-protector-all -std=c99 ${COMPILER_COLOR_FLAGS_OPTS} ${CMAKE_USER_C_FLAGS}" CACHE STRING
+	if (HAS_COMPILER_FPIC)
+		set(COMPILER_FPIC_FLAGS_OPTS "-fPIC")
+	else (HAS_COMPILER_FPIC)
+		set(COMPILER_FPIC_FLAGS_OPTS "")
+	endif (HAS_COMPILER_FPIC)
+
+	set(CMAKE_C_FLAGS "-Wall -Wshadow -Wconversion -Wno-sign-conversion -pedantic-errors -fstrict-aliasing -fstack-protector-all -std=c99 ${COMPILER_COLOR_FLAGS_OPTS} ${COMPILER_FPIC_FLAGS_OPTS} ${CMAKE_USER_C_FLAGS}" CACHE STRING
 		"Flags used by the compiler during all build types." FORCE
 	)
 
