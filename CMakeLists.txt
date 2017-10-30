@@ -25,7 +25,6 @@ else (UNIX)
 	endif (WIN32)
 endif(UNIX)
 
-link_libraries(${URIPARSER_LIB})
 include_directories(src)
 
 add_subdirectory(src/ objs)
