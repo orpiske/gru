@@ -186,7 +186,7 @@ int sts_net_recv(sts_net_socket_t* socket, void* data, int length) {
     return sts_net__set_error("Cannot receive on closed socket");
   }
   socket->ready = 0;
-  result = recv(socket->fd, (char*)data, length, 0);
+  result = recv(socket->fd, (char*)data, length, MSG_DONTWAIT);
   if (result < 0) {
     return sts_net__set_error("Cannot receive data");
   }
