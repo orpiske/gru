@@ -71,7 +71,7 @@ gru_export bool gru_keypair_set_key(gru_keypair_t *kp, const char *key);
  * @param status
  * @return
  */
-gru_export gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status);
+gru_export gru_keypair_t *gru_keypair_clone(const gru_keypair_t *kp, gru_status_t *status);
 
 
 /**
@@ -80,7 +80,7 @@ gru_export gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *sta
  * @param key
  * @return
  */
-gru_export bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key);
+gru_export bool gru_keypair_key_equals(const gru_keypair_t *kp, const char *key);
 
 
 /**
