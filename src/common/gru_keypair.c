@@ -58,7 +58,7 @@ bool gru_keypair_set_key(gru_keypair_t *kp, const char *key) {
 	return false;
 }
 
-gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status) {
+gru_keypair_t *gru_keypair_clone(const gru_keypair_t *kp, gru_status_t *status) {
 	gru_keypair_t *ret = gru_keypair_new(status);
 	if (!ret) {
 		return NULL;
@@ -82,7 +82,7 @@ gru_keypair_t *gru_keypair_clone(gru_keypair_t *kp, gru_status_t *status) {
 	return ret;
 }
 
-bool gru_keypair_key_equals(gru_keypair_t *kp, const char *key) {
+bool gru_keypair_key_equals(const gru_keypair_t *kp, const char *key) {
 	if (strcmp(kp->key, key) == 0) {
 		return true;
 	}
