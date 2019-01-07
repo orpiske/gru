@@ -1,5 +1,5 @@
-project(gru)
-cmake_minimum_required(VERSION 2.6)
+project(gru C)
+cmake_minimum_required(VERSION 2.8.4)
 
 # Manually sets the version to remain compatible w/ cmake older than 3.0
 set(GRU_VERSION_MAJOR 0)
