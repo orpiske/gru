@@ -8,6 +8,7 @@ URL:                https://github.com/orpiske/gru
 BuildRequires:      cmake
 BuildRequires:      make
 BuildRequires:      gcc
+BuildRequires:      gcc-c++
 BuildRequires:      doxygen
 BuildRequires:      uriparser-devel
 
