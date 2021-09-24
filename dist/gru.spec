@@ -35,9 +35,9 @@ Development documentation for the GRU library
 %autosetup -n gru-%{version}
 
 %build
-mkdir build && cd build
-%cmake -DBUILD_WITH_DOCUMENTATION=ON -DCMAKE_USER_C_FLAGS="-fPIC" ..
-%make_build all documentation
+mkdir build
+%cmake -DBUILD_WITH_DOCUMENTATION=ON -DCMAKE_USER_C_FLAGS="-fPIC" -S . -B build
+cd build && %make_build all documentation
 
 %install
 cd build
