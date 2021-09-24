@@ -1,7 +1,7 @@
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
 Version:            0.2.0
-Release:            8%{?dist}
+Release:            9%{?dist}
 License:            Apache-2.0
 Source:             gru-%{version}.tar.gz
 URL:                https://github.com/orpiske/gru
@@ -67,6 +67,9 @@ cd build
 
 
 %changelog
+* Fri Sep 24 2021 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-8
+- Increase minimum cmake version
+
 * Fri Nov 03 2017 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-7
 - Missing const declaration on keypair functions
 
