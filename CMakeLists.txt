@@ -1,5 +1,5 @@
 project(gru)
-cmake_minimum_required(VERSION 2.8.4)
+cmake_minimum_required(VERSION 3.0.0)
 
 # Manually sets the version to remain compatible w/ cmake older than 3.0
 set(GRU_VERSION_MAJOR 0)
@@ -46,7 +46,7 @@ if (BUILD_WITH_DOCUMENTATION)
 	add_custom_target(documentation ALL
 		COMMAND ${CMAKE_COMMAND} -P ../documentation.cmake)
 	install(
-		DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/target/share/doc 
+		DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/target/share/doc
 		DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}-${GRU_VERSION_MAJOR}
 	)
 endif(BUILD_WITH_DOCUMENTATION)
