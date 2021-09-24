@@ -27,7 +27,6 @@ Development packages for the GRU library
 %package devel-doc
 Summary:            Generic Reusable Utilities (GRU) development kit documentation
 BuildArch:          noarch
-Obsoletes:          gru-devel-docs
 
 %description devel-doc
 Development documentation for the GRU library
