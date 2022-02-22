@@ -28,7 +28,7 @@ This library contains portable and reusable C code for very simple applications.
 Installation:
 ----
 
-The code can be installed via Fedora COPR. Packages are available for CentOS 6, 7, Fedora 25 
+The code can be installed via Fedora COPR. Packages are available for CentOS 6, 7, Fedora 33 
 or greater and RHEL 6 and 7. For CentOS 6 and RHEL 6, please use the legacy repos (check the notes below). 
 
 **Testing**
