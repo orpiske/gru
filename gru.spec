@@ -1,3 +1,5 @@
+%global srcname gru
+
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
 Version:            0.0.0
