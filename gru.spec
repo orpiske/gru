@@ -11,7 +11,7 @@ License:            Apache-2.0
 # tito build --tgz
 Source0:            %{name}-%{version}.tar.gz
 URL:                https://github.com/orpiske/gru
-BuildRequires:      cmake
+BuildRequires:      cmake >= 3.0.0
 BuildRequires:      make
 BuildRequires:      gcc
 BuildRequires:      gcc-c++
