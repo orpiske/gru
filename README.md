@@ -28,8 +28,8 @@ This library contains portable and reusable C code for very simple applications.
 Installation:
 ----
 
-The code can be installed via Fedora COPR. Packages are available for CentOS 6, 7, Fedora 33 
-or greater and RHEL 6 and 7. For CentOS 6 and RHEL 6, please use the legacy repos (check the notes below). 
+The code can be installed via Fedora COPR. Packages are available for CentOS 6, 7, Fedora 33
+or greater and RHEL 6 and 7. For CentOS 6 and RHEL 6, please use the legacy repos (check the notes below).
 
 **Testing**
 
@@ -40,7 +40,7 @@ or greater and RHEL 6 and 7. For CentOS 6 and RHEL 6, please use the legacy repo
 2. Install the runtime only:
 ```dnf install -y gru```
 
-3. (Alternative) Install the development packages: 
+3. (Alternative) Install the development packages:
 ```dnf install -y gru gru-devel gru-devel-doc```
 
 **Note**: the testing packages are the **recommended** packages for this project.
@@ -56,7 +56,7 @@ or greater and RHEL 6 and 7. For CentOS 6 and RHEL 6, please use the legacy repo
 2. Install the runtime only:
 ```dnf install -y gru```
 
-3. (Alternative) Install the development packages: 
+3. (Alternative) Install the development packages:
 ```dnf install -y gru gru-devel gru-devel-doc```
 
 
@@ -80,6 +80,17 @@ mkdir build && cmake ..
 - On Windows
 ```
 mkdir build && cmake -G "NMake Makefiles" ..
+```
+
+Packaging
+
+From: https://docs.fedoraproject.org/en-US/quick-docs/publish-rpm-on-copr/
+
+
+
+```
+tito build --test
+tito tag && git push --follow-tags origin
 ```
 
 
