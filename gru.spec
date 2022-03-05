@@ -2,8 +2,8 @@
 
 Summary:            Generic Reusable Utilities (GRU) library
 Name:               gru
-Version:            0.0.0
-Release:            0%{?dist}
+Version:            0.2.1
+Release:            1%{?dist}
 License:            Apache-2.0
 # Sources can be obtained by
 # git clone https://github.com/orpiske/gru
@@ -72,6 +72,9 @@ cd build
 
 
 %changelog
+* Sat Mar 05 2022 Otavio R. Piske <angusyoung@gmail.com> 0.2.1-1
+- new package built with tito
+
 * Fri Sep 24 2021 Otavio R. Piske <angusyoung@gmail.com> - 0.2.0-8
 - Increase minimum cmake version
 
